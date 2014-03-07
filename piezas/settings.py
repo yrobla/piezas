@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # Django settings for piezas project.
 from oscar import get_core_apps
 from oscar import OSCAR_MAIN_TEMPLATE_DIR
@@ -204,5 +207,7 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
-LANGUAGES = ()
 from oscar.defaults import *
+OSCAR_SHOP_NAME = "POD"
+OSCAR_SHOP_TAGLINE = "Ahorra tiempo y dinero en la búsqueda de tu pieza recuperada"
+LANGUAGES = ()
