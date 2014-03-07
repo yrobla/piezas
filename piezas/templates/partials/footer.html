@@ -1,0 +1,35 @@
+{% load i18n %}
+<footer class="footer container-fluid">
+    {% block footer %}
+	<div class="element-footer pull-left">
+		<h3>976 324 074</h3>
+		<div>{% trans "Horario" %}<br />
+		{% trans "Lunes a Viernes." %}<br />
+		{% trans "De 8:00 a 13:00 y de 15:30 a 20:00" %}<br />
+		{% trans "Sábado de 8:00 a 13:00" %}</div>
+	</div>
+	<div class="element-footer pull-left">
+		<div>{% trans "Desguaces Aeropuerto" %}<br />
+		{% trans "Carretera Aeropuerto, Km 1700" %}<br />
+		{% trans "50011 Zaragoza" %}<br />
+		{% trans "Aragón" %}
+		</div>
+	</div>
+
+	<div class="element-footer pull-left">
+		<div class="navbar">
+		<ul class="nav">
+			<li>
+				<a href="#">{% trans "Cómo llegar" %}</a>
+			</li>
+			<li>
+				<a href="#">{% trans "Mapa web" %}</a>
+			</li>
+			<li>
+				<a href="#">{% trans "Aviso legal" %}</a>
+			</li>
+		</ul>
+		</div>
+	</div>
+    {% endblock %}
+</footer>

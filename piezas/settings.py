@@ -80,7 +80,9 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    location('../static'),
 )
+print STATICFILES_DIRS
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -97,7 +99,7 @@ SECRET_KEY = '-@s3d!hdn1h=dvlea#s6z_m4-p0v1gz8m@r^ssjs8)l4f#h!!a'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -202,4 +204,5 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
+LANGUAGES = ()
 from oscar.defaults import *
