@@ -85,7 +85,6 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     location('static'),
 )
-print STATICFILES_DIRS
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -210,4 +209,8 @@ HAYSTACK_CONNECTIONS = {
 from oscar.defaults import *
 OSCAR_SHOP_NAME = "POD recambios"
 OSCAR_SHOP_TAGLINE = "Ahorra tiempo y dinero en la búsqueda de tu pieza recuperada"
+OSCAR_DEFAULT_CURRENCY = 'EUR'
+OSCAR_CURRENCY_LOCALE = 'es_ES'
+OSCAR_ALLOW_ANON_REVIEWS = False
+OSCAR_FROM_EMAIL = 'info@ysoft.biz'
 LANGUAGES = ()
