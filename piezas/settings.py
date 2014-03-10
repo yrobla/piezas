@@ -18,11 +18,11 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'piezas',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'pod',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'pod',
+        'PASSWORD': 'pod2014',
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
@@ -60,7 +60,7 @@ USE_TZ = True
 PROJECT_DIR = os.path.dirname(__file__)
 location = lambda x: os.path.join(
     os.path.dirname(os.path.realpath(__file__)), x)
-MEDIA_ROOT = location("piezas/media")
+MEDIA_ROOT = location("media")
 MEDIA_URL = '/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
@@ -83,7 +83,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    location('../static'),
+    location('static'),
 )
 print STATICFILES_DIRS
 
@@ -145,7 +145,7 @@ INSTALLED_APPS = [
     # 'django.contrib.admindocs',
     'south',
     'compressor',
-] + get_core_apps()
+] + get_core_apps(['piezas.catalogue'])
 
 SITE_ID = 1
 
@@ -208,6 +208,6 @@ HAYSTACK_CONNECTIONS = {
 }
 
 from oscar.defaults import *
-OSCAR_SHOP_NAME = "POD"
+OSCAR_SHOP_NAME = "POD recambios"
 OSCAR_SHOP_TAGLINE = "Ahorra tiempo y dinero en la búsqueda de tu pieza recuperada"
 LANGUAGES = ()

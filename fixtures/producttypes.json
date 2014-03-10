@@ -1,0 +1,12 @@
+[
+    {
+        "pk": 1,
+        "model": "catalogue.productclass",
+        "fields": {
+            "name": "Piezas",
+            "slug": "piezas",
+            "requires_shipping": true,
+            "track_stock": false
+        }
+    }
+]
