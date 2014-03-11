@@ -144,7 +144,9 @@ INSTALLED_APPS = [
     # 'django.contrib.admindocs',
     'south',
     'compressor',
-] + get_core_apps(['piezas.catalogue'])
+]
+INSTALLED_APPS = INSTALLED_APPS + get_core_apps(['piezas.apps.basket',
+    'piezas.apps.catalogue', 'piezas.apps.offer', 'piezas.apps.voucher'])
 
 SITE_ID = 1
 

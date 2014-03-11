@@ -9,6 +9,7 @@
             <div class="row-fluid">
 
                 <aside class="span3">
+		{% if user.is_authenticated %}
                     <div id="promotions_left">
                         {% for promotion in promotions_left %}
                         {% render_promotion promotion %}
@@ -16,6 +17,7 @@
                     </div>
                     {% block column_left %} 
                     {% endblock %}
+		{% endif %}
                 </aside>
 
                 <div class="span6">
@@ -26,11 +28,15 @@
                     {% endblock %}
                     {% include "partials/alert_messages.html" %}
 
+		{% if user.is_authenticated %}
                     <div id="promotions">
                         {% for promotion in promotions_page %}
                         {% render_promotion promotion %}
                         {% endfor %}
                     </div>
+		{% else %}
+			{% include "partials/non_auth_homepage.html" %}
+		{% endif %}
 
                     {% block content %}{% endblock %}
                 </div>
