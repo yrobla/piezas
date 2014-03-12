@@ -62,7 +62,7 @@
                     {% block brand_list_header %}
                         <tr>
                             <th>{% if 'recently_edited' in request.GET %}{% trans "Name" %}
-                                {% else %}{% anchor 'title' _("Name") %}{% endif %}</th>
+                                {% else %}{% anchor 'name' _("Name") %}{% endif %}</th>
                             <th></th>
                         </tr>
                     {% endblock %}
