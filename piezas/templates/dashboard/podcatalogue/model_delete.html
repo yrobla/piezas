@@ -1,0 +1,55 @@
+{% extends 'dashboard/layout.html' %}
+
+{% load i18n %}
+
+{% block title %}
+    {% blocktrans with title=model.name %}
+        Delete {{ title}}?
+    {% endblocktrans %} |
+    {{ block.super }}
+{% endblock %}
+
+{% block body_class %}{{ block.super }} create-page{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li>
+            <a href="{% url 'dashboard:catalogue-model-list' %}">{% trans "Model management" %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li>
+            <a href="{% url 'dashboard:catalogue-model' pk=model.pk %}">{{ model.name }}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans "Delete?" %}</li>
+    </ul>
+{% endblock %}
+
+{% block header %}
+    <div class="page-header">
+        <h1>{% trans "Delete model?" %}</h1>
+    </div>
+{% endblock header%}
+
+{% block dashboard_content %}
+    <div class="table-header">
+        <h2>{% trans "Delete model" %}</h2>
+    </div>
+    <form action="." method="post" class="well">
+        {% csrf_token %}
+
+        {% blocktrans with title=model.name %}
+            <p>Delete model <strong>{{ title }}</strong> - are you sure?</p>
+        {% endblocktrans %}
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
+            {% trans "or" %}
+            <a href="{% url 'dashboard:catalogue-model-list' %}">{% trans "cancel" %}</a>
+        </div>
+    </form>
+{% endblock %}

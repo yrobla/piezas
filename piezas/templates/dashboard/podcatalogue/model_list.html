@@ -1,0 +1,105 @@
+{% extends 'dashboard/layout.html' %}
+{% load i18n %}
+{% load thumbnail %}
+{% load staticfiles %}
+{% load sorting_tags %}
+
+{% block body_class %}{{ block.super }} catalogue{% endblock %}
+
+{% block title %}
+    {% trans "Model management" %} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans "Model management" %}</li>
+    </ul>
+{% endblock %}
+
+{% block header %}
+    <div class="page-header">
+        <a href="{% url 'dashboard:catalogue-model-create' %}" class="btn btn-primary btn-large pull-right">
+	<i class="icon-plus"></i> {% trans "Create new model" %}</a>
+        <h1>{% trans "Model management" %}</h1>
+    </div>
+{% endblock header %}
+
+{% block dashboard_content %}
+    {% block search_models %}
+        <div class="table-header">
+            <h3><i class="icon-search icon-large"></i>{% trans "Search Models" %}</h3>
+        </div>
+        <div class="well">
+            <form action="." method="get" class="form-inline">
+                {% comment %}
+                    Add the current query string to the search form so that the
+                    sort order is not reset when searching.
+                {% endcomment %}
+                {% for name, value in request.GET.items %}
+                    {% if name not in form.fields %}
+                        <input type="hidden" name="{{ name }}" value="{{ value }}"/>
+                    {% endif %}
+                {% endfor %}
+
+                {% include "partials/form_fields_inline.html" with form=form %}
+                <button type="submit" class="btn btn-primary">{% trans "Search" %}</button>
+            </form>
+        </div>
+    {% endblock %}
+
+    {% if models %}
+        {% block model_list %}
+            <div class="table-header">
+                <h2><i class="icon-sitemap icon-large"></i>{{ queryset_description }}</h2>
+            </div>
+            <form action="." method="post">
+                {% csrf_token %}
+                <table class="table table-striped table-bordered">
+                    {% block model_list_header %}
+                        <tr>
+                            <th>{% if 'recently_edited' in request.GET %}{% trans "Brand" %}
+                                {% else %}{% anchor 'brand' _("Brand") %}{% endif %}</th>
+                            <th>{% if 'recently_edited' in request.GET %}{% trans "Name" %}
+                                {% else %}{% anchor 'name' _("Name") %}{% endif %}</th>
+                            <th></th>
+                        </tr>
+                    {% endblock %}
+                    {% for model in models %}
+                        {% block model %}
+                            <tr>
+				<td><a href="{%url 'dashboard:catalogue-brand' pk=model.brand.id %}">{{ model.brand }}</a></td>
+                                <td><a href="{% url 'dashboard:catalogue-model' pk=model.id %}">{{ model.name }}</a></td>
+                                <td>
+                                    <div class="btn-toolbar">
+                                        <div class="btn-group">
+                                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                                {% trans "Actions" %}
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li>
+                                                    <a href="{% url 'dashboard:catalogue-model' pk=model.id %}{% if request.GET.urlencode %}?{{ request.GET.urlencode }}{% endif %}">{% trans "Edit" %}</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{% url 'dashboard:catalogue-model-delete' pk=model.id %}">{% trans "Delete" %}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endblock model %}
+                    {% endfor %}
+                </table>
+                {% include "partials/pagination.html" %}
+            </form>
+        {% endblock model_list %}
+    {% else %}
+        <p>{% trans "No models found." %}</p>
+    {% endif %}
+
+{% endblock dashboard_content %}
