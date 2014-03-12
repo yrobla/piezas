@@ -4,22 +4,41 @@ from oscar.apps.catalogue.abstract_models import AbstractProduct
 from oscar.apps.catalogue.models import ProductImage
 
 
+class BrandManager(models.Manager):
+
+    def base_queryset(self):
+        """
+        Return ``QuerySet`` with related content pre-loaded.
+        """
+        return self.get_query_set().all()
+
 class Brand(models.Model):
     name = models.CharField(_('Car brand'), max_length=255)
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_update = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
+    objects = BrandManager()
 
 class Model(models.Model):
     brand = models.ForeignKey(Brand, verbose_name = _('Car brand'))
     name = models.CharField(_('Car model'), max_length=255)
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_update = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
 
 class Version(models.Model):
     model = models.ForeignKey(Model, verbose_name = _('Car model'))
     name = models.CharField(_('Car model'), max_length=255)
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_update = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
 
 class Bodywork(models.Model):
     name = models.CharField(_('Car bodywork type'), max_length=255)
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_update = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
 
 class Engine(models.Model):
     name = models.CharField(_('Car engine'), max_length=255)
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_update = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
 
 class Product(AbstractProduct):
     brand = models.ForeignKey(Brand, verbose_name=_("Car brand"),

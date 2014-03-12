@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Django settings for piezas project.
+from django.utils.translation import ugettext_lazy as _
 from oscar import get_core_apps
 from oscar import OSCAR_MAIN_TEMPLATE_DIR
 import os
@@ -145,9 +146,11 @@ INSTALLED_APPS = [
     'south',
     'compressor',
 ]
-INSTALLED_APPS = INSTALLED_APPS + get_core_apps(['piezas.apps.basket',
-    'piezas.apps.catalogue', 'piezas.apps.offer', 'piezas.apps.voucher'])
+INSTALLED_APPS = INSTALLED_APPS + get_core_apps([
+    'piezas.apps.catalogue', 'piezas.apps.offer',
+    'piezas.apps.dashboard'])
 
+INSTALLED_APPS = INSTALLED_APPS + ['piezas.apps.dashboard.podcatalogue',]
 SITE_ID = 1
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -215,4 +218,111 @@ OSCAR_DEFAULT_CURRENCY = 'EUR'
 OSCAR_CURRENCY_LOCALE = 'es_ES'
 OSCAR_ALLOW_ANON_REVIEWS = False
 OSCAR_FROM_EMAIL = 'info@ysoft.biz'
+LOGIN_REDIRECT_URL = '/'
 LANGUAGES = ()
+
+# Menu structure of the dashboard navigation
+OSCAR_DASHBOARD_NAVIGATION = [
+    {
+        'label': _('Dashboard'),
+        'icon': 'icon-th-list',
+        'url_name': 'dashboard:index',
+    },
+    {
+        'label': _('Catalogue'),
+        'icon': 'icon-sitemap',
+        'children': [
+            {
+                'label': _('Products'),
+                'url_name': 'dashboard:catalogue-product-list',
+            },
+            {
+                'label': _('Categories'),
+                'url_name': 'dashboard:catalogue-category-list',
+            },
+            {
+                'label': _('Brands'),
+                'url_name': 'dashboard:catalogue-brand-list',
+            },
+            {
+                'label': _('Models'),
+                'url_name': 'dashboard:catalogue-model-list',
+            },
+            {
+                'label': _('Versions'),
+                'url_name': 'dashboard:catalogue-version-list',
+            },
+            {
+                'label': _('Bodywork'),
+                'url_name': 'dashboard:catalogue-bodywork-list',
+            },
+            {
+                'label': _('Engine'),
+                'url_name': 'dashboard:catalogue-engine-list',
+            },
+        ]
+    },
+    {
+        'label': _('Fulfilment'),
+        'icon': 'icon-shopping-cart',
+        'children': [
+            {
+                'label': _('Order management'),
+                'url_name': 'dashboard:order-list',
+            },
+            {
+                'label': _('Statistics'),
+                'url_name': 'dashboard:order-stats',
+            },
+            {
+                'label': _('Partners'),
+                'url_name': 'dashboard:partner-list',
+            },
+        ]
+    },
+    {
+        'label': _('Customers'),
+        'icon': 'icon-group',
+        'children': [
+            {
+                'label': _('Customer management'),
+                'url_name': 'dashboard:users-index',
+            }
+        ]
+    },
+    {
+        'label': _('Content'),
+        'icon': 'icon-folder-close',
+        'children': [
+            {
+                'label': _('Content blocks'),
+                'url_name': 'dashboard:promotion-list',
+            },
+            {
+                'label': _('Content blocks by page'),
+                'url_name': 'dashboard:promotion-list-by-page',
+            },
+            {
+                'label': _('Pages'),
+                'url_name': 'dashboard:page-list',
+            },
+            {
+                'label': _('Email templates'),
+                'url_name': 'dashboard:comms-list',
+            },
+            {
+                'label': _('Reviews'),
+                'url_name': 'dashboard:reviews-list',
+            },
+        ] 
+    },
+    {
+        'label': _('Reports'),
+        'icon': 'icon-bar-chart',
+        'url_name': 'dashboard:reports-index',
+    },
+]
+
+
+LOCALE_PATHS = (location('../locale'),)
+print LOCALE_PATHS

@@ -13,3 +13,4 @@ class OfferApplication(CoreOfferApplication):
         ]
         return self.post_process_urls(patterns('', *urls))
 
+application = OfferApplication()

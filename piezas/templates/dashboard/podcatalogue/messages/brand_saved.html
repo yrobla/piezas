@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% if creating %}
+    {% blocktrans with name=brand.name %}
+        Created brand '{{ name }}'.
+    {% endblocktrans %}
+{% else %}
+    {% blocktrans with name=brand.name %}
+        Updated brand '{{ name }}'.
+    {% endblocktrans %}
+{% endif %}
+
+<p>
+    <a href="{% url 'dashboard:catalogue-brand' pk=brand.pk %}" class="btn btn-success">{% trans "Edit again" %}</a>
+</p>

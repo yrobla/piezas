@@ -16,3 +16,4 @@ class SearchApplication(CoreSearchApplication):
         )
         return self.post_process_urls(urlpatterns)
 
+application = SearchApplication()

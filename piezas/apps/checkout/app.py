@@ -36,3 +36,4 @@ class CheckoutApplication(CoreCheckoutApplication):
         ]
         return self.post_process_urls(patterns('', *urls))
 
+application = CheckoutApplication()
