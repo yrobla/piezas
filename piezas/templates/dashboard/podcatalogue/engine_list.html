@@ -1,0 +1,102 @@
+{% extends 'dashboard/layout.html' %}
+{% load i18n %}
+{% load thumbnail %}
+{% load staticfiles %}
+{% load sorting_tags %}
+
+{% block body_class %}{{ block.super }} catalogue{% endblock %}
+
+{% block title %}
+    {% trans "Engine management" %} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans "Engine management" %}</li>
+    </ul>
+{% endblock %}
+
+{% block header %}
+    <div class="page-header">
+        <a href="{% url 'dashboard:catalogue-engine-create' %}" class="btn btn-primary btn-large pull-right">
+	<i class="icon-plus"></i> {% trans "Create new engine" %}</a>
+        <h1>{% trans "Engine management" %}</h1>
+    </div>
+{% endblock header %}
+
+{% block dashboard_content %}
+    {% block search_engines %}
+        <div class="table-header">
+            <h3><i class="icon-search icon-large"></i>{% trans "Search Engines" %}</h3>
+        </div>
+        <div class="well">
+            <form action="." method="get" class="form-inline">
+                {% comment %}
+                    Add the current query string to the search form so that the
+                    sort order is not reset when searching.
+                {% endcomment %}
+                {% for name, value in request.GET.items %}
+                    {% if name not in form.fields %}
+                        <input type="hidden" name="{{ name }}" value="{{ value }}"/>
+                    {% endif %}
+                {% endfor %}
+
+                {% include "partials/form_fields_inline.html" with form=form %}
+                <button type="submit" class="btn btn-primary">{% trans "Search" %}</button>
+            </form>
+        </div>
+    {% endblock %}
+
+    {% if engines %}
+        {% block engine_list %}
+            <div class="table-header">
+                <h2><i class="icon-sitemap icon-large"></i>{{ queryset_description }}</h2>
+            </div>
+            <form action="." method="post">
+                {% csrf_token %}
+                <table class="table table-striped table-bordered">
+                    {% block engine_list_header %}
+                        <tr>
+                            <th>{% if 'recently_edited' in request.GET %}{% trans "Name" %}
+                                {% else %}{% anchor 'name' _("Name") %}{% endif %}</th>
+                            <th></th>
+                        </tr>
+                    {% endblock %}
+                    {% for engine in engines %}
+                        {% block engine %}
+                            <tr>
+                                <td><a href="{% url 'dashboard:catalogue-engine' pk=engine.id %}">{{ engine.name }}</a></td>
+                                <td>
+                                    <div class="btn-toolbar">
+                                        <div class="btn-group">
+                                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                                {% trans "Actions" %}
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li>
+                                                    <a href="{% url 'dashboard:catalogue-engine' pk=engine.id %}{% if request.GET.urlencode %}?{{ request.GET.urlencode }}{% endif %}">{% trans "Edit" %}</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{% url 'dashboard:catalogue-engine-delete' pk=engine.id %}">{% trans "Delete" %}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endblock engine %}
+                    {% endfor %}
+                </table>
+                {% include "partials/pagination.html" %}
+            </form>
+        {% endblock engine_list %}
+    {% else %}
+        <p>{% trans "No engines found." %}</p>
+    {% endif %}
+
+{% endblock dashboard_content %}

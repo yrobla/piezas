@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% if creating %}
+    {% blocktrans with name=engine.name %}
+        Created engine '{{ name }}'.
+    {% endblocktrans %}
+{% else %}
+    {% blocktrans with name=engine.name %}
+        Updated engine '{{ name }}'.
+    {% endblocktrans %}
+{% endif %}
+
+<p>
+    <a href="{% url 'dashboard:catalogue-engine' pk=engine.pk %}" class="btn btn-success">{% trans "Edit again" %}</a>
+</p>

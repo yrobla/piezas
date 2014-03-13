@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% if creating %}
+    {% blocktrans with name=bodywork.name %}
+        Created bodywork '{{ name }}'.
+    {% endblocktrans %}
+{% else %}
+    {% blocktrans with name=bodywork.name %}
+        Updated bodywork '{{ name }}'.
+    {% endblocktrans %}
+{% endif %}
+
+<p>
+    <a href="{% url 'dashboard:catalogue-bodywork' pk=bodywork.pk %}" class="btn btn-success">{% trans "Edit again" %}</a>
+</p>

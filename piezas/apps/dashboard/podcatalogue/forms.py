@@ -11,6 +11,8 @@ from oscar.forms.widgets import ImageInput
 Brand = get_model('catalogue', 'Brand')
 Model = get_model('catalogue', 'Model')
 Version = get_model('catalogue', 'Version')
+Bodywork = get_model('catalogue', 'Bodywork')
+Engine = get_model('catalogue', 'Engine')
 
 
 # brand
@@ -71,5 +73,43 @@ class VersionSearchForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(VersionSearchForm, self).clean()
+        cleaned_data['name'] = cleaned_data['name'].strip()
+        return cleaned_data
+
+# bodywork
+class BodyworkForm(forms.ModelForm):
+    """
+    Form to create a brand
+    """
+    class Meta:
+        model = Bodywork
+
+    name = forms.CharField(max_length=255, required=True, label=_('Name'))
+
+
+class BodyworkSearchForm(forms.Form):
+    name = forms.CharField(max_length=255, required=False, label=_('Name'))
+
+    def clean(self):
+        cleaned_data = super(BodyworkSearchForm, self).clean()
+        cleaned_data['name'] = cleaned_data['name'].strip()
+        return cleaned_data
+
+# engine
+class EngineForm(forms.ModelForm):
+    """
+    Form to create a brand
+    """
+    class Meta:
+        model = Engine
+
+    name = forms.CharField(max_length=255, required=True, label=_('Name'))
+
+
+class EngineSearchForm(forms.Form):
+    name = forms.CharField(max_length=255, required=False, label=_('Name'))
+
+    def clean(self):
+        cleaned_data = super(EngineSearchForm, self).clean()
         cleaned_data['name'] = cleaned_data['name'].strip()
         return cleaned_data
