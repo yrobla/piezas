@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% if creating %}
+    {% blocktrans with name=version.name %}
+        Created version '{{ name }}'.
+    {% endblocktrans %}
+{% else %}
+    {% blocktrans with name=version.name %}
+        Updated version '{{ name }}'.
+    {% endblocktrans %}
+{% endif %}
+
+<p>
+    <a href="{% url 'dashboard:catalogue-version' pk=version.pk %}" class="btn btn-success">{% trans "Edit again" %}</a>
+</p>

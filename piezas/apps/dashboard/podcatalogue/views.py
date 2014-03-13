@@ -13,20 +13,31 @@ from oscar.core.loading import get_classes, get_model
 from oscar.views import sort_queryset
 from oscar.views.generic import ObjectLookupView
 
-(BrandForm,
+(	BrandForm,
  BrandSearchForm,
  ModelForm,
- ModelSearchForm) \
+ ModelSearchForm,
+ VersionForm,
+ VersionSearchForm) \
     = get_classes('dashboard.podcatalogue.forms',
                   ('BrandForm',
                    'BrandSearchForm',
                    'ModelForm',
-                   'ModelSearchForm'))
+                   'ModelSearchForm',
+                   'VersionForm',
+                   'VersionSearchForm'))
 
 Brand = get_model('catalogue', 'Brand')
 Model = get_model('catalogue', 'Model')
+Version = get_model('catalogue', 'Version')
 
 # brand
+class BrandListMixin(object):
+
+    def get_success_url(self):
+        return reverse("dashboard:catalogue-brand-list")
+
+
 class BrandListView(generic.ListView):
     """
     Dashboard view of the brand list.
@@ -98,12 +109,6 @@ class BrandListView(generic.ListView):
         self.description = self.description_template % description_ctx
 
         return queryset
-
-
-class BrandListMixin(object):
-
-    def get_success_url(self):
-        return reverse("dashboard:catalogue-brand-list")
 
 
 class BrandCreateView(BrandListMixin, generic.CreateView):
@@ -229,19 +234,19 @@ class BrandCreateUpdateView(generic.UpdateView):
         return self.get_url_with_querystring(url)
 
 # model
-class BrandListMixin(object):
+class ModelListMixin(object):
 
     def get_success_url(self):
         return reverse("dashboard:catalogue-model-list")
 
 class ModelListView(generic.ListView):
     """
-    Dashboard view of the brand list.
+    Dashboard view of the model list.
     Supports the permission-based dashboard.
     """
 
     template_name = 'dashboard/podcatalogue/model_list.html'
-    model = Brand
+    model = Model
     context_object_name = 'models'
     form_class = ModelSearchForm
     description_template = _(u'Models %(title_filter)s')
@@ -298,7 +303,7 @@ class ModelListView(generic.ListView):
 
         if data.get('brand'):
             queryset = queryset.filter(
-                name__icontains=data['brand']).distinct()
+                brand=data['brand']).distinct()
             description_ctx['brand_filter'] = _(
                 " including an item with brand matching '%s'") % data['brand']
 
@@ -387,11 +392,6 @@ class ModelCreateUpdateView(generic.UpdateView):
                           kwargs={"pk": self.object.id})
         return self.get_url_with_querystring(url)
 
-class ModelListMixin(object):
-
-    def get_success_url(self):
-        return reverse("dashboard:catalogue-model-list")
-
 
 class ModelCreateView(ModelListMixin, generic.CreateView):
     template_name = 'dashboard/podcatalogue/model_form.html'
@@ -414,17 +414,17 @@ class ModelCreateView(ModelListMixin, generic.CreateView):
 
 
 class ModelUpdateView(ModelListMixin, generic.UpdateView):
-    template_name = 'dashboard/podcatalogue/brand_form.html'
-    model = Brand
-    form_class = BrandForm
+    template_name = 'dashboard/podcatalogue/model_form.html'
+    model = Model
+    form_class = ModelForm
 
     def get_context_data(self, **kwargs):
-        ctx = super(BrandUpdateView, self).get_context_data(**kwargs)
+        ctx = super(ModelUpdateView, self).get_context_data(**kwargs)
         return ctx
 
     def get_success_url(self):
-        messages.info(self.request, _("Brand updated successfully"))
-        return super(BrandUpdateView, self).get_success_url()
+        messages.info(self.request, _("Model updated successfully"))
+        return super(ModelUpdateView, self).get_success_url()
 
 
 class ModelDeleteView(ModelListMixin, generic.DeleteView):
@@ -438,3 +438,212 @@ class ModelDeleteView(ModelListMixin, generic.DeleteView):
     def get_success_url(self):
         messages.info(self.request, _("Model deleted successfully"))
         return super(ModelDeleteView, self).get_success_url()
+
+# version
+class VersionListMixin(object):
+
+    def get_success_url(self):
+        return reverse("dashboard:catalogue-version-list")
+
+class VersionListView(generic.ListView):
+    """
+    Dashboard view of the version list.
+    Supports the permission-based dashboard.
+    """
+
+    template_name = 'dashboard/podcatalogue/version_list.html'
+    model = Version
+    context_object_name = 'versions'
+    form_class = VersionSearchForm
+    description_template = _(u'Versions %(title_filter)s')
+    paginate_by = 20
+    recent_versions = 5
+
+    def get_context_data(self, **kwargs):
+        ctx = super(VersionListView, self).get_context_data(**kwargs)
+        ctx['form'] = self.form
+        if 'recently_edited' in self.request.GET:
+            ctx['queryset_description'] \
+                = _("Last %(num_versions)d edited versions") \
+                % {'num_versions': self.recent_versions}
+        else:
+            ctx['queryset_description'] = self.description
+
+        return ctx
+
+    def get_queryset(self):
+        """
+        Build the queryset for this list
+        """
+        queryset = Version.objects.base_queryset()
+        queryset = self.apply_search(queryset)
+        queryset = self.apply_ordering(queryset)
+
+        return queryset
+
+    def apply_ordering(self, queryset):
+        if 'recently_edited' in self.request.GET:
+            # Just show recently edited
+            queryset = queryset.order_by('-date_updated')
+            queryset = queryset[:self.recent_products]
+        else:
+            # Allow sorting when all
+            queryset = sort_queryset(queryset, self.request,
+                                     ['model', 'name'], '-date_created')
+        return queryset
+
+    def apply_search(self, queryset):
+        """
+        Filter the queryset and set the description according to the search
+        parameters given
+        """
+        description_ctx = {'title_filter': ''}
+
+        self.form = self.form_class(self.request.GET)
+
+        if not self.form.is_valid():
+            self.description = self.description_template % description_ctx
+            return queryset
+
+        data = self.form.cleaned_data
+
+        if data.get('model'):
+            queryset = queryset.filter(
+                model=data['model']).distinct()
+            description_ctx['model_filter'] = _(
+                " including an item with model matching '%s'") % data['model']
+
+        if data.get('name'):
+            queryset = queryset.filter(
+                name__icontains=data['name']).distinct()
+            description_ctx['name_filter'] = _(
+                " including an item with title matching '%s'") % data['name']
+
+        self.description = self.description_template % description_ctx
+
+        return queryset
+
+class VersionCreateUpdateView(generic.UpdateView):
+    """
+    Dashboard view that bundles both creating and updating single products.
+    Supports the permission-based dashboard.
+    """
+
+    template_name = 'dashboard/podcatalogue/version_update.html'
+    model = Version
+    context_object_name = 'version'
+
+    form_class = VersionForm
+
+    def get_context_data(self, **kwargs):
+        ctx = super(VersionCreateUpdateView, self).get_context_data(**kwargs)
+
+        if self.object is None:
+            ctx['title'] = _('Create new version')
+        else:
+            ctx['title'] = ctx['version'].name
+        return ctx
+
+    def forms_valid(self, form, formsets):
+        """
+        Save all changes and display a success url.
+        """
+        if not self.creating:
+            # a just created product was already saved in process_all_forms()
+            self.object = form.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def forms_invalid(self, form, formsets):
+        # delete the temporary product again
+        if self.creating and self.object and self.object.pk is not None:
+            self.object.delete()
+            self.object = None
+
+        messages.error(self.request,
+                       _("Your submitted data was not valid - please "
+                         "correct the errors below"))
+        ctx = self.get_context_data(form=form, **formsets)
+        return self.render_to_response(ctx)
+
+    def get_url_with_querystring(self, url):
+        url_parts = [url]
+        if self.request.GET.urlencode():
+            url_parts += [self.request.GET.urlencode()]
+        return "?".join(url_parts)
+
+    def get_object(self, queryset=None):
+        """
+        This parts allows generic.UpdateView to handle creating products as
+        well. The only distinction between an UpdateView and a CreateView
+        is that self.object is None. We emulate this behavior.
+        Additionally, self.product_class is set.
+        """
+        self.creating = not 'pk' in self.kwargs
+        if not self.creating:
+            model = super(VersionCreateUpdateView, self).get_object(queryset)
+            return model
+
+    def get_success_url(self):
+        msg = render_to_string(
+            'dashboard/podcatalogue/messages/version_saved.html',
+            {
+                'version': self.object,
+                'creating': self.creating,
+            })
+        messages.success(self.request, msg)
+        url = reverse('dashboard:catalogue-version-list')
+        if self.request.POST.get('action') == 'continue':
+            url = reverse('dashboard:catalogue-version',
+                          kwargs={"pk": self.object.id})
+        return self.get_url_with_querystring(url)
+
+
+class VersionCreateView(VersionListMixin, generic.CreateView):
+    template_name = 'dashboard/podcatalogue/version_form.html'
+    model = Version
+    form_class = VersionForm
+
+    def get_context_data(self, **kwargs):
+        ctx = super(VersionCreateView, self).get_context_data(**kwargs)
+        ctx['title'] = _("Add a new version")
+        return ctx
+
+    def get_success_url(self):
+        messages.info(self.request, _("Version created successfully"))
+        return super(VersionCreateView, self).get_success_url()
+
+    def get_initial(self):
+        # set child category if set in the URL kwargs
+        initial = super(VersionCreateView, self).get_initial()
+        return initial
+
+
+class VersionUpdateView(ModelListMixin, generic.UpdateView):
+    template_name = 'dashboard/podcatalogue/version_form.html'
+    model = Version
+    form_class = VersionForm
+
+    def get_context_data(self, **kwargs):
+        ctx = super(VersionUpdateView, self).get_context_data(**kwargs)
+        return ctx
+
+    def get_success_url(self):
+        messages.info(self.request, _("Version updated successfully"))
+        return super(VersionUpdateView, self).get_success_url()
+
+
+class VersionDeleteView(VersionListMixin, generic.DeleteView):
+    template_name = 'dashboard/podcatalogue/version_delete.html'
+    model = Version
+
+    def get_context_data(self, *args, **kwargs):
+        print "in context"
+
+        ctx = super(VersionDeleteView, self).get_context_data(*args, **kwargs)
+        ctx['content'] = ctx['version']
+        return ctx
+
+    def get_success_url(self):
+        messages.info(self.request, _("Version deleted successfully"))
+        return super(VersionDeleteView, self).get_success_url()

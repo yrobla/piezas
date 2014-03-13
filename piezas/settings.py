@@ -325,4 +325,3 @@ OSCAR_DASHBOARD_NAVIGATION = [
 
 
 LOCALE_PATHS = (location('../locale'),)
-print LOCALE_PATHS

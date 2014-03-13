@@ -10,6 +10,7 @@ from oscar.forms.widgets import ImageInput
 
 Brand = get_model('catalogue', 'Brand')
 Model = get_model('catalogue', 'Model')
+Version = get_model('catalogue', 'Version')
 
 
 # brand
@@ -49,5 +50,26 @@ class ModelSearchForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(ModelSearchForm, self).clean()
+        cleaned_data['name'] = cleaned_data['name'].strip()
+        return cleaned_data
+
+# version
+class VersionForm(forms.ModelForm):
+    """
+    Form to create a brand
+    """
+    class Meta:
+        model = Version
+
+    model = forms.ModelChoiceField(required=True, label=_('Model'), queryset=Model.objects.all())
+    name = forms.CharField(max_length=255, required=True, label=_('Name'))
+
+
+class VersionSearchForm(forms.Form):
+    model = forms.ModelChoiceField(required=False, label=_('Model'), queryset=Model.objects.all())
+    name = forms.CharField(max_length=255, required=False, label=_('Name'))
+
+    def clean(self):
+        cleaned_data = super(VersionSearchForm, self).clean()
         cleaned_data['name'] = cleaned_data['name'].strip()
         return cleaned_data
