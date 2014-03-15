@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
+from django.contrib.auth.decorators import login_required
 from piezas.app import application
+import views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -7,7 +9,7 @@ from piezas.app import application
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'piezas.views.home', name='home'),
+    url(r'^$', login_required(views.HomeView.as_view()), name='home'),
     # url(r'^piezas/', include('piezas.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
@@ -15,6 +17,6 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'', include(application.urls)),
+    url(r'^', include(application.urls)),
     url(r'^chaining/', include('smart_selects.urls')),
 )

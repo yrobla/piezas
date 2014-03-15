@@ -219,7 +219,7 @@ OSCAR_DEFAULT_CURRENCY = 'EUR'
 OSCAR_CURRENCY_LOCALE = 'es_ES'
 OSCAR_ALLOW_ANON_REVIEWS = False
 OSCAR_FROM_EMAIL = 'info@ysoft.biz'
-LOGIN_REDIRECT_URL = '/home/'
+LOGIN_REDIRECT_URL = '/'
 LANGUAGES = ()
 
 # Menu structure of the dashboard navigation
@@ -327,6 +327,6 @@ OSCAR_DASHBOARD_NAVIGATION = [
 
 LOCALE_PATHS = (location('../locale'),)
 APPEND_SLASH = True
-OSCAR_HOMEPAGE = '/home/'
+OSCAR_HOMEPAGE = '/'
 
 EXCLUDE_TAXES = True
