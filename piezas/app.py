@@ -1,6 +1,7 @@
 import django
 from django.conf.urls import patterns, url, include
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
 
 from oscar.core.application import Application
@@ -18,7 +19,7 @@ class PodApplication(Shop):
         urls = super(PodApplication, self).get_urls()
 
         urls += [
-            url(r'^home/', self.index_view.as_view(), name='index'),
+            url(r'^home/', login_required(self.index_view.as_view()), name='index'),
         ]
         return patterns('', *urls)
 
