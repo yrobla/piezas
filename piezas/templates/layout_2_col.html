@@ -32,13 +32,7 @@ main content area to split it into a sidebar and a content block
 
                 {% include "partials/alert_messages.html" %}
 
-		{% if user.is_authenticated %}
-                <div id="promotions">
-                    {% for promotion in promotions_page %}
-                        {% render_promotion promotion %}
-                    {% endfor %}
-                </div>
-		{% else %}
+		{% if not user.is_authenticated %}
 			{% include "partials/non_auth_homepage.html" %}
 		{% endif %}
 

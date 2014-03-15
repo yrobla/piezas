@@ -136,7 +136,7 @@ var oscar = (function(o, $) {
                 options = {'basketURL': document.URL};
             }
             o.basket.url = options.basketURL || document.URL;
-            $('#content_inner').on('click', '#basket_formset a[data-behaviours~="remove"]', function(event) {
+            $('#content_inner').on('click', 'a[data-behaviours~="remove"]', function(event) {
                 o.basket.checkAndSubmit($(this), 'form', 'DELETE');
                 event.preventDefault();
             });

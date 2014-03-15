@@ -7514,7 +7514,7 @@ form,
 .table,
 .page-header,
 .sub-header {
-  margin: 0 0 20px;
+  	margin: 20px 0 0 20px;
 }
 ul,
 ol {
@@ -7918,6 +7918,11 @@ input[type="number"][id*="quantity"] {
 .basket-items {
   border-bottom: 1px solid #e5e5e5;
   padding: 10px;
+  padding-left:0px;
+  margin:0;
+}
+.baket-items div {
+	margin: 0;
 }
 .basket-items:nth-child(even) {
   background: #f8f8f8;
@@ -8163,4 +8168,14 @@ input[type="number"][id*="quantity"] {
 .logo
 {
 	height:75px !important;
+}
+
+.content
+{
+	margin-left:20px;
+}
+
+.basket-header
+{
+	margin-left:20px;
 }

@@ -9,8 +9,17 @@ from oscar.core.loading import get_class
 from oscar.views.decorators import login_forbidden
 
 from oscar.app import Shop
+import views
 
 class PodApplication(Shop):
-    pass
+    index_view = views.HomeView
+
+    def get_urls(self):
+        urls = super(PodApplication, self).get_urls()
+
+        urls += [
+            url(r'^home/', self.index_view.as_view(), name='index'),
+        ]
+        return patterns('', *urls)
 
 application = PodApplication()

@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from oscar.apps.basket.app import BasketApplication as CoreBasketApplication
 
 class BasketApplication(CoreBasketApplication):
+    name = 'basket'
     def get_urls(self):
         urls = [
             url(r'^$', login_required(self.summary_view.as_view()), name='summary'),

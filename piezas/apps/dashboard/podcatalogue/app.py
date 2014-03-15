@@ -1,8 +1,22 @@
 from django.conf.urls import patterns, url
 from oscar.apps.dashboard.catalogue.app import CatalogueApplication as CoreCatalogueApplication
+from oscar.apps.dashboard.catalogue import views as coreviews
 import views
 
 class CatalogueApplication(CoreCatalogueApplication):
+    # product
+    product_list_view = coreviews.ProductListView
+    product_lookup_view = coreviews.ProductLookupView
+    product_create_redirect_view = coreviews.ProductCreateRedirectView
+    product_createupdate_view = coreviews.ProductCreateUpdateView
+    product_delete_view = coreviews.ProductDeleteView
+    # category
+    category_list_view = coreviews.CategoryListView
+    category_detail_list_view = coreviews.CategoryDetailListView
+    category_create_view = coreviews.CategoryCreateView
+    category_update_view = coreviews.CategoryUpdateView
+    category_delete_view = coreviews.CategoryDeleteView
+    stock_alert_view = coreviews.StockAlertListView
     # brand
     brand_list_view = views.BrandListView
     brand_createupdate_view = views.BrandCreateUpdateView
@@ -36,6 +50,15 @@ class CatalogueApplication(CoreCatalogueApplication):
 
     default_permissions = ['is_staff', ]
     permissions_map = _map = {
+        # product
+        'catalogue-product': (['is_staff'], ['partner.dashboard_access']),
+        'catalogue-product-create': (['is_staff'],
+                                     ['partner.dashboard_access']),
+        'catalogue-product-list': (['is_staff'], ['partner.dashboard_access']),
+        'catalogue-product-delete': (['is_staff'],
+                                     ['partner.dashboard_access']),
+        'catalogue-product-lookup': (['is_staff'],
+                                     ['partner.dashboard_access']),
         # brand
         'catalogue-brand': (['is_staff']),
         'catalogue-brand-create': (['is_staff']),
@@ -64,10 +87,41 @@ class CatalogueApplication(CoreCatalogueApplication):
     }
 
     def get_urls(self):
-        urls = super(CatalogueApplication, self).get_urls()
-
         # add new urls
-        urls += [
+        urls = [
+            # products
+            url(r'^products/(?P<pk>\d+)/$',
+                self.product_createupdate_view.as_view(),
+                name='catalogue-product'),
+            url(r'^products/create/$',
+                self.product_create_redirect_view.as_view(),
+                name='catalogue-product-create'),
+            url(r'^products/(?P<pk>\d+)/delete/$',
+                self.product_delete_view.as_view(),
+                name='catalogue-product-delete'),
+            url(r'^$', self.product_list_view.as_view(),
+                name='catalogue-product-list'),
+            url(r'^stock-alerts/$', self.stock_alert_view.as_view(),
+                name='stock-alert-list'),
+            url(r'^product-lookup/$', self.product_lookup_view.as_view(),
+                name='catalogue-product-lookup'),
+            # categories
+            url(r'^categories/$', self.category_list_view.as_view(),
+                name='catalogue-category-list'),
+            url(r'^categories/(?P<pk>\d+)/$',
+                self.category_detail_list_view.as_view(),
+                name='catalogue-category-detail-list'),
+            url(r'^categories/create/$', self.category_create_view.as_view(),
+                name='catalogue-category-create'),
+            url(r'^categories/create/(?P<parent>\d+)$',
+                self.category_create_view.as_view(),
+                name='catalogue-category-create-child'),
+            url(r'^categories/(?P<pk>\d+)/update/$',
+                self.category_update_view.as_view(),
+                name='catalogue-category-update'),
+            url(r'^categories/(?P<pk>\d+)/delete/$',
+                self.category_delete_view.as_view(),
+                name='catalogue-category-delete'),
             # brands
             url(r'^brands/(?P<pk>\d+)/$',
                 self.brand_createupdate_view.as_view(),

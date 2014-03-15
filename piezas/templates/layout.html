@@ -17,11 +17,6 @@
 		{% endif %}
             </div>
         </div>
-	{% if user.is_authenticated %}
-        {% block navigation %}
-            {% include "partials/nav_primary.html" %}
-        {% endblock %}
-	{% endif %}
     </header>
 
     {# Main content of page - other layout templates may override this block #}
@@ -38,16 +33,7 @@
                 {% block subnavigation %}{% endblock %}
                 <div class="content">
                     {% block subheader %}{% endblock subheader %}
-
                     {# Render promotions #}
-		{% if user.is_authenticated %}
-                    <div id="promotions">
-                        {% for promotion in promotions_page %}
-                            {% render_promotion promotion %}
-                        {% endfor %}
-                    </div>
-		{% endif %}
-
                     {# Div exists for AJAX updates to entire content section #}
                     <div id="content_inner">{% block content %}{% endblock %}</div>
                 </div>

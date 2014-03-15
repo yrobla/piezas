@@ -111,7 +111,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'oscar.apps.basket.middleware.BasketMiddleware',
+    'piezas.apps.basket.middleware.BasketMiddleware',
     'django.middleware.transaction.TransactionMiddleware',  # recommended for oscar
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     # Uncomment the next line for simple clickjacking protection:
@@ -145,10 +145,11 @@ INSTALLED_APPS = [
     # 'django.contrib.admindocs',
     'south',
     'compressor',
+    'smart_selects'
 ]
 INSTALLED_APPS = INSTALLED_APPS + get_core_apps([
     'piezas.apps.catalogue', 'piezas.apps.offer',
-    'piezas.apps.dashboard'])
+    'piezas.apps.dashboard', 'piezas.apps.search', 'piezas.apps.basket'])
 
 INSTALLED_APPS = INSTALLED_APPS + ['piezas.apps.dashboard.podcatalogue',]
 SITE_ID = 1
@@ -218,7 +219,7 @@ OSCAR_DEFAULT_CURRENCY = 'EUR'
 OSCAR_CURRENCY_LOCALE = 'es_ES'
 OSCAR_ALLOW_ANON_REVIEWS = False
 OSCAR_FROM_EMAIL = 'info@ysoft.biz'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/home/'
 LANGUAGES = ()
 
 # Menu structure of the dashboard navigation
@@ -325,3 +326,7 @@ OSCAR_DASHBOARD_NAVIGATION = [
 
 
 LOCALE_PATHS = (location('../locale'),)
+APPEND_SLASH = True
+OSCAR_HOMEPAGE = '/home/'
+
+EXCLUDE_TAXES = True

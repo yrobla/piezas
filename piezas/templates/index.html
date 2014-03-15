@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Homepage' %} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{{ homepage_url }}">{% trans 'Home' %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans 'Dashboard' %}</li>
+    </ul>
+{% endblock %}
+
+{% block headertext %}
+    {% trans "Dashboard" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span6 register_form">
+		<div class="well">
+			<a href="{% url 'search:home' %}">{% trans "Search pieces" %}</a>
+		</div>
+        </div>
+    </div>
+{% endblock content %}

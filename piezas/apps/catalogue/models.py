@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from oscar.apps.catalogue.abstract_models import AbstractProduct
 from oscar.apps.catalogue.models import ProductImage
-
+from smart_selects.db_fields import ChainedForeignKey
 
 class BrandManager(models.Manager):
 
@@ -115,5 +115,28 @@ class Product(AbstractProduct):
     engine = models.ForeignKey(Engine, verbose_name=_("Car engine"),
         blank=True, null=True, related_name='product_engine')
     frameref = models.CharField(_('Frame reference'), max_length=255, blank=True, null=True)
+
+class SearchProductRequest(models.Model):
+    brand = models.ForeignKey(Brand, verbose_name=_("Car brand"),
+        help_text=_('Brand of the car that it belongs to'), blank=True, null=True,
+        related_name='product_brand')
+    model = ChainedForeignKey(Model, chained_field="brand", chained_model_field="brand",
+        show_all=False, auto_choose=False, verbose_name=_("Car model"),
+        help_text=_('Model of the car that it belongs to'), blank=True, null=True,
+        related_name='product_model')
+    version = ChainedForeignKey(Version, chained_field="model", chained_model_field="model",
+        show_all=False, auto_choose=True, verbose_name=_("Car version"),
+        help_text=_('Version of the car that it belongs to'), blank=True, null=True,
+        related_name='product_version')
+    bodywork = models.ForeignKey(Bodywork, verbose_name=_("Bodywork type"),
+        blank=True, null=True, related_name='product_bodywork')
+    engine = models.ForeignKey(Engine, verbose_name=_("Car engine"),
+        blank=True, null=True, related_name='product_engine')
+    frameref = models.CharField(_('Frame reference'), max_length=255, blank=True, null=True)
+    comments = models.TextField(_('Comments'), blank=True)
+
+    def __unicode__(self):
+        return u'%s - %s - %s - %s -%s -%s -%s' % (self.brand, self.model, self.version,
+            self.bodywork, self.engine, self.frameref, self.comments)
 
 from oscar.apps.catalogue.models import *

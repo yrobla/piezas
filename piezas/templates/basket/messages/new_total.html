@@ -5,11 +5,7 @@
     {% if basket.is_empty %}
         {% trans "Your basket is now empty" %}
     {% else %}
-        {% if basket.is_tax_known %}
-            {% trans "Basket total now" %} {{ basket.total_incl_tax|currency:basket.currency }}
-        {% else %}
-            {% trans "Basket total now" %} {{ basket.total_excl_tax|currency:basket.currency }}
-        {% endif %}
+        {% trans "Your basket has been updated" %}
     {% endif %}
 </p>
 

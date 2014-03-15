@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Homepage' %} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{{ homepage_url }}">{% trans 'Home' %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans 'Search pieces' %}</li>
+    </ul>
+{% endblock %}
+
+{% block headertext %}
+    {% trans "Search pieces" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span6 register_form">
+		<div class="well">
+			<form id="search_pieces_form" action="." method="post" class="form-horizontal">
+				{% csrf_token %}
+				<p>{% trans "Please enter the criteria for the pieces you want to search" %}</p>
+				{% include "partials/form_fields.html" %}
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary btn-large">
+					{% trans "Add to search request" %}
+					</button>
+				</div>
+			</form>
+		</div>
+        </div>
+    </div>
+{% endblock content %}
