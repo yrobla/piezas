@@ -10120,7 +10120,7 @@ msgstr ""
 
 #: piezas/settings.py:237
 msgid "Pieces"
-msgstr ""
+msgstr "Piezas"
 
 #: piezas/settings.py:245
 #: piezas/templates/dashboard/podcatalogue/brand_form.html:18
