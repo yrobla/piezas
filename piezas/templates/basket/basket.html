@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}
-    {% trans "Basket" %} | {{ block.super }}
+    {% trans "Search request" %} | {{ block.super }}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -12,7 +12,7 @@
             <a href="{{ homepage_url }}">{% trans "Home" %}</a>
             <span class="divider">/</span>
         </li>
-        <li class="active">{% trans "Basket" %}</li>
+        <li class="active">{% trans "Search request" %}</li>
     </ul>
 {% endblock %}
 
@@ -20,7 +20,7 @@
 {% block mini_basket %}{% endblock %}
 
 {% block headertext %}
-    {% trans "Basket" %}
+    {% trans "Search request" %}
 {% endblock %}
 
 {% block content %}

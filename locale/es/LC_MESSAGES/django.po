@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-13 19:15+0100\n"
+"POT-Creation-Date: 2014-03-16 09:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,10 +72,11 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/vouchers/voucher_detail.html:12
 #: oscar/templates/oscar/dashboard/vouchers/voucher_form.html:14
 #: oscar/templates/oscar/dashboard/vouchers/voucher_list.html:13
-#: oscar/templates/oscar/partials/nav_accounts.html:41 piezas/settings.py:227
+#: oscar/templates/oscar/partials/nav_accounts.html:41 piezas/settings.py:228
+#: piezas/templates/index.html:15 piezas/templates/index.html.py:20
 #: piezas/templates/dashboard/index.html:16
 #: piezas/templates/dashboard/layout.html:29
-#: piezas/templates/dashboard/layout.html:109
+#: piezas/templates/dashboard/layout.html:108
 #: piezas/templates/dashboard/catalogue/category_delete.html:9
 #: piezas/templates/dashboard/catalogue/category_form.html:14
 #: piezas/templates/dashboard/catalogue/category_list.html:14
@@ -147,11 +148,10 @@ msgstr ""
 #: piezas/templates/dashboard/vouchers/voucher_detail.html:12
 #: piezas/templates/dashboard/vouchers/voucher_form.html:14
 #: piezas/templates/dashboard/vouchers/voucher_list.html:13
-#: piezas/templates/partials/nav_accounts.html:41
 msgid "Dashboard"
 msgstr ""
 
-#: oscar/defaults.py:95 piezas/settings.py:232
+#: oscar/defaults.py:95 piezas/settings.py:233
 msgid "Catalogue"
 msgstr ""
 
@@ -159,7 +159,7 @@ msgstr ""
 #: oscar/apps/promotions/models.py:257
 #: oscar/templates/oscar/dashboard/promotions/handpickedproductlist_form.html:5
 #: oscar/templates/oscar/dashboard/ranges/range_product_list.html:24
-#: piezas/settings.py:236
+#: piezas/settings.py:237
 #: piezas/templates/dashboard/promotions/handpickedproductlist_form.html:5
 #: piezas/templates/dashboard/ranges/range_product_list.html:24
 msgid "Products"
@@ -172,7 +172,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/catalogue/category_list.html:17
 #: oscar/templates/oscar/dashboard/catalogue/category_list.html:43
 #: oscar/templates/oscar/dashboard/catalogue/product_update.html:116
-#: piezas/settings.py:240
+#: piezas/settings.py:241
 #: piezas/templates/dashboard/catalogue/category_delete.html:13
 #: piezas/templates/dashboard/catalogue/category_form.html:18
 #: piezas/templates/dashboard/catalogue/category_list.html:17
@@ -194,7 +194,7 @@ msgstr ""
 msgid "Low stock alerts"
 msgstr ""
 
-#: oscar/defaults.py:117 piezas/settings.py:266
+#: oscar/defaults.py:117 piezas/settings.py:267
 msgid "Fulfilment"
 msgstr ""
 
@@ -202,7 +202,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/orders/order_list.html:9
 #: oscar/templates/oscar/dashboard/orders/order_list.html:18
 #: oscar/templates/oscar/dashboard/orders/order_list.html:24
-#: piezas/settings.py:270 piezas/templates/dashboard/orders/order_list.html:9
+#: piezas/settings.py:271 piezas/templates/dashboard/orders/order_list.html:9
 #: piezas/templates/dashboard/orders/order_list.html:18
 #: piezas/templates/dashboard/orders/order_list.html:24
 msgid "Order management"
@@ -210,11 +210,11 @@ msgstr ""
 
 #: oscar/defaults.py:125
 #: oscar/templates/oscar/dashboard/orders/statistics.html:21
-#: piezas/settings.py:274 piezas/templates/dashboard/orders/statistics.html:21
+#: piezas/settings.py:275 piezas/templates/dashboard/orders/statistics.html:21
 msgid "Statistics"
 msgstr ""
 
-#: oscar/defaults.py:129 piezas/settings.py:278
+#: oscar/defaults.py:129 piezas/settings.py:279
 msgid "Partners"
 msgstr ""
 
@@ -222,7 +222,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/users/detail.html:18
 #: oscar/templates/oscar/dashboard/users/index.html:8
 #: oscar/templates/oscar/dashboard/users/index.html:13
-#: oscar/templates/oscar/dashboard/users/index.html:23 piezas/settings.py:284
+#: oscar/templates/oscar/dashboard/users/index.html:23 piezas/settings.py:285
 #: piezas/templates/dashboard/index.html:112
 #: piezas/templates/dashboard/users/detail.html:18
 #: piezas/templates/dashboard/users/index.html:8
@@ -231,7 +231,7 @@ msgstr ""
 msgid "Customers"
 msgstr ""
 
-#: oscar/defaults.py:139 piezas/settings.py:288
+#: oscar/defaults.py:139 piezas/settings.py:289
 msgid "Customer management"
 msgstr ""
 
@@ -282,6 +282,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/vouchers/voucher_detail.html:16
 #: oscar/templates/oscar/dashboard/vouchers/voucher_form.html:8
 #: oscar/templates/oscar/dashboard/vouchers/voucher_form.html:18
+#: piezas/apps/basket/abstract_models.py:49
 #: piezas/templates/basket/partials/basket_totals.html:39
 #: piezas/templates/dashboard/vouchers/voucher_delete.html:8
 #: piezas/templates/dashboard/vouchers/voucher_delete.html:18
@@ -292,7 +293,7 @@ msgstr ""
 msgid "Vouchers"
 msgstr ""
 
-#: oscar/defaults.py:163 piezas/settings.py:294
+#: oscar/defaults.py:163 piezas/settings.py:295
 msgid "Content"
 msgstr ""
 
@@ -300,7 +301,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/promotions/promotion_list.html:7
 #: oscar/templates/oscar/dashboard/promotions/promotion_list.html:12
 #: oscar/templates/oscar/dashboard/promotions/promotion_list.html:38
-#: piezas/settings.py:298
+#: piezas/settings.py:299
 #: piezas/templates/dashboard/promotions/promotion_list.html:7
 #: piezas/templates/dashboard/promotions/promotion_list.html:12
 #: piezas/templates/dashboard/promotions/promotion_list.html:38
@@ -309,7 +310,7 @@ msgstr ""
 
 #: oscar/defaults.py:171
 #: oscar/templates/oscar/dashboard/promotions/pagepromotion_list.html:24
-#: piezas/settings.py:302
+#: piezas/settings.py:303
 #: piezas/templates/dashboard/promotions/pagepromotion_list.html:24
 msgid "Content blocks by page"
 msgstr ""
@@ -318,7 +319,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/pages/delete.html:18
 #: oscar/templates/oscar/dashboard/pages/index.html:8
 #: oscar/templates/oscar/dashboard/pages/index.html:17
-#: oscar/templates/oscar/dashboard/pages/update.html:17 piezas/settings.py:306
+#: oscar/templates/oscar/dashboard/pages/update.html:17 piezas/settings.py:307
 #: piezas/templates/dashboard/pages/delete.html:18
 #: piezas/templates/dashboard/pages/index.html:8
 #: piezas/templates/dashboard/pages/index.html:17
@@ -326,7 +327,7 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
-#: oscar/defaults.py:179 piezas/settings.py:310
+#: oscar/defaults.py:179 piezas/settings.py:311
 msgid "Email templates"
 msgstr ""
 
@@ -340,7 +341,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/reviews/review_update.html:18
 #: oscar/templates/oscar/dashboard/users/detail.html:109
 #: oscar/templates/oscar/dashboard/users/detail.html:176
-#: piezas/settings.py:314
+#: piezas/settings.py:315
 #: piezas/templates/catalogue/reviews/review_detail.html:5
 #: piezas/templates/catalogue/reviews/review_detail.html:26
 #: piezas/templates/dashboard/reviews/review_delete.html:18
@@ -354,7 +355,7 @@ msgid "Reviews"
 msgstr ""
 
 #: oscar/defaults.py:189 oscar/templates/oscar/dashboard/reports/index.html:6
-#: piezas/settings.py:320 piezas/templates/dashboard/reports/index.html:6
+#: piezas/settings.py:321 piezas/templates/dashboard/reports/index.html:6
 msgid "Reports"
 msgstr ""
 
@@ -655,6 +656,7 @@ msgstr ""
 #: oscar/apps/payment/abstract_models.py:40 oscar/apps/promotions/models.py:26
 #: oscar/apps/promotions/models.py:328
 #: oscar/apps/voucher/abstract_models.py:145
+#: piezas/apps/basket/abstract_models.py:554
 #: piezas/apps/catalogue/models.py:18 piezas/apps/catalogue/models.py:38
 #: piezas/apps/catalogue/models.py:58 piezas/apps/catalogue/models.py:77
 #: piezas/apps/catalogue/models.py:96 piezas/apps/offer/models.py:166
@@ -729,6 +731,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/reviews/review_list.html:58
 #: oscar/templates/oscar/dashboard/users/alerts/list.html:45
 #: oscar/templates/oscar/dashboard/users/alerts/partials/alert.html:6
+#: piezas/apps/basket/abstract_models.py:531
 #: piezas/templates/checkout/checkout.html:104
 #: piezas/templates/customer/anon_order.html:58
 #: piezas/templates/customer/alerts/alert_list.html:12
@@ -1016,26 +1019,32 @@ msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:25
 #: oscar/apps/wishlists/abstract_models.py:21
+#: piezas/apps/basket/abstract_models.py:28
 msgid "Owner"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:33
+#: piezas/apps/basket/abstract_models.py:36
 msgid "Open - currently active"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:34
+#: piezas/apps/basket/abstract_models.py:37
 msgid "Merged - superceded by another basket"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:35
+#: piezas/apps/basket/abstract_models.py:38
 msgid "Saved - for items to be purchased later"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:36
+#: piezas/apps/basket/abstract_models.py:39
 msgid "Frozen - the basket cannot be modified"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:37
+#: piezas/apps/basket/abstract_models.py:40
 msgid "Submitted - has been ordered at the checkout"
 msgstr ""
 
@@ -1069,7 +1078,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/users/detail.html:125
 #: oscar/templates/oscar/dashboard/users/alerts/list.html:47
 #: oscar/templates/oscar/dashboard/users/alerts/partials/alert.html:20
-#: piezas/apps/offer/models.py:100
+#: piezas/apps/basket/abstract_models.py:43 piezas/apps/offer/models.py:100
 #: piezas/templates/customer/anon_order.html:14
 #: piezas/templates/customer/anon_order.html:59
 #: piezas/templates/customer/alerts/alert_list.html:13
@@ -1104,6 +1113,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/users/alerts/list.html:48
 #: oscar/templates/oscar/dashboard/users/alerts/partials/alert.html:24
 #: oscar/templates/oscar/dashboard/vouchers/voucher_list.html:51
+#: piezas/apps/basket/abstract_models.py:51
 #: piezas/templates/customer/alerts/alert_list.html:14
 #: piezas/templates/dashboard/promotions/promotion_list.html:45
 #: piezas/templates/dashboard/ranges/range_list.html:35
@@ -1118,11 +1128,13 @@ msgid "Date created"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:49
+#: piezas/apps/basket/abstract_models.py:52
 msgid "Date merged"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:50
 #: oscar/templates/oscar/customer/order/order_list.html:40
+#: piezas/apps/basket/abstract_models.py:53
 #: piezas/templates/customer/order/order_list.html:40
 msgid "Date submitted"
 msgstr ""
@@ -1137,9 +1149,7 @@ msgstr ""
 #: oscar/templates/oscar/basket/partials/basket_totals.html:158
 #: oscar/templates/oscar/checkout/thank_you.html:145
 #: oscar/templates/oscar/partials/nav_primary.html:19
-#: piezas/templates/basket/basket.html:6
-#: piezas/templates/basket/basket.html:15
-#: piezas/templates/basket/basket.html:23
+#: piezas/apps/basket/abstract_models.py:520
 #: piezas/templates/basket/partials/basket_totals.html:9
 #: piezas/templates/basket/partials/basket_totals.html:158
 #: piezas/templates/checkout/thank_you.html:145
@@ -1159,6 +1169,7 @@ msgid "%(status)s basket (owner: %(owner)s, lines: %(num_lines)d)"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:146
+#: piezas/apps/basket/abstract_models.py:138
 #, python-format
 msgid ""
 "Due to technical limitations we are not able to ship more than %(threshold)d "
@@ -1166,6 +1177,7 @@ msgid ""
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:553
+#: piezas/apps/basket/abstract_models.py:527
 msgid "Line Reference"
 msgstr ""
 
@@ -1185,7 +1197,8 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/orders/line_detail.html:139
 #: oscar/templates/oscar/dashboard/orders/line_detail.html:170
 #: oscar/templates/oscar/dashboard/orders/order_detail.html:96
-#: piezas/templates/basket/partials/basket_content.html:29
+#: piezas/apps/basket/abstract_models.py:540
+#: piezas/templates/basket/partials/basket_content.html:34
 #: piezas/templates/checkout/checkout.html:105
 #: piezas/templates/checkout/thank_you.html:98
 #: piezas/templates/customer/anon_order.html:61
@@ -1203,15 +1216,18 @@ msgstr ""
 #: oscar/apps/partner/abstract_models.py:138
 #: oscar/apps/payment/abstract_models.py:72
 #: oscar/templates/oscar/dashboard/catalogue/product_update.html:327
+#: piezas/apps/basket/abstract_models.py:546
 #: piezas/templates/dashboard/catalogue/product_update.html:327
 msgid "Currency"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:574
+#: piezas/apps/basket/abstract_models.py:548
 msgid "Price excl. Tax"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:577
+#: piezas/apps/basket/abstract_models.py:551
 msgid "Price incl. Tax"
 msgstr ""
 
@@ -1229,6 +1245,7 @@ msgid "Basket #%(basket_id)d, Product #%(product_id)d, quantity %(quantity)d"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:608
+#: piezas/apps/basket/abstract_models.py:582
 #, python-format
 msgid "You cannot modify a %s basket"
 msgstr ""
@@ -1252,6 +1269,7 @@ msgstr ""
 #: oscar/apps/order/abstract_models.py:708
 #: oscar/apps/order/abstract_models.py:808
 #: oscar/apps/order/abstract_models.py:864
+#: piezas/apps/basket/abstract_models.py:780
 msgid "Line"
 msgstr ""
 
@@ -1261,24 +1279,28 @@ msgstr ""
 #: oscar/apps/catalogue/abstract_models.py:1013
 #: oscar/apps/order/abstract_models.py:684
 #: oscar/apps/order/abstract_models.py:706
+#: piezas/apps/basket/abstract_models.py:781
 msgid "Option"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:847 oscar/apps/offer/models.py:427
 #: oscar/apps/offer/models.py:546 oscar/apps/order/abstract_models.py:686
-#: piezas/apps/offer/models.py:427 piezas/apps/offer/models.py:546
+#: piezas/apps/basket/abstract_models.py:782 piezas/apps/offer/models.py:427
+#: piezas/apps/offer/models.py:546
 msgid "Value"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:851
+#: piezas/apps/basket/abstract_models.py:786
 msgid "Line attribute"
 msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:852
+#: piezas/apps/basket/abstract_models.py:787
 msgid "Line attributes"
 msgstr ""
 
-#: oscar/apps/basket/forms.py:16
+#: oscar/apps/basket/forms.py:16 piezas/apps/basket/forms.py:16
 msgid "Save for Later"
 msgstr ""
 
@@ -3129,7 +3151,6 @@ msgstr ""
 #: oscar/apps/dashboard/orders/forms.py:80 oscar/apps/voucher/reports.py:19
 #: oscar/templates/oscar/basket/partials/basket_content.html:116
 #: oscar/templates/oscar/dashboard/reports/partials/voucher_report.html:9
-#: piezas/templates/basket/partials/basket_content.html:116
 #: piezas/templates/dashboard/reports/partials/voucher_report.html:9
 msgid "Voucher code"
 msgstr ""
@@ -5583,7 +5604,7 @@ msgstr ""
 #: oscar/templates/oscar/registration/password_reset_confirm.html:11
 #: oscar/templates/oscar/registration/password_reset_done.html:11
 #: oscar/templates/oscar/registration/password_reset_form.html:11
-#: oscar/templates/oscar/search/results.html:15
+#: oscar/templates/oscar/search/results.html:15 piezas/templates/index.html:12
 #: piezas/templates/basket/basket.html:12
 #: piezas/templates/catalogue/browse.html:21
 #: piezas/templates/catalogue/detail.html:23
@@ -5605,6 +5626,7 @@ msgstr ""
 #: piezas/templates/registration/password_reset_confirm.html:11
 #: piezas/templates/registration/password_reset_done.html:11
 #: piezas/templates/registration/password_reset_form.html:11
+#: piezas/templates/search/home.html:12
 #: piezas/templates/search/results.html:15
 msgid "Home"
 msgstr ""
@@ -5651,22 +5673,18 @@ msgstr ""
 
 #: oscar/templates/oscar/basket/messages/new_total.html:9
 #: oscar/templates/oscar/basket/messages/new_total.html:11
-#: piezas/templates/basket/messages/new_total.html:9
-#: piezas/templates/basket/messages/new_total.html:11
 msgid "Basket total now"
 msgstr ""
 
 #: oscar/templates/oscar/basket/messages/new_total.html:18
 #: oscar/templates/oscar/basket/partials/basket_quick.html:38
 #: oscar/templates/oscar/partials/mini_basket.html:13
-#: piezas/templates/basket/messages/new_total.html:18
-#: piezas/templates/basket/partials/basket_quick.html:38
-#: piezas/templates/partials/mini_basket.html:13
+#: piezas/templates/basket/messages/new_total.html:14
 msgid "View basket"
 msgstr ""
 
 #: oscar/templates/oscar/basket/messages/new_total.html:19
-#: piezas/templates/basket/messages/new_total.html:19
+#: piezas/templates/basket/messages/new_total.html:15
 msgid "Checkout now"
 msgstr ""
 
@@ -5709,22 +5727,19 @@ msgid ""
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:28
-#: piezas/templates/basket/partials/basket_content.html:28
 msgid "Items to buy now"
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:30
 #: oscar/templates/oscar/basket/partials/basket_content.html:165
 #: oscar/templates/oscar/checkout/checkout.html:106
-#: piezas/templates/basket/partials/basket_content.html:30
-#: piezas/templates/basket/partials/basket_content.html:165
+#: piezas/templates/basket/partials/basket_content.html:107
 #: piezas/templates/checkout/checkout.html:106
 msgid "Price"
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:31
 #: oscar/templates/oscar/checkout/thank_you.html:99
-#: piezas/templates/basket/partials/basket_content.html:31
 #: piezas/templates/checkout/thank_you.html:99
 msgid "Total"
 msgstr ""
@@ -5732,7 +5747,7 @@ msgstr ""
 #: oscar/templates/oscar/basket/partials/basket_content.html:63
 #: oscar/templates/oscar/dashboard/catalogue/stockalert_list.html:70
 #: oscar/templates/oscar/dashboard/reviews/review_list.html:51
-#: piezas/templates/basket/partials/basket_content.html:63
+#: piezas/templates/basket/partials/basket_content.html:57
 #: piezas/templates/dashboard/catalogue/stockalert_list.html:70
 #: piezas/templates/dashboard/reviews/review_list.html:51
 msgid "Update"
@@ -5748,8 +5763,8 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/promotions/page_detail.html:57
 #: oscar/templates/oscar/dashboard/ranges/range_product_list.html:113
 #: oscar/templates/oscar/search/partials/facet.html:9
-#: piezas/templates/basket/partials/basket_content.html:65
-#: piezas/templates/basket/partials/basket_content.html:188
+#: piezas/templates/basket/partials/basket_content.html:59
+#: piezas/templates/basket/partials/basket_content.html:129
 #: piezas/templates/basket/partials/basket_totals.html:48
 #: piezas/templates/catalogue/partials/add_to_wishlist.html:41
 #: piezas/templates/customer/wishlists/wishlists_delete_product.html:36
@@ -5762,22 +5777,18 @@ msgid "Remove"
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:67
-#: piezas/templates/basket/partials/basket_content.html:67
 msgid "Save for later"
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:111
-#: piezas/templates/basket/partials/basket_content.html:111
 msgid "Voucher/promo code"
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:113
-#: piezas/templates/basket/partials/basket_content.html:113
 msgid "I have a voucher code..."
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:120
-#: piezas/templates/basket/partials/basket_content.html:120
 msgid "Add voucher"
 msgstr ""
 
@@ -5816,7 +5827,6 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/vouchers/voucher_detail.html:85
 #: oscar/templates/oscar/dashboard/vouchers/voucher_form.html:36
 #: oscar/templates/oscar/partials/form.html:9
-#: piezas/templates/basket/partials/basket_content.html:121
 #: piezas/templates/catalogue/reviews/review_form.html:12
 #: piezas/templates/checkout/shipping_address.html:70
 #: piezas/templates/checkout/user_address_delete.html:30
@@ -5895,7 +5905,6 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/vouchers/voucher_detail.html:86
 #: oscar/templates/oscar/dashboard/vouchers/voucher_form.html:37
 #: oscar/templates/oscar/partials/form.html:9
-#: piezas/templates/basket/partials/basket_content.html:121
 #: piezas/templates/catalogue/reviews/review_form.html:13
 #: piezas/templates/checkout/user_address_delete.html:30
 #: piezas/templates/checkout/user_address_form.html:25
@@ -5936,62 +5945,56 @@ msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:130
 #: oscar/templates/oscar/customer/anon_order.html:95
-#: piezas/templates/basket/partials/basket_content.html:130
 #: piezas/templates/customer/anon_order.html:95
 msgid "Totals"
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:142
-#: piezas/templates/basket/partials/basket_content.html:142
 msgid "Proceed to checkout"
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:151
 #: oscar/templates/oscar/basket/partials/basket_quick.html:42
-#: piezas/templates/basket/partials/basket_content.html:151
-#: piezas/templates/basket/partials/basket_quick.html:42
+#: piezas/templates/basket/partials/basket_content.html:93
 msgid "Your basket is empty."
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:152
 #: oscar/templates/oscar/checkout/thank_you.html:285
-#: piezas/templates/basket/partials/basket_content.html:152
+#: piezas/templates/basket/partials/basket_content.html:94
 #: piezas/templates/checkout/thank_you.html:285
 msgid "Continue shopping"
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:161
-#: piezas/templates/basket/partials/basket_content.html:161
+#: piezas/templates/basket/partials/basket_content.html:103
 msgid "To buy later"
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:164
-#: piezas/templates/basket/partials/basket_content.html:164
+#: piezas/templates/basket/partials/basket_content.html:106
 msgid "Items"
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_content.html:205
-#: piezas/templates/basket/partials/basket_content.html:205
+#: piezas/templates/basket/partials/basket_content.html:146
 msgid "Move to basket"
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_quick.html:25
 #: oscar/templates/oscar/customer/order/order_detail.html:20
-#: piezas/templates/basket/partials/basket_quick.html:25
+#: piezas/templates/basket/partials/basket_quick.html:16
 #: piezas/templates/customer/order/order_detail.html:20
 msgid "Qty"
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_quick.html:33
 #: oscar/templates/oscar/basket/partials/basket_quick.html:35
-#: piezas/templates/basket/partials/basket_quick.html:33
-#: piezas/templates/basket/partials/basket_quick.html:35
 msgid "Total:"
 msgstr ""
 
 #: oscar/templates/oscar/basket/partials/basket_quick.html:39
 #: oscar/templates/oscar/checkout/checkout.html:9
-#: piezas/templates/basket/partials/basket_quick.html:39
 #: piezas/templates/checkout/checkout.html:9
 msgid "Checkout"
 msgstr ""
@@ -6861,9 +6864,7 @@ msgstr ""
 #: piezas/templates/customer/wishlists/wishlists_delete_product.html:11
 #: piezas/templates/customer/wishlists/wishlists_detail.html:12
 #: piezas/templates/customer/wishlists/wishlists_form.html:11
-#: piezas/templates/dashboard/layout.html:48
 #: piezas/templates/partials/nav_accounts.html:33
-#: piezas/templates/partials/nav_accounts.html:37
 msgid "Account"
 msgstr ""
 
@@ -6872,7 +6873,7 @@ msgstr ""
 #: oscar/templates/oscar/partials/nav_accounts.html:45
 #: piezas/templates/customer/login_registration.html:5
 #: piezas/templates/customer/login_registration.html:14
-#: piezas/templates/partials/nav_accounts.html:45
+#: piezas/templates/partials/nav_accounts.html:43
 msgid "Login or register"
 msgstr ""
 
@@ -7211,7 +7212,6 @@ msgstr ""
 #: oscar/templates/oscar/partials/mini_basket.html:5
 #: piezas/templates/customer/emails/commtype_order_placed_body.html:17
 #: piezas/templates/customer/emails/commtype_order_placed_body.txt:10
-#: piezas/templates/partials/mini_basket.html:5
 msgid "Basket total:"
 msgstr ""
 
@@ -7871,7 +7871,7 @@ msgid "Return to site"
 msgstr ""
 
 #: oscar/templates/oscar/dashboard/layout.html:49
-#: piezas/templates/dashboard/layout.html:49
+#: piezas/templates/dashboard/layout.html:48
 msgid "Log out"
 msgstr ""
 
@@ -9971,7 +9971,7 @@ msgid "Upload Image"
 msgstr ""
 
 #: oscar/templates/oscar/partials/nav_accounts.html:43
-#: piezas/templates/partials/nav_accounts.html:43
+#: piezas/templates/partials/nav_accounts.html:41
 msgid "Logout"
 msgstr ""
 
@@ -10181,36 +10181,69 @@ msgstr ""
 msgid "This is not a valid local or international phone format."
 msgstr ""
 
-#: piezas/settings.py:244
+#: piezas/settings.py:245
 #: piezas/templates/dashboard/podcatalogue/brand_form.html:18
 msgid "Brands"
 msgstr "Marcas"
 
-#: piezas/settings.py:248
+#: piezas/settings.py:249
 #: piezas/templates/dashboard/podcatalogue/model_form.html:18
 msgid "Models"
 msgstr "Modelos"
 
-#: piezas/settings.py:252
+#: piezas/settings.py:253
 #: piezas/templates/dashboard/podcatalogue/version_form.html:18
 msgid "Versions"
 msgstr "Versiones"
 
-#: piezas/settings.py:256
+#: piezas/settings.py:257 piezas/apps/search/forms.py:18
+#: piezas/templates/basket/partials/basket_content.html:30
 msgid "Bodywork"
 msgstr "Tipo de carrocería"
 
-#: piezas/settings.py:260
+#: piezas/settings.py:261 piezas/apps/search/forms.py:19
+#: piezas/templates/basket/partials/basket_content.html:31
 msgid "Engine"
 msgstr "Tipo de motor"
 
+#: piezas/apps/basket/abstract_models.py:61
+#: piezas/templates/basket/basket.html:6
+#: piezas/templates/basket/basket.html:15
+#: piezas/templates/basket/basket.html:23
+msgid "Search request"
+msgstr "Petición de búsqueda"
+
+#: piezas/apps/basket/abstract_models.py:62
+msgid "Search requests"
+msgstr "Peticiones de búsqueda"
+
+#: piezas/apps/basket/abstract_models.py:81
+#, python-format
+msgid "%(status)s search request (owner: %(owner)s, lines: %(num_lines)d)"
+msgstr ""
+
+#: piezas/apps/basket/abstract_models.py:566
+msgid "Search request item"
+msgstr ""
+
+#: piezas/apps/basket/abstract_models.py:567
+msgid "Search request items"
+msgstr "Elementos de la petición de búsqueda"
+
+#: piezas/apps/basket/abstract_models.py:571
+#, python-format
+msgid ""
+"Search request #%(basket_id)d, Product #%(product_id)d, quantity %(quantity)d"
+msgstr ""
+
 #: piezas/apps/catalogue/models.py:17 piezas/apps/catalogue/models.py:36
-#: piezas/apps/catalogue/models.py:104
+#: piezas/apps/catalogue/models.py:104 piezas/apps/catalogue/models.py:120
 msgid "Car brand"
 msgstr "Marca de coche"
 
 #: piezas/apps/catalogue/models.py:37 piezas/apps/catalogue/models.py:56
 #: piezas/apps/catalogue/models.py:57 piezas/apps/catalogue/models.py:107
+#: piezas/apps/catalogue/models.py:124
 msgid "Car model"
 msgstr "Modelo de coche"
 
@@ -10219,35 +10252,45 @@ msgid "Car bodywork type"
 msgstr "Tipo de carrocería"
 
 #: piezas/apps/catalogue/models.py:95 piezas/apps/catalogue/models.py:115
+#: piezas/apps/catalogue/models.py:133
 msgid "Car engine"
 msgstr "Tipo de motor"
 
-#: piezas/apps/catalogue/models.py:105
+#: piezas/apps/catalogue/models.py:105 piezas/apps/catalogue/models.py:121
 msgid "Brand of the car that it belongs to"
 msgstr "Marca del coche al que pertenece"
 
-#: piezas/apps/catalogue/models.py:108
+#: piezas/apps/catalogue/models.py:108 piezas/apps/catalogue/models.py:125
 msgid "Model of the car that it belongs to"
 msgstr "Modelo del coche al que pertenece"
 
-#: piezas/apps/catalogue/models.py:110
+#: piezas/apps/catalogue/models.py:110 piezas/apps/catalogue/models.py:128
 msgid "Car version"
 msgstr "Versión de coche"
 
-#: piezas/apps/catalogue/models.py:111
+#: piezas/apps/catalogue/models.py:111 piezas/apps/catalogue/models.py:129
 msgid "Version of the car that it belongs to"
 msgstr "Versión del coche al que pertenece"
 
-#: piezas/apps/catalogue/models.py:113
+#: piezas/apps/catalogue/models.py:113 piezas/apps/catalogue/models.py:131
 msgid "Bodywork type"
 msgstr "Tipo de carrocería"
 
-#: piezas/apps/catalogue/models.py:117
+#: piezas/apps/catalogue/models.py:117 piezas/apps/catalogue/models.py:135
+#: piezas/apps/search/forms.py:20
+#: piezas/templates/basket/partials/basket_content.html:32
 msgid "Frame reference"
-msgstr "Número de referencia del bastidor"
+msgstr "Número de bastidor"
+
+#: piezas/apps/catalogue/models.py:136 piezas/apps/search/forms.py:21
+#: piezas/templates/basket/partials/basket_content.html:33
+msgid "Comments"
+msgstr "Comentarios"
 
 #: piezas/apps/dashboard/podcatalogue/forms.py:45
 #: piezas/apps/dashboard/podcatalogue/forms.py:50
+#: piezas/apps/search/forms.py:15
+#: piezas/templates/basket/partials/basket_content.html:27
 #: piezas/templates/dashboard/podcatalogue/model_list.html:65
 #: piezas/templates/dashboard/podcatalogue/model_list.html:66
 msgid "Brand"
@@ -10255,6 +10298,8 @@ msgstr "Marca"
 
 #: piezas/apps/dashboard/podcatalogue/forms.py:66
 #: piezas/apps/dashboard/podcatalogue/forms.py:71
+#: piezas/apps/search/forms.py:16
+#: piezas/templates/basket/partials/basket_content.html:28
 #: piezas/templates/dashboard/podcatalogue/version_list.html:65
 #: piezas/templates/dashboard/podcatalogue/version_list.html:66
 msgid "Model"
@@ -10425,6 +10470,41 @@ msgstr "Motor actualizado con éxito"
 msgid "Engine deleted successfully"
 msgstr "Motor borrado con éxito"
 
+#: piezas/apps/search/forms.py:17
+#: piezas/templates/basket/partials/basket_content.html:29
+msgid "Version"
+msgstr "Versión"
+
+#: piezas/templates/index.html:6 piezas/templates/search/home.html:6
+msgid "Homepage"
+msgstr "Inicio"
+
+#: piezas/templates/index.html:27 piezas/templates/search/home.html:15
+#: piezas/templates/search/home.html:20
+msgid "Search pieces"
+msgstr "Buscar piezas"
+
+#: piezas/templates/basket/messages/new_total.html:8
+msgid "Your basket has been updated"
+msgstr "Tu búsqueda ha sido actualizada"
+
+#: piezas/templates/basket/partials/basket_content.html:84
+msgid "Submit search request"
+msgstr "Enviar petición de búsqueda"
+
+#: piezas/templates/basket/partials/basket_quick.html:21
+#: piezas/templates/partials/mini_basket.html:9
+msgid "View current search"
+msgstr "Ver búsqueda actual"
+
+#: piezas/templates/basket/partials/basket_quick.html:22
+msgid "Create search request"
+msgstr "Crear petición de búsqueda"
+
+#: piezas/templates/basket/partials/basket_quick.html:25
+msgid "Your search request is empty."
+msgstr "Tu petición de búsqueda está vacía"
+
 #: piezas/templates/dashboard/podcatalogue/bodywork_delete.html:21
 #: piezas/templates/dashboard/podcatalogue/bodywork_form.html:8
 #: piezas/templates/dashboard/podcatalogue/bodywork_list.html:10
@@ -10539,8 +10619,7 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            <p>Borrar motor <strong>%(title)s</strong> - estás seguro?</"
-"p>\n"
+"            <p>Borrar motor <strong>%(title)s</strong> - estás seguro?</p>\n"
 "        "
 
 #: piezas/templates/dashboard/podcatalogue/engine_form.html:18
@@ -10796,6 +10875,26 @@ msgstr ""
 #: piezas/templates/partials/footer.html:29
 msgid "Aviso legal"
 msgstr ""
+
+#: piezas/templates/partials/mini_basket.html:5
+msgid "Total items in current search:"
+msgstr "Total de piezas en búsqueda:"
+
+#: piezas/templates/partials/nav_accounts.html:39
+msgid "Admin Dashboard"
+msgstr "Panel de control de administrador"
+
+#: piezas/templates/partials/welcome_homepage.html:3
+msgid "Search piece"
+msgstr "Buscar pieza"
+
+#: piezas/templates/search/home.html:29
+msgid "Please enter the criteria for the pieces you want to search"
+msgstr "Por favor entra los criterios para las piezas que quieras buscar"
+
+#: piezas/templates/search/home.html:33
+msgid "Add to search request"
+msgstr "Añadir a la petición de búsqueda"
 
 #~ msgid "New Brand"
 #~ msgstr "Nueva marca"

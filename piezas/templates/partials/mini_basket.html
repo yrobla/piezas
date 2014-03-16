@@ -2,15 +2,11 @@
 {% load i18n %}
 
 <div class="basket-mini pull-right hidden-phone">
-    <strong>{% trans "Basket total:" %}</strong>
-    {% if request.basket.is_tax_known %}
-        {{ request.basket.total_incl_tax|currency }}
-    {% else %}
-        {{ request.basket.total_excl_tax|currency }}
-    {% endif %}
+    <strong>{% trans "Total items in current search:" %}</strong>
+	{{request.basket.num_lines}}
 
     <span class="btn-group">
-        <a class="btn" href="{% url 'basket:summary' %}">{% trans "View basket" %}</a>
+        <a class="btn" href="{% url 'basket:summary' %}">{% trans "View current search" %}</a>
         <button class="btn dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
         </button>

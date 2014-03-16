@@ -27,10 +27,10 @@
                 <h4 class="span1">{% trans "Brand" %}</h4>
                 <h4 class="span1">{% trans "Model" %}</h4>
                 <h4 class="span1">{% trans "Version" %}</h4>
-                <h4 class="span1">{% trans "Bodywork" %}</h4>
-                <h4 class="span1">{% trans "Engine" %}</h4>
-                <h4 class="span2">{% trans "Frame reference" %}</h4>
-                <h4 class="span1">{% trans "Comments" %}</h4>
+                <h4 class="span2">{% trans "Bodywork" %}</h4>
+                <h4 class="span2">{% trans "Engine" %}</h4>
+                <h4 class="span1">{% trans "Frame reference" %}</h4>
+                <h4 class="span2">{% trans "Comments" %}</h4>
 		<h4 class="span2">{% trans "Quantity" %}</h4>
     {% endblock %}
 	</div>
@@ -44,15 +44,15 @@
                 {% with line=form.instance product=form.instance.product %}
 		<div class="basket-items">
 			<div class="row-fluid">
-                            <div class="span1">{{product.brand}}</div>
-                            <div class="span1">{{product.model}}</div>
-                            <div class="span1">{{product.version}}</div>
-                            <div class="span1">{{product.bodywork}}</div>
-                            <div class="span1">{{product.engine}}</div>
-                            <div class="span2">{{product.frameref}}</div>
-                            <div class="span1">{{product.comments}}</div>
+                            <div class="span1">{{product.brand.name}}</div>
+                            <div class="span1">{{product.model.name}}</div>
+                            <div class="span1">{{product.version.name}}</div>
+                            <div class="span2">{{product.bodywork}}</div>
+                            <div class="span2">{{product.engine}}</div>
+                            <div class="span1">{{product.frameref}}</div>
+                            <div class="span2">{{product.comments}}</div>
                             <div class="span2">{{form.id}}
-                                <div class="checkout-quantity control-group {% if form.errors %}error{% endif %}">
+                                <div class="checkout-quantity control-group {% if form.errors %}error{% endif %}" style="margin-top:0px;">
 					{{ form.quantity }}
 					<button class="btn" type="submit">{% trans "Update" %}</button>
                                     <p>
@@ -80,10 +80,15 @@
     {% block formactions %}
         <div class="form-actions clearfix">
             <div class="row-fluid">
-                <div class="span4 offset8">
-                    <a href="{% url 'checkout:index' %}" class="btn btn-large btn-primary btn-block">{% trans "Submit search request" %}</a>
+		<div class="span4 offset4">
+			<a href="{% url 'search:home' %}" class="btn btn-large btn-block">{% trans "Search new piece" %}</a>
+		</div>
+
+                <div class="span4">
+                	<a href="{% url 'checkout:index' %}" class="btn btn-large btn-primary btn-block">{% trans "Submit search request" %}</a>
                 </div>
             </div>
+
         </div>
     {% endblock formactions %}
 
