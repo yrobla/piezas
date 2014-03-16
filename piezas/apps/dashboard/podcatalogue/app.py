@@ -8,7 +8,7 @@ class CatalogueApplication(CoreCatalogueApplication):
     product_list_view = coreviews.ProductListView
     product_lookup_view = coreviews.ProductLookupView
     product_create_redirect_view = coreviews.ProductCreateRedirectView
-    product_createupdate_view = coreviews.ProductCreateUpdateView
+    product_createupdate_view = views.ProductCreateUpdateView
     product_delete_view = coreviews.ProductDeleteView
     # category
     category_list_view = coreviews.CategoryListView
@@ -51,14 +51,11 @@ class CatalogueApplication(CoreCatalogueApplication):
     default_permissions = ['is_staff', ]
     permissions_map = _map = {
         # product
-        'catalogue-product': (['is_staff'], ['partner.dashboard_access']),
-        'catalogue-product-create': (['is_staff'],
-                                     ['partner.dashboard_access']),
-        'catalogue-product-list': (['is_staff'], ['partner.dashboard_access']),
-        'catalogue-product-delete': (['is_staff'],
-                                     ['partner.dashboard_access']),
-        'catalogue-product-lookup': (['is_staff'],
-                                     ['partner.dashboard_access']),
+        'catalogue-product': (['is_staff']),
+        'catalogue-piece-create': (['is_staff']),
+        'catalogue-product-list': (['is_staff']),
+        'catalogue-product-delete': (['is_staff']),
+        'catalogue-product-lookup': (['is_staff']),
         # brand
         'catalogue-brand': (['is_staff']),
         'catalogue-brand-create': (['is_staff']),
@@ -93,8 +90,8 @@ class CatalogueApplication(CoreCatalogueApplication):
             url(r'^products/(?P<pk>\d+)/$',
                 self.product_createupdate_view.as_view(),
                 name='catalogue-product'),
-            url(r'^products/create/$',
-                self.product_create_redirect_view.as_view(),
+            url(r'^products/create/(?P<product_class_slug>[\w-]+)/$',
+                self.product_createupdate_view.as_view(),
                 name='catalogue-product-create'),
             url(r'^products/(?P<pk>\d+)/delete/$',
                 self.product_delete_view.as_view(),

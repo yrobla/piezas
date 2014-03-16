@@ -234,7 +234,7 @@ OSCAR_DASHBOARD_NAVIGATION = [
         'icon': 'icon-sitemap',
         'children': [
             {
-                'label': _('Products'),
+                'label': _('Pieces'),
                 'url_name': 'dashboard:catalogue-product-list',
             },
             {

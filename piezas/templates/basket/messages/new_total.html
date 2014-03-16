@@ -12,6 +12,6 @@
 {% if include_buttons %}
 <p>
     <a href="{% url 'basket:summary' %}" class="btn btn-info">{% trans "View basket" %}</a>
-    <a href="{% url 'checkout:index' %}" class="btn btn-info">{% trans "Checkout now" %}</a>
+    <a href="{% url 'basket:placesearchrequest' %}" class="btn btn-info">{% trans "Place search request now" %}</a>
 </p>
 {% endif %}

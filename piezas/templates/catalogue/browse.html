@@ -22,7 +22,7 @@
             <span class="divider">/</span>
         </li>
         {% if not category %}
-            <li class="active">{% trans "All products" %}</li>
+            <li class="active">{% trans "All pieces" %}</li>
         {% else %}
             {% for category in category.get_ancestors|slice:":-1" %}
                 <li>
@@ -81,6 +81,6 @@
             </div>
         </section>
     {% else %}
-        <p class="nonefound">{% trans "No products found." %}</p>
+        <p class="nonefound">{% trans "No pieces found." %}</p>
     {% endif %}
 {% endblock content %}

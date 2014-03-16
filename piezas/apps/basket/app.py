@@ -1,13 +1,19 @@
 from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
 from oscar.apps.basket.app import BasketApplication as CoreBasketApplication
+import views
 
 class BasketApplication(CoreBasketApplication):
     name = 'basket'
+    place_search_request_view = views.PlaceSearchRequestView
+
     def get_urls(self):
         urls = [
             url(r'^$', login_required(self.summary_view.as_view()), name='summary'),
             url(r'^add/$', login_required(self.add_view.as_view()), name='add'),
+            url(r'^placesearchrequest/$',
+                login_required(self.place_search_request_view.as_view()),
+                name='placesearchrequest'),
             url(r'^vouchers/add/$', login_required(self.add_voucher_view.as_view()),
                 name='vouchers-add'),
             url(r'^vouchers/(?P<pk>\d+)/remove/$',

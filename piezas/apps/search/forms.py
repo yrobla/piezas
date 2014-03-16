@@ -11,6 +11,7 @@ Engine = get_model('catalogue', 'Engine')
 class SearchCreationForm(forms.ModelForm):
     class Meta:
         model = SearchProductRequest
+        exclude = ('search_request',)
 
     brand = forms.ModelChoiceField(label=_('Brand'), required=True, queryset = Brand.objects.all())
     model = ChainedModelChoiceField(label=_('Model'), required=True, app_name='catalogue', model_name='Model', chain_field='brand', model_field='brand', show_all=False, auto_choose=False)

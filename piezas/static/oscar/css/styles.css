@@ -11,6 +11,10 @@
 .clearfix {
   *zoom: 1;
 }
+#content_inner
+{
+	width:98%;
+}
 .clearfix:before,
 .clearfix:after {
   display: table;

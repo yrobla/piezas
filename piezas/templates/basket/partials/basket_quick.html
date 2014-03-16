@@ -19,7 +19,7 @@
         {% endfor %}
         <li class="form-actions">
             <p class="pull-left"><a href="{% url 'basket:summary' %}" class="btn btn-info btn-small">{% trans "View current search" %}</a></p>
-            <p class="pull-right"><a href="{% url 'checkout:index' %}" class="btn btn-primary btn-small"><i class="icon-shopping-cart"></i> {% trans "Create search request" %}</a></p>
+            <p class="pull-right"><a href="{% url 'basket:placesearchrequest' %}" class="btn btn-primary btn-small"><i class="icon-shopping-cart"></i> {% trans "Create search request" %}</a></p>
         </li>
     {% else %}
         <li><p>{% trans "Your search request is empty." %}</p></li>

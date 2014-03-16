@@ -39,3 +39,6 @@ class BasketLineForm(forms.ModelForm):
         exclude = ('basket', 'product', 'stockrecord', 'line_reference',
                    'price_excl_tax', 'price_incl_tax', 'price_currency')
 
+
+class PlaceSearchRequestForm(forms.Form):
+    pass

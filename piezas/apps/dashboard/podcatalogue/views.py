@@ -9,9 +9,11 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 
-from oscar.core.loading import get_classes, get_model
+from oscar.core.loading import get_class, get_classes, get_model
 from oscar.views import sort_queryset
 from oscar.views.generic import ObjectLookupView
+from oscar.apps.dashboard.catalogue.views import ProductCreateUpdateView as CoreProductCreateUpdateView
+
 
 (	BrandForm,
  BrandSearchForm,
@@ -35,6 +37,11 @@ from oscar.views.generic import ObjectLookupView
                    'EngineForm',
                    'EngineSearchForm'))
 
+ProductForm = get_class('dashboard.podcatalogue.forms', 'ProductForm')
+ProductCategoryFormSet = get_class('dashboard.catalogue.forms', 'ProductCategoryFormSet')
+
+Product = get_model('catalogue', 'Product')
+ProductClass = get_model('catalogue', 'ProductClass')
 Brand = get_model('catalogue', 'Brand')
 Model = get_model('catalogue', 'Model')
 Version = get_model('catalogue', 'Version')
@@ -1055,3 +1062,22 @@ class EngineDeleteView(EngineListMixin, generic.DeleteView):
     def get_success_url(self):
         messages.info(self.request, _("Engine deleted successfully"))
         return super(EngineDeleteView, self).get_success_url()
+
+
+class ProductCreateUpdateView(CoreProductCreateUpdateView):
+    """
+    Dashboard view that bundles both creating and updating single products.
+    Supports the permission-based dashboard.
+    """
+
+    template_name = 'dashboard/catalogue/product_update.html'
+    model = Product
+    context_object_name = 'product'
+
+    form_class = ProductForm
+    category_formset = ProductCategoryFormSet
+
+    def __init__(self, *args, **kwargs):
+        super(ProductCreateUpdateView, self).__init__(*args, **kwargs)
+        self.formsets = {'category_formset': self.category_formset}
+

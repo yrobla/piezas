@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% load thumbnail %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Place search request" %} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{{ homepage_url }}">{% trans "Home" %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans "Place search request" %}</li>
+    </ul>
+{% endblock %}
+
+{% block headertext %}
+    {% trans "Place search request" %}
+{% endblock %}
+
+{% block content %}
+    {# Use a partial template so that AJAX can be used to re-render basket #}
+    {% include 'basket/partials/searchrequest_content.html' %}
+{% endblock content %}
+
+{% block onbodyload %}
+    {{ block.super }}
+    {# We pass in the URL to send AJAX requests to #}
+    var options = {
+    'basketURL': '{% url 'basket:summary' %}'
+    };
+    oscar.basket.init(options);
+{% endblock %}

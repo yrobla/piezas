@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from oscar.apps.catalogue.abstract_models import AbstractProduct
 from oscar.apps.catalogue.models import ProductImage
+from oscar.core.compat import AUTH_USER_MODEL
 from smart_selects.db_fields import ChainedForeignKey
 
 class BrandManager(models.Manager):
@@ -101,20 +102,21 @@ class Engine(models.Model):
         return self.name
 
 class Product(AbstractProduct):
-    brand = models.ForeignKey(Brand, verbose_name=_("Car brand"),
-        help_text=_('Brand of the car that it belongs to'), blank=True, null=True,
-        related_name='product_brand')
-    model = models.ForeignKey(Brand, verbose_name=_("Car model"),
-        help_text=_('Model of the car that it belongs to'), blank=True, null=True,
-        related_name='product_model')
-    version = models.ForeignKey(Version, verbose_name=_("Car version"),
-        help_text=_('Version of the car that it belongs to'), blank=True, null=True,
-        related_name='product_version')
-    bodywork = models.ForeignKey(Bodywork, verbose_name=_("Bodywork type"),
-        blank=True, null=True, related_name='product_bodywork')
-    engine = models.ForeignKey(Engine, verbose_name=_("Car engine"),
-        blank=True, null=True, related_name='product_engine')
-    frameref = models.CharField(_('Frame reference'), max_length=255, blank=True, null=True)
+    pass
+
+
+SEARCH_REQUEST_TYPES = (('regional', _('Regional')), ('border', _('Border area')),
+    ('national', _('National')), ('supra', _('Supraregional')))
+
+class SearchRequest(models.Model):
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
+    owner = models.ForeignKey(
+        AUTH_USER_MODEL, related_name='search_rqeuests', null=True,
+        verbose_name=_("Owner"))
+    search_type = models.CharField(max_length=25, choices=SEARCH_REQUEST_TYPES)
+    expiration_date = models.DateTimeField(_('Expiration Date'), blank=True, null=True)
+
 
 class SearchProductRequest(models.Model):
     brand = models.ForeignKey(Brand, verbose_name=_("Car brand"),
@@ -134,9 +136,11 @@ class SearchProductRequest(models.Model):
         blank=True, null=True, related_name='product_engine')
     frameref = models.CharField(_('Frame reference'), max_length=255, blank=True, null=True)
     comments = models.TextField(_('Comments'), blank=True)
+    search_request = models.ForeignKey(SearchRequest, verbose_name = _('Search request'), blank=True, null=True)
 
     def __unicode__(self):
         return u'%s - %s - %s - %s -%s -%s -%s' % (self.brand, self.model, self.version,
             self.bodywork, self.engine, self.frameref, self.comments)
+
 
 from oscar.apps.catalogue.models import *

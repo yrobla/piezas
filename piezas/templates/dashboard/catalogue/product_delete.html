@@ -18,7 +18,7 @@
             <span class="divider">/</span>
         </li>
         <li>
-            <a href="{% url 'dashboard:catalogue-product-list' %}">{% trans "Product management" %}</a>
+            <a href="{% url 'dashboard:catalogue-product-list' %}">{% trans "Piece management" %}</a>
             <span class="divider">/</span>
         </li>
         <li>
@@ -31,23 +31,23 @@
 
 {% block header %}
     <div class="page-header">
-        <h1>{% trans "Delete product?" %}</h1>
+        <h1>{% trans "Delete piece?" %}</h1>
     </div>
 {% endblock header%}
 
 {% block dashboard_content %}
     <div class="table-header">
-        <h2>{% trans "Delete product" %}</h2>
+        <h2>{% trans "Delete piece" %}</h2>
     </div>
     <form action="." method="post" class="well">
         {% csrf_token %}
 
         {% blocktrans with title=product.title %}
-            <p>Delete product <strong>{{ title }}</strong> - are you sure?</p>
+            <p>Delete piece <strong>{{ title }}</strong> - are you sure?</p>
         {% endblocktrans %}
 
         {% if product.is_group %}
-            <p> {% trans "This will also delete the following variant products:" %}
+            <p> {% trans "This will also delete the following variant pieces:" %}
                 <ul>
                     {% for variant in product.variants.all %}
                         <li><strong>{{ variant.title }}</strong></li>
