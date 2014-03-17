@@ -112,13 +112,16 @@ class SearchRequest(models.Model):
     date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
     date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
     owner = models.ForeignKey(
-        AUTH_USER_MODEL, related_name='search_rqeuests', null=True,
+        AUTH_USER_MODEL, related_name='search_requests', null=True,
         verbose_name=_("Owner"))
     search_type = models.CharField(max_length=25, choices=SEARCH_REQUEST_TYPES)
     expiration_date = models.DateTimeField(_('Expiration Date'), blank=True, null=True)
 
 
 class SearchProductRequest(models.Model):
+    piece = models.ForeignKey(Product, verbose_name=_('Piece'),
+        help_text=_('Piece to search for'), blank=True, null=True,
+        related_name='product_piece')
     brand = models.ForeignKey(Brand, verbose_name=_("Car brand"),
         help_text=_('Brand of the car that it belongs to'), blank=True, null=True,
         related_name='product_brand')
@@ -136,11 +139,13 @@ class SearchProductRequest(models.Model):
         blank=True, null=True, related_name='product_engine')
     frameref = models.CharField(_('Frame reference'), max_length=255, blank=True, null=True)
     comments = models.TextField(_('Comments'), blank=True)
+    owner = models.ForeignKey(
+        AUTH_USER_MODEL, related_name='search_product_requests', null=True,
+        verbose_name=_("Owner"))
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
     search_request = models.ForeignKey(SearchRequest, verbose_name = _('Search request'), blank=True, null=True)
 
     def __unicode__(self):
         return u'%s - %s - %s - %s -%s -%s -%s' % (self.brand, self.model, self.version,
             self.bodywork, self.engine, self.frameref, self.comments)
-
-
-from oscar.apps.catalogue.models import *

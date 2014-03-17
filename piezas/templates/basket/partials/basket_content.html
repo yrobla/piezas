@@ -24,10 +24,11 @@
 {% if not basket.is_empty %}
 	<div class="row-fluid basket-header">
     {% block basket_form_headers %}
+                <h4 class="span1">{% trans "Piece" %}</h4>
                 <h4 class="span1">{% trans "Brand" %}</h4>
                 <h4 class="span1">{% trans "Model" %}</h4>
                 <h4 class="span1">{% trans "Version" %}</h4>
-                <h4 class="span2">{% trans "Bodywork" %}</h4>
+                <h4 class="span1">{% trans "Bodywork" %}</h4>
                 <h4 class="span2">{% trans "Engine" %}</h4>
                 <h4 class="span1">{% trans "Frame reference" %}</h4>
                 <h4 class="span2">{% trans "Comments" %}</h4>
@@ -44,10 +45,11 @@
                 {% with line=form.instance product=form.instance.product %}
 		<div class="basket-items">
 			<div class="row-fluid">
+                            <div class="span1">{{product.piece}}</div>
                             <div class="span1">{{product.brand.name}}</div>
                             <div class="span1">{{product.model.name}}</div>
                             <div class="span1">{{product.version.name}}</div>
-                            <div class="span2">{{product.bodywork}}</div>
+                            <div class="span1">{{product.bodywork}}</div>
                             <div class="span2">{{product.engine}}</div>
                             <div class="span1">{{product.frameref}}</div>
                             <div class="span2">{{product.comments}}</div>

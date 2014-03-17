@@ -17,6 +17,11 @@ class HomeView(CreateView):
         basket = self.request.basket
         basket.add_product(form.instance, 1, None)
 
+        # add owner
+        current_product = form.instance
+        current_product.owner = self.request.user
+        current_product.save()
+
         messages.success(self.request, _('Piece has been successfully added to search request'),
                          extra_tags='safe noicon')
 
