@@ -1,26 +1,25 @@
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import CreateView
+from django.views.generic import CreateView, FormView
 from django.core.urlresolvers import reverse
 from oscar.core.loading import get_model
 import forms
 
-class HomeView(CreateView):
+
+class HomeView(FormView):
     form_class = forms.SearchCreationForm
     template_name = 'search/home.html'
-    model = get_model('catalogue', 'SearchProductRequest')
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            context['formset'] = forms.SearchCreationFormSet(self.request.POST)
+        else:
+            context['formset'] = forms.SearchCreationFormSet()
+        return context
     
     def form_valid(self, form):
         response = super(HomeView, self).form_valid(form)
-
-        # add that to basket
-        basket = self.request.basket
-        basket.add_product(form.instance, 1, None)
-
-        # add owner
-        current_product = form.instance
-        current_product.owner = self.request.user
-        current_product.save()
 
         messages.success(self.request, _('Piece has been successfully added to search request'),
                          extra_tags='safe noicon')

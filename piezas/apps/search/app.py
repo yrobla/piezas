@@ -17,7 +17,8 @@ class SearchApplication(CoreSearchApplication):
                 form_class=self.search_form,
                 searchqueryset=self.get_sqs())),
                 name='search'),
-            url(r'^home/$', login_required(self.index_view.as_view()), name='home')
+            url(r'^home/$', login_required(self.index_view.as_view()), name='home'),
+            url(r'^placesearch$', login_required(self.index_view.as_view()), name='placesearchrequest'),
         )
         return self.post_process_urls(urlpatterns)
 

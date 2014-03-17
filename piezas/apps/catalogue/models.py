@@ -4,6 +4,7 @@ from oscar.apps.catalogue.abstract_models import AbstractProduct
 from oscar.apps.catalogue.models import ProductImage
 from oscar.core.compat import AUTH_USER_MODEL
 from smart_selects.db_fields import ChainedForeignKey
+from oscar.apps.catalogue.models import Category
 
 class BrandManager(models.Manager):
 
@@ -55,7 +56,7 @@ class VersionManager(models.Manager):
 
 class Version(models.Model):
     model = models.ForeignKey(Model, verbose_name = _('Car model'))
-    name = models.CharField(_('Car model'), max_length=255)
+    name = models.CharField(_('Car version'), max_length=255)
     date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
     date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
     objects = VersionManager()
@@ -109,22 +110,8 @@ SEARCH_REQUEST_TYPES = (('regional', _('Regional')), ('border', _('Border area')
     ('national', _('National')), ('supra', _('Supraregional')))
 
 class SearchRequest(models.Model):
-    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
-    date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
-    owner = models.ForeignKey(
-        AUTH_USER_MODEL, related_name='search_requests', null=True,
-        verbose_name=_("Owner"))
-    search_type = models.CharField(max_length=25, choices=SEARCH_REQUEST_TYPES)
-    expiration_date = models.DateTimeField(_('Expiration Date'), blank=True, null=True)
-
-
-class SearchProductRequest(models.Model):
-    piece = models.ForeignKey(Product, verbose_name=_('Piece'),
-        help_text=_('Piece to search for'), blank=True, null=True,
-        related_name='product_piece')
-    brand = models.ForeignKey(Brand, verbose_name=_("Car brand"),
-        help_text=_('Brand of the car that it belongs to'), blank=True, null=True,
-        related_name='product_brand')
+    brand = models.ForeignKey(Brand, verbose_name=_("Brand"),
+        blank=True, null=True, related_name='product_brand')
     model = ChainedForeignKey(Model, chained_field="brand", chained_model_field="brand",
         show_all=False, auto_choose=False, verbose_name=_("Car model"),
         help_text=_('Model of the car that it belongs to'), blank=True, null=True,
@@ -139,6 +126,25 @@ class SearchProductRequest(models.Model):
         blank=True, null=True, related_name='product_engine')
     frameref = models.CharField(_('Frame reference'), max_length=255, blank=True, null=True)
     comments = models.TextField(_('Comments'), blank=True)
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
+    owner = models.ForeignKey(
+        AUTH_USER_MODEL, related_name='search_requests', null=True,
+        verbose_name=_("Owner"))
+    search_type = models.CharField(max_length=25, choices=SEARCH_REQUEST_TYPES)
+    expiration_date = models.DateTimeField(_('Expiration Date'), blank=True, null=True)
+
+
+class SearchItemRequest(models.Model):
+    category = models.ForeignKey(Category, verbose_name=_('Category'),
+        help_text=_('Category to search for'), blank=True, null=True,
+        related_name='product_category')
+    piece = ChainedForeignKey(Product, chained_field="category", chained_model_field="categories",
+        show_all=False, auto_choose=False, verbose_name=_("Piece"),
+        help_text=_('Piece to search for'), blank=True, null=True,
+        related_name='product_piece')
+    comments = models.TextField(_('Comments'), blank=True)
+    quantity = models.PositiveIntegerField(_('Quantity'), default=1)
     owner = models.ForeignKey(
         AUTH_USER_MODEL, related_name='search_product_requests', null=True,
         verbose_name=_("Owner"))

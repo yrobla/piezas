@@ -11,10 +11,6 @@
         <div class="page_inner">
             <div class="row-fluid">
                 {% include "partials/brand.html" %}
-                {# Mini-basket wrapped in a block so some templates can now display it #}
-		{% if user.is_authenticated %}
-                {% block mini_basket %}{% include "partials/mini_basket.html" %}{% endblock %}
-		{% endif %}
             </div>
         </div>
     </header>

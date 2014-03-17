@@ -1080,4 +1080,3 @@ class ProductCreateUpdateView(CoreProductCreateUpdateView):
     def __init__(self, *args, **kwargs):
         super(ProductCreateUpdateView, self).__init__(*args, **kwargs)
         self.formsets = {'category_formset': self.category_formset}
-

@@ -111,7 +111,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'piezas.apps.basket.middleware.BasketMiddleware',
+    'oscar.apps.basket.middleware.BasketMiddleware',
     'django.middleware.transaction.TransactionMiddleware',  # recommended for oscar
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     # Uncomment the next line for simple clickjacking protection:
@@ -149,7 +149,7 @@ INSTALLED_APPS = [
 ]
 INSTALLED_APPS = INSTALLED_APPS + get_core_apps([
     'piezas.apps.catalogue', 'piezas.apps.offer',
-    'piezas.apps.dashboard', 'piezas.apps.search', 'piezas.apps.basket'])
+    'piezas.apps.dashboard', 'piezas.apps.search'])
 
 INSTALLED_APPS = INSTALLED_APPS + ['piezas.apps.dashboard.podcatalogue',]
 SITE_ID = 1

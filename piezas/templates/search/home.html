@@ -6,6 +6,21 @@
     {% trans 'Homepage' %} | {{ block.super }}
 {% endblock %}
 
+{% block extrahead %}
+<script type="text/javascript">
+    $(function() {
+        $('#id_searchitemrequest_table tbody tr').formset({
+            prefix: 'ordered_items'
+        })
+    })
+</script>
+<style type="text/css">
+    .delete-row {
+        margin-left:5px;
+    }
+</style>
+{% endblock %}
+
 {% block breadcrumbs %}
     <ul class="breadcrumb">
         <li>
@@ -28,9 +43,38 @@
 				{% csrf_token %}
 				<p>{% trans "Please enter the criteria for the pieces you want to search" %}</p>
 				{% include "partials/form_fields.html" %}
+
+				{{ formset.management_form }}
+			 	<h4>{% trans "Pieces to search" %}</h4>
+
+				<div class="responsible-table">
+					<table class="table" id="id_searchitemrequest_table">
+						<thead><tr>
+							<th>{% trans "Category" %}</th>
+							<th>{% trans "Piece" %}</th>
+							<th>{% trans "Comments" %}</th>
+							<th>{% trans "Quantity" %}</th>
+						</thead>
+						<tbody>
+							{% for item_form in formset.forms %}
+							<tr id="{{ item_form.prefix }}-row">
+								<td>{{item_form.category}}</td>
+								<td>
+								{% for fld in item_form.hidden_fields %}{{ fld }}{% endfor %}
+				                            	{% if item_form.instance.pk %}{{ item_form.DELETE }}{% endif %}
+								{{item_form.piece}}
+								</td>
+								<td>{{item_form.comments}}</td>
+								<td>{{item_form.quantity}}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+
 				<div class="form-actions">
 					<button type="submit" class="btn btn-primary btn-large">
-					{% trans "Add to search request" %}
+					{% trans "Confirm search request" %}
 					</button>
 				</div>
 			</form>
