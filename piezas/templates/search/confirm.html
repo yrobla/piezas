@@ -7,20 +7,6 @@
 {% endblock %}
 
 {% block extrahead %}
-<script type="text/javascript">
-    $(function() {
-        $('#id_searchitemrequest_table tbody tr').formset({
-            prefix: 'ordered_items',
-            'addText': '{% trans "Add new piece" %}',
-            'deleteText': '{% trans "Delete piece" %}',
-        })
-    })
-</script>
-<style type="text/css">
-    .delete-row {
-        margin-left:5px;
-    }
-</style>
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -29,24 +15,21 @@
             <a href="{{ homepage_url }}">{% trans 'Home' %}</a>
             <span class="divider">/</span>
         </li>
-        <li class="active">{% trans 'Search pieces' %}</li>
+        <li class="active">{% trans 'Confirm search' %}</li>
     </ul>
 {% endblock %}
 
 {% block headertext %}
-    {% trans "Search pieces" %}
+    {% trans "Confirm search" %}
 {% endblock %}
 
 {% block content %}
     <div class="row-fluid">
         <div class="span12 register_form">
-   <div class="alert alert-error" id="error_show" style="display:none;">
-{% trans "There have been errors in your search. Please correct them and retry" %}
-   </div>
 
 			<form id="search_pieces_form" action="." method="post" class="form-horizontal">
 				{% csrf_token %}
-				<p>{% trans "Please enter the criteria for the pieces you want to search" %}</p>
+				<p>{% trans "Please confirm the pieces you want to search" %}</p>
 				{% include "partials/form_fields.html" %}
 
 				{{ formset.management_form }}

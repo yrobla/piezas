@@ -137,12 +137,10 @@ class SearchRequest(models.Model):
 
 class SearchItemRequest(models.Model):
     category = models.ForeignKey(Category, verbose_name=_('Category'),
-        help_text=_('Category to search for'), blank=True, null=True,
-        related_name='product_category')
+        help_text=_('Category to search for'), related_name='product_category')
     piece = ChainedForeignKey(Product, chained_field="category", chained_model_field="categories",
         show_all=False, auto_choose=False, verbose_name=_("Piece"),
-        help_text=_('Piece to search for'), blank=True, null=True,
-        related_name='product_piece')
+        help_text=_('Piece to search for'), related_name='product_piece')
     comments = models.TextField(_('Comments'), blank=True)
     quantity = models.PositiveIntegerField(_('Quantity'), default=1)
     owner = models.ForeignKey(
@@ -153,5 +151,5 @@ class SearchItemRequest(models.Model):
     search_request = models.ForeignKey(SearchRequest, verbose_name = _('Search request'), blank=True, null=True)
 
     def __unicode__(self):
-        return u'%s - %s - %s - %s -%s -%s -%s' % (self.brand, self.model, self.version,
-            self.bodywork, self.engine, self.frameref, self.comments)
+        return u'%s - %s - %s - %s' % (self.category, self.piece, self.quantity,
+            self.comments)
