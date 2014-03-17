@@ -28,9 +28,9 @@ class HomeView(FormView):
             context['formset'] = forms.SearchCreationFormSet(self.request.POST)
         else:
             current_session = self.request.session.get('search_data', None)
+            initial = []
             if current_session:
                 current_data = json.loads(current_session)
-                initial = []
                 for item in current_data['pieces']:
                     initial_item = {}
                     initial_item['category'] = item['category']
