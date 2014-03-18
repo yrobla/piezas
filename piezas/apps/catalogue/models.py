@@ -109,6 +109,10 @@ class Product(AbstractProduct):
 SEARCH_REQUEST_TYPES = (('regional', _('Regional')), ('border', _('Border area')),
     ('national', _('National')), ('supra', _('Supraregional')))
 
+SEARCH_REQUEST_STATES = (('pending', _('Pending')), ('expired', _('Expired')),
+    ('closed', _('Closed')))
+
+
 class SearchRequest(models.Model):
     brand = models.ForeignKey(Brand, verbose_name=_("Brand"),
         blank=True, null=True, related_name='product_brand')
@@ -132,6 +136,7 @@ class SearchRequest(models.Model):
         AUTH_USER_MODEL, related_name='search_requests', null=True,
         verbose_name=_("Owner"))
     search_type = models.CharField(max_length=25, choices=SEARCH_REQUEST_TYPES)
+    state = models.CharField(max_length=25, choices=SEARCH_REQUEST_STATES, default='pending')
     expiration_date = models.DateTimeField(_('Expiration Date'), blank=True, null=True)
 
 
@@ -149,6 +154,7 @@ class SearchItemRequest(models.Model):
     date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
     date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
     search_request = models.ForeignKey(SearchRequest, verbose_name = _('Search request'), blank=True, null=True)
+    state = models.CharField(max_length=25, choices=SEARCH_REQUEST_STATES, default='pending')
 
     def __unicode__(self):
         return u'%s - %s - %s - %s' % (self.category, self.piece, self.quantity,

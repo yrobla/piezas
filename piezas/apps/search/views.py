@@ -36,7 +36,10 @@ class HomeView(FormView):
                     initial_item['category'] = item['category']
                     initial_item['piece'] = item['piece']
                     initial_item['comments'] = item['comments']
-                    initial_item['quantity'] = item['quantity']
+                    if "quantity" in item:
+                        initial_item['quantity'] = item['quantity']
+                    else:
+                        initial_item['quantity'] = 1
                     initial.append(initial_item)
 
             context['formset'] = forms.SearchCreationFormSet(initial=initial)
@@ -46,34 +49,64 @@ class HomeView(FormView):
         response = super(HomeView, self).form_valid(form)
         context = self.get_context_data()
         formset = context['formset']
-        if formset.is_valid():
-            final_data = {}
-            final_data["engine"] = form.cleaned_data["engine"].id
-            final_data["frameref"] = form.cleaned_data["frameref"]
-            final_data["brand"] = form.cleaned_data["brand"].id
-            final_data["version"] = form.cleaned_data["version"].id
-            final_data["model"] = form.cleaned_data["model"].id
-            final_data["bodywork"] = form.cleaned_data["bodywork"].id
 
-            # formset
-            final_data["pieces"] = []
+        final_data = {}
+        final_data["engine"] = form.cleaned_data["engine"].id
+        final_data["frameref"] = form.cleaned_data["frameref"]
+        final_data["brand"] = form.cleaned_data["brand"].id
+        final_data["version"] = form.cleaned_data["version"].id
+        final_data["model"] = form.cleaned_data["model"].id
+        final_data["bodywork"] = form.cleaned_data["bodywork"].id
+
+        # formset
+        final_data["pieces"] = []
+
+        if hasattr(formset, 'cleaned_data'):
             current_formset_data = formset.cleaned_data
             for current_item in current_formset_data:
                 final_item = {}
-                if "category" in current_item:
+                if "category" in current_item and current_item["category"] and \
+                    "piece" in current_item and current_item["piece"]:
                     final_item["category"] = current_item["category"].id
-                if "quantity" in current_item:
-                    final_item["quantity"] = current_item["quantity"]
-                if "piece" in current_item:
                     final_item["piece"] = current_item["piece"].id
-                if "comments" in current_item:
                     final_item["comments"] = current_item["comments"]
-                final_data["pieces"].append(final_item)   
+
+                    if "quantity" in current_item and current_item["quantity"]>0:
+                        final_item["quantity"] = current_item["quantity"]
+                    else:
+                        final_item["quantity"] = 1
+
+                    final_data["pieces"].append(final_item)   
 
             self.request.session['search_data'] = json.dumps(final_data)
             return True
         else:
-            return False
+            current_formset_data = formset.data
+            max_item = int(current_formset_data['form-TOTAL_FORMS'])
+
+            for i in range(max_item):
+                final_item = {}
+                prefix = "form-%s-" % i
+                current_category = prefix+"category"
+                current_piece = prefix+"piece"
+                current_quantity = prefix+"quantity"
+                current_comments = prefix+"comments"
+
+                if current_category in current_formset_data and current_formset_data[current_category] and \
+                    current_piece in current_formset_data and current_formset_data[current_piece]:
+                    final_item["category"] = [current_formset_data[current_category],]
+                    final_item["piece"] = [current_formset_data[current_category],]
+                    final_item["comments"] = current_formset_data[current_category]
+
+                    if current_quantity in current_formset_data and current_formset_data[current_quantity]>0:
+                        final_item["quantity"] = current_formset_data[current_quantity]
+                    else:
+                        final_item["quantity"] = 1
+
+                    final_data["pieces"].append(final_item)
+
+            self.request.session['search_data'] = json.dumps(final_data)
+            return True
 
     def get_success_url(self):
         return reverse('search:home')
