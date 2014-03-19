@@ -139,6 +139,15 @@ class SearchRequest(models.Model):
     state = models.CharField(max_length=25, choices=SEARCH_REQUEST_STATES, default='pending')
     expiration_date = models.DateTimeField(_('Expiration Date'), blank=True, null=True)
 
+    @property
+    def lines(self):
+        items = SearchItemRequest.objects.filter(search_request=self)
+        return items
+
+    @property
+    def num_items(self):
+        return self.lines.count()        
+
 
 class SearchItemRequest(models.Model):
     category = models.ForeignKey(Category, verbose_name=_('Category'),

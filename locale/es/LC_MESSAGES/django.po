@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-19 16:59+0100\n"
+"POT-Creation-Date: 2014-03-19 20:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,6 +93,7 @@ msgstr ""
 #: piezas/templates/dashboard/orders/line_detail.html:13
 #: piezas/templates/dashboard/orders/order_detail.html:14
 #: piezas/templates/dashboard/orders/order_list.html:15
+#: piezas/templates/dashboard/orders/searchrequest_list.html:15
 #: piezas/templates/dashboard/orders/shippingaddress_form.html:11
 #: piezas/templates/dashboard/orders/statistics.html:14
 #: piezas/templates/dashboard/pages/delete.html:14
@@ -208,11 +209,11 @@ msgstr ""
 
 #: oscar/defaults.py:125
 #: oscar/templates/oscar/dashboard/orders/statistics.html:21
-#: piezas/settings.py:275 piezas/templates/dashboard/orders/statistics.html:21
+#: piezas/settings.py:279 piezas/templates/dashboard/orders/statistics.html:21
 msgid "Statistics"
 msgstr ""
 
-#: oscar/defaults.py:129 piezas/settings.py:279
+#: oscar/defaults.py:129 piezas/settings.py:283
 msgid "Partners"
 msgstr ""
 
@@ -220,7 +221,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/users/detail.html:18
 #: oscar/templates/oscar/dashboard/users/index.html:8
 #: oscar/templates/oscar/dashboard/users/index.html:13
-#: oscar/templates/oscar/dashboard/users/index.html:23 piezas/settings.py:285
+#: oscar/templates/oscar/dashboard/users/index.html:23 piezas/settings.py:289
 #: piezas/templates/dashboard/index.html:112
 #: piezas/templates/dashboard/users/detail.html:18
 #: piezas/templates/dashboard/users/index.html:8
@@ -229,7 +230,7 @@ msgstr ""
 msgid "Customers"
 msgstr ""
 
-#: oscar/defaults.py:139 piezas/settings.py:289
+#: oscar/defaults.py:139 piezas/settings.py:293
 msgid "Customer management"
 msgstr ""
 
@@ -290,7 +291,7 @@ msgstr ""
 msgid "Vouchers"
 msgstr ""
 
-#: oscar/defaults.py:163 piezas/settings.py:295
+#: oscar/defaults.py:163 piezas/settings.py:299
 msgid "Content"
 msgstr ""
 
@@ -298,7 +299,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/promotions/promotion_list.html:7
 #: oscar/templates/oscar/dashboard/promotions/promotion_list.html:12
 #: oscar/templates/oscar/dashboard/promotions/promotion_list.html:38
-#: piezas/settings.py:299
+#: piezas/settings.py:303
 #: piezas/templates/dashboard/promotions/promotion_list.html:7
 #: piezas/templates/dashboard/promotions/promotion_list.html:12
 #: piezas/templates/dashboard/promotions/promotion_list.html:38
@@ -307,7 +308,7 @@ msgstr ""
 
 #: oscar/defaults.py:171
 #: oscar/templates/oscar/dashboard/promotions/pagepromotion_list.html:24
-#: piezas/settings.py:303
+#: piezas/settings.py:307
 #: piezas/templates/dashboard/promotions/pagepromotion_list.html:24
 msgid "Content blocks by page"
 msgstr ""
@@ -316,7 +317,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/pages/delete.html:18
 #: oscar/templates/oscar/dashboard/pages/index.html:8
 #: oscar/templates/oscar/dashboard/pages/index.html:17
-#: oscar/templates/oscar/dashboard/pages/update.html:17 piezas/settings.py:307
+#: oscar/templates/oscar/dashboard/pages/update.html:17 piezas/settings.py:311
 #: piezas/templates/dashboard/pages/delete.html:18
 #: piezas/templates/dashboard/pages/index.html:8
 #: piezas/templates/dashboard/pages/index.html:17
@@ -324,7 +325,7 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
-#: oscar/defaults.py:179 piezas/settings.py:311
+#: oscar/defaults.py:179 piezas/settings.py:315
 msgid "Email templates"
 msgstr ""
 
@@ -338,7 +339,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/reviews/review_update.html:18
 #: oscar/templates/oscar/dashboard/users/detail.html:109
 #: oscar/templates/oscar/dashboard/users/detail.html:176
-#: piezas/settings.py:315
+#: piezas/settings.py:319
 #: piezas/templates/catalogue/reviews/review_detail.html:5
 #: piezas/templates/catalogue/reviews/review_detail.html:26
 #: piezas/templates/dashboard/reviews/review_delete.html:18
@@ -352,7 +353,7 @@ msgid "Reviews"
 msgstr ""
 
 #: oscar/defaults.py:189 oscar/templates/oscar/dashboard/reports/index.html:6
-#: piezas/settings.py:321 piezas/templates/dashboard/reports/index.html:6
+#: piezas/settings.py:325 piezas/templates/dashboard/reports/index.html:6
 msgid "Reports"
 msgstr ""
 
@@ -361,7 +362,7 @@ msgstr ""
 #: oscar/apps/customer/abstract_models.py:148
 #: oscar/templates/oscar/dashboard/catalogue/product_update.html:279
 #: oscar/templates/oscar/dashboard/comms/list.html:34
-#: piezas/apps/catalogue/models.py:144 piezas/apps/search/forms.py:29
+#: piezas/apps/catalogue/models.py:153 piezas/apps/search/forms.py:29
 #: piezas/templates/dashboard/catalogue/product_update.html:137
 #: piezas/templates/dashboard/comms/list.html:34
 #: piezas/templates/search/confirm.html:81
@@ -659,7 +660,7 @@ msgstr ""
 #: piezas/apps/catalogue/models.py:20 piezas/apps/catalogue/models.py:40
 #: piezas/apps/catalogue/models.py:60 piezas/apps/catalogue/models.py:79
 #: piezas/apps/catalogue/models.py:98 piezas/apps/catalogue/models.py:133
-#: piezas/apps/catalogue/models.py:154 piezas/apps/offer/models.py:166
+#: piezas/apps/catalogue/models.py:163 piezas/apps/offer/models.py:166
 #: piezas/apps/offer/models.py:774
 msgid "Date Created"
 msgstr ""
@@ -1015,7 +1016,9 @@ msgstr ""
 
 #: oscar/apps/basket/abstract_models.py:25
 #: oscar/apps/wishlists/abstract_models.py:21
-#: piezas/apps/catalogue/models.py:137 piezas/apps/catalogue/models.py:153
+#: piezas/apps/catalogue/models.py:137 piezas/apps/catalogue/models.py:162
+#: piezas/apps/dashboard/podorders/views.py:195
+#: piezas/templates/dashboard/orders/searchrequest_list.html:97
 msgid "Owner"
 msgstr ""
 
@@ -1069,6 +1072,8 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/users/detail.html:125
 #: oscar/templates/oscar/dashboard/users/alerts/list.html:47
 #: oscar/templates/oscar/dashboard/users/alerts/partials/alert.html:20
+#: piezas/apps/dashboard/podorders/forms.py:11
+#: piezas/apps/dashboard/podorders/views.py:193
 #: piezas/apps/offer/models.py:100
 #: piezas/templates/customer/anon_order.html:14
 #: piezas/templates/customer/anon_order.html:59
@@ -1079,6 +1084,7 @@ msgstr ""
 #: piezas/templates/dashboard/orders/order_detail.html:99
 #: piezas/templates/dashboard/orders/order_detail.html:493
 #: piezas/templates/dashboard/orders/order_list.html:97
+#: piezas/templates/dashboard/orders/searchrequest_list.html:95
 #: piezas/templates/dashboard/orders/statistics.html:59
 #: piezas/templates/dashboard/reviews/review_delete.html:43
 #: piezas/templates/dashboard/reviews/review_list.html:62
@@ -1180,7 +1186,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/orders/line_detail.html:139
 #: oscar/templates/oscar/dashboard/orders/line_detail.html:170
 #: oscar/templates/oscar/dashboard/orders/order_detail.html:96
-#: piezas/apps/catalogue/models.py:150 piezas/apps/search/forms.py:31
+#: piezas/apps/catalogue/models.py:159 piezas/apps/search/forms.py:31
 #: piezas/templates/basket/partials/basket_content.html:35
 #: piezas/templates/basket/partials/searchrequest_content.html:16
 #: piezas/templates/checkout/checkout.html:105
@@ -1393,6 +1399,7 @@ msgstr ""
 
 #: oscar/apps/basket/reports.py:24
 #: oscar/templates/oscar/dashboard/reports/partials/open_basket_report.html:12
+#: piezas/templates/dashboard/orders/searchrequest_list.html:98
 #: piezas/templates/dashboard/reports/partials/open_basket_report.html:12
 msgid "Date of creation"
 msgstr ""
@@ -1647,7 +1654,7 @@ msgstr ""
 #: oscar/apps/order/abstract_models.py:328 piezas/apps/catalogue/models.py:21
 #: piezas/apps/catalogue/models.py:41 piezas/apps/catalogue/models.py:61
 #: piezas/apps/catalogue/models.py:80 piezas/apps/catalogue/models.py:99
-#: piezas/apps/catalogue/models.py:134 piezas/apps/catalogue/models.py:155
+#: piezas/apps/catalogue/models.py:134 piezas/apps/catalogue/models.py:164
 msgid "Date Updated"
 msgstr ""
 
@@ -2315,6 +2322,9 @@ msgstr ""
 #: piezas/templates/dashboard/catalogue/stockalert_list.html:40
 msgid "Closed"
 msgstr ""
+
+msgid "closed"
+msgstr "Cerrado"
 
 #: oscar/apps/customer/abstract_models.py:311
 #: oscar/templates/oscar/dashboard/users/alerts/partials/alert.html:29
@@ -3104,11 +3114,13 @@ msgstr ""
 #: oscar/apps/dashboard/orders/forms.py:77
 #: oscar/apps/dashboard/reports/forms.py:22
 #: oscar/apps/dashboard/reviews/forms.py:27
+#: piezas/apps/dashboard/podorders/forms.py:14
 msgid "Date from"
 msgstr ""
 
 #: oscar/apps/dashboard/orders/forms.py:78
 #: oscar/apps/dashboard/reports/forms.py:23
+#: piezas/apps/dashboard/podorders/forms.py:15
 msgid "Date to"
 msgstr ""
 
@@ -3124,14 +3136,17 @@ msgid "Payment method"
 msgstr ""
 
 #: oscar/apps/dashboard/orders/forms.py:86 oscar/apps/promotions/models.py:149
+#: piezas/apps/dashboard/podorders/forms.py:17
 msgid "HTML"
 msgstr ""
 
 #: oscar/apps/dashboard/orders/forms.py:87
+#: piezas/apps/dashboard/podorders/forms.py:18
 msgid "CSV"
 msgstr ""
 
 #: oscar/apps/dashboard/orders/forms.py:91
+#: piezas/apps/dashboard/podorders/forms.py:22
 msgid "Get results as"
 msgstr ""
 
@@ -3178,16 +3193,19 @@ msgid " including an item with ID '%(partner_sku)s'"
 msgstr ""
 
 #: oscar/apps/dashboard/orders/views.py:185
+#: piezas/apps/dashboard/podorders/views.py:83
 #, python-format
 msgid " placed between %(start_date)s and %(end_date)s"
 msgstr ""
 
 #: oscar/apps/dashboard/orders/views.py:189
+#: piezas/apps/dashboard/podorders/views.py:87
 #, python-format
 msgid " placed since %s"
 msgstr ""
 
 #: oscar/apps/dashboard/orders/views.py:193
+#: piezas/apps/dashboard/podorders/views.py:91
 #, python-format
 msgid " placed before %s"
 msgstr ""
@@ -3221,7 +3239,9 @@ msgstr ""
 
 #: oscar/apps/dashboard/orders/views.py:327
 #: oscar/templates/oscar/dashboard/orders/order_list.html:96
+#: piezas/apps/dashboard/podorders/views.py:192
 #: piezas/templates/dashboard/orders/order_list.html:96
+#: piezas/templates/dashboard/orders/searchrequest_list.html:94
 msgid "Number of items"
 msgstr ""
 
@@ -3647,6 +3667,7 @@ msgstr ""
 #: oscar/apps/dashboard/reports/forms.py:26
 #: oscar/templates/oscar/dashboard/orders/order_list.html:86
 #: piezas/templates/dashboard/orders/order_list.html:86
+#: piezas/templates/dashboard/orders/searchrequest_list.html:85
 msgid "Download"
 msgstr ""
 
@@ -5210,6 +5231,9 @@ msgstr ""
 #: piezas/templates/dashboard/orders/order_list.html:30
 #: piezas/templates/dashboard/orders/order_list.html:51
 #: piezas/templates/dashboard/orders/order_list.html:67
+#: piezas/templates/dashboard/orders/searchrequest_list.html:30
+#: piezas/templates/dashboard/orders/searchrequest_list.html:51
+#: piezas/templates/dashboard/orders/searchrequest_list.html:67
 #: piezas/templates/dashboard/pages/index.html:30
 #: piezas/templates/dashboard/pages/index.html:35
 #: piezas/templates/dashboard/partners/partner_list.html:30
@@ -7350,6 +7374,7 @@ msgstr ""
 #: piezas/templates/customer/wishlists/wishlists_list.html:19
 #: piezas/templates/dashboard/orders/order_detail.html:137
 #: piezas/templates/dashboard/orders/order_list.html:125
+#: piezas/templates/dashboard/orders/searchrequest_list.html:114
 #: piezas/templates/dashboard/pages/index.html:69
 #: piezas/templates/dashboard/reports/partials/order_report.html:30
 #: piezas/templates/dashboard/users/detail.html:135
@@ -8769,11 +8794,14 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/orders/order_list.html:58
 #: piezas/templates/dashboard/orders/order_list.html:52
 #: piezas/templates/dashboard/orders/order_list.html:58
+#: piezas/templates/dashboard/orders/searchrequest_list.html:52
+#: piezas/templates/dashboard/orders/searchrequest_list.html:58
 msgid "Advanced Search"
 msgstr ""
 
 #: oscar/templates/oscar/dashboard/orders/order_list.html:66
 #: piezas/templates/dashboard/orders/order_list.html:66
+#: piezas/templates/dashboard/orders/searchrequest_list.html:66
 msgid "Close"
 msgstr ""
 
@@ -8784,6 +8812,7 @@ msgstr ""
 
 #: oscar/templates/oscar/dashboard/orders/order_list.html:93
 #: piezas/templates/dashboard/orders/order_list.html:93
+#: piezas/templates/dashboard/orders/searchrequest_list.html:92
 msgid "Select all"
 msgstr ""
 
@@ -10135,6 +10164,10 @@ msgstr "Tipo de carrocería"
 msgid "Engine"
 msgstr "Tipo de motor"
 
+#: piezas/settings.py:275
+msgid "Search requests"
+msgstr "Peticiones de búsqueda"
+
 #: piezas/apps/catalogue/models.py:19 piezas/apps/catalogue/models.py:38
 msgid "Car brand"
 msgstr "Marca de coche"
@@ -10160,24 +10193,42 @@ msgstr "Tipo de motor"
 msgid "Regional"
 msgstr "Regional"
 
+msgid "regional"
+msgstr "Regional"
+
 #: piezas/apps/catalogue/models.py:109
 msgid "Border area"
+msgstr "Limítrofe"
+
+msgid "border"
 msgstr "Limítrofe"
 
 #: piezas/apps/catalogue/models.py:110
 msgid "National"
 msgstr "Nacional"
 
+msgid "national"
+msgstr "National"
+
 #: piezas/apps/catalogue/models.py:110
 msgid "Supraregional"
+msgstr "Supraregional"
+
+msgid "supraregional"
 msgstr "Supraregional"
 
 #: piezas/apps/catalogue/models.py:112
 msgid "Pending"
 msgstr "Pendiente"
 
+msgid "pending"
+msgstr "Pendiente"
+
 #: piezas/apps/catalogue/models.py:112
 msgid "Expired"
+msgstr "Expirada"
+
+msgid "expired"
 msgstr "Expirada"
 
 #: piezas/apps/catalogue/models.py:117
@@ -10211,7 +10262,7 @@ msgstr "Tipo de carrocería"
 msgid "Frame reference"
 msgstr "Número de bastidor"
 
-#: piezas/apps/catalogue/models.py:132 piezas/apps/catalogue/models.py:149
+#: piezas/apps/catalogue/models.py:132 piezas/apps/catalogue/models.py:158
 #: piezas/apps/search/forms.py:32 piezas/apps/search/forms.py:42
 #: piezas/templates/basket/partials/basket_content.html:34
 #: piezas/templates/basket/partials/searchrequest_content.html:15
@@ -10224,22 +10275,22 @@ msgstr "Comentarios"
 msgid "Expiration Date"
 msgstr "Fecha de expiración"
 
-#: piezas/apps/catalogue/models.py:145
+#: piezas/apps/catalogue/models.py:154
 msgid "Category to search for"
 msgstr "Categoría a buscar"
 
-#: piezas/apps/catalogue/models.py:147
+#: piezas/apps/catalogue/models.py:156
 #: piezas/templates/basket/partials/basket_content.html:27
 #: piezas/templates/search/confirm.html:82
 #: piezas/templates/search/home.html:59
 msgid "Piece"
 msgstr "Pieza"
 
-#: piezas/apps/catalogue/models.py:148
+#: piezas/apps/catalogue/models.py:157
 msgid "Piece to search for"
 msgstr "Pieza a buscar"
 
-#: piezas/apps/catalogue/models.py:156 piezas/templates/basket/basket.html:6
+#: piezas/apps/catalogue/models.py:165 piezas/templates/basket/basket.html:6
 #: piezas/templates/basket/basket.html:15
 #: piezas/templates/basket/basket.html:23
 msgid "Search request"
@@ -10421,20 +10472,70 @@ msgstr "Motor actualizado con éxito"
 msgid "Engine deleted successfully"
 msgstr "Motor borrado con éxito"
 
+#: piezas/apps/dashboard/podorders/forms.py:7
+#: piezas/apps/dashboard/podorders/views.py:191
+#: piezas/templates/dashboard/orders/searchrequest_list.html:93
+msgid "Search request number"
+msgstr "Número de la petición de búsqueda"
+
+#: piezas/apps/dashboard/podorders/forms.py:8
+msgid "Owner name"
+msgstr "Propietario"
+
+#: piezas/apps/dashboard/podorders/views.py:24
+#, python-format
+msgid "%(main_filter)s %(name_filter)s%(date_filter)s%(state_filter)s"
+msgstr ""
+
+#: piezas/apps/dashboard/podorders/views.py:58
+msgid "All search requests"
+msgstr "Todas las peticiones de búsqueda"
+
+#: piezas/apps/dashboard/podorders/views.py:67
+msgid "Search requests without an state"
+msgstr "Peticiones de búsqueda sin estado"
+
+#: piezas/apps/dashboard/podorders/views.py:69
+#, python-format
+msgid "Search requests with state '%s'"
+msgstr "Peticiones de búsqueda con estado '%s'"
+
+#: piezas/apps/dashboard/podorders/views.py:74
+#, python-format
+msgid "Search requests with number starting with \"%(searchrequest_number)s\""
+msgstr ""
+"Peticiones de búsqueda con número que comienza por \"%(searchrequest_number)s"
+"\""
+
+#: piezas/apps/dashboard/podorders/views.py:78
+#, python-format
+msgid " with user name matching '%(name)s'"
+msgstr "con usuario que concuerda con '%(name)s'"
+
+#: piezas/apps/dashboard/podorders/views.py:95
+#, python-format
+msgid " with status %(state)s"
+msgstr "con estado %(state)s"
+
+#: piezas/apps/dashboard/podorders/views.py:194 piezas/apps/search/forms.py:41
+#: piezas/templates/dashboard/orders/searchrequest_list.html:96
+msgid "Search type"
+msgstr "Tipo de búsqueda"
+
+#: piezas/apps/dashboard/podorders/views.py:196
+msgid "Creation date"
+msgstr "Fecha de creación"
+
+#: piezas/apps/dashboard/podorders/views.py:197 piezas/apps/search/forms.py:43
+msgid "Expiration date"
+msgstr "Fecha de expiración"
+
 #: piezas/apps/search/forms.py:22
 #: piezas/templates/basket/partials/basket_content.html:30
 #: piezas/templates/basket/partials/searchrequest_content.html:11
 #: piezas/templates/search/confirm.html:53
 msgid "Version"
 msgstr "Versión"
-
-#: piezas/apps/search/forms.py:41
-msgid "Search type"
-msgstr "Tipo de búsqueda"
-
-#: piezas/apps/search/forms.py:43
-msgid "Expiration date"
-msgstr "Fecha de expiración"
 
 #: piezas/apps/search/forms.py:50
 msgid "Expiration date must be greater than today"
@@ -10451,13 +10552,17 @@ msgid "Search pieces"
 msgstr "Buscar piezas"
 
 #: piezas/templates/index.html:29
-msgid "My personal data"
-msgstr "Mis datos personales"
-
-#: piezas/templates/index.html:32
 #: piezas/templates/customer/baseaccountpage.html:38
 msgid "Search request history"
 msgstr "Histórico de peticiones de búsqueda"
+
+#: piezas/templates/index.html:33
+msgid "Pending search requests"
+msgstr "Peticiones de búsqueda pedientes"
+
+#: piezas/templates/index.html:37
+msgid "My personal data"
+msgstr "Mis datos personales"
 
 #: piezas/templates/basket/placesearchrequest.html:6
 #: piezas/templates/basket/placesearchrequest.html:15
@@ -10587,6 +10692,24 @@ msgstr ""
 "\n"
 "        Pieza '%(name)s' actualizada.\n"
 "    "
+
+#: piezas/templates/dashboard/orders/searchrequest_list.html:9
+#: piezas/templates/dashboard/orders/searchrequest_list.html:18
+#: piezas/templates/dashboard/orders/searchrequest_list.html:24
+msgid "Search request management"
+msgstr "Gestión de peticiones de búsqueda"
+
+#: piezas/templates/dashboard/orders/searchrequest_list.html:83
+msgid "Download selected search requests as a CSV"
+msgstr "Descargar las peticiones de búsqueda seleccionadas como CSV"
+
+#: piezas/templates/dashboard/orders/searchrequest_list.html:99
+msgid "Date of expiration"
+msgstr "Fecha de caducidad"
+
+#: piezas/templates/dashboard/orders/searchrequest_list.html:127
+msgid "No search requests found."
+msgstr "No se han encontrado resultados"
 
 #: piezas/templates/dashboard/podcatalogue/bodywork_delete.html:21
 #: piezas/templates/dashboard/podcatalogue/bodywork_form.html:8
@@ -10965,7 +11088,7 @@ msgstr "Total de piezas en búsqueda:"
 
 #: piezas/templates/partials/nav_accounts.html:39
 msgid "Admin Dashboard"
-msgstr "Panel de control de administrador"
+msgstr "Panel de control"
 
 #: piezas/templates/partials/welcome_homepage.html:3
 msgid "Search piece"
@@ -11027,12 +11150,6 @@ msgstr "Volver al inicio"
 #~ msgid "Please confirm the pieces you want to search"
 #~ msgstr "Por favor confirma las piezas que quieras buscar"
 
-#~ msgid "Search requests"
-#~ msgstr "Peticiones de búsqueda"
-
-#~ msgid "Search request items"
-#~ msgstr "Elementos de la petición de búsqueda"
-
 #~ msgid "Brand of the car that it belongs to"
 #~ msgstr "Marca del coche al que pertenece"
 
@@ -11044,3 +11161,6 @@ msgstr "Volver al inicio"
 
 #~ msgid "New Brand"
 #~ msgstr "Nueva marca"
+
+#~ msgid "searchrequests"
+#~ msgstr "peticiones de búsqueda"

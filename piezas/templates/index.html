@@ -21,20 +21,21 @@
 {% endblock %}
 
 {% block content %}
-    <ol class="row-fluid">
-	<li class="span4">
+<div class="span15 well">
+	<div class="span5">
 		<h4><a href="{% url 'search:home' %}">{% trans "Search pieces" %}</a></h4>
-	</li>
-	<li class="span4">
-		<h4><a href="{% url 'customer:summary' %}">{% trans "My personal data" %}</a></h4>
-	</li>
-	<li class="span4">
+	</div>
+	<div class="span5">
 		<h4><a href="{% url 'customer:order-list' %}">{% trans "Search request history" %}</a></h4>
-	</li>
+	</div>
+	{% if perms.partner.dashboard_access %}
+	<div class="span5">
+		<h4><a href="{% url 'search:request-list' %}">{% trans "Pending search requests" %}</a></h4>
+	</div>
+	{% endif %}
+	<div class="span5">
+		<h4><a href="{% url 'customer:summary' %}">{% trans "My personal data" %}</a></h4>
+	</div>
+</div>
 
-	<li class="span4">
-		<h4></h4>
-	</li>
-    </ol>
-<div style="clear:both"><br /></div>
 {% endblock content %}

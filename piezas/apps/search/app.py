@@ -22,6 +22,7 @@ class SearchApplication(CoreSearchApplication):
             url(r'^home/$', login_required(self.index_view.as_view()), name='home'),
             url(r'^placesearch/$', login_required(self.confirm_view.as_view()), name='placesearchrequest'),
             url(r'^placed/$', login_required(self.placed_view.as_view()), name='placed'),
+            url(r'^pendingrequests/$', login_required(self.placed_view.as_view()), name='request-list'),
         )
         return self.post_process_urls(urlpatterns)
 

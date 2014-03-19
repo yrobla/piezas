@@ -151,7 +151,7 @@ INSTALLED_APPS = INSTALLED_APPS + get_core_apps([
     'piezas.apps.catalogue', 'piezas.apps.offer',
     'piezas.apps.dashboard', 'piezas.apps.search'])
 
-INSTALLED_APPS = INSTALLED_APPS + ['piezas.apps.dashboard.podcatalogue',]
+INSTALLED_APPS = INSTALLED_APPS + ['piezas.apps.dashboard.podcatalogue', 'piezas.apps.dashboard.podorders']
 SITE_ID = 1
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -270,6 +270,10 @@ OSCAR_DASHBOARD_NAVIGATION = [
             {
                 'label': _('Order management'),
                 'url_name': 'dashboard:order-list',
+            },
+            {
+                'label': _('Search requests'),
+                'url_name': 'dashboard:order-searchrequest-list',
             },
             {
                 'label': _('Statistics'),

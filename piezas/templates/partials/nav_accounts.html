@@ -35,7 +35,7 @@
                                 </a>
                             {% endif %}</a>
                         </li>
-                        {% if user.is_staff or perms.partner.dashboard_access %}
+                        {% if user.is_staff %}
                             <li class="hidden-phone"><a href="{% url 'dashboard:index' %}"><i class="icon-list-ul"></i> {% trans "Admin Dashboard" %}</a></li>
                         {% endif %}
                         <li><a href="{% url 'customer:logout' %}"><i class="icon-signout"></i> {% trans "Logout" %}</a></li>
