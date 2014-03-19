@@ -1,12 +1,12 @@
 from django.contrib import messages
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import CreateView, FormView
+from django.views.generic import CreateView, FormView, TemplateView
 from django.core.urlresolvers import reverse
 from oscar.core.loading import get_model
 import json
 import forms
-
+from piezas.apps.catalogue import models
 
 class HomeView(FormView):
     form_class = forms.SearchCreationForm
@@ -125,3 +125,74 @@ class HomeView(FormView):
 class ConfirmView(FormView):
     form_class = forms.SearchConfirmForm
     template_name = 'search/confirm.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ConfirmView, self).get_context_data(**kwargs)
+
+        # retrieve data from session
+        current_session = self.request.session.get('search_data', None)
+        if current_session:
+            current_data = json.loads(current_session)
+            if 'brand' in current_data:
+                current_data['brand_name'] = models.Brand.objects.get(pk=current_data['brand']).name
+            if 'model' in current_data:
+                current_data['model_name'] = models.Model.objects.get(pk=current_data['model']).name
+            if 'version' in current_data:
+                current_data['version_name'] = models.Version.objects.get(pk=current_data['version']).name
+            if 'bodywork' in current_data:
+                current_data['bodywork_name'] = models.Bodywork.objects.get(pk=current_data['bodywork']).name
+            if 'engine' in current_data:
+                current_data['engine_name'] = models.Engine.objects.get(pk=current_data['engine']).name
+            context['search_data'] = current_data
+
+            for piece in current_data["pieces"]:
+                if 'category' in piece:
+                    piece['category_name'] = models.Category.objects.get(pk=piece['category'])
+                if 'piece' in piece:
+                    piece['piece_name'] = models.Product.objects.get(pk=piece['piece'])
+        return context
+
+    def form_valid(self, form):
+        response = super(ConfirmView, self).form_valid(form)
+        current_session = self.request.session.get('search_data', None)
+        if current_session:
+            current_data = json.loads(current_session)
+
+            try:
+                # create search objects
+                brand = models.Brand.objects.get(pk=current_data["brand"])
+                model = models.Model.objects.get(pk=current_data["model"])
+                version = models.Version.objects.get(pk=current_data["version"])
+                bodywork = models.Bodywork.objects.get(pk=current_data["bodywork"])
+                engine = models.Engine.objects.get(pk=current_data["engine"])
+
+                search_request = models.SearchRequest(brand=brand, model=model,
+                    version=version, bodywork=bodywork, engine=engine,
+                    frameref=current_data["frameref"], comments=form.cleaned_data["comments"],
+                    search_type=form.cleaned_data["search_type"], state='pending',
+                    owner=self.request.user, expiration_date=form.cleaned_data['expiration_date'])
+                search_request.save()
+
+                # now create search items
+                for piece in current_data["pieces"]:
+                    category = models.Category.objects.get(pk=piece["category"])
+                    piece_model = models.Product.objects.get(pk=piece["piece"])
+
+                    search_request_item = models.SearchItemRequest(category=category,
+                        piece=piece_model, comments=piece["comments"], quantity=piece["quantity"],
+                        owner=self.request.user, search_request=search_request, state='pending')
+                    search_request_item.save()
+                # clear session
+                del(self.request.session['search_data'])
+
+            except Exception as e:
+                print str(e)
+        return response
+
+
+    def get_success_url(self):
+        return reverse('search:placed')
+
+
+class PlacedView(TemplateView):
+    template_name = 'search/placed.html'

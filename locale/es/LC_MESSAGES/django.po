@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-18 10:10+0100\n"
+"POT-Creation-Date: 2014-03-19 16:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -361,10 +361,10 @@ msgstr ""
 #: oscar/apps/customer/abstract_models.py:148
 #: oscar/templates/oscar/dashboard/catalogue/product_update.html:279
 #: oscar/templates/oscar/dashboard/comms/list.html:34
-#: piezas/apps/catalogue/models.py:144 piezas/apps/search/forms.py:27
+#: piezas/apps/catalogue/models.py:144 piezas/apps/search/forms.py:29
 #: piezas/templates/dashboard/catalogue/product_update.html:137
 #: piezas/templates/dashboard/comms/list.html:34
-#: piezas/templates/search/confirm.html:41
+#: piezas/templates/search/confirm.html:81
 #: piezas/templates/search/home.html:58
 msgid "Category"
 msgstr ""
@@ -730,7 +730,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/reviews/review_list.html:58
 #: oscar/templates/oscar/dashboard/users/alerts/list.html:45
 #: oscar/templates/oscar/dashboard/users/alerts/partials/alert.html:6
-#: piezas/apps/search/forms.py:28 piezas/templates/checkout/checkout.html:104
+#: piezas/apps/search/forms.py:30 piezas/templates/checkout/checkout.html:104
 #: piezas/templates/customer/anon_order.html:58
 #: piezas/templates/customer/alerts/alert_list.html:12
 #: piezas/templates/customer/order/order_detail.html:18
@@ -1180,7 +1180,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/orders/line_detail.html:139
 #: oscar/templates/oscar/dashboard/orders/line_detail.html:170
 #: oscar/templates/oscar/dashboard/orders/order_detail.html:96
-#: piezas/apps/catalogue/models.py:150 piezas/apps/search/forms.py:29
+#: piezas/apps/catalogue/models.py:150 piezas/apps/search/forms.py:31
 #: piezas/templates/basket/partials/basket_content.html:35
 #: piezas/templates/basket/partials/searchrequest_content.html:16
 #: piezas/templates/checkout/checkout.html:105
@@ -1192,7 +1192,7 @@ msgstr ""
 #: piezas/templates/dashboard/orders/line_detail.html:139
 #: piezas/templates/dashboard/orders/line_detail.html:170
 #: piezas/templates/dashboard/orders/order_detail.html:96
-#: piezas/templates/search/confirm.html:44
+#: piezas/templates/search/confirm.html:84
 #: piezas/templates/search/home.html:61
 msgid "Quantity"
 msgstr ""
@@ -5590,8 +5590,8 @@ msgstr ""
 #: piezas/templates/registration/password_reset_confirm.html:11
 #: piezas/templates/registration/password_reset_done.html:11
 #: piezas/templates/registration/password_reset_form.html:11
-#: piezas/templates/search/confirm.html:15
-#: piezas/templates/search/home.html:29
+#: piezas/templates/search/confirm.html:18
+#: piezas/templates/search/home.html:29 piezas/templates/search/placed.html:29
 #: piezas/templates/search/results.html:15
 msgid "Home"
 msgstr ""
@@ -10121,15 +10121,17 @@ msgstr "Modelos"
 msgid "Versions"
 msgstr "Versiones"
 
-#: piezas/settings.py:257 piezas/apps/search/forms.py:21
+#: piezas/settings.py:257 piezas/apps/search/forms.py:23
 #: piezas/templates/basket/partials/basket_content.html:31
 #: piezas/templates/basket/partials/searchrequest_content.html:12
+#: piezas/templates/search/confirm.html:59
 msgid "Bodywork"
 msgstr "Tipo de carrocería"
 
-#: piezas/settings.py:261 piezas/apps/search/forms.py:22
+#: piezas/settings.py:261 piezas/apps/search/forms.py:24
 #: piezas/templates/basket/partials/basket_content.html:32
 #: piezas/templates/basket/partials/searchrequest_content.html:13
+#: piezas/templates/search/confirm.html:65
 msgid "Engine"
 msgstr "Tipo de motor"
 
@@ -10181,11 +10183,12 @@ msgstr "Expirada"
 #: piezas/apps/catalogue/models.py:117
 #: piezas/apps/dashboard/podcatalogue/forms.py:50
 #: piezas/apps/dashboard/podcatalogue/forms.py:55
-#: piezas/apps/search/forms.py:18
+#: piezas/apps/search/forms.py:20
 #: piezas/templates/basket/partials/basket_content.html:28
 #: piezas/templates/basket/partials/searchrequest_content.html:9
 #: piezas/templates/dashboard/podcatalogue/model_list.html:65
 #: piezas/templates/dashboard/podcatalogue/model_list.html:66
+#: piezas/templates/search/confirm.html:41
 msgid "Brand"
 msgstr "Marca"
 
@@ -10201,17 +10204,18 @@ msgstr "Versión del coche al que pertenece"
 msgid "Bodywork type"
 msgstr "Tipo de carrocería"
 
-#: piezas/apps/catalogue/models.py:131 piezas/apps/search/forms.py:23
+#: piezas/apps/catalogue/models.py:131 piezas/apps/search/forms.py:25
 #: piezas/templates/basket/partials/basket_content.html:33
 #: piezas/templates/basket/partials/searchrequest_content.html:14
+#: piezas/templates/search/confirm.html:71
 msgid "Frame reference"
 msgstr "Número de bastidor"
 
 #: piezas/apps/catalogue/models.py:132 piezas/apps/catalogue/models.py:149
-#: piezas/apps/search/forms.py:30
+#: piezas/apps/search/forms.py:32 piezas/apps/search/forms.py:42
 #: piezas/templates/basket/partials/basket_content.html:34
 #: piezas/templates/basket/partials/searchrequest_content.html:15
-#: piezas/templates/search/confirm.html:43
+#: piezas/templates/search/confirm.html:83
 #: piezas/templates/search/home.html:60
 msgid "Comments"
 msgstr "Comentarios"
@@ -10226,7 +10230,7 @@ msgstr "Categoría a buscar"
 
 #: piezas/apps/catalogue/models.py:147
 #: piezas/templates/basket/partials/basket_content.html:27
-#: piezas/templates/search/confirm.html:42
+#: piezas/templates/search/confirm.html:82
 #: piezas/templates/search/home.html:59
 msgid "Piece"
 msgstr "Pieza"
@@ -10243,11 +10247,12 @@ msgstr "Petición de búsqueda"
 
 #: piezas/apps/dashboard/podcatalogue/forms.py:71
 #: piezas/apps/dashboard/podcatalogue/forms.py:76
-#: piezas/apps/search/forms.py:19
+#: piezas/apps/search/forms.py:21
 #: piezas/templates/basket/partials/basket_content.html:29
 #: piezas/templates/basket/partials/searchrequest_content.html:10
 #: piezas/templates/dashboard/podcatalogue/version_list.html:65
 #: piezas/templates/dashboard/podcatalogue/version_list.html:66
+#: piezas/templates/search/confirm.html:47
 msgid "Model"
 msgstr "Modelo"
 
@@ -10416,14 +10421,27 @@ msgstr "Motor actualizado con éxito"
 msgid "Engine deleted successfully"
 msgstr "Motor borrado con éxito"
 
-#: piezas/apps/search/forms.py:20
+#: piezas/apps/search/forms.py:22
 #: piezas/templates/basket/partials/basket_content.html:30
 #: piezas/templates/basket/partials/searchrequest_content.html:11
+#: piezas/templates/search/confirm.html:53
 msgid "Version"
 msgstr "Versión"
 
-#: piezas/templates/index.html:6 piezas/templates/search/confirm.html:6
-#: piezas/templates/search/home.html:6
+#: piezas/apps/search/forms.py:41
+msgid "Search type"
+msgstr "Tipo de búsqueda"
+
+#: piezas/apps/search/forms.py:43
+msgid "Expiration date"
+msgstr "Fecha de expiración"
+
+#: piezas/apps/search/forms.py:50
+msgid "Expiration date must be greater than today"
+msgstr "La fecha de expiración debe ser superior a la actual"
+
+#: piezas/templates/index.html:6 piezas/templates/search/confirm.html:7
+#: piezas/templates/search/home.html:6 piezas/templates/search/placed.html:6
 msgid "Homepage"
 msgstr "Inicio"
 
@@ -10462,6 +10480,7 @@ msgid "Search new piece"
 msgstr "Buscar nueva pieza"
 
 #: piezas/templates/basket/partials/basket_content.html:89
+#: piezas/templates/search/confirm.html:102
 msgid "Submit search request"
 msgstr "Enviar petición de búsqueda"
 
@@ -10496,7 +10515,7 @@ msgid "Delete piece?"
 msgstr "¿Borrar pieza?"
 
 #: piezas/templates/dashboard/catalogue/product_delete.html:40
-#: piezas/templates/search/home.html:15
+#: piezas/templates/search/home.html:15 piezas/templates/search/placed.html:15
 msgid "Delete piece"
 msgstr "Borrar pieza"
 
@@ -10952,26 +10971,25 @@ msgstr "Panel de control de administrador"
 msgid "Search piece"
 msgstr "Buscar pieza"
 
-#: piezas/templates/search/confirm.html:18
-#: piezas/templates/search/confirm.html:23
+#: piezas/templates/search/confirm.html:21
+#: piezas/templates/search/confirm.html:26
 msgid "Confirm search"
-msgstr ""
+msgstr "Confirmar búsqueda"
 
-#: piezas/templates/search/confirm.html:32
-msgid "Please confirm the pieces you want to search"
-msgstr "Por favor confirma las piezas que quieras buscar"
+#: piezas/templates/search/confirm.html:35
+msgid "Please confirm the search that will be submitted to providers"
+msgstr "Por favor confirma la búsqueda que será enviada a los proveedores"
 
-#: piezas/templates/search/confirm.html:36
+#: piezas/templates/search/confirm.html:38
 #: piezas/templates/search/home.html:53
 msgid "Pieces to search"
 msgstr "Piezas a buscar"
 
-#: piezas/templates/search/confirm.html:79
-#: piezas/templates/search/home.html:96
-msgid "Confirm search request"
-msgstr "Confirmar petición de búsqueda"
+#: piezas/templates/search/confirm.html:100
+msgid "Return to search"
+msgstr "Volver a la búsqueda"
 
-#: piezas/templates/search/home.html:14
+#: piezas/templates/search/home.html:14 piezas/templates/search/placed.html:14
 msgid "Add new piece"
 msgstr "Añadir nueva pieza"
 
@@ -10982,6 +11000,32 @@ msgstr ""
 #: piezas/templates/search/home.html:49
 msgid "Please enter the criteria for the pieces you want to search"
 msgstr "Por favor entra los criterios para las piezas que quieras buscar"
+
+#: piezas/templates/search/home.html:96
+msgid "Confirm search request"
+msgstr "Confirmar petición de búsqueda"
+
+#: piezas/templates/search/placed.html:32
+#: piezas/templates/search/placed.html:37
+msgid "Search submitted"
+msgstr "Búsqueda enviada"
+
+#: piezas/templates/search/placed.html:44
+msgid ""
+"Your search has been successfully submitted and will be visible to providers."
+msgstr ""
+"Tu búsqueda ha sido enviada correctamente y será visible para los proveedores"
+
+#: piezas/templates/search/placed.html:45
+msgid "You will be notified if there are offers for your search."
+msgstr "Serás notificado cuando hayan ofertas para tu búsqueda"
+
+#: piezas/templates/search/placed.html:49
+msgid "Return home"
+msgstr "Volver al inicio"
+
+#~ msgid "Please confirm the pieces you want to search"
+#~ msgstr "Por favor confirma las piezas que quieras buscar"
 
 #~ msgid "Search requests"
 #~ msgstr "Peticiones de búsqueda"

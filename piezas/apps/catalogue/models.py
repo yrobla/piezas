@@ -106,7 +106,7 @@ class Product(AbstractProduct):
     pass
 
 
-SEARCH_REQUEST_TYPES = (('regional', _('Regional')), ('border', _('Border area')),
+SEARCH_REQUEST_TYPES = (('', '----'), ('regional', _('Regional')), ('border', _('Border area')),
     ('national', _('National')), ('supra', _('Supraregional')))
 
 SEARCH_REQUEST_STATES = (('pending', _('Pending')), ('expired', _('Expired')),

@@ -4,6 +4,8 @@ from django.forms.models import formset_factory
 from django.forms.formsets import BaseFormSet
 from django.utils.translation import ugettext_lazy as _
 from smart_selects.form_fields import ChainedModelChoiceField
+from piezas.apps.catalogue import models
+from datetime import date
 
 Product = get_model('catalogue', 'Product')
 Brand = get_model('catalogue', 'Brand')
@@ -35,6 +37,17 @@ class SearchItemRequestFormSet(BaseFormSet):
 
 
 class SearchConfirmForm(forms.Form):
-    pass
+    search_type = forms.ChoiceField(widget=forms.Select(), choices=models.SEARCH_REQUEST_TYPES,
+        required=True, label=_('Search type'))
+    comments = forms.CharField(label=_('Comments'), required=False, widget=forms.Textarea)
+    expiration_date = forms.DateField(label=_('Expiration date'), required=False,
+        widget=forms.TextInput(attrs={'class':'datepicker'}))
+
+    def clean_expiration_date(self):
+        data = self.cleaned_data['expiration_date']
+        # check if is greater than today
+        if data and data<=date.today():
+            raise forms.ValidationError(_('Expiration date must be greater than today'))
+        return data
 
 SearchCreationFormSet = formset_factory(SearchCreationFormItem, formset=SearchItemRequestFormSet, extra=1)

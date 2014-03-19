@@ -1,12 +1,15 @@
 {% extends "layout.html" %}
 
 {% load i18n %}
+{% load staticfiles %}
 
 {% block title %}
     {% trans 'Homepage' %} | {{ block.super }}
 {% endblock %}
 
 {% block extrahead %}
+<script src="{% static "oscar/js/datepicker/bootstrap-datepicker.js" %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static "oscar/css/datepicker.css" %}" />
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -27,13 +30,50 @@
     <div class="row-fluid">
         <div class="span12 register_form">
 
-			<form id="search_pieces_form" action="." method="post" class="form-horizontal">
+			<form id="search_pieces_form" method="post" class="form-horizontal">
 				{% csrf_token %}
-				<p>{% trans "Please confirm the pieces you want to search" %}</p>
-				{% include "partials/form_fields.html" %}
+				<p>{% trans "Please confirm the search that will be submitted to providers" %}</p>
 
 				{{ formset.management_form }}
 			 	<h4>{% trans "Pieces to search" %}</h4>
+
+				<div class="control-group">
+					<label for="brand" class="control-label">{% trans "Brand" %}</label>
+					<div class="controls">
+						<input type="text" readonly="1" value="{{search_data.brand_name}}" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label for="model" class="control-label">{% trans "Model" %}</label>
+					<div class="controls">
+						<input type="text" readonly="1" value="{{search_data.model_name}}" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label for="version" class="control-label">{% trans "Version" %}</label>
+					<div class="controls">
+						<input type="text" readonly="1" value="{{search_data.version_name}}" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label for="bodywork" class="control-label">{% trans "Bodywork" %}</label>
+					<div class="controls">
+						<input type="text" readonly="1" value="{{search_data.bodywork_name}}" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label for="engine" class="control-label">{% trans "Engine" %}</label>
+					<div class="controls">
+						<input type="text" readonly="1" value="{{search_data.engine_name}}" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label for="frameref" class="control-label">{% trans "Frame reference" %}</label>
+					<div class="controls">
+						<input type="text" readonly="1" value="{{search_data.frameref}}" />
+					</div>
+				</div>
+				{% include "partials/form_fields.html" %}
 
 				<div class="responsible-table">
 					<table class="table" id="id_searchitemrequest_table">
@@ -44,73 +84,35 @@
 							<th>{% trans "Quantity" %}</th>
 						</thead>
 						<tbody>
-							{% for item_form in formset.forms %}
-							<tr id="{{ item_form.prefix }}-row">
-								<td>{{item_form.category}}
-                {% block errors %}
-                    {% for error in item_form.category.errors %}
-                        <span class="error-block"><i class="icon-exclamation-sign">
-</i> {{ error }}</span>
-                    {% endfor %}
-                {% endblock %}
-</td>
-								<td>
-								{% for fld in item_form.hidden_fields %}{{ fld }}{% endfor %}
-				                            	{% if item_form.instance.pk %}{{ item_form.DELETE }}{% endif %}
-								{{item_form.piece}}
-                {% block errors1 %}
-                    {% for error in item_form.piece.errors %}
-                        <span class="error-block"><i class="icon-exclamation-sign">
-</i> {{ error }}</span>
-                    {% endfor %}
-                {% endblock %}
-
-								</td>
-								<td>{{item_form.comments}}</td>
-								<td>{{item_form.quantity}}</td>
+							{% for item in search_data.pieces %}
+							<tr>
+								<td>{{item.category_name}}</td>
+								<td>{{item.piece_name}}</td>
+								<td>{{item.comments}}</td>
+								<td>{{item.quantity}}</td>
 							</tr>
 							{% endfor %}
 						</tbody>
 					</table>
 				</div>
 
-				<div class="span4 form-actions">
-					<button type="submit" class="btn btn-primary btn-large">
-					{% trans "Confirm search request" %}
+				<div class="span12 form-actions">
+					<a href="{% url 'search:home' %}" class="span4 btn btn-large">{% trans "Return to search" %}</a>
+					<button type="submit" class="btn btn-primary btn-large span4">
+					{% trans "Submit search request" %}
 					</button>
 				</div>
 			</form>
         </div>
     </div>
 
-<script type="text/javascript">
-$(document).ready(function()
-{
-	$("#search_pieces_form").submit(function()
-	{
-		$("#error_show").hide();
-		var $form = $(this);
-		$.ajax({
-			type: 'POST',
-	    		url: $form.action,
-    			data: $form.serialize(),
-    			success: function(data) {
-				if (data.result)
-				{
-					// redirect
-					location.href='{% url 'search:placesearchrequest' %}';
-				}
-				else
-				{
-					// errors
-					$("#error_show").show();
-				}
-    			}
-		});
-		return false;
-	});
-});
-</script>
-
+/* Include the jquery Ui here */
+ <script>
+    $( ".datepicker" ).datepicker({
+      changeMonth: true,
+      format: 'dd/mm/yyyy',
+      weekStart:1
+    });
+  </script>
 {% endblock content %}
 
