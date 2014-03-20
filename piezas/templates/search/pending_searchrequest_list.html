@@ -38,7 +38,7 @@
             </tr>
             {% for searchrequest in searchrequests %}
                 <tr>
-                    <td><span class="span1">{{ searchrequest.id}}</span>&nbsp;<a href="{% url 'search:quote' searchrequest_number=searchrequest.id %}" class="btn">{% trans "Quote" %}</a></td>
+                    <td><span class="span1">{{ searchrequest.id}}</span>&nbsp;<a href="{% url 'search:quote' pk=searchrequest.id %}" class="btn">{% trans "Quote" %}</a></td>
                     <td>{{ searchrequest.expiration_date|date:'d/m/Y' }}</td>
                     <td>{{ searchrequest.brand.name }}</td>
                     <td>{{ searchrequest.model.name }}</td>

@@ -168,3 +168,44 @@ class SearchItemRequest(models.Model):
     def __unicode__(self):
         return u'%s - %s - %s - %s' % (self.category, self.piece, self.quantity,
             self.comments)
+
+
+QUOTE_STATES = (('sent', _('Sent')), ('accepted', _('Accepted')),
+    ('partially_accepted', _('Partially accepted')), ('rejected', _('Rejected')),
+    ('expired', _('Expired')))
+
+
+class Quote(models.Model):
+    search_request = models.ForeignKey(SearchRequest, verbose_name = _('Associated search request'), blank=False)
+    owner = models.ForeignKey(
+        AUTH_USER_MODEL, related_name='quote_owner', null=True,
+        verbose_name=_("Owner"))
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
+    state = models.CharField(max_length=25, choices=QUOTE_STATES, default='pending')
+    base_total_excl_tax = models.DecimalField(_('Base total excluding tax'), decimal_places=2, max_digits=12)
+    base_total_incl_tax = models.DecimalField(_('Base total including tax'), decimal_places=2, max_digits=12)
+    shipping_total_excl_tax = models.DecimalField(_('Shipping total excluding tax'), decimal_places=2, max_digits=12)
+    shipping_total_incl_tax = models.DecimalField(_('Shipping total including tax'), decimal_places=2, max_digits=12)
+    grand_total_excl_tax = models.DecimalField(_('Grand total excluding tax'), decimal_places=2, max_digits=12)
+    grand_total_incl_tax = models.DecimalField(_('Grand total including tax'), decimal_places=2, max_digits=12)
+    comments = models.TextField(_('Comments'), blank=True)
+    warranty_days = models.PositiveIntegerField(_('Warranty days'), blank=True, null=True)
+    shipping_days = models.PositiveIntegerField(_('Shipping days'), blank=True, null=True)
+
+
+QUOTE_ITEM_STATES = (('sent', _('Sent')), ('accepted', _('Accepted')),
+    ('rejected', _('Rejected')))
+
+class QuoteItem(models.Model):
+    search_item_request = models.ForeignKey(SearchItemRequest, verbose_name = _('Associated search request item'), blank=False)
+    owner = models.ForeignKey(
+        AUTH_USER_MODEL, related_name='quote_item_owner', null=True,
+        verbose_name=_("Owner"))
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
+    quantity = models.PositiveIntegerField(_('Quantity'), default=1)
+    base_total_excl_tax = models.DecimalField(_('Base total excluding tax'), decimal_places=2, max_digits=12)
+    shipping_total_excl_tax = models.DecimalField(_('Shipping total excluding tax'), decimal_places=2, max_digits=12)
+    state = models.CharField(max_length=25, choices=QUOTE_ITEM_STATES, default='pending')
+    comments = models.TextField(_('Comments'), blank=True)

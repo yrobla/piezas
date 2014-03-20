@@ -1,0 +1,175 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Homepage' %} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{{ homepage_url }}">{% trans 'Home' %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans 'Quote search request' %}</li>
+    </ul>
+{% endblock %}
+
+{% block headertext %}
+    {% trans "Quote search request" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span10 register_form">
+
+				<p class="span10">{% trans "Please enter the quote details for that search request" %}</p>
+
+				<div class="control-group span5">
+					<label class="control-label">{% trans "Brand" %}:</label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.brand.name}}" />
+					</div>
+				</div>
+				<div class="control-group span5">
+					<label class="control-label">{% trans "Model" %}:</label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.model.name}}" />
+					</div>
+				</div>
+				<div class="control-group span5">
+					<label class="control-label">{% trans "Version" %}:</label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.version.name}}" />
+					</div>
+				</div>
+				<div class="control-group span5">
+					<label class="control-label">{% trans "Engine" %}:</label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.engine.name}}" />
+					</div>
+				</div>
+				<div class="control-group span5">
+					<label class="control-label">{% trans "Bodywork" %}:</label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.bodywork.name}}" />
+					</div>
+				</div>
+				<div class="control-group span5">
+					<label class="control-label">{% trans "Frame reference" %}:</label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.frameref}}" />
+					</div>
+				</div>
+				<div class="control-group span5">
+					<label class="control-label">{% trans "Search type" %}:</label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="{% trans searchrequest.search_type %}" />
+					</div>
+				</div>
+				<div class="control-group span5">
+					<label class="control-label">{% trans "Expiration date" %}:</label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.expiration_date|date:'d/m/Y'}}" />
+					</div>
+				</div>
+				<div class="control-group span10">
+					<label class="control-label">{% trans "Comments" %}:</label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.comments}}" />
+					</div>
+				</div>
+
+			<form id="quote_form" action="." method="post" class="form-horizontal span12">
+				{% csrf_token %}
+
+				{{ formset.management_form }}
+			 	<h4>{% trans "Pieces to quote" %}</h4>
+
+				<div class="responsible-table">
+					<table class="table table-quote" id="id_searchitemrequest_table">
+						<thead><tr>
+							<th>{% trans "Add" %}</th>
+							<th>{% trans "Category" %}</th>
+							<th>{% trans "Piece" %}</th>
+							<th>{% trans "Comments" %}</th>
+							<th>{% trans "Quantity" %}</th>
+							<th>{% trans "Served quantity" %}</th>
+							<th>{% trans "Base total excl. tax" %}</th>
+							<th>{% trans "Shipping total excl. tax" %}</th> 							
+							<th>{% trans "Comments for the quote" %}</th>
+						</tr></thead>
+						<tbody>
+							{% for item_form in formset.forms %}
+							<tr id="{{ item_form.prefix }}-row">
+								<td><input type="checkbox" id="selectforquote-{{item_form.pk}}" /></td>
+								<td>{{item_form.category}}</td>
+								<td>
+								{% for fld in item_form.hidden_fields %}{{ fld }}{% endfor %}
+								{{item_form.piece}}</td>
+								</td>
+								<td>{{item_form.comments}}</td>
+								<td>{{item_form.quantity}}</td>
+								<td>{{item_form.served_quantity}}</td>
+								<td>{{item_form.base_total}}</td>
+								<td>{{item_form.shipping_total}}</td>
+								<td>{{item_form.quote_comments}}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				{% include "partials/form_fields.html" %}
+
+				<div class="control-group span5">
+					<label class="control-label"><strong>{% trans "Base total excluding tax" %}:</strong></label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="" id="base_total_excluding_tax" />
+					</div>
+				</div>
+				<div class="control-group span5">
+					<label class="control-label"><strong>{% trans "Base total including tax" %}:</strong></label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="" id="base_total_including_tax" />
+					</div>
+				</div>
+
+				<div class="control-group span5">
+					<label class="control-label"><strong>{% trans "Shipping total excluding tax" %}:</strong></label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="" id="shipping_total_excluding_tax" />
+					</div>
+				</div>
+				<div class="control-group span5">
+					<label class="control-label"><strong>{% trans "Shipping total including tax" %}:</strong></label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="" id="shipping_total_including_tax" />
+					</div>
+				</div>
+
+				<div class="control-group span5">
+					<label class="control-label"><strong>{% trans "Grand total excluding tax" %}:</strong></label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="" id="grand_total_excluding_tax" />
+					</div>
+				</div>
+				<div class="control-group span5">
+					<label class="control-label"><strong>{% trans "Grand total including tax" %}:</strong></label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="" id="grand_total_including_tax" />
+					</div>
+				</div>
+
+				<div class="span10 form-actions">
+					<button type="submit" class="btn btn-primary btn-large span4">
+					{% trans "Confirm quote" %}
+					</button>
+					<span class="span8"></span>
+				</div>
+			</form>
+        </div>
+    </div>
+
+{% endblock content %}
+

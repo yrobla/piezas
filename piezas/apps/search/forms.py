@@ -1,6 +1,7 @@
 from django import forms
+from django.forms.extras.widgets import SelectDateWidget
 from oscar.core.loading import get_model
-from django.forms.models import formset_factory
+from django.forms.models import formset_factory, inlineformset_factory
 from django.forms.formsets import BaseFormSet
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy
@@ -106,3 +107,38 @@ class SearchRequestSearchForm(forms.Form):
             kwargs['expiration_date__lt'] = date_to
         return kwargs
 
+
+class QuoteCreationForm(forms.ModelForm):
+    class Meta:
+        model = SearchRequest
+        exclude = ('brand', 'model', 'version', 'bodywork', 'engine', 'frameref', 'comments',
+            'expiration_date', 'date_created', 'date_updated', 'state', 'owner', 'search_type',)
+
+    quote_comments = forms.CharField(label=_('Comments for the quote'), required=False,
+        widget=forms.Textarea())
+    warranty_days = forms.IntegerField(label=_('Warranty days'), required=True)
+    shipping_days = forms.IntegerField(label=_('Shipping days'), required=True)
+
+class QuoteItemCreationForm(forms.ModelForm):
+    class Meta:
+        model = SearchItemRequest
+
+    category = forms.ModelChoiceField(label=_('Category'), queryset=models.Category.objects.all(),
+        widget=forms.Select(attrs={'readonly':'readonly', 'disabled':'disabled'}))
+    piece = forms.ModelChoiceField(label=_('Piece'), queryset=models.Product.objects.all(),
+        widget=forms.Select(attrs={'readonly':'readonly', 'disabled':'disabled'}))
+    comments = forms.CharField(label=_('Comments'), required=False,
+        widget=forms.Textarea(attrs={'readonly':'readonly', 'disabled':'disabled'}))
+    quantity = forms.IntegerField(label=_('Quantity'), widget=forms.TextInput(
+        attrs={'readonly':'readonly', 'disabled':'disabled'}))
+    served_quantity = forms.IntegerField(label=_('Served quantity'), widget=forms.NumberInput(
+        attrs={'style':'width:50px;'}))
+    base_total = forms.DecimalField(label=_('Base total excluding tax'), decimal_places=2,
+        max_digits=12, widget=forms.NumberInput(attrs={'style':'width:100px;'}))
+    shipping_total = forms.DecimalField(label=_('Shipping total excluding tax'),
+        decimal_places=2, max_digits=12, widget=forms.NumberInput(attrs={'style':'width:100px;'}))
+    quote_comments = forms.CharField(label=_('Comments for the quote'), required=False,
+        widget=forms.Textarea())
+
+
+InlineQuoteCreationFormSet = inlineformset_factory(SearchRequest, SearchItemRequest, form=QuoteItemCreationForm, extra=0)
