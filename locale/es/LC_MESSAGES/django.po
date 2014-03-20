@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-20 18:45+0100\n"
+"POT-Creation-Date: 2014-03-20 18:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10332,28 +10332,28 @@ msgid "Associated search request"
 msgstr "Petición de búsqueda asociada"
 
 #: piezas/apps/catalogue/models.py:186 piezas/apps/catalogue/models.py:208
-#: piezas/apps/search/forms.py:136
+#: piezas/apps/search/forms.py:136 piezas/templates/search/quote.html:127
 msgid "Base total excluding tax"
 msgstr "Total base sin impuestos"
 
-#: piezas/apps/catalogue/models.py:187
+#: piezas/apps/catalogue/models.py:187 piezas/templates/search/quote.html:133
 msgid "Base total including tax"
 msgstr "Total base con impuestos"
 
 #: piezas/apps/catalogue/models.py:188 piezas/apps/catalogue/models.py:209
-#: piezas/apps/search/forms.py:138
+#: piezas/apps/search/forms.py:138 piezas/templates/search/quote.html:140
 msgid "Shipping total excluding tax"
 msgstr "Gastos de envío sin impuestos"
 
-#: piezas/apps/catalogue/models.py:189
+#: piezas/apps/catalogue/models.py:189 piezas/templates/search/quote.html:146
 msgid "Shipping total including tax"
 msgstr "Gastos de envío con impuestos"
 
-#: piezas/apps/catalogue/models.py:190
+#: piezas/apps/catalogue/models.py:190 piezas/templates/search/quote.html:153
 msgid "Grand total excluding tax"
 msgstr "Total final sin impuestos"
 
-#: piezas/apps/catalogue/models.py:191
+#: piezas/apps/catalogue/models.py:191 piezas/templates/search/quote.html:159
 msgid "Grand total including tax"
 msgstr "Total final con impuestos"
 
@@ -11323,7 +11323,11 @@ msgstr "Total base sin impuestos"
 msgid "Shipping total excl. tax"
 msgstr "Gastos de envío sin impuestos"
 
-#: piezas/templates/search/quote.html:134
+#: piezas/templates/search/quote.html:124
+msgid "Quote summary"
+msgstr "Resumen del presupuesto"
+
+#: piezas/templates/search/quote.html:167
 msgid "Confirm quote"
 msgstr "Confirmar presupuesto"
 
