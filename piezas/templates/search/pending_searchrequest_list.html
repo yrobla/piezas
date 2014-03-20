@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% load i18n %}
+{% load currency_filters %}
+{% load staticfiles %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{{ homepage_url }}">{% trans 'Home' %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans 'Active searches from customers' %}</li>
+    </ul>
+{% endblock %}
+{% block content %}
+    {% if searchrequests or form.is_bound %}
+	<div class="well">
+            <form action="." method="get">
+                {% include "partials/form_fields.html" with form=form %}
+                <button type="submit" class="btn btn-primary">{% trans 'Filter results' %}</button>
+                <a href="{% url 'search:request-list' %}" class="btn">{% trans 'Reset' %}</a>
+            </form>
+	</div>
+    {% endif %}
+
+    {% if searchrequests %}
+        <h3>{{ form.description }}</h3>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>{% trans "Search request number" %}</th>
+                <th>{% trans "Expiration date" %}</th>
+                <th>{% trans "Brand" %}</th>
+                <th>{% trans "Model" %}</th>
+                <th>{% trans "Version" %}</th>
+                <th>{% trans "Engine" %}</th>
+                <th>{% trans "Num items" %}</th>
+                <th>{% trans "Search type" %}</th>
+            </tr>
+            {% for searchrequest in searchrequests %}
+                <tr>
+                    <td><span class="span1">{{ searchrequest.id}}</span>&nbsp;<a href="{% url 'search:quote' searchrequest_number=searchrequest.id %}" class="btn">{% trans "Quote" %}</a></td>
+                    <td>{{ searchrequest.expiration_date|date:'d/m/Y' }}</td>
+                    <td>{{ searchrequest.brand.name }}</td>
+                    <td>{{ searchrequest.model.name }}</td>
+                    <td>{{ searchrequest.version.name }}</td>
+                    <td>{{ searchrequest.engine }}</td>
+                    <td>{{ searchrequest.num_items }}</td>
+                    <td>{% trans searchrequest.search_type %}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>{% trans "You haven't placed any orders." %}</p>
+    {% endif %}
+
+    {% include "partials/pagination.html" %}
+
+<div style="clear:both"><br /></div>
+{% endblock %}
+
+{% block extrastyles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.css">
+{% endblock %}
+
+{% block cdn_scripts %}
+    {{ block.super }}
+    <script src="//code.jquery.com/ui/1.10.3/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+
+{% block onbodyload %}
+    {{ block.super }}
+    $('#id_date_to, #id_date_from').datepicker({'dateFormat': 'yy-mm-dd'});
+{% endblock %}

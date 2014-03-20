@@ -3,6 +3,7 @@ from oscar.core.loading import get_model
 from django.forms.models import formset_factory
 from django.forms.formsets import BaseFormSet
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy
 from smart_selects.form_fields import ChainedModelChoiceField
 from piezas.apps.catalogue import models
 from datetime import date
@@ -51,3 +52,57 @@ class SearchConfirmForm(forms.Form):
         return data
 
 SearchCreationFormSet = formset_factory(SearchCreationFormItem, formset=SearchItemRequestFormSet, extra=1)
+
+
+class SearchRequestSearchForm(forms.Form):
+    date_from = forms.DateField(
+        required=False, label=_('From'))
+    date_to = forms.DateField(
+        required=False, label=_('To'))
+
+    def clean(self):
+        if self.is_valid() and not any([self.cleaned_data['date_from'],
+                                        self.cleaned_data['date_to']]):
+            raise forms.ValidationError(_("At least one field is required."))
+        return super(SearchRequestSearchForm, self).clean()
+
+    def description(self):
+        """
+        Uses the form's data to build a useful description of what orders
+        are listed.
+        """
+        if not self.is_bound or not self.is_valid():
+            return _('All search requests')
+        else:
+            date_from = self.cleaned_data['date_from']
+            date_to = self.cleaned_data['date_to']
+            return self._searchrequests_description(date_from, date_to)
+
+    def _searchrequests_description(self, date_from, date_to, order_number):
+        if date_from and date_to:
+            desc = _('Search requests expiring between %(date_from)s and '
+                     '%(date_to)s')
+        elif date_from:
+            desc = _('Search requests expiring since %(date_from)s')
+        elif date_to:
+            desc = _('Serach requests not expiring until %(date_to)s')
+        else:
+            return None
+        params = {
+            'date_from': date_from,
+            'date_to': date_to,
+        }
+        return desc % params
+
+    def get_filters(self):
+        date_from = self.cleaned_data['date_from']
+        date_to = self.cleaned_data['date_to']
+        kwargs = {}
+        if date_from and date_to:
+            kwargs['expiration_date__range'] = [date_from, date_to]
+        elif date_from and not date_to:
+            kwargs['expiration_date__gt'] = date_from
+        elif not date_from and date_to:
+            kwargs['expiration_date__lt'] = date_to
+        return kwargs
+

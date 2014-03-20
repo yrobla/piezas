@@ -8,6 +8,7 @@ class SearchApplication(CoreSearchApplication):
     index_view = views.HomeView
     confirm_view = views.ConfirmView
     placed_view = views.PlacedView
+    pending_search_requests_view = views.PendingSearchRequestsView
 
     def get_urls(self):
         # The form class has to be passed to the __init__ method as that is how
@@ -22,7 +23,11 @@ class SearchApplication(CoreSearchApplication):
             url(r'^home/$', login_required(self.index_view.as_view()), name='home'),
             url(r'^placesearch/$', login_required(self.confirm_view.as_view()), name='placesearchrequest'),
             url(r'^placed/$', login_required(self.placed_view.as_view()), name='placed'),
-            url(r'^pendingrequests/$', login_required(self.placed_view.as_view()), name='request-list'),
+            url(r'^pendingrequests/$', login_required(self.pending_search_requests_view.as_view()), name='request-list'),
+            url(r'^createquote/(?P<searchrequest_number>[\w-]*)/$',
+                login_required(self.placed_view.as_view()),
+                name='quote'),
+
         )
         return self.post_process_urls(urlpatterns)
 

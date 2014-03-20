@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import CreateView, FormView, TemplateView
+from django.views.generic import CreateView, FormView, TemplateView, ListView
 from django.core.urlresolvers import reverse
 from oscar.core.loading import get_model
 import json
@@ -196,3 +196,40 @@ class ConfirmView(FormView):
 
 class PlacedView(TemplateView):
     template_name = 'search/placed.html'
+
+
+class PendingSearchRequestsView(ListView):
+    """
+    Pending search requests
+    """
+    context_object_name = "searchrequests"
+    template_name = 'search/pending_searchrequest_list.html'
+    paginate_by = 20
+    model = models.SearchRequest
+    form_class = forms.SearchRequestSearchForm
+    page_title = _('Active searches from customers')
+    active_tab = 'searchrequests'
+
+    def get(self, request, *args, **kwargs):
+        if 'date_from' in request.GET:
+            self.form = self.form_class(self.request.GET)
+            if not self.form.is_valid():
+                self.object_list = self.get_queryset()
+                ctx = self.get_context_data(object_list=self.object_list)
+                return self.render_to_response(ctx)
+            data = self.form.cleaned_data
+        else:
+            self.form = self.form_class()
+        return super(PendingSearchRequestsView, self).get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        qs = self.model._default_manager.filter(state='pending')
+        if self.form.is_bound and self.form.is_valid():
+            qs = qs.filter(**self.form.get_filters())
+        return qs
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(PendingSearchRequestsView, self).get_context_data(*args, **kwargs)
+        ctx['form'] = self.form
+        return ctx
+
