@@ -7,6 +7,7 @@ import views
 class OrdersDashboardApplication(OrdersCoreApplication):
     # search request
     searchrequest_list_view = views.SearchrequestListView
+    searchrequest_detail_view = views.SearchrequestDetailView
 
     default_permissions = ['is_staff', ]
     permissions_map = _map = {
@@ -21,7 +22,7 @@ class OrdersDashboardApplication(OrdersCoreApplication):
             url(r'^searchrequests/$', self.searchrequest_list_view.as_view(),
                 name='order-searchrequest-list'),
             url(r'^searchrequest/(?P<number>[-\w]+)/$',
-                self.order_detail_view.as_view(), name='searchrequest-detail'),
+                self.searchrequest_detail_view.as_view(), name='searchrequest-detail'),
         ]
         urls += super(OrdersDashboardApplication, self).get_urls()
         return self.post_process_urls(patterns('', *urls))

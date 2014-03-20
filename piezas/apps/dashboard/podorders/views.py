@@ -3,7 +3,7 @@ import six
 from django.core.urlresolvers import reverse
 from django.utils.datastructures import SortedDict
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.utils.translation import ugettext_lazy as _
 
 from oscar.core.loading import get_model
@@ -219,3 +219,32 @@ class SearchrequestListView(BulkEditMixin, ListView):
                               for value in row.values()]
             writer.writerow(encoded_values)
         return response
+
+
+class SearchrequestDetailView(DetailView):
+    """
+    Dashboard view to display a single order.
+    Supports the permission-based dashboard.
+    """
+    model = SearchRequest
+    context_object_name = 'searchrequest'
+    template_name = 'dashboard/orders/searchrequest_detail.html'
+    searchrequest_actions = ()
+    searchrequestitem_actions = ()
+
+    def get_object(self, queryset=None):
+        queryset = SearchRequest._default_manager.all()
+        return queryset.get(id=self.kwargs['number'])
+
+    def reload_page_response(self, fragment=None):
+        url = reverse('dashboard:searchrequest-detail', kwargs={'number':
+                                                        self.object.id})
+        if fragment:
+            url += '#' + fragment
+        return HttpResponseRedirect(url)
+
+    def get_context_data(self, **kwargs):
+        ctx = super(SearchrequestDetailView, self).get_context_data(**kwargs)
+        ctx['active_tab'] = kwargs.get('active_tab', 'detail')
+        return ctx
+
