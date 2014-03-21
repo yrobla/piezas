@@ -145,11 +145,12 @@ INSTALLED_APPS = [
     # 'django.contrib.admindocs',
     'south',
     'compressor',
-    'smart_selects'
+    'smart_selects',
+    'piezas'
 ]
 INSTALLED_APPS = INSTALLED_APPS + get_core_apps([
-    'piezas.apps.catalogue', 'piezas.apps.offer',
-    'piezas.apps.dashboard', 'piezas.apps.search'])
+    'piezas.apps.catalogue', 'piezas.apps.customer', 'piezas.apps.dashboard',
+    'piezas.apps.search'])
 
 INSTALLED_APPS = INSTALLED_APPS + ['piezas.apps.dashboard.podcatalogue', 'piezas.apps.dashboard.podorders']
 SITE_ID = 1
@@ -334,3 +335,5 @@ APPEND_SLASH = True
 OSCAR_HOMEPAGE = '/'
 
 EXCLUDE_TAXES = True
+AUTH_USER_MODEL = 'piezas.User'
+AUTH_USER_TABLE = 'piezas_user'

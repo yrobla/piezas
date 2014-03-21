@@ -13,6 +13,18 @@
                 <th>{% trans 'Email address' %}</th>
                 <td>{{ user.email }}</td>
             </tr>
+            <tr>
+                <th>{% trans 'Customer type' %}</th>
+                <td>{% trans request.user.type %}</td>
+            </tr>
+            <tr>
+                <th>{% trans 'CIF' %}</th>
+                <td>{{ request.user.cif }}</td>
+            </tr>
+            <tr>
+                <th>{% trans 'Promotional code' %}</th>
+                <td>{{ request.user.promotional_code }}</td>
+            </tr>
             {% block profile_fields %}
                 {% for field in profile_fields %}
                     <tr>

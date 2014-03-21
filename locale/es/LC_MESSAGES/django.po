@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-20 18:54+0100\n"
+"POT-Creation-Date: 2014-03-21 14:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -445,6 +445,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/partners/partner_manage.html:55
 #: oscar/templates/oscar/dashboard/partners/partner_user_list.html:46
 #: oscar/templates/oscar/dashboard/partners/partner_user_select.html:53
+#: piezas/apps/customer/models.py:52
 #: piezas/templates/dashboard/partners/partner_manage.html:55
 #: piezas/templates/dashboard/partners/partner_user_list.html:46
 #: piezas/templates/dashboard/partners/partner_user_select.html:53
@@ -456,6 +457,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/partners/partner_manage.html:56
 #: oscar/templates/oscar/dashboard/partners/partner_user_list.html:47
 #: oscar/templates/oscar/dashboard/partners/partner_user_select.html:54
+#: piezas/apps/customer/models.py:54
 #: piezas/templates/dashboard/partners/partner_manage.html:56
 #: piezas/templates/dashboard/partners/partner_user_list.html:47
 #: piezas/templates/dashboard/partners/partner_user_select.html:54
@@ -622,6 +624,7 @@ msgstr ""
 #: oscar/templates/oscar/dashboard/reviews/review_list.html:59
 #: oscar/templates/oscar/dashboard/users/alerts/list.html:46
 #: oscar/templates/oscar/dashboard/users/alerts/partials/alert.html:10
+#: piezas/apps/customer/models.py:74
 #: piezas/templates/dashboard/orders/order_detail.html:580
 #: piezas/templates/dashboard/reviews/review_delete.html:40
 #: piezas/templates/dashboard/reviews/review_list.html:59
@@ -2174,32 +2177,33 @@ msgstr ""
 msgid "No order found"
 msgstr ""
 
-#: oscar/apps/customer/abstract_models.py:57
+#: oscar/apps/customer/abstract_models.py:57 piezas/apps/customer/models.py:50
 msgid "email address"
 msgstr ""
 
-#: oscar/apps/customer/abstract_models.py:63
+#: oscar/apps/customer/abstract_models.py:63 piezas/apps/customer/models.py:56
 msgid "Staff status"
 msgstr ""
 
-#: oscar/apps/customer/abstract_models.py:64
+#: oscar/apps/customer/abstract_models.py:64 piezas/apps/customer/models.py:57
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
 #: oscar/apps/customer/abstract_models.py:67
 #: oscar/apps/customer/abstract_models.py:303
 #: oscar/templates/oscar/dashboard/users/detail.html:46
+#: piezas/apps/customer/models.py:60
 #: piezas/templates/dashboard/users/detail.html:46
 msgid "Active"
 msgstr ""
 
-#: oscar/apps/customer/abstract_models.py:68
+#: oscar/apps/customer/abstract_models.py:68 piezas/apps/customer/models.py:61
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: oscar/apps/customer/abstract_models.py:70
+#: oscar/apps/customer/abstract_models.py:70 piezas/apps/customer/models.py:63
 msgid "date joined"
 msgstr ""
 
@@ -2207,6 +2211,7 @@ msgstr ""
 #: oscar/apps/partner/abstract_models.py:65
 #: oscar/templates/oscar/dashboard/partners/partner_list.html:46
 #: oscar/templates/oscar/dashboard/partners/partner_manage.html:49
+#: piezas/apps/customer/models.py:75
 #: piezas/templates/dashboard/partners/partner_list.html:46
 #: piezas/templates/dashboard/partners/partner_manage.html:49
 msgid "Users"
@@ -2357,7 +2362,7 @@ msgid "Email Address"
 msgstr ""
 
 #: oscar/apps/customer/forms.py:105 oscar/apps/customer/forms.py:178
-#: oscar/apps/dashboard/partners/forms.py:66
+#: oscar/apps/dashboard/partners/forms.py:66 piezas/apps/customer/forms.py:13
 msgid "Password"
 msgstr ""
 
@@ -2373,21 +2378,23 @@ msgstr ""
 #: oscar/apps/dashboard/partners/forms.py:117
 #: oscar/templates/oscar/customer/profile/profile.html:13
 #: oscar/templates/oscar/dashboard/orders/order_detail.html:37
+#: piezas/apps/customer/forms.py:11
 #: piezas/templates/customer/profile/profile.html:13
 #: piezas/templates/dashboard/orders/order_detail.html:37
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:34
 msgid "Email address"
 msgstr ""
 
-#: oscar/apps/customer/forms.py:182
+#: oscar/apps/customer/forms.py:182 piezas/apps/customer/forms.py:17
 msgid "Confirm password"
 msgstr ""
 
-#: oscar/apps/customer/forms.py:198
+#: oscar/apps/customer/forms.py:198 piezas/apps/customer/forms.py:37
 msgid "A user with that email address already exists"
 msgstr ""
 
 #: oscar/apps/customer/forms.py:206 oscar/apps/dashboard/partners/forms.py:82
+#: piezas/apps/customer/forms.py:45
 msgid "The two password fields didn't match."
 msgstr ""
 
@@ -6887,18 +6894,18 @@ msgstr ""
 
 #: oscar/templates/oscar/customer/login_registration.html:25
 #: oscar/templates/oscar/customer/login_registration.html:29
-#: piezas/templates/customer/login_registration.html:25
-#: piezas/templates/customer/login_registration.html:29
+#: piezas/templates/customer/login_registration.html:24
+#: piezas/templates/customer/login_registration.html:28
 msgid "Log In"
 msgstr ""
 
 #: oscar/templates/oscar/customer/login_registration.html:28
-#: piezas/templates/customer/login_registration.html:28
+#: piezas/templates/customer/login_registration.html:27
 msgid "I've forgotten my password"
 msgstr ""
 
 #: oscar/templates/oscar/customer/login_registration.html:29
-#: piezas/templates/customer/login_registration.html:29
+#: piezas/templates/customer/login_registration.html:28
 msgid "Logging in..."
 msgstr ""
 
@@ -6908,8 +6915,8 @@ msgstr ""
 #: oscar/templates/oscar/customer/registration.html:15
 #: oscar/templates/oscar/customer/registration.html:20
 #: oscar/templates/oscar/customer/registration.html:29
-#: piezas/templates/customer/login_registration.html:34
-#: piezas/templates/customer/login_registration.html:37
+#: piezas/templates/customer/login_registration.html:33
+#: piezas/templates/customer/login_registration.html:36
 #: piezas/templates/customer/registration.html:6
 #: piezas/templates/customer/registration.html:15
 #: piezas/templates/customer/registration.html:20
@@ -6919,7 +6926,7 @@ msgstr ""
 
 #: oscar/templates/oscar/customer/login_registration.html:37
 #: oscar/templates/oscar/customer/registration.html:29
-#: piezas/templates/customer/login_registration.html:37
+#: piezas/templates/customer/login_registration.html:36
 #: piezas/templates/customer/registration.html:29
 msgid "Registering..."
 msgstr ""
@@ -8835,6 +8842,7 @@ msgid "Select all"
 msgstr ""
 
 #: oscar/templates/oscar/dashboard/orders/order_list.html:98
+#: piezas/apps/customer/models.py:8
 #: piezas/templates/dashboard/orders/order_list.html:98
 msgid "Customer"
 msgstr ""
@@ -10368,6 +10376,26 @@ msgstr "Plazo de envío en días"
 #: piezas/apps/catalogue/models.py:201
 msgid "Associated search request item"
 msgstr "Elemento de la petición de búsqueda asociada"
+
+#: piezas/apps/customer/forms.py:18
+msgid "Customer type"
+msgstr "Tipo de cliente"
+
+#: piezas/apps/customer/forms.py:19 piezas/apps/customer/models.py:66
+msgid "CIF"
+msgstr "CIF"
+
+#: piezas/apps/customer/forms.py:20 piezas/apps/customer/models.py:67
+msgid "Promotional code"
+msgstr "Código promocional"
+
+#: piezas/apps/customer/models.py:9
+msgid "Provider"
+msgstr "Proveedor"
+
+#: piezas/apps/customer/models.py:65
+msgid "User type"
+msgstr "Tipo de usuario"
 
 #: piezas/apps/dashboard/podcatalogue/forms.py:71
 #: piezas/apps/dashboard/podcatalogue/forms.py:76
