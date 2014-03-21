@@ -21,7 +21,7 @@ class Migration(SchemaMigration):
         db.create_table(u'catalogue_productclass', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('slug', self.gf('oscar.models.fields.autoslugfield.AutoSlugField')(allow_duplicates=False, max_length=128, separator=u'-', blank=True, unique=True, populate_from='name', overwrite=False)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=128)),
             ('requires_shipping', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('track_stock', self.gf('django.db.models.fields.BooleanField')(default=True)),
         ))
@@ -55,17 +55,19 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('product', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['catalogue.Product'])),
             ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['catalogue.Category'])),
+            ('is_canonical', self.gf('django.db.models.fields.BooleanField')(default=False, db_index=True)),
         ))
         db.send_create_signal(u'catalogue', ['ProductCategory'])
 
         # Adding model 'Product'
         db.create_table(u'catalogue_product', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('upc', self.gf('oscar.models.fields.NullCharField')(max_length=64, unique=True, null=True, blank=True)),
+            ('upc', self.gf('django.db.models.fields.CharField')(max_length=64, unique=True, null=True, blank=True)),
             ('parent', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='variants', null=True, to=orm['catalogue.Product'])),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255)),
             ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('status', self.gf('django.db.models.fields.CharField')(db_index=True, max_length=128, null=True, blank=True)),
             ('product_class', self.gf('django.db.models.fields.related.ForeignKey')(related_name='products', null=True, to=orm['catalogue.ProductClass'])),
             ('score', self.gf('django.db.models.fields.FloatField')(default=0.0, db_index=True)),
             ('rating', self.gf('django.db.models.fields.FloatField')(null=True)),
@@ -92,6 +94,32 @@ class Migration(SchemaMigration):
             ('to_product', models.ForeignKey(orm[u'catalogue.product'], null=False))
         ))
         db.create_unique(m2m_table_name, ['from_product_id', 'to_product_id'])
+
+        # Adding model 'ContributorRole'
+        db.create_table(u'catalogue_contributorrole', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('name_plural', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50)),
+        ))
+        db.send_create_signal(u'catalogue', ['ContributorRole'])
+
+        # Adding model 'Contributor'
+        db.create_table(u'catalogue_contributor', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255)),
+        ))
+        db.send_create_signal(u'catalogue', ['Contributor'])
+
+        # Adding model 'ProductContributor'
+        db.create_table(u'catalogue_productcontributor', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('product', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['catalogue.Product'])),
+            ('contributor', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['catalogue.Contributor'])),
+            ('role', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['catalogue.ContributorRole'], null=True, blank=True)),
+        ))
+        db.send_create_signal(u'catalogue', ['ProductContributor'])
 
         # Adding model 'ProductAttribute'
         db.create_table(u'catalogue_productattribute', (
@@ -160,7 +188,7 @@ class Migration(SchemaMigration):
         db.create_table(u'catalogue_option', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('code', self.gf('oscar.models.fields.autoslugfield.AutoSlugField')(allow_duplicates=False, max_length=128, separator=u'-', blank=True, unique=True, populate_from='name', overwrite=False)),
+            ('code', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=128)),
             ('type', self.gf('django.db.models.fields.CharField')(default='Required', max_length=128)),
         ))
         db.send_create_signal(u'catalogue', ['Option'])
@@ -324,6 +352,15 @@ class Migration(SchemaMigration):
         # Removing M2M table for field related_products on 'Product'
         db.delete_table(db.shorten_name(u'catalogue_product_related_products'))
 
+        # Deleting model 'ContributorRole'
+        db.delete_table(u'catalogue_contributorrole')
+
+        # Deleting model 'Contributor'
+        db.delete_table(u'catalogue_contributor')
+
+        # Deleting model 'ProductContributor'
+        db.delete_table(u'catalogue_productcontributor')
+
         # Deleting model 'ProductAttribute'
         db.delete_table(u'catalogue_productattribute')
 
@@ -440,6 +477,19 @@ class Migration(SchemaMigration):
             'path': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '255'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255'})
         },
+        u'catalogue.contributor': {
+            'Meta': {'object_name': 'Contributor'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255'})
+        },
+        u'catalogue.contributorrole': {
+            'Meta': {'object_name': 'ContributorRole'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'name_plural': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50'})
+        },
         u'catalogue.engine': {
             'Meta': {'object_name': 'Engine'},
             'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
@@ -457,7 +507,7 @@ class Migration(SchemaMigration):
         },
         u'catalogue.option': {
             'Meta': {'object_name': 'Option'},
-            'code': ('oscar.models.fields.autoslugfield.AutoSlugField', [], {'allow_duplicates': 'False', 'max_length': '128', 'separator': "u'-'", 'blank': 'True', 'unique': 'True', 'populate_from': "'name'", 'overwrite': 'False'}),
+            'code': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '128'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'type': ('django.db.models.fields.CharField', [], {'default': "'Required'", 'max_length': '128'})
@@ -479,8 +529,9 @@ class Migration(SchemaMigration):
             'related_products': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'relations'", 'blank': 'True', 'to': u"orm['catalogue.Product']"}),
             'score': ('django.db.models.fields.FloatField', [], {'default': '0.0', 'db_index': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255'}),
+            'status': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '128', 'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'upc': ('oscar.models.fields.NullCharField', [], {'max_length': '64', 'unique': 'True', 'null': 'True', 'blank': 'True'})
+            'upc': ('django.db.models.fields.CharField', [], {'max_length': '64', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
         u'catalogue.productattribute': {
             'Meta': {'ordering': "['code']", 'object_name': 'ProductAttribute'},
@@ -510,9 +561,10 @@ class Migration(SchemaMigration):
             'value_text': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
         },
         u'catalogue.productcategory': {
-            'Meta': {'ordering': "['product', 'category']", 'object_name': 'ProductCategory'},
+            'Meta': {'ordering': "['-is_canonical']", 'object_name': 'ProductCategory'},
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['catalogue.Category']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_canonical': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'db_index': 'True'}),
             'product': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['catalogue.Product']"})
         },
         u'catalogue.productclass': {
@@ -521,8 +573,15 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'options': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['catalogue.Option']", 'symmetrical': 'False', 'blank': 'True'}),
             'requires_shipping': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'slug': ('oscar.models.fields.autoslugfield.AutoSlugField', [], {'allow_duplicates': 'False', 'max_length': '128', 'separator': "u'-'", 'blank': 'True', 'unique': 'True', 'populate_from': "'name'", 'overwrite': 'False'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '128'}),
             'track_stock': ('django.db.models.fields.BooleanField', [], {'default': 'True'})
+        },
+        u'catalogue.productcontributor': {
+            'Meta': {'object_name': 'ProductContributor'},
+            'contributor': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['catalogue.Contributor']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'product': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['catalogue.Product']"}),
+            'role': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['catalogue.ContributorRole']", 'null': 'True', 'blank': 'True'})
         },
         u'catalogue.productimage': {
             'Meta': {'ordering': "['display_order']", 'unique_together': "(('product', 'display_order'),)", 'object_name': 'ProductImage'},
@@ -630,8 +689,8 @@ class Migration(SchemaMigration):
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'promotional_code': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'type': ('django.db.models.fields.CharField', [], {'max_length': '15'}),
+            'promotional_code': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
+            'type': ('django.db.models.fields.CharField', [], {'default': "'customer'", 'max_length': '15'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"})
         }
     }

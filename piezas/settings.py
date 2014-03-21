@@ -146,13 +146,13 @@ INSTALLED_APPS = [
     'south',
     'compressor',
     'smart_selects',
-    'piezas'
+    'piezas.apps.dashboard.podcatalogue', 'piezas.apps.dashboard.podorders',
+    'piezas.apps.dashboard', 'piezas'
 ]
 INSTALLED_APPS = INSTALLED_APPS + get_core_apps([
-    'piezas.apps.catalogue', 'piezas.apps.customer', 'piezas.apps.dashboard',
+    'piezas.apps.catalogue', 'piezas.apps.customer', 
     'piezas.apps.search'])
 
-INSTALLED_APPS = INSTALLED_APPS + ['piezas.apps.dashboard.podcatalogue', 'piezas.apps.dashboard.podorders']
 SITE_ID = 1
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

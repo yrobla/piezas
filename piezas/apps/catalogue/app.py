@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from oscar.apps.catalogue.app import BaseCatalogueApplication as CoreCatalogueApplication
 
 class BaseCatalogueApplication(CoreCatalogueApplication):
+
     def get_urls(self):
         urlpatterns = []
         urls = [
