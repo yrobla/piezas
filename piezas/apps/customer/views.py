@@ -6,6 +6,7 @@ from django.views.generic import (TemplateView, ListView, DetailView,
                                   FormView, RedirectView)
 from django.http import HttpResponseRedirect, Http404
 from oscar.apps.customer.views import ProfileView as CoreProfileView
+import forms
 
 
 PageTitleMixin, RegisterUserMixin = get_classes(
@@ -13,6 +14,7 @@ PageTitleMixin, RegisterUserMixin = get_classes(
 EmailAuthenticationForm, EmailUserCreationForm, ProfileForm = get_classes(
     'customer.forms', ['EmailAuthenticationForm', 'PodEmailUserCreationForm',
                        'ProfileForm'])
+ProfileForm = forms.ProfileForm
 
 class PodAccountAuthView(RegisterUserMixin, TemplateView):
     """

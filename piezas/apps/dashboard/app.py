@@ -3,10 +3,12 @@ from oscar.apps.dashboard.app import DashboardApplication as CoreDashboardApplic
 from oscar.core.loading import get_class
 from piezas.apps.dashboard.podcatalogue.app import CatalogueApplication
 from piezas.apps.dashboard.podorders.app import OrdersDashboardApplication
+from piezas.apps.dashboard.podusers.app import UsersDashboardApplication
 
 class DashboardApplication(CoreDashboardApplication):
     orders_app = OrdersDashboardApplication()
     catalogue_app = CatalogueApplication()
+    users_app = UsersDashboardApplication()
 
     def get_urls(self):
         print self.catalogue_app

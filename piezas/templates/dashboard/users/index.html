@@ -58,6 +58,12 @@
                                 <label>
                                     <input type="radio" name="action" value="make_inactive" /> {% trans "Make inactive" %}
                                 </label>
+                                <label>
+                                    <input type="radio" name="action" value="make_valid" /> {% trans "Make valid" %}
+                                </label>
+                                <label>
+                                    <input type="radio" name="action" value="make_invalid" /> {% trans "Make invalid" %}
+                                </label>
                                 <input type="submit" value="{% trans "Go!" %}" class="btn btn-primary" />
                             </div>
                         </div>
@@ -68,9 +74,11 @@
                             <th>{% trans "Email" %}</th>
                             <th>{% trans "Name" %}</th>
                             <th>{% trans "Active?" %}</th>
-                            <th>{% trans "Staff?" %}</th>
+                            <th>{% trans "Validated?" %}</th>
+			    <th>{% trans "Type" %}</th>
+			    <th>{% trans "CIF" %}</th>
+			    <th>{% trans "Promotional code" %}</th>
                             <th>{% trans "Date registered" %}</th>
-                            <th>{% trans "Num Orders" %}</th>
                             <th></th>
                         {% endblock %}
                     </tr>
@@ -81,9 +89,11 @@
                                 <td><a href="{% url 'dashboard:user-detail' pk=user.id %}">{{ user.email }}</a></td>
                                 <td>{{ user.get_full_name|default:"-" }}</td>
                                 <td>{{ user.is_active|yesno:_("True,False") }}</td>
-                                <td>{{ user.is_staff|yesno:_("True,False") }}</td>
+                                <td>{{ user.is_validated|yesno:_("True,False") }}</td>
+                                <td>{% trans user.type %}</td>
+				<td>{{user.cif}}</td>
+				<td>{{user.promotional_code}}</td>
                                 <td>{{ user.date_joined|date:"d/m/y H:i" }}</td>
-                                <td>{% num_orders user %}</td>
                                 <td>
                                     <a href="{% url 'dashboard:user-detail' pk=user.id %}" class="btn btn-info">{% trans "View" %}</a>
                                 </td>

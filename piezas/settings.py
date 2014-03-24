@@ -146,8 +146,9 @@ INSTALLED_APPS = [
     'south',
     'compressor',
     'smart_selects',
+    'piezas.apps.customuser',
     'piezas.apps.dashboard.podcatalogue', 'piezas.apps.dashboard.podorders',
-    'piezas.apps.dashboard', 'piezas'
+    'piezas.apps.dashboard.podusers', 'piezas.apps.dashboard',
 ]
 INSTALLED_APPS = INSTALLED_APPS + get_core_apps([
     'piezas.apps.catalogue', 'piezas.apps.customer', 
@@ -335,5 +336,5 @@ APPEND_SLASH = True
 OSCAR_HOMEPAGE = '/'
 
 EXCLUDE_TAXES = True
-AUTH_USER_MODEL = 'piezas.User'
-AUTH_USER_TABLE = 'piezas_user'
+AUTH_USER_MODEL = 'customuser.PiezasUser'
+AUTH_USER_TABLE = 'piezasuser'

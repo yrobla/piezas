@@ -21,19 +21,33 @@
 {% endblock %}
 
 {% block content %}
-<div class="span15 well">
-	<div class="span5">
+{% if not user.is_validated %}
+<div class="alert alert-error">
+	<span class="error">
+	{% trans "Your account still is not validated. You will have limited functionality until your account is validated by the administrators of the site." %}
+	</span><br />
+	<span class="error">
+	{% trans "Please complete all your personal detail in your profile to enter into the validation process." %}
+	</span>
+</div>
+{% endif %}
+<div class="span12 well">
+	{% if user.is_validated %}
+	{% if user.type == "customer" %}
+	<div class="span4">
 		<h4><a href="{% url 'search:home' %}">{% trans "Search pieces" %}</a></h4>
 	</div>
-	<div class="span5">
+	<div class="span4">
 		<h4><a href="{% url 'customer:order-list' %}">{% trans "Search request history" %}</a></h4>
 	</div>
-	{% if perms.partner.dashboard_access %}
-	<div class="span5">
+	{% endif %}
+	{% if user.type == "provider" %}
+	<div class="span4">
 		<h4><a href="{% url 'search:request-list' %}">{% trans "Active searches from customers" %}</a></h4>
 	</div>
 	{% endif %}
-	<div class="span5">
+	{% endif %}
+	<div class="span4">
 		<h4><a href="{% url 'customer:summary' %}">{% trans "My personal data" %}</a></h4>
 	</div>
 </div>

@@ -49,12 +49,26 @@
                         </td>
                     </tr>
                     <tr>
+                        <th>{% trans "Validated" %}?</th>
+                        <td>
+                            {{ customer.is_validated|yesno:_("Yes,No") }}
+                        </td>
+                    </tr>
+                    <tr>
                         <th>{% trans "Superuser" %}?</th>
                         <td>{{ customer.is_superuser|yesno:_("True,False") }}</td>
                     </tr>
                     <tr>
-                        <th>{% trans "Staff" %}?</th>
-                        <td>{{ customer.is_staff|yesno:_("True,False") }}</td>
+                        <th>{% trans "Type" %}</th>
+                        <td>{% trans customer.type %}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "CIF" %}</th>
+                        <td>{{customer.cif}}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Promotional code" %}</th>
+                        <td>{{customer.promotional_code}}</td>
                     </tr>
                     <tr>
                         <th>{% trans "Last login" %}</th>
@@ -65,26 +79,6 @@
                         <td>{{ customer.date_joined }}</td>
                     </tr>
                     {% with record=customer.userrecord %}
-                        <tr>
-                            <th>{% trans "Products viewed" %}</th>
-                            <td>{{ record.num_product_views|default:0 }}</td>
-                        </tr>
-                        <tr>
-                            <th>{% trans "Number of orders" %}</th>
-                            <td>{{ record.num_orders|default:0 }}</td>
-                        </tr>
-                        <tr>
-                            <th>{% trans "Number of ordered items" %}</th>
-                            <td>{{ record.num_order_items|default:0 }}</td>
-                        </tr>
-                        <tr>
-                            <th>{% trans "Total spent" %}</th>
-                            <td>{{ record.total_spent|default:0|currency }}</td>
-                        </tr>
-                        <tr>
-                            <th>{% trans "Reviews written" %}</th>
-                            <td>{{ customer.reviews.count }}</td>
-                        </tr>
                         <tr>
                             <th>{% trans "Actions" %}</th>
                             <td>
