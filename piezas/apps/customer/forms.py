@@ -22,6 +22,7 @@ class ProfileForm(forms.ModelForm):
 
     type = forms.ChoiceField(label=_('Customer type'), widget=forms.Select(attrs={'readonly':'readonly', 'disabled':'disabled'}), choices=TYPE_CHOICES)
     cif = forms.CharField(label=_('CIF'), widget=forms.TextInput(attrs={'readonly':'readonly', 'disabled':'disabled'}))
+    is_validated = forms.ChoiceField(label=_('Validated'), widget=forms.CheckboxInput(attrs={'readonly':'readonly', 'disabled':'disabled'}))
 
     def __init__(self, user, *args, **kwargs):
         self.user = user
