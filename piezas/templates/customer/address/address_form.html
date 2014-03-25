@@ -1,7 +1,7 @@
 {% extends "customer/baseaccountpage.html" %}
-
-
 {% load i18n %}
+{% load staticfiles %}
+
 
 {% block extra_breadcrumbs %}
 	<li>
@@ -11,5 +11,51 @@
 {% endblock %}
 
 {% block tabcontent %}
+<div class="span10 alert alert-info">
+	<p>
+	{% trans "Please enter your address in the first line address and it will be automatically located in the map." %}
+	</p><p>
+	{% trans "You can also drag the pointer into the map to supply the right address." %}
+	</p>
+</div>
+<div id="map_canvas" class="span10"></div>
+<div style="clear:both"></div>
     {% include "partials/form.html" %}
+
+<script type="text/javascript">
+var addresspickerMap = $('#id_line1').addresspicker({
+	componentsFilter: 'country:ES',
+	regionBias:"es",
+	draggableMarker:true,
+	reverseGeocode:true,
+	mapOptions: {
+      		zoom: 6,
+      		center: new google.maps.LatLng(40.416691, -3.700345),
+      		scrollwheel: false,
+      		mapTypeId: google.maps.MapTypeId.ROADMAP
+  	},
+	elements: {
+		map:"#map_canvas",
+		lat:"#id_latitude",
+		lng:"#id_longitude",
+		street_number: "#id_line2",
+		locality:"#id_line4",
+		administrative_area_level_2:"#id_state",
+		postal_code:"#id_postcode"
+	}
+});
+
+$(document).ready(function()
+{
+	$("#id_country").attr("readonly", "readonly");
+	$("#id_latitude").attr("readonly", "readonly");
+	$("#id_longitude").attr("readonly", "readonly");
+});
+
+var gmarker = addresspickerMap.addresspicker( "marker");
+gmarker.setVisible(true);
+addresspickerMap.addresspicker( "updatePosition");
+
+</script>
+
 {% endblock tabcontent %}

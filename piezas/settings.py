@@ -151,8 +151,11 @@ INSTALLED_APPS = [
     'piezas.apps.dashboard.podusers', 'piezas.apps.dashboard',
 ]
 INSTALLED_APPS = INSTALLED_APPS + get_core_apps([
-    'piezas.apps.catalogue', 'piezas.apps.customer', 
-    'piezas.apps.search'])
+    'piezas.apps.customer', 
+    'piezas.apps.catalogue',
+    'piezas.apps.search',
+    'piezas.apps.address'
+])
 
 SITE_ID = 1
 

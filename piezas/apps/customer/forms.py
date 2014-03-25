@@ -4,7 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from oscar.core.compat import get_user_model
 from oscar.apps.customer.forms import EmailUserCreationForm
-from piezas.models import TYPE_CHOICES
+from oscar.apps.customer.utils import normalise_email
+from piezas.apps.customuser.models import TYPE_CHOICES
 
 User = get_user_model()
 
@@ -19,10 +20,6 @@ class PodEmailUserCreationForm(EmailUserCreationForm):
 
 
 class ProfileForm(forms.ModelForm):
-
-    type = forms.ChoiceField(label=_('Customer type'), widget=forms.Select(attrs={'readonly':'readonly', 'disabled':'disabled'}), choices=TYPE_CHOICES)
-    cif = forms.CharField(label=_('CIF'), widget=forms.TextInput(attrs={'readonly':'readonly', 'disabled':'disabled'}))
-    is_validated = forms.ChoiceField(label=_('Validated'), widget=forms.CheckboxInput(attrs={'readonly':'readonly', 'disabled':'disabled'}))
 
     def __init__(self, user, *args, **kwargs):
         self.user = user
@@ -49,4 +46,5 @@ class ProfileForm(forms.ModelForm):
         model = User
         exclude = ('username', 'password', 'is_staff', 'is_superuser',
                    'is_active', 'last_login', 'date_joined',
-                   'user_permissions', 'groups')
+                   'user_permissions', 'groups', 'email', 'is_validated',
+                   'cif', 'type')

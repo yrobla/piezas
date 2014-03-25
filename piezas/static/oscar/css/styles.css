@@ -109,6 +109,10 @@ img {
 .google-maps img {
   max-width: none;
 }
+#map_canvas
+{
+	height:300px;
+}
 button,
 input,
 select,

@@ -44,6 +44,7 @@
                     {% else %}
                         <link rel="stylesheet" type="text/css" href="{% static "oscar/css/styles.css" %}" />
                         <link rel="stylesheet" type="text/css" href="{% static "oscar/css/responsive.css" %}" />
+			<link rel="stylesheet" type="text/css" href="{% static "oscar/css/jquery-ui/jquery-ui-1.10.4.custom.min.css" %}">
                     {% endif %}
                 {% endcompress %}
             {% endblock %}
@@ -58,11 +59,17 @@
         {% endcomment %}
         {% block cdn_scripts %}
             <!-- jQuery -->
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVhxduiAwlXYgzf19U98RnJbUkJOvdlns&sensor=false"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
             <script>window.jQuery || document.write('<script src="{% static "oscar/js/jquery/jquery-1.9.1.min.js" %}"><\/script>')</script>
         {% endblock %}
 
 	<script src="{% static "oscar/js/dynamic-formset/jquery.formset.min.js" %}"></script>
+
+
+<script src="{% static "oscar/js/addresspicker/jquery.ui.addresspicker.js" %}">
+</script>
         {% block extrahead %}{% endblock %}
     </head>
 

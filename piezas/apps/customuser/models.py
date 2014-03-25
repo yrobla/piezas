@@ -3,6 +3,7 @@ from django.contrib.auth import models as auth_models
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from oscar.models.fields import PhoneNumberField
 
 TYPE_CHOICES = (
     ('customer', _('Customer')),
@@ -42,6 +43,10 @@ if hasattr(auth_models, 'BaseUserManager'):
 
     class PiezasUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         email = models.EmailField(_('email address'), unique=True)
+        commercial_name = models.CharField(
+            _('Commercial name'), max_length=255, blank=True)
+        social_name = models.CharField(
+            _('Social name'), max_length=255, blank=True)
         first_name = models.CharField(
             _('First name'), max_length=255, blank=True)
         last_name = models.CharField(

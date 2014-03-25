@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-24 17:44+0100\n"
+"POT-Creation-Date: 2014-03-25 18:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: piezas/settings.py:230 piezas/templates/index.html:15
+#: piezas/settings.py:233 piezas/templates/index.html:15
 #: piezas/templates/index.html.py:20 piezas/templates/dashboard/index.html:17
 #: piezas/templates/dashboard/layout.html:30
 #: piezas/templates/dashboard/layout.html:110
@@ -98,15 +98,15 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: piezas/settings.py:235
+#: piezas/settings.py:238
 msgid "Catalogue"
 msgstr ""
 
-#: piezas/settings.py:239
+#: piezas/settings.py:242
 msgid "Pieces"
 msgstr "Piezas"
 
-#: piezas/settings.py:243
+#: piezas/settings.py:246
 #: piezas/templates/dashboard/catalogue/category_delete.html:13
 #: piezas/templates/dashboard/catalogue/category_form.html:18
 #: piezas/templates/dashboard/catalogue/category_list.html:17
@@ -115,22 +115,22 @@ msgstr "Piezas"
 msgid "Categories"
 msgstr ""
 
-#: piezas/settings.py:247
+#: piezas/settings.py:250
 #: piezas/templates/dashboard/podcatalogue/brand_form.html:18
 msgid "Brands"
 msgstr "Marcas"
 
-#: piezas/settings.py:251
+#: piezas/settings.py:254
 #: piezas/templates/dashboard/podcatalogue/model_form.html:18
 msgid "Models"
 msgstr "Modelos"
 
-#: piezas/settings.py:255
+#: piezas/settings.py:258
 #: piezas/templates/dashboard/podcatalogue/version_form.html:18
 msgid "Versions"
 msgstr "Versiones"
 
-#: piezas/settings.py:259 piezas/apps/search/forms.py:25
+#: piezas/settings.py:262 piezas/apps/search/forms.py:25
 #: piezas/templates/basket/partials/basket_content.html:31
 #: piezas/templates/basket/partials/searchrequest_content.html:12
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:131
@@ -139,7 +139,7 @@ msgstr "Versiones"
 msgid "Bodywork"
 msgstr "Tipo de carrocería"
 
-#: piezas/settings.py:263 piezas/apps/search/forms.py:26
+#: piezas/settings.py:266 piezas/apps/search/forms.py:26
 #: piezas/templates/basket/partials/basket_content.html:32
 #: piezas/templates/basket/partials/searchrequest_content.html:13
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:135
@@ -149,30 +149,30 @@ msgstr "Tipo de carrocería"
 msgid "Engine"
 msgstr "Tipo de motor"
 
-#: piezas/settings.py:269
+#: piezas/settings.py:272
 msgid "Fulfilment"
 msgstr ""
 
-#: piezas/settings.py:273 piezas/templates/dashboard/orders/order_list.html:9
+#: piezas/settings.py:276 piezas/templates/dashboard/orders/order_list.html:9
 #: piezas/templates/dashboard/orders/order_list.html:18
 #: piezas/templates/dashboard/orders/order_list.html:24
 msgid "Order management"
 msgstr ""
 
-#: piezas/settings.py:277
+#: piezas/settings.py:280
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:18
 msgid "Search requests"
 msgstr "Peticiones de búsqueda"
 
-#: piezas/settings.py:281 piezas/templates/dashboard/orders/statistics.html:21
+#: piezas/settings.py:284 piezas/templates/dashboard/orders/statistics.html:21
 msgid "Statistics"
 msgstr ""
 
-#: piezas/settings.py:285
+#: piezas/settings.py:288
 msgid "Partners"
 msgstr ""
 
-#: piezas/settings.py:291 piezas/templates/dashboard/index.html:113
+#: piezas/settings.py:294 piezas/templates/dashboard/index.html:113
 #: piezas/templates/dashboard/users/detail.html:18
 #: piezas/templates/dashboard/users/index.html:8
 #: piezas/templates/dashboard/users/index.html:13
@@ -180,38 +180,38 @@ msgstr ""
 msgid "Customers"
 msgstr ""
 
-#: piezas/settings.py:295
+#: piezas/settings.py:298
 msgid "Customer management"
 msgstr ""
 
-#: piezas/settings.py:301
+#: piezas/settings.py:304
 msgid "Content"
 msgstr ""
 
-#: piezas/settings.py:305
+#: piezas/settings.py:308
 #: piezas/templates/dashboard/promotions/promotion_list.html:7
 #: piezas/templates/dashboard/promotions/promotion_list.html:12
 #: piezas/templates/dashboard/promotions/promotion_list.html:38
 msgid "Content blocks"
 msgstr ""
 
-#: piezas/settings.py:309
+#: piezas/settings.py:312
 #: piezas/templates/dashboard/promotions/pagepromotion_list.html:24
 msgid "Content blocks by page"
 msgstr ""
 
-#: piezas/settings.py:313 piezas/templates/dashboard/pages/delete.html:18
+#: piezas/settings.py:316 piezas/templates/dashboard/pages/delete.html:18
 #: piezas/templates/dashboard/pages/index.html:8
 #: piezas/templates/dashboard/pages/index.html:17
 #: piezas/templates/dashboard/pages/update.html:17
 msgid "Pages"
 msgstr ""
 
-#: piezas/settings.py:317
+#: piezas/settings.py:320
 msgid "Email templates"
 msgstr ""
 
-#: piezas/settings.py:321
+#: piezas/settings.py:324
 #: piezas/templates/catalogue/reviews/review_detail.html:5
 #: piezas/templates/catalogue/reviews/review_detail.html:26
 #: piezas/templates/dashboard/reviews/review_delete.html:18
@@ -224,9 +224,17 @@ msgstr ""
 msgid "Reviews"
 msgstr ""
 
-#: piezas/settings.py:327 piezas/templates/dashboard/reports/index.html:6
+#: piezas/settings.py:330 piezas/templates/dashboard/reports/index.html:6
 msgid "Reports"
 msgstr ""
+
+#: piezas/apps/address/forms.py:10 piezas/apps/address/models.py:8
+msgid "Latitude"
+msgstr "Latitud"
+
+#: piezas/apps/address/forms.py:11 piezas/apps/address/models.py:9
+msgid "Longitude"
+msgstr "Longitud"
 
 #: piezas/apps/catalogue/models.py:19 piezas/apps/catalogue/models.py:38
 msgid "Car brand"
@@ -465,88 +473,116 @@ msgstr "Plazo de envío en días"
 msgid "Associated search request item"
 msgstr "Elemento de la petición de búsqueda asociada"
 
-#: piezas/apps/customer/forms.py:23 piezas/apps/customuser/models.py:60
-msgid "Customer type"
-msgstr "Tipo de cliente"
-
-#: piezas/apps/customer/forms.py:24 piezas/apps/customuser/models.py:61
-#: piezas/templates/dashboard/users/detail.html:66
-#: piezas/templates/dashboard/users/index.html:79
-msgid "CIF"
-msgstr "CIF"
-
-#: piezas/apps/customer/forms.py:44
+#: piezas/apps/customer/forms.py:42
 msgid "A user with this email address already exists"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:8
+#: piezas/apps/customer/views.py:123
+msgid "Edit Profile"
+msgstr ""
+
+#: piezas/apps/customer/views.py:141
+msgid "Profile updated"
+msgstr "Perfil actualizado"
+
+#: piezas/apps/customer/views.py:153 piezas/apps/customer/views.py:162
+#: piezas/templates/customer/address/address_list.html:67
+msgid "Add a new address"
+msgstr ""
+
+#: piezas/apps/customer/views.py:167
+#, python-format
+msgid "Address '%s' created"
+msgstr ""
+
+#: piezas/apps/customuser/models.py:9
 #: piezas/templates/dashboard/orders/order_list.html:98
 msgid "Customer"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:9
+#: piezas/apps/customuser/models.py:10
 msgid "Provider"
 msgstr "Proveedor"
 
-#: piezas/apps/customuser/models.py:44
+#: piezas/apps/customuser/models.py:45
 msgid "email address"
-msgstr ""
+msgstr "dirección de correo electrónico"
 
-#: piezas/apps/customuser/models.py:46
+#: piezas/apps/customuser/models.py:47
+msgid "Commercial name"
+msgstr "Nombre comercial"
+
+#: piezas/apps/customuser/models.py:49
+msgid "Social name"
+msgstr "Nombre social"
+
+#: piezas/apps/customuser/models.py:51
 #: piezas/templates/dashboard/partners/partner_manage.html:55
 #: piezas/templates/dashboard/partners/partner_user_list.html:46
 #: piezas/templates/dashboard/partners/partner_user_select.html:53
 msgid "First name"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:48
+#: piezas/apps/customuser/models.py:53
 #: piezas/templates/dashboard/partners/partner_manage.html:56
 #: piezas/templates/dashboard/partners/partner_user_list.html:47
 #: piezas/templates/dashboard/partners/partner_user_select.html:54
 msgid "Last name"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:50
+#: piezas/apps/customuser/models.py:55
 msgid "Staff status"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:51
+#: piezas/apps/customuser/models.py:56
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: piezas/apps/customuser/models.py:54
+#: piezas/apps/customuser/models.py:59
 #: piezas/templates/dashboard/users/detail.html:46
 msgid "Active"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:55
+#: piezas/apps/customuser/models.py:60
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: piezas/apps/customuser/models.py:58
+#: piezas/apps/customuser/models.py:63
 #: piezas/templates/dashboard/users/detail.html:52
 msgid "Validated"
 msgstr "Validado"
 
-#: piezas/apps/customuser/models.py:59
+#: piezas/apps/customuser/models.py:64
 msgid ""
 "Designates if the user has been validated by admins and has full access to "
 "platform."
-msgstr "Designa si el usuario ha sido validado por los administradores y tiene acceso completo a la plataforma"
+msgstr ""
+"Designa si el usuario ha sido validado por los administradores y tiene "
+"acceso completo a la plataforma"
 
-#: piezas/apps/customuser/models.py:62
+#: piezas/apps/customuser/models.py:65
+msgid "Customer type"
+msgstr "Tipo de cliente"
+
+#: piezas/apps/customuser/models.py:66
+#: piezas/templates/dashboard/users/detail.html:66
+#: piezas/templates/dashboard/users/index.html:79
+msgid "CIF"
+msgstr "CIF"
+
+#: piezas/apps/customuser/models.py:67
 #: piezas/templates/dashboard/users/detail.html:70
 #: piezas/templates/dashboard/users/index.html:80
 msgid "Promotional code"
 msgstr "Código promocional"
 
-#: piezas/apps/customuser/models.py:63
+#: piezas/apps/customuser/models.py:68
 msgid "date joined"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:71
+#: piezas/apps/customuser/models.py:76
 #: piezas/templates/dashboard/orders/order_detail.html:580
 #: piezas/templates/dashboard/reviews/review_delete.html:40
 #: piezas/templates/dashboard/reviews/review_list.html:59
@@ -555,7 +591,7 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:72
+#: piezas/apps/customuser/models.py:77
 #: piezas/templates/dashboard/partners/partner_list.html:46
 #: piezas/templates/dashboard/partners/partner_manage.html:49
 msgid "Users"
@@ -1498,7 +1534,7 @@ msgstr "Comentarios para el presupuesto"
 msgid "Served quantity"
 msgstr "Cantidad servida"
 
-#: piezas/apps/search/views.py:211 piezas/templates/index.html:44
+#: piezas/apps/search/views.py:211 piezas/templates/index.html:46
 #: piezas/templates/search/pending_searchrequest_list.html:12
 msgid "Active searches from customers"
 msgstr "Búsquedas activas de talleres"
@@ -1541,7 +1577,7 @@ msgstr ""
 msgid "Build"
 msgstr ""
 
-#: piezas/templates/base.html:103
+#: piezas/templates/base.html:110
 msgid "Version:"
 msgstr ""
 
@@ -1598,25 +1634,29 @@ msgstr ""
 msgid ""
 "Your account still is not validated. You will have limited functionality "
 "until your account is validated by the administrators of the site."
-msgstr "Tu cuenta aún no ha sido validada. Tendrás funcionalidad limitada hasta que tu cuenta sea validada por los administradores del sitio."
+msgstr ""
+"Tu cuenta aún no ha sido validada. Tendrás funcionalidad limitada hasta que "
+"tu cuenta sea validada por los administradores del sitio."
 
 #: piezas/templates/index.html:30
 msgid ""
 "Please complete all your personal detail in your profile to enter into the "
 "validation process."
-msgstr "Por favor completa todos los datos personales en tu perfil para entrar dentro del proceso de validación."
+msgstr ""
+"Por favor completa todos los datos personales en tu perfil para entrar "
+"dentro del proceso de validación."
 
-#: piezas/templates/index.html:37 piezas/templates/search/home.html:32
+#: piezas/templates/index.html:38 piezas/templates/search/home.html:32
 #: piezas/templates/search/home.html:37
 msgid "Search pieces"
 msgstr "Buscar piezas"
 
-#: piezas/templates/index.html:40
+#: piezas/templates/index.html:41
 #: piezas/templates/customer/baseaccountpage.html:38
 msgid "Search request history"
 msgstr "Histórico de peticiones de búsqueda"
 
-#: piezas/templates/index.html:49
+#: piezas/templates/index.html:51
 msgid "My personal data"
 msgstr "Mis datos personales"
 
@@ -2719,6 +2759,16 @@ msgstr ""
 msgid "Address book"
 msgstr ""
 
+#: piezas/templates/customer/address/address_form.html:16
+msgid ""
+"Please enter your address in the first line address and it will be "
+"automatically located in the map."
+msgstr "Por favor entra tu dirección en la primera línea dedicada a ello y será automáticamente geolocalizada en el mapa."
+
+#: piezas/templates/customer/address/address_form.html:18
+msgid "You can also drag the pointer into the map to supply the right address."
+msgstr "También puedes arrastrar el puntero en el mapa para proporcionar la dirección correa."
+
 #: piezas/templates/customer/address/address_list.html:17
 msgid "Default shipping address"
 msgstr ""
@@ -2768,10 +2818,6 @@ msgstr ""
 
 #: piezas/templates/customer/address/address_list.html:64
 msgid "There are no addresses in your address book."
-msgstr ""
-
-#: piezas/templates/customer/address/address_list.html:67
-msgid "Add a new address"
 msgstr ""
 
 #: piezas/templates/customer/alerts/alert_list.html:6
