@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "catalogue.productclass", "fields": {"track_stock": false, "requires_shipping": true, "name": "Piezas", "slug": "piezas"}}]

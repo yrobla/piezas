@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
-from oscar.apps.catalogue.abstract_models import AbstractProduct
+from oscar.apps.catalogue.abstract_models import AbstractProduct as AbstractProduct
 from oscar.apps.catalogue.models import ProductImage
 from oscar.core.compat import AUTH_USER_MODEL
 from smart_selects.db_fields import ChainedForeignKey
@@ -102,8 +102,18 @@ class Engine(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class Product(AbstractProduct):
     pass
+
+
+class ProductQuestion(models.Model):
+    text = models.CharField(_('Product question'), max_length=255)
+    product = models.ForeignKey(Product, verbose_name=_("Piece"),
+        help_text=_('Piece to ask for'), related_name='product_question')
+
+    def __unicode__(self):
+        return self.text
 
 
 SEARCH_REQUEST_TYPES = (('', '----'), ('regional', _('Regional')), ('border', _('Border area')),

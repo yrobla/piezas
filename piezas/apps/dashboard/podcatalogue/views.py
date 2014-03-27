@@ -14,6 +14,8 @@ from oscar.views import sort_queryset
 from oscar.views.generic import ObjectLookupView
 from oscar.apps.dashboard.catalogue.views import ProductCreateUpdateView as CoreProductCreateUpdateView
 
+from forms import ProductQuestionsFormSet
+
 
 (	BrandForm,
  BrandSearchForm,
@@ -39,8 +41,10 @@ from oscar.apps.dashboard.catalogue.views import ProductCreateUpdateView as Core
 
 ProductForm = get_class('dashboard.podcatalogue.forms', 'ProductForm')
 ProductCategoryFormSet = get_class('dashboard.catalogue.forms', 'ProductCategoryFormSet')
+ProductQuestionsFormSet = ProductQuestionsFormSet
 
 Product = get_model('catalogue', 'Product')
+ProductQuestion = get_model('catalogue', 'ProductQuestion')
 ProductClass = get_model('catalogue', 'ProductClass')
 Brand = get_model('catalogue', 'Brand')
 Model = get_model('catalogue', 'Model')
@@ -1076,7 +1080,99 @@ class ProductCreateUpdateView(CoreProductCreateUpdateView):
 
     form_class = ProductForm
     category_formset = ProductCategoryFormSet
+    questions_formset = ProductQuestionsFormSet
 
     def __init__(self, *args, **kwargs):
         super(ProductCreateUpdateView, self).__init__(*args, **kwargs)
-        self.formsets = {'category_formset': self.category_formset}
+        self.formsets = {'category_formset': self.category_formset, 'questions_formset': self.questions_formset}
+
+    def get_object(self, queryset=None):
+        """
+        This parts allows generic.UpdateView to handle creating products as
+        well. The only distinction between an UpdateView and a CreateView
+        is that self.object is None. We emulate this behavior.
+        Additionally, self.product_class is set.
+        """
+        self.creating = not 'pk' in self.kwargs
+        if self.creating:
+            try:
+                product_class_id = 1
+                self.product_class = ProductClass.objects.get(
+                    id=product_class_id)
+            except ObjectDoesNotExist:
+                raise Http404
+            else:
+                return None  # success
+        else:
+            product = super(ProductCreateUpdateView, self).get_object(queryset)
+            self.product_class = product.product_class
+            product.questions = ProductQuestion.objects.filter(product=product)
+            return product
+
+    def get_context_data(self, **kwargs):
+        ctx = super(ProductCreateUpdateView, self).get_context_data(**kwargs)
+        ctx['product_class'] = self.product_class
+        if 'category_formset' not in ctx:
+            ctx['category_formset'] \
+                = self.category_formset(instance=self.object)
+        if 'questions_formset' not in ctx:
+            ctx['questions_formset'] = self.questions_formset(instance=self.object)
+        if self.object is None:
+            ctx['title'] = _('Create new %s product') % self.product_class.name
+        else:
+            ctx['title'] = ctx['product'].get_title()
+        return ctx
+
+    def forms_valid(self, form, category_formset, questions_formset):
+        """
+        Save all changes and display a success url.
+        """
+        if not self.creating:
+            # a just created product was already saved in process_all_forms()
+            self.object = form.save()
+        # Save formsets
+        category_formset.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def forms_invalid(self, form, category_formset, questions_formset):
+        messages.error(self.request,
+                       _("Your submitted data was not valid - please "
+                         "correct the below errors"))
+        ctx = self.get_context_data(form=form,
+                                    category_formset=category_formset,
+                                    questions_formset=questions_formset)
+        return self.render_to_response(ctx)
+
+    def process_all_forms(self, form):
+        """
+        Short-circuits the regular logic to have one place to have our
+        logic to check all forms
+        """
+        # Need to create the product here because the inline forms need it
+        # can't use commit=False because ProductForm does not support it
+        if self.creating and form.is_valid():
+            self.object = form.save()
+
+        category_formset = self.category_formset(
+            self.request.POST, instance=self.object)
+        questions_formset = self.questions_formset(
+            self.request.POST, instance=self.object)
+
+        is_valid = all([
+            form.is_valid(),
+            category_formset.is_valid(), True
+        ])
+
+        if is_valid:
+            return self.forms_valid(
+                form, category_formset, questions_formset)
+        else:
+            # delete the temporary product again
+            if self.creating and form.is_valid():
+                self.object.delete()
+                self.object = None
+
+            return self.forms_invalid(
+                form, category_formset, questions_formset)
+

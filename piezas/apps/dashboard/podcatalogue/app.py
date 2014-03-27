@@ -87,12 +87,12 @@ class CatalogueApplication(CoreCatalogueApplication):
         # add new urls
         urls = [
             # products
-            url(r'^products/(?P<pk>\d+)/$',
-                self.product_createupdate_view.as_view(),
-                name='catalogue-product'),
             url(r'^products/create/(?P<product_class_slug>[\w-]+)/$',
                 self.product_createupdate_view.as_view(),
                 name='catalogue-product-create'),
+            url(r'^products/(?P<pk>\d+)/$',
+                self.product_createupdate_view.as_view(),
+                name='catalogue-product'),
             url(r'^products/(?P<pk>\d+)/delete/$',
                 self.product_delete_view.as_view(),
                 name='catalogue-product-delete'),

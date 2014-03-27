@@ -13,6 +13,7 @@ from oscar.apps.dashboard.catalogue.forms import _attr_text_field, _attr_textare
     _attr_file_field, _attr_image_field
 
 Product = get_model('catalogue', 'Product')
+ProductQuestion = get_model('catalogue', 'ProductQuestion')
 Brand = get_model('catalogue', 'Brand')
 Model = get_model('catalogue', 'Model')
 Version = get_model('catalogue', 'Version')
@@ -160,6 +161,7 @@ class ProductForm(forms.ModelForm):
             self.fields['title'].widget = forms.TextInput(
                 attrs={'autocomplete': 'off'})
 
+
     def save(self):
         object = super(ProductForm, self).save(commit=False)
         object.product_class = self.product_class
@@ -171,3 +173,12 @@ class ProductForm(forms.ModelForm):
         data = self.cleaned_data
         return super(ProductForm, self).clean()
 
+class ProductQuestionForm(forms.ModelForm):
+    class Meta:
+        model = ProductQuestion
+        widgets = {'text': forms.TextInput(attrs={'maxlength':255, 'size':100})}
+
+
+ProductQuestionsFormSet = inlineformset_factory(
+    Product, ProductQuestion, form=ProductQuestionForm,
+    extra=0, fields=('text',))
