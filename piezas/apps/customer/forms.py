@@ -14,10 +14,6 @@ class PodEmailUserCreationForm(EmailUserCreationForm):
         model = User
         fields = ('email', 'type', 'cif', 'promotional_code')
 
-    #type = forms.ChoiceField(_('Customer type'), choices=TYPE_CHOICES)
-    #cif = forms.CharField(_('CIF'), max_length=9)
-    #promotional_code = forms.CharField(_('Promotional code'), max_length=50)
-
 
 class ProfileForm(forms.ModelForm):
 

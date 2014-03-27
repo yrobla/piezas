@@ -77,7 +77,7 @@ class PodAccountAuthView(RegisterUserMixin, TemplateView):
         kwargs['host'] = self.request.get_host()
         kwargs['prefix'] = self.registration_prefix
         kwargs['initial'] = {
-            'redirect_url': self.request.GET.get(self.redirect_field_name, ''),
+            'redirect_url': reverse('customer:address-create'),
         }
         if request and request.method in ('POST', 'PUT'):
             kwargs.update({
@@ -144,6 +144,13 @@ class ProfileUpdateView(PageTitleMixin, FormView):
     def get_success_url(self):
         return reverse('customer:profile-view')
 
+# retrieves shipping address for user, if it has it
+def get_shipping_address(user):
+    try:
+        address = UserAddress.objects.get(user=user, is_default_for_shipping=True)
+        return address
+    except:
+        return None
 
 class AddressCreateView(PageTitleMixin, CreateView):
     form_class = UserAddressForm
@@ -155,6 +162,8 @@ class AddressCreateView(PageTitleMixin, CreateView):
     def get_form_kwargs(self):
         kwargs = super(AddressCreateView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
+        if get_shipping_address(self.request.user) is None:
+            kwargs['initial']['is_default_for_shipping'] = True
         return kwargs
 
     def get_context_data(self, **kwargs):

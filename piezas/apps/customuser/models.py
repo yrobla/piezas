@@ -6,8 +6,8 @@ from django.utils import timezone
 from oscar.models.fields import PhoneNumberField
 
 TYPE_CHOICES = (
-    ('customer', _('Customer')),
-    ('provider', _('Provider'))
+    ('customer', _('Workshop')),
+    ('provider', _('Scrapping'))
 )
 
 if hasattr(auth_models, 'BaseUserManager'):

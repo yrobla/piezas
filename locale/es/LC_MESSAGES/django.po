@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-25 18:35+0100\n"
+"POT-Creation-Date: 2014-03-27 14:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -473,7 +473,7 @@ msgstr "Plazo de envío en días"
 msgid "Associated search request item"
 msgstr "Elemento de la petición de búsqueda asociada"
 
-#: piezas/apps/customer/forms.py:42
+#: piezas/apps/customer/forms.py:38
 msgid "A user with this email address already exists"
 msgstr ""
 
@@ -485,24 +485,23 @@ msgstr ""
 msgid "Profile updated"
 msgstr "Perfil actualizado"
 
-#: piezas/apps/customer/views.py:153 piezas/apps/customer/views.py:162
+#: piezas/apps/customer/views.py:160 piezas/apps/customer/views.py:171
 #: piezas/templates/customer/address/address_list.html:67
 msgid "Add a new address"
 msgstr ""
 
-#: piezas/apps/customer/views.py:167
+#: piezas/apps/customer/views.py:176
 #, python-format
 msgid "Address '%s' created"
 msgstr ""
 
 #: piezas/apps/customuser/models.py:9
-#: piezas/templates/dashboard/orders/order_list.html:98
-msgid "Customer"
-msgstr ""
+msgid "Workshop"
+msgstr "Taller"
 
 #: piezas/apps/customuser/models.py:10
-msgid "Provider"
-msgstr "Proveedor"
+msgid "Scrapping"
+msgstr "Desguace"
 
 #: piezas/apps/customuser/models.py:45
 msgid "email address"
@@ -2763,11 +2762,15 @@ msgstr ""
 msgid ""
 "Please enter your address in the first line address and it will be "
 "automatically located in the map."
-msgstr "Por favor entra tu dirección en la primera línea dedicada a ello y será automáticamente geolocalizada en el mapa."
+msgstr ""
+"Por favor entra tu dirección en la primera línea dedicada a ello y será "
+"automáticamente geolocalizada en el mapa."
 
 #: piezas/templates/customer/address/address_form.html:18
 msgid "You can also drag the pointer into the map to supply the right address."
-msgstr "También puedes arrastrar el puntero en el mapa para proporcionar la dirección correa."
+msgstr ""
+"También puedes arrastrar el puntero en el mapa para proporcionar la "
+"dirección correa."
 
 #: piezas/templates/customer/address/address_list.html:17
 msgid "Default shipping address"
@@ -4495,6 +4498,10 @@ msgstr ""
 msgid "Select all"
 msgstr ""
 
+#: piezas/templates/dashboard/orders/order_list.html:98
+msgid "Customer"
+msgstr ""
+
 #: piezas/templates/dashboard/orders/order_list.html:118
 msgid "Deleted"
 msgstr ""
@@ -6147,6 +6154,9 @@ msgid ""
 "%(suggestion)s\">\"%(suggestion)s\"</a>?\n"
 "                    "
 msgstr ""
+
+#~ msgid "Provider"
+#~ msgstr "Proveedor"
 
 #~ msgid "User type"
 #~ msgstr "Tipo de usuario"
