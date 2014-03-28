@@ -65,13 +65,14 @@ def generate_prodcateg(index, product_index, category_index):
     }
     return prodcateg_data
 
-def generate_prodquestion(index, product_index, question):
+def generate_prodquestion(index, product_index, question, type):
     prodquestion_data = {
         'model': 'catalogue.productquestion',
         'pk': index,
         'fields': {
             'product': product_index,
-            'text': question
+            'text': question,
+            'type': type
         }
     }
     return prodquestion_data
@@ -83,7 +84,7 @@ with open("podrecambios.csv") as f:
     contentreader = csv.reader(f, delimiter=',', quotechar='"')
     categories = []
     products = []
-    
+    question_types = {'SI/NO':'boolean', 'TEXTO':'text', 'FOTOS':'photo'}    
 
     created_categories = {}
     created_products = {}
@@ -121,9 +122,15 @@ with open("podrecambios.csv") as f:
 
         # product question
         question = row[3]
+        question_type = row[4]
+        if question_type in question_types:
+            final_question_type = question_types[question_type]
+        else:
+            final_question_type = ''
+
         if question:
             current_product_index = created_products[prodkey]
-            prodquestion = generate_prodquestion(prodquestion_index, current_product_index, question)
+            prodquestion = generate_prodquestion(prodquestion_index, current_product_index, question, final_question_type)
             prodquestion_index += 1
             products.append(prodquestion)
        

@@ -107,8 +107,11 @@ class Product(AbstractProduct):
     pass
 
 
+QUESTION_TYPES = (('boolean', _('Boolean')), ('text', _('Text')), ('photo', _('Photo')))
+
 class ProductQuestion(models.Model):
     text = models.CharField(_('Product question'), max_length=255)
+    type = models.CharField(_('Question type'), max_length=25, choices=QUESTION_TYPES, default='boolean')
     product = models.ForeignKey(Product, verbose_name=_("Piece"),
         help_text=_('Piece to ask for'), related_name='product_question')
 

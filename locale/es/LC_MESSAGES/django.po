@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-27 19:38+0100\n"
+"POT-Creation-Date: 2014-03-28 16:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -242,27 +242,27 @@ msgstr "Marca de coche"
 
 #: piezas/apps/catalogue/models.py:20 piezas/apps/catalogue/models.py:40
 #: piezas/apps/catalogue/models.py:60 piezas/apps/catalogue/models.py:79
-#: piezas/apps/catalogue/models.py:98 piezas/apps/catalogue/models.py:143
-#: piezas/apps/catalogue/models.py:173 piezas/apps/catalogue/models.py:193
-#: piezas/apps/catalogue/models.py:215 piezas/apps/offer/models.py:166
+#: piezas/apps/catalogue/models.py:98 piezas/apps/catalogue/models.py:146
+#: piezas/apps/catalogue/models.py:176 piezas/apps/catalogue/models.py:196
+#: piezas/apps/catalogue/models.py:218 piezas/apps/offer/models.py:166
 #: piezas/apps/offer/models.py:774
 msgid "Date Created"
 msgstr ""
 
 #: piezas/apps/catalogue/models.py:21 piezas/apps/catalogue/models.py:41
 #: piezas/apps/catalogue/models.py:61 piezas/apps/catalogue/models.py:80
-#: piezas/apps/catalogue/models.py:99 piezas/apps/catalogue/models.py:144
-#: piezas/apps/catalogue/models.py:174 piezas/apps/catalogue/models.py:194
-#: piezas/apps/catalogue/models.py:216
+#: piezas/apps/catalogue/models.py:99 piezas/apps/catalogue/models.py:147
+#: piezas/apps/catalogue/models.py:177 piezas/apps/catalogue/models.py:197
+#: piezas/apps/catalogue/models.py:219
 msgid "Date Updated"
 msgstr ""
 
 #: piezas/apps/catalogue/models.py:39 piezas/apps/catalogue/models.py:58
-#: piezas/apps/catalogue/models.py:130
+#: piezas/apps/catalogue/models.py:133
 msgid "Car model"
 msgstr "Modelo de coche"
 
-#: piezas/apps/catalogue/models.py:59 piezas/apps/catalogue/models.py:134
+#: piezas/apps/catalogue/models.py:59 piezas/apps/catalogue/models.py:137
 msgid "Car version"
 msgstr "Versión de coche"
 
@@ -270,15 +270,31 @@ msgstr "Versión de coche"
 msgid "Car bodywork type"
 msgstr "Tipo de carrocería"
 
-#: piezas/apps/catalogue/models.py:97 piezas/apps/catalogue/models.py:139
+#: piezas/apps/catalogue/models.py:97 piezas/apps/catalogue/models.py:142
 msgid "Car engine"
 msgstr "Tipo de motor"
 
-#: piezas/apps/catalogue/models.py:111
+#: piezas/apps/catalogue/models.py:110
+msgid "Boolean"
+msgstr "Booleano"
+
+#: piezas/apps/catalogue/models.py:110
+msgid "Text"
+msgstr "Texto"
+
+#: piezas/apps/catalogue/models.py:110
+msgid "Photo"
+msgstr "Foto"
+
+#: piezas/apps/catalogue/models.py:113
 msgid "Product question"
 msgstr "Pregunta sobre la pieza"
 
-#: piezas/apps/catalogue/models.py:112 piezas/apps/catalogue/models.py:166
+#: piezas/apps/catalogue/models.py:114
+msgid "Question type"
+msgstr "Tipo de pregunta"
+
+#: piezas/apps/catalogue/models.py:115 piezas/apps/catalogue/models.py:169
 #: piezas/apps/search/forms.py:128
 #: piezas/templates/basket/partials/basket_content.html:27
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:84
@@ -287,40 +303,40 @@ msgstr "Pregunta sobre la pieza"
 msgid "Piece"
 msgstr "Pieza"
 
-#: piezas/apps/catalogue/models.py:113
+#: piezas/apps/catalogue/models.py:116
 msgid "Piece to ask for"
 msgstr "Pieza a buscar"
 
-#: piezas/apps/catalogue/models.py:119
+#: piezas/apps/catalogue/models.py:122
 msgid "Regional"
 msgstr "Regional"
 
-#: piezas/apps/catalogue/models.py:119
+#: piezas/apps/catalogue/models.py:122
 msgid "Border area"
 msgstr "Limítrofe"
 
-#: piezas/apps/catalogue/models.py:120
+#: piezas/apps/catalogue/models.py:123
 msgid "National"
 msgstr "Nacional"
 
-#: piezas/apps/catalogue/models.py:120
+#: piezas/apps/catalogue/models.py:123
 msgid "Supraregional"
 msgstr "Supraregional"
 
-#: piezas/apps/catalogue/models.py:122
+#: piezas/apps/catalogue/models.py:125
 msgid "Pending"
 msgstr "Pendiente"
 
-#: piezas/apps/catalogue/models.py:122 piezas/apps/catalogue/models.py:185
+#: piezas/apps/catalogue/models.py:125 piezas/apps/catalogue/models.py:188
 msgid "Expired"
 msgstr "Expirada"
 
-#: piezas/apps/catalogue/models.py:123
+#: piezas/apps/catalogue/models.py:126
 #: piezas/templates/dashboard/catalogue/stockalert_list.html:40
 msgid "Closed"
 msgstr ""
 
-#: piezas/apps/catalogue/models.py:127
+#: piezas/apps/catalogue/models.py:130
 #: piezas/apps/dashboard/podcatalogue/forms.py:51
 #: piezas/apps/dashboard/podcatalogue/forms.py:56
 #: piezas/apps/search/forms.py:22
@@ -335,19 +351,19 @@ msgstr ""
 msgid "Brand"
 msgstr "Marca"
 
-#: piezas/apps/catalogue/models.py:131
+#: piezas/apps/catalogue/models.py:134
 msgid "Model of the car that it belongs to"
 msgstr "Modelo del coche al que pertenece"
 
-#: piezas/apps/catalogue/models.py:135
+#: piezas/apps/catalogue/models.py:138
 msgid "Version of the car that it belongs to"
 msgstr "Versión del coche al que pertenece"
 
-#: piezas/apps/catalogue/models.py:137
+#: piezas/apps/catalogue/models.py:140
 msgid "Bodywork type"
 msgstr "Tipo de carrocería"
 
-#: piezas/apps/catalogue/models.py:141 piezas/apps/search/forms.py:27
+#: piezas/apps/catalogue/models.py:144 piezas/apps/search/forms.py:27
 #: piezas/templates/basket/partials/basket_content.html:33
 #: piezas/templates/basket/partials/searchrequest_content.html:14
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:139
@@ -356,8 +372,8 @@ msgstr "Tipo de carrocería"
 msgid "Frame reference"
 msgstr "Número de bastidor"
 
-#: piezas/apps/catalogue/models.py:142 piezas/apps/catalogue/models.py:168
-#: piezas/apps/catalogue/models.py:202 piezas/apps/catalogue/models.py:221
+#: piezas/apps/catalogue/models.py:145 piezas/apps/catalogue/models.py:171
+#: piezas/apps/catalogue/models.py:205 piezas/apps/catalogue/models.py:224
 #: piezas/apps/search/forms.py:34 piezas/apps/search/forms.py:44
 #: piezas/apps/search/forms.py:130
 #: piezas/templates/basket/partials/basket_content.html:34
@@ -370,18 +386,18 @@ msgstr "Número de bastidor"
 msgid "Comments"
 msgstr "Comentarios"
 
-#: piezas/apps/catalogue/models.py:147 piezas/apps/catalogue/models.py:172
-#: piezas/apps/catalogue/models.py:192 piezas/apps/catalogue/models.py:214
+#: piezas/apps/catalogue/models.py:150 piezas/apps/catalogue/models.py:175
+#: piezas/apps/catalogue/models.py:195 piezas/apps/catalogue/models.py:217
 #: piezas/apps/dashboard/podorders/views.py:195
 #: piezas/templates/dashboard/orders/searchrequest_list.html:97
 msgid "Owner"
 msgstr "Propietario"
 
-#: piezas/apps/catalogue/models.py:150
+#: piezas/apps/catalogue/models.py:153
 msgid "Expiration Date"
 msgstr "Fecha de expiración"
 
-#: piezas/apps/catalogue/models.py:163 piezas/apps/search/forms.py:31
+#: piezas/apps/catalogue/models.py:166 piezas/apps/search/forms.py:31
 #: piezas/apps/search/forms.py:126
 #: piezas/templates/dashboard/catalogue/product_update.html:156
 #: piezas/templates/dashboard/comms/list.html:34
@@ -391,15 +407,15 @@ msgstr "Fecha de expiración"
 msgid "Category"
 msgstr ""
 
-#: piezas/apps/catalogue/models.py:164
+#: piezas/apps/catalogue/models.py:167
 msgid "Category to search for"
 msgstr "Categoría a buscar"
 
-#: piezas/apps/catalogue/models.py:167
+#: piezas/apps/catalogue/models.py:170
 msgid "Piece to search for"
 msgstr "Pieza a buscar"
 
-#: piezas/apps/catalogue/models.py:169 piezas/apps/catalogue/models.py:217
+#: piezas/apps/catalogue/models.py:172 piezas/apps/catalogue/models.py:220
 #: piezas/apps/search/forms.py:33 piezas/apps/search/forms.py:132
 #: piezas/templates/basket/partials/basket_content.html:35
 #: piezas/templates/basket/partials/searchrequest_content.html:16
@@ -418,67 +434,67 @@ msgstr "Pieza a buscar"
 msgid "Quantity"
 msgstr ""
 
-#: piezas/apps/catalogue/models.py:175 piezas/templates/basket/basket.html:6
+#: piezas/apps/catalogue/models.py:178 piezas/templates/basket/basket.html:6
 #: piezas/templates/basket/basket.html:15
 #: piezas/templates/basket/basket.html:23
 msgid "Search request"
 msgstr "Petición de búsqueda"
 
-#: piezas/apps/catalogue/models.py:183 piezas/apps/catalogue/models.py:207
+#: piezas/apps/catalogue/models.py:186 piezas/apps/catalogue/models.py:210
 msgid "Sent"
 msgstr ""
 
-#: piezas/apps/catalogue/models.py:183 piezas/apps/catalogue/models.py:207
+#: piezas/apps/catalogue/models.py:186 piezas/apps/catalogue/models.py:210
 msgid "Accepted"
 msgstr ""
 
-#: piezas/apps/catalogue/models.py:184
+#: piezas/apps/catalogue/models.py:187
 msgid "Partially accepted"
 msgstr ""
 
-#: piezas/apps/catalogue/models.py:184 piezas/apps/catalogue/models.py:208
+#: piezas/apps/catalogue/models.py:187 piezas/apps/catalogue/models.py:211
 msgid "Rejected"
 msgstr ""
 
-#: piezas/apps/catalogue/models.py:189
+#: piezas/apps/catalogue/models.py:192
 msgid "Associated search request"
 msgstr "Petición de búsqueda asociada"
 
-#: piezas/apps/catalogue/models.py:196 piezas/apps/catalogue/models.py:218
+#: piezas/apps/catalogue/models.py:199 piezas/apps/catalogue/models.py:221
 #: piezas/apps/search/forms.py:136 piezas/templates/search/quote.html:127
 msgid "Base total excluding tax"
 msgstr "Total base sin impuestos"
 
-#: piezas/apps/catalogue/models.py:197 piezas/templates/search/quote.html:133
+#: piezas/apps/catalogue/models.py:200 piezas/templates/search/quote.html:133
 msgid "Base total including tax"
 msgstr "Total base con impuestos"
 
-#: piezas/apps/catalogue/models.py:198 piezas/apps/catalogue/models.py:219
+#: piezas/apps/catalogue/models.py:201 piezas/apps/catalogue/models.py:222
 #: piezas/apps/search/forms.py:138 piezas/templates/search/quote.html:140
 msgid "Shipping total excluding tax"
 msgstr "Gastos de envío sin impuestos"
 
-#: piezas/apps/catalogue/models.py:199 piezas/templates/search/quote.html:146
+#: piezas/apps/catalogue/models.py:202 piezas/templates/search/quote.html:146
 msgid "Shipping total including tax"
 msgstr "Gastos de envío con impuestos"
 
-#: piezas/apps/catalogue/models.py:200 piezas/templates/search/quote.html:153
+#: piezas/apps/catalogue/models.py:203 piezas/templates/search/quote.html:153
 msgid "Grand total excluding tax"
 msgstr "Total final sin impuestos"
 
-#: piezas/apps/catalogue/models.py:201 piezas/templates/search/quote.html:159
+#: piezas/apps/catalogue/models.py:204 piezas/templates/search/quote.html:159
 msgid "Grand total including tax"
 msgstr "Total final con impuestos"
 
-#: piezas/apps/catalogue/models.py:203 piezas/apps/search/forms.py:119
+#: piezas/apps/catalogue/models.py:206 piezas/apps/search/forms.py:119
 msgid "Warranty days"
 msgstr "Días de garantía"
 
-#: piezas/apps/catalogue/models.py:204 piezas/apps/search/forms.py:120
+#: piezas/apps/catalogue/models.py:207 piezas/apps/search/forms.py:120
 msgid "Shipping days"
 msgstr "Plazo de envío en días"
 
-#: piezas/apps/catalogue/models.py:211
+#: piezas/apps/catalogue/models.py:214
 msgid "Associated search request item"
 msgstr "Elemento de la petición de búsqueda asociada"
 
@@ -845,8 +861,13 @@ msgid "Engine deleted successfully"
 msgstr "Motor borrado con éxito"
 
 #: piezas/apps/dashboard/podcatalogue/views.py:1121
+#, python-format
 msgid "Create new %s product"
 msgstr "Crear nuevo producto %s"
+
+#: piezas/apps/dashboard/podcatalogue/views.py:1141
+msgid "Your submitted data was not valid - please correct the below errors"
+msgstr ""
 
 #: piezas/apps/dashboard/podorders/forms.py:7
 #: piezas/apps/dashboard/podorders/views.py:191

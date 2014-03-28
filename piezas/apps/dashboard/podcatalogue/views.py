@@ -1132,6 +1132,7 @@ class ProductCreateUpdateView(CoreProductCreateUpdateView):
             self.object = form.save()
         # Save formsets
         category_formset.save()
+        questions_formset.save()
 
         return HttpResponseRedirect(self.get_success_url())
 

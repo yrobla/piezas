@@ -171,8 +171,8 @@
                             {% block product_questions_content %}
                                 <table class="table table-striped table-bordered form-inline">
                                     <caption>{% trans "Questions" %}</caption>
-                                    {{ category_formset.management_form }}
-                                    {{ category_formset.non_form_errors }}
+                                    {{ questions_formset.management_form }}
+                                    {{ quesitons_formset.non_form_errors }}
                                     {% for question_form in questions_formset %}
                                         <tr>
                                             <td>

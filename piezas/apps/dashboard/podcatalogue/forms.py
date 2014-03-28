@@ -181,4 +181,4 @@ class ProductQuestionForm(forms.ModelForm):
 
 ProductQuestionsFormSet = inlineformset_factory(
     Product, ProductQuestion, form=ProductQuestionForm,
-    extra=0, fields=('text',))
+    extra=1, fields=('text', 'type'))
