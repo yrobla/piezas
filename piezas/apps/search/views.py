@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.files.storage import default_storage
 from django.http import HttpResponse, Http404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, FormView, TemplateView, ListView
@@ -37,6 +38,8 @@ class HomeView(FormView):
                     initial_item['category'] = item['category']
                     initial_item['piece'] = item['piece']
                     initial_item['comments'] = item['comments']
+                    initial_item['picture'] = item['picture']
+
                     if "quantity" in item:
                         initial_item['quantity'] = item['quantity']
                     else:
@@ -62,52 +65,34 @@ class HomeView(FormView):
         # formset
         final_data["pieces"] = []
 
-        if hasattr(formset, 'cleaned_data'):
-            current_formset_data = formset.cleaned_data
-            for current_item in current_formset_data:
-                final_item = {}
-                if "category" in current_item and current_item["category"] and \
-                    "piece" in current_item and current_item["piece"]:
-                    final_item["category"] = current_item["category"].id
-                    final_item["piece"] = current_item["piece"].id
-                    final_item["comments"] = current_item["comments"]
+        current_formset_data = formset.data
+        max_item = int(current_formset_data['form-TOTAL_FORMS'])
 
-                    if "quantity" in current_item and current_item["quantity"]>0:
-                        final_item["quantity"] = current_item["quantity"]
-                    else:
-                        final_item["quantity"] = 1
+        for i in range(max_item):
+            final_item = {}
+            prefix = "form-%s-" % i
+            current_category = prefix+"category"
+            current_piece = prefix+"piece"
+            current_quantity = prefix+"quantity"
+            current_comments = prefix+"comments"
+            current_picture = prefix+"picture"
 
-                    final_data["pieces"].append(final_item)   
+            if current_category in current_formset_data and current_formset_data[current_category] and \
+                current_piece in current_formset_data and current_formset_data[current_piece]:
+                final_item["category"] = current_formset_data[current_category]
+                final_item["piece"] = current_formset_data[current_category]
+                final_item["comments"] = current_formset_data[current_comments]
 
-            self.request.session['search_data'] = json.dumps(final_data)
-            return True
-        else:
-            current_formset_data = formset.data
-            max_item = int(current_formset_data['form-TOTAL_FORMS'])
+                final_item["picture"] = current_formset_data[current_picture]
 
-            for i in range(max_item):
-                final_item = {}
-                prefix = "form-%s-" % i
-                current_category = prefix+"category"
-                current_piece = prefix+"piece"
-                current_quantity = prefix+"quantity"
-                current_comments = prefix+"comments"
+                if current_quantity in current_formset_data and current_formset_data[current_quantity]>0:
+                    final_item["quantity"] = current_formset_data[current_quantity]
+                else:
+                    final_item["quantity"] = 1
+                final_data["pieces"].append(final_item)
 
-                if current_category in current_formset_data and current_formset_data[current_category] and \
-                    current_piece in current_formset_data and current_formset_data[current_piece]:
-                    final_item["category"] = [current_formset_data[current_category],]
-                    final_item["piece"] = [current_formset_data[current_category],]
-                    final_item["comments"] = current_formset_data[current_category]
-
-                    if current_quantity in current_formset_data and current_formset_data[current_quantity]>0:
-                        final_item["quantity"] = current_formset_data[current_quantity]
-                    else:
-                        final_item["quantity"] = 1
-
-                    final_data["pieces"].append(final_item)
-
-            self.request.session['search_data'] = json.dumps(final_data)
-            return True
+        self.request.session['search_data'] = json.dumps(final_data)
+        return True
 
     def get_success_url(self):
         return reverse('search:home')
@@ -148,9 +133,9 @@ class ConfirmView(FormView):
 
             for piece in current_data["pieces"]:
                 if 'category' in piece:
-                    piece['category_name'] = models.Category.objects.get(pk=piece['category'])
+                    piece['category_name'] = models.Category.objects.get(pk=piece['category'][0])
                 if 'piece' in piece:
-                    piece['piece_name'] = models.Product.objects.get(pk=piece['piece'])
+                    piece['piece_name'] = models.Product.objects.get(pk=piece['piece'][0])
         return context
 
     def form_valid(self, form):

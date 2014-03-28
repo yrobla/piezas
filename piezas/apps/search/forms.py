@@ -1,13 +1,46 @@
+import os
 from django import forms
 from django.forms.extras.widgets import SelectDateWidget
 from oscar.core.loading import get_model
+from django.core.urlresolvers import reverse
 from django.forms.models import formset_factory, inlineformset_factory
 from django.forms.formsets import BaseFormSet
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy
+from django.utils.safestring import mark_safe
 from smart_selects.form_fields import ChainedModelChoiceField
 from piezas.apps.catalogue import models
 from datetime import date
+
+from ajaximage.widgets import AjaxImageEditor as CoreAjaxImageEditor, HTML
+
+class AjaxImageEditor(CoreAjaxImageEditor):
+    def render(self, name, value, attrs=None):
+        final_attrs = self.build_attrs(attrs)
+        element_id = final_attrs.get('id')
+
+        kwargs = {'upload_to': self.upload_to,
+                  'max_width': self.max_width,
+                  'max_height': self.max_height,
+                  'crop': self.crop}
+
+        upload_url = reverse('ajaximage', kwargs=kwargs)
+        file_path = value if value else ''
+
+        # use FieldFile.url - get url using storage backend
+        file_url = value if value else ''
+        if not file_url.startswith('/media/'):
+            file_url = '/media/'+file_url
+
+        file_name = os.path.basename(file_url)
+
+        output = HTML.format(upload_url=upload_url,
+                             file_url=file_url,
+                             file_name=file_name,
+                             file_path=file_path,
+                             element_id=element_id,
+                             name=name)
+        return mark_safe(unicode(output))
 
 Product = get_model('catalogue', 'Product')
 Brand = get_model('catalogue', 'Brand')
@@ -28,10 +61,11 @@ class SearchCreationForm(forms.Form):
 
 
 class SearchCreationFormItem(forms.Form):
-    category = forms.ModelChoiceField(label=_('Category'), required=True, queryset = Category.objects.all())
-    piece = ChainedModelChoiceField(label=_('Product'), required=True, app_name='catalogue', model_name='Product', chain_field='category', model_field='categories', show_all=False, auto_choose=False)
+    category = forms.ModelChoiceField(label=_('Category'), required=True, queryset = Category.objects.all(), widget=forms.Select(attrs={'class':'category'}))
+    piece = forms.ModelChoiceField(label=_('Product'), required=True, queryset = Product.objects.all(), widget=forms.Select(attrs={'class':'piece'}))
     quantity = forms.IntegerField(label=_('Quantity'), required=True, initial=1)
-    comments = forms.CharField(label=_('Comments'), required=False, widget=forms.Textarea)
+    picture = forms.ImageField(widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1))
+    comments = forms.CharField(label=_('Comments'), required=False, widget=forms.Textarea(attrs={'style':'height:50px;width:200px'}))
 
 
 class SearchItemRequestFormSet(BaseFormSet):
@@ -39,9 +73,7 @@ class SearchItemRequestFormSet(BaseFormSet):
 
 
 class SearchConfirmForm(forms.Form):
-    search_type = forms.ChoiceField(widget=forms.Select(), choices=models.SEARCH_REQUEST_TYPES,
-        required=True, label=_('Search type'))
-    comments = forms.CharField(label=_('Comments'), required=False, widget=forms.Textarea)
+    comments = forms.CharField(label=_('Comments'), required=False, widget=forms.Textarea(attrs={'style':'height:50px;width:200px'}))
     expiration_date = forms.DateField(label=_('Expiration date'), required=False,
         widget=forms.TextInput(attrs={'class':'datepicker'}))
 
@@ -52,7 +84,7 @@ class SearchConfirmForm(forms.Form):
             raise forms.ValidationError(_('Expiration date must be greater than today'))
         return data
 
-SearchCreationFormSet = formset_factory(SearchCreationFormItem, formset=SearchItemRequestFormSet, extra=1)
+SearchCreationFormSet = formset_factory(SearchCreationFormItem, formset=SearchItemRequestFormSet, extra=10)
 
 
 class SearchRequestSearchForm(forms.Form):

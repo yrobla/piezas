@@ -81,6 +81,7 @@
 							<th>{% trans "Category" %}</th>
 							<th>{% trans "Piece" %}</th>
 							<th>{% trans "Comments" %}</th>
+							<th>{% trans "Picture" %}</th>
 							<th>{% trans "Quantity" %}</th>
 						</thead>
 						<tbody>
@@ -89,6 +90,7 @@
 								<td>{{item.category_name}}</td>
 								<td>{{item.piece_name}}</td>
 								<td>{{item.comments}}</td>
+								<td><img src="/media/{{item.picture}}" style="height:50px;" /></td>
 								<td>{{item.quantity}}</td>
 							</tr>
 							{% endfor %}
@@ -106,7 +108,6 @@
         </div>
     </div>
 
-/* Include the jquery Ui here */
  <script>
     $( ".datepicker" ).datepicker({
       changeMonth: true,

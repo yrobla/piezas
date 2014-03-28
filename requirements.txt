@@ -16,3 +16,4 @@ raven==4.0.3
 
 # extras
 django-smart-selects
+django-ajaximage

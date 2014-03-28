@@ -7,15 +7,6 @@
 {% endblock %}
 
 {% block extrahead %}
-<script type="text/javascript">
-    $(function() {
-        $('#id_searchitemrequest_table tbody tr').formset({
-            prefix: 'form',
-            'addText': '{% trans "Add new piece" %}',
-            'deleteText': '{% trans "Delete piece" %}',
-        })
-    })
-</script>
 <style type="text/css">
     .delete-row {
         margin-left:5px;
@@ -44,7 +35,7 @@
 {% trans "There have been errors in your search. Please correct them and retry" %}
    </div>
 
-			<form id="search_pieces_form" action="." method="post" class="form-horizontal">
+			<form id="search_pieces_form" action="." method="post" class="form-horizontal" enctype="multipart/form-data">
 				{% csrf_token %}
 				<p>{% trans "Please enter the criteria for the pieces you want to search" %}</p>
 				{% include "partials/form_fields.html" %}
@@ -58,6 +49,7 @@
 							<th>{% trans "Category" %}</th>
 							<th>{% trans "Piece" %}</th>
 							<th>{% trans "Comments" %}</th>
+							<th>{% trans "Photo" %}</th>
 							<th>{% trans "Quantity" %}</th>
 						</thead>
 						<tbody>
@@ -84,6 +76,7 @@
 
 								</td>
 								<td>{{item_form.comments}}</td>
+								<td>{{item_form.picture}}</td>
 								<td>{{item_form.quantity}}</td>
 							</tr>
 							{% endfor %}
@@ -127,6 +120,53 @@ $(document).ready(function()
 		});
 		return false;
 	});
+
+	function fill_field(current_parent, current_child, category_value, product_value)
+	{
+		var current_id = $(current_child).id;
+		if (!category_value || category_value=='')
+		{
+                        options = '<option value="">---------<'+'/option>';
+			$(current_child).html(options);
+			$(this).html(options);
+			$("#"+current_id+' option:first').attr('selected', 'selected');
+			$(current_child).trigger('change');
+                        return;
+		}
+                $.getJSON("/chaining/filter/catalogue/Product/categories/"+category_value+"/", function(j){
+                	var options = '<option value="">---------<'+'/option>';
+                        for (var i = 0; i < j.length; i++) {
+                            options += '<option value="' + j[i].value + '">' + j[i].display + '<'+'/option>';
+                        }
+                        var width = $(current_child).outerWidth();
+                        $(current_child).html(options);
+                        if (navigator.appVersion.indexOf("MSIE") != -1)
+                            $(current_child).width(width + 'px');
+                        $('#'+current_id+' option:first').attr('selected', 'selected');
+                        var auto_choose = false;
+                        if(product_value){
+                            $('#'+current_id+' option[value="'+ product_value +'"]').attr('selected', 'selected');
+                        }
+                        if(auto_choose && j.length == 1){
+                            $('#'+current_id+' option[value="'+ j[0].value +'"]').attr('selected', 'selected');
+                        }
+                        $(current_child).trigger('change');
+		})
+	}
+
+	$("select.category").change(function(){
+		var category_value = $(this).val();
+		
+		var related_product = $(this).parent().parent().find("select.piece");
+		if (related_product.length>0)
+		{
+			product_value = '';
+			var current_select = related_product[0];
+			var product_value = $(current_select).val();
+                    	fill_field(this, current_select, category_value, product_value);
+		}
+	})
+
 });
 </script>
 

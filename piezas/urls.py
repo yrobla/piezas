@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required
 from piezas.app import application
+
 import views
+import settings
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -19,4 +21,11 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^', include(application.urls)),
     url(r'^chaining/', include('smart_selects.urls')),
+    url(r'^ajaximage/', include('ajaximage.urls')),
 )
+
+if settings.DEBUG:
+    # static files (images, css, javascript, etc.)
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT}))

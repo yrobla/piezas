@@ -63,6 +63,7 @@ location = lambda x: os.path.join(
     os.path.dirname(os.path.realpath(__file__)), x)
 MEDIA_ROOT = location("media")
 MEDIA_URL = '/media/'
+AJAXIMAGE_DIR = "searchpictures"
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -108,7 +109,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'oscar.apps.basket.middleware.BasketMiddleware',
@@ -146,6 +147,7 @@ INSTALLED_APPS = [
     'south',
     'compressor',
     'smart_selects',
+    'ajaximage',
     'piezas.apps.customuser',
     'piezas.apps.dashboard.podcatalogue', 'piezas.apps.dashboard.podorders',
     'piezas.apps.dashboard.podusers', 'piezas.apps.dashboard',
@@ -341,3 +343,4 @@ OSCAR_HOMEPAGE = '/'
 EXCLUDE_TAXES = True
 AUTH_USER_MODEL = 'customuser.PiezasUser'
 AUTH_USER_TABLE = 'piezasuser'
+AJAXIMAGE_AUTH_TEST = (lambda u: True)

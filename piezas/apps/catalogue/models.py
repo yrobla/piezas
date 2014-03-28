@@ -119,12 +119,8 @@ class ProductQuestion(models.Model):
         return self.text
 
 
-SEARCH_REQUEST_TYPES = (('', '----'), ('regional', _('Regional')), ('border', _('Border area')),
-    ('national', _('National')), ('supra', _('Supraregional')))
-
 SEARCH_REQUEST_STATES = (('pending', _('Pending')), ('expired', _('Expired')),
     ('closed', _('Closed')))
-
 
 class SearchRequest(models.Model):
     brand = models.ForeignKey(Brand, verbose_name=_("Brand"),
@@ -148,7 +144,6 @@ class SearchRequest(models.Model):
     owner = models.ForeignKey(
         AUTH_USER_MODEL, related_name='search_requests', null=True,
         verbose_name=_("Owner"))
-    search_type = models.CharField(max_length=25, choices=SEARCH_REQUEST_TYPES)
     state = models.CharField(max_length=25, choices=SEARCH_REQUEST_STATES, default='pending')
     expiration_date = models.DateTimeField(_('Expiration Date'), blank=True, null=True)
 
@@ -165,11 +160,11 @@ class SearchRequest(models.Model):
 class SearchItemRequest(models.Model):
     category = models.ForeignKey(Category, verbose_name=_('Category'),
         help_text=_('Category to search for'), related_name='product_category')
-    piece = ChainedForeignKey(Product, chained_field="category", chained_model_field="categories",
-        show_all=False, auto_choose=False, verbose_name=_("Piece"),
-        help_text=_('Piece to search for'), related_name='product_piece')
+    piece = models.ForeignKey(Product, verbose_name=_("Piece"), help_text=_('Piece to search for'), related_name='product_piece')
     comments = models.TextField(_('Comments'), blank=True)
     quantity = models.PositiveIntegerField(_('Quantity'), default=1)
+    picture = models.ImageField(upload_to='searchpictures/', blank=True)
+
     owner = models.ForeignKey(
         AUTH_USER_MODEL, related_name='search_product_requests', null=True,
         verbose_name=_("Owner"))
@@ -181,6 +176,28 @@ class SearchItemRequest(models.Model):
     def __unicode__(self):
         return u'%s - %s - %s - %s' % (self.category, self.piece, self.quantity,
             self.comments)
+
+
+class SearchItemRequestAnswers(models.Model):
+    search_item_request = models.ForeignKey(SearchItemRequest, verbose_name = _('Search item request'), blank=True, null=True)
+    question = models.ForeignKey(ProductQuestion, verbose_name=_('Piece question'), help_text=_('Question associated to piece'), related_name='piece_question')
+    boolean_answer = models.NullBooleanField(_('Answer for boolean types'), blank=True, null=True)
+    text_answer = models.TextField(_('Anser for text types'), blank=True, null=True)
+    image_answer = models.ImageField(upload_to='media/searchpictures/', blank=True)
+
+    owner = models.ForeignKey(
+        AUTH_USER_MODEL, related_name='search_answers', null=True,
+        verbose_name=_("Owner"))
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
+
+    def __unicode__(self):
+        if self.question.type == 'boolean':
+            return u'%s - %s' % (self.question, self.boolean_answer)
+        elif self.question_type == 'text':
+            return u'%s - %s' % (self.question, self.text_answer)
+        else:
+            return u'%s - %s' % (self.question, _('Image'))
 
 
 QUOTE_STATES = (('sent', _('Sent')), ('accepted', _('Accepted')),
