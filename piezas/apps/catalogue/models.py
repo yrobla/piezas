@@ -183,7 +183,7 @@ class SearchItemRequestAnswers(models.Model):
     question = models.ForeignKey(ProductQuestion, verbose_name=_('Piece question'), help_text=_('Question associated to piece'), related_name='piece_question')
     boolean_answer = models.NullBooleanField(_('Answer for boolean types'), blank=True, null=True)
     text_answer = models.TextField(_('Anser for text types'), blank=True, null=True)
-    image_answer = models.ImageField(upload_to='media/searchpictures/', blank=True)
+    image_answer = models.ImageField(upload_to='media/searchpictures/', blank=True, null=True)
 
     owner = models.ForeignKey(
         AUTH_USER_MODEL, related_name='search_answers', null=True,
@@ -239,3 +239,4 @@ class QuoteItem(models.Model):
     shipping_total_excl_tax = models.DecimalField(_('Shipping total excluding tax'), decimal_places=2, max_digits=12)
     state = models.CharField(max_length=25, choices=QUOTE_ITEM_STATES, default='pending')
     comments = models.TextField(_('Comments'), blank=True)
+    picture = models.ImageField(upload_to='searchpictures/', blank=True, null=True)

@@ -155,7 +155,6 @@ class ConfirmView(FormView):
                 search_request = models.SearchRequest(brand=brand, model=model,
                     version=version, bodywork=bodywork, engine=engine,
                     frameref=current_data["frameref"], comments=form.cleaned_data["comments"],
-                    search_type=form.cleaned_data["search_type"], state='pending',
                     owner=self.request.user, expiration_date=form.cleaned_data['expiration_date'])
                 search_request.save()
 
@@ -166,7 +165,8 @@ class ConfirmView(FormView):
 
                     search_request_item = models.SearchItemRequest(category=category,
                         piece=piece_model, comments=piece["comments"], quantity=piece["quantity"],
-                        owner=self.request.user, search_request=search_request, state='pending')
+                        owner=self.request.user, search_request=search_request, state='pending',
+                        picture=piece["picture"])
                     search_request_item.save()
                 # clear session
                 del(self.request.session['search_data'])

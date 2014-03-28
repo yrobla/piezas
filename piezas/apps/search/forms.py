@@ -144,7 +144,7 @@ class QuoteCreationForm(forms.ModelForm):
     class Meta:
         model = SearchRequest
         exclude = ('brand', 'model', 'version', 'bodywork', 'engine', 'frameref', 'comments',
-            'expiration_date', 'date_created', 'date_updated', 'state', 'owner', 'search_type',)
+            'expiration_date', 'date_created', 'date_updated', 'state', 'owner')
 
     quote_comments = forms.CharField(label=_('Comments for the quote'), required=False,
         widget=forms.Textarea())
