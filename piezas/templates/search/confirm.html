@@ -90,7 +90,7 @@
 								<td>{{item.category_name}}</td>
 								<td>{{item.piece_name}}</td>
 								<td>{{item.comments}}</td>
-								<td><img src="/media/{{item.picture}}" style="height:50px;" /></td>
+								<td>{% if item.picture %}<img src="/media/{{item.picture}}" style="height:50px;" />{% endif %}</td>
 								<td>{{item.quantity}}</td>
 							</tr>
 							{% endfor %}

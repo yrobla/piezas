@@ -49,6 +49,7 @@
 							<th>{% trans "Category" %}</th>
 							<th>{% trans "Piece" %}</th>
 							<th>{% trans "Comments" %}</th>
+							<th>{% trans "Questions" %}</th>
 							<th>{% trans "Photo" %}</th>
 							<th>{% trans "Quantity" %}</th>
 						</thead>
@@ -76,9 +77,11 @@
 
 								</td>
 								<td>{{item_form.comments}}</td>
+								<td><buttton type="button" class="toggle_questions btn">{% trans "Show/hide questions" %}</button></td>
 								<td>{{item_form.picture}}</td>
 								<td>{{item_form.quantity}}</td>
 							</tr>
+							<tr><td colspan="6" style='border:0px;'><div class="questions" style="display:none;">{% trans "No questions for this product" %}</div></td></tr>
 							{% endfor %}
 						</tbody>
 					</table>
@@ -99,6 +102,7 @@ $(document).ready(function()
 {
 	$("#search_pieces_form").submit(function()
 	{
+		$("#error_show").html("");
 		$("#error_show").hide();
 		var $form = $(this);
 		$.ajax({
@@ -113,7 +117,9 @@ $(document).ready(function()
 				}
 				else
 				{
+console.log(data);
 					// errors
+					$("#error_show").html(data.error_message);
 					$("#error_show").show();
 				}
     			}
@@ -152,7 +158,57 @@ $(document).ready(function()
                         }
                         $(current_child).trigger('change');
 		})
+
 	}
+	$("select.piece").change(function()
+	{
+		var product_value = $(this).val();
+                var next_row = $(this).parent().parent('tr').next();
+                var current_cell = $(next_row).children()[0];
+                var questions_container = $(current_cell).find("div.questions")[0];
+		if (product_value)
+		{
+	                $.getJSON("/catalogue/productquestions/"+product_value+"/", function(data){
+				if (data.length>0)
+				{
+					var final_html = "<table class='table span9'>";
+					for (var i in data)
+					{
+						current_item = data[i];
+						if (current_item.type=='boolean')
+						{
+							final_html += "<tr><th style='border-top:0px;'>"+current_item.text+"</th>";
+							final_html+="<td style='border-top:0px;'><input type='checkbox' id='question_"+current_item.id+"' name='question_"+current_item.id+"' /></td>";
+						}
+						else if (current_item.type=='text')
+						{
+
+							final_html += "<tr><th style='border-top:0px;'>"+current_item.text+"</th>";
+							final_html+="<td style='border-top:0px;'><input type='text' id='question_"+current_item.id+"' name='question_"+current_item.id+"' size=50 maxlength=255 /></td>";
+						}
+						else
+						{
+							// foto, usar el campo principal
+							final_html+="<tr><td style='border-top:0px;'>{% trans "It's mandatory to attach a picture" %}</td>";
+						}
+						final_html += "</tr>";
+					}
+					final_html += "</table>";
+					$(questions_container).html(final_html);
+				}
+				else
+				{
+					// no questions
+					$(questions_container).html("{% trans "No questions for this product" %}");
+				}
+			});
+		}
+		else
+		{
+			// no questions
+			$(questions_container).html("{% trans "No questions for this product" %}");
+		}
+	});
 
 	$("select.category").change(function(){
 		var category_value = $(this).val();
@@ -167,6 +223,15 @@ $(document).ready(function()
 		}
 	})
 
+	$(".toggle_questions").click(function()
+	{
+		var next_row = $(this).parent().parent('tr').next();
+		var current_cell = $(next_row).children()[0];
+		var questions = $(current_cell).find("div.questions")[0];
+		$(questions).toggle("fast");
+	});
+
+	$("select.piece").trigger("change");
 });
 </script>
 

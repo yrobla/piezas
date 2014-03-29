@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.core.files.storage import default_storage
 from django.http import HttpResponse, Http404
 from django.utils.translation import ugettext_lazy as _
@@ -13,6 +12,7 @@ from piezas.apps.catalogue import models
 class HomeView(FormView):
     form_class = forms.SearchCreationForm
     template_name = 'search/home.html'
+    dupes_message = _("Duplicate products aren't allowed")
 
     def get_form_kwargs(self):
         current_session = self.request.session.get('search_data', None)
@@ -79,8 +79,9 @@ class HomeView(FormView):
 
             if current_category in current_formset_data and current_formset_data[current_category] and \
                 current_piece in current_formset_data and current_formset_data[current_piece]:
+
                 final_item["category"] = current_formset_data[current_category]
-                final_item["piece"] = current_formset_data[current_category]
+                final_item["piece"] = current_formset_data[current_piece]
                 final_item["comments"] = current_formset_data[current_comments]
 
                 final_item["picture"] = current_formset_data[current_picture]
@@ -100,7 +101,44 @@ class HomeView(FormView):
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        if form.is_valid():
+
+        is_valid = form.is_valid()
+
+        # first check if we have dupes of pieces
+        current_pieces = []
+        for key, val in request.POST.items():
+            if key.endswith('-piece') and val:
+                if val not in current_pieces:
+                    current_pieces.append(val)
+                    form_container = key.replace('-piece', '')
+                    photo_container = form_container+'-picture'
+
+                    # get product questions
+                    try:
+                        questions = models.ProductQuestion.objects.filter(product=val)
+                        for question in questions:
+                            print question.type
+                            if question.type == 'text':
+                                # check if we have a value supplied
+                                question_key = 'question_'+str(question.id)
+                                if question_key not in request.POST:
+                                    # error
+                                    return HttpResponse(json.dumps({"result":False, "error_message":unicode(_('Please fill all mandatory questions'))}), mimetype='application/json')
+                            elif question.type == 'photo':
+                                # check if we have included a picture
+                                if photo_container not in request.POST or not request.POST[photo_container]:
+                                    # error
+                                    return HttpResponse(json.dumps({"result":False, "error_message":unicode(_('Please include all mandatory pictures'))}), mimetype='application/json')
+
+                    except Exception as e:
+                        print str(e)
+                        pass
+
+                else:
+                    # error
+                    return HttpResponse(json.dumps({"result":False, "error_message":unicode(self.dupes_message)}), mimetype='application/json')
+        if is_valid:
+            # check that all the questions have values
             result = self.form_valid(form)
             return HttpResponse(json.dumps({"result":result}), mimetype='application/json')
         else:
@@ -133,9 +171,9 @@ class ConfirmView(FormView):
 
             for piece in current_data["pieces"]:
                 if 'category' in piece:
-                    piece['category_name'] = models.Category.objects.get(pk=piece['category'][0])
+                    piece['category_name'] = models.Category.objects.get(pk=piece['category'])
                 if 'piece' in piece:
-                    piece['piece_name'] = models.Product.objects.get(pk=piece['piece'][0])
+                    piece['piece_name'] = models.Product.objects.get(pk=piece['piece'])
         return context
 
     def form_valid(self, form):
