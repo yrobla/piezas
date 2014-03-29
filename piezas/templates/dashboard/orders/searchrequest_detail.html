@@ -45,14 +45,12 @@
             <th>{% trans "Number of items" %}</th>
             <th>{% trans "Date of creation" %}</th>
             <th>{% trans "Expiration date" %}</th>
-            <th>{% trans "Search type" %}</th>
             <th>{% trans "Status" %}</th>
         </tr>
         <tr>
             <td>{{ searchrequest.num_items }}</td>
             <td>{{ searchrequest.date_created|date:"d/m/y" }}</td>
             <td>{{ searchrequest.expiration_date|date:"d/m/y" }}</td>
-            <td>{% trans searchrequest.search_type %}</td>
             <td>{% trans searchrequest.state %}</td>
         </tr>
     </table>
@@ -83,6 +81,7 @@
                                     <th>{% trans "Category" %}</th>
                                     <th>{% trans "Piece" %}</th>
                                     <th>{% trans "Comments" %}</th>
+                                    <th>{% trans "Picture" %}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,6 +99,7 @@
                                             {% endif %}
                                         </td>
                                         <td>{{ line.comments }}</td>
+					<td><img src="/media/{{ line.picture }}" style="height:50px;" /></td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

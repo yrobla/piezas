@@ -93,7 +93,6 @@
                         <th>{% anchor 'id' _("Search request number") %}</th>
                         <th>{% trans "Number of items" %}</th>
                         <th>{% trans "Status" %}</th>
-                        <th>{% trans "Search type" %}</th>
                         <th>{% trans "Owner" %}</th>
                         <th>{% trans "Date of creation" %}</th>
                         <th>{% trans "Date of expiration" %}</th>
@@ -106,7 +105,6 @@
                             <td><a href="{% url 'dashboard:searchrequest-detail' number=searchrequest.id %}">{{ searchrequest.id }}</a></td>
 			    <td>{{ searchrequest.num_items}}</td>
                             <td>{% trans searchrequest.state %}</td>
-                            <td>{% trans searchrequest.search_type %}</td>
 			    <td>{{ searchrequest.owner.email }}</td>
                             <td>{{ searchrequest.date_created }}</td>
                             <td>{{ searchrequest.expiration_date }}</td>

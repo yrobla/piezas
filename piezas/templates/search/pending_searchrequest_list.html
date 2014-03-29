@@ -34,7 +34,6 @@
                 <th>{% trans "Version" %}</th>
                 <th>{% trans "Engine" %}</th>
                 <th>{% trans "Num items" %}</th>
-                <th>{% trans "Search type" %}</th>
             </tr>
             {% for searchrequest in searchrequests %}
                 <tr>
@@ -45,7 +44,6 @@
                     <td>{{ searchrequest.version.name }}</td>
                     <td>{{ searchrequest.engine }}</td>
                     <td>{{ searchrequest.num_items }}</td>
-                    <td>{% trans searchrequest.search_type %}</td>
                 </tr>
             {% endfor %}
         </table>

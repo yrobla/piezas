@@ -191,7 +191,6 @@ class SearchrequestListView(BulkEditMixin, ListView):
         meta_data = (('id', _('Search request number')),
                      ('num_items', _('Number of items')),
                      ('state', _('Status')),
-                     ('search_type', _('Search type')),
                      ('owner', _('Owner')),
                      ('creation_date', _('Creation date')),
                      ('expiration_date', _('Expiration date')),
@@ -211,7 +210,6 @@ class SearchrequestListView(BulkEditMixin, ListView):
                 row['expiration_date'] = ''
 
             row['state'] = searchrequest.state
-            row['search_type'] = searchrequest.search_type
             row['num_items'] = searchrequest.num_items
             row['owner'] = searchrequest.owner.email
 
