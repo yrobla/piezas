@@ -177,6 +177,14 @@ class SearchItemRequest(models.Model):
         return u'%s - %s - %s - %s' % (self.category, self.piece, self.quantity,
             self.comments)
 
+    @property
+    def answers(self):
+        try:
+            items = SearchItemRequestAnswers.objects.filter(search_item_request=self.id)
+        except Exception as e:
+            print str(e)
+        return items
+
 
 class SearchItemRequestAnswers(models.Model):
     search_item_request = models.ForeignKey(SearchItemRequest, verbose_name = _('Search item request'), blank=True, null=True)
@@ -193,11 +201,11 @@ class SearchItemRequestAnswers(models.Model):
 
     def __unicode__(self):
         if self.question.type == 'boolean':
-            return u'%s - %s' % (self.question, self.boolean_answer)
-        elif self.question_type == 'text':
-            return u'%s - %s' % (self.question, self.text_answer)
+            return u'%s - %s' % (self.question.text, self.boolean_answer)
+        elif self.question.type == 'text':
+            return u'%s - %s' % (self.question.text, self.text_answer)
         else:
-            return u'%s - %s' % (self.question, _('Image'))
+            return u'%s - %s' % (self.question.text, _('Image'))
 
 
 QUOTE_STATES = (('sent', _('Sent')), ('accepted', _('Accepted')),

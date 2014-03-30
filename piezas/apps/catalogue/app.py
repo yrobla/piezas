@@ -18,7 +18,7 @@ class BaseCatalogueApplication(CoreCatalogueApplication):
             url(r'^ranges/(?P<slug>[\w-]+)/$',
                 login_required(self.range_view.as_view()), name='range'),
             url(r'^productquestions/(?P<pk>\d+)/$',
-                login_required(self.product_questions_view), name='product_questions'),
+                login_required(self.product_questions_view.as_view()), name='product_questions'),
             # Legacy route for the category view
             url(r'^(?P<category_slug>[\w-]+(/[\w-]+)*)/$',
                 login_required(self.category_view.as_view()), name='category')]

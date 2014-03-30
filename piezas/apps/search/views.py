@@ -92,6 +92,10 @@ class HomeView(FormView):
                     final_item["quantity"] = 1
                 final_data["pieces"].append(final_item)
 
+        # questions
+        for key,val in self.request.POST.items():
+            if key.startswith('question_'):
+                final_data[key] = val
         self.request.session['search_data'] = json.dumps(final_data)
         return True
 
@@ -117,11 +121,10 @@ class HomeView(FormView):
                     try:
                         questions = models.ProductQuestion.objects.filter(product=val)
                         for question in questions:
-                            print question.type
                             if question.type == 'text':
                                 # check if we have a value supplied
                                 question_key = 'question_'+str(question.id)
-                                if question_key not in request.POST:
+                                if question_key not in request.POST or not request.POST[question_key]:
                                     # error
                                     return HttpResponse(json.dumps({"result":False, "error_message":unicode(_('Please fill all mandatory questions'))}), mimetype='application/json')
                             elif question.type == 'photo':
@@ -174,6 +177,20 @@ class ConfirmView(FormView):
                     piece['category_name'] = models.Category.objects.get(pk=piece['category'])
                 if 'piece' in piece:
                     piece['piece_name'] = models.Product.objects.get(pk=piece['piece'])
+
+                # get the questions for each piece
+                questions = models.ProductQuestion.objects.filter(product=piece['piece'])
+                piece['questions'] = []
+                for question in questions:
+                    question_data = {}
+                    question_data['type'] = question.type
+                    question_data['text'] = question.text
+                    question_key = 'question_'+str(question.id)
+                    if question_key in current_data:
+                        question_data['value'] = current_data[question_key]
+                    else:
+                        question_data['value'] = ''
+                    piece['questions'].append(question_data)
         return context
 
     def form_valid(self, form):
@@ -206,6 +223,20 @@ class ConfirmView(FormView):
                         owner=self.request.user, search_request=search_request, state='pending',
                         picture=piece["picture"])
                     search_request_item.save()
+
+                    # now create answers for these search items
+                    questions = models.ProductQuestion.objects.filter(product=piece_model)
+                    for question in questions:
+                        question_key = 'question_'+str(question.id)
+                        if question.type in ('text','boolean'):
+                            answer = models.SearchItemRequestAnswers(search_item_request=search_request_item,
+                                question=question)
+                            if question.type=='text' and question_key in current_data:
+                                answer.text_answer = current_data[question_key]
+                            else:
+                                answer.boolean_answer = (question_key in current_data)
+                            answer.save()
+
                 # clear session
                 del(self.request.session['search_data'])
 

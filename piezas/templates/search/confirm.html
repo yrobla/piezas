@@ -81,6 +81,7 @@
 							<th>{% trans "Category" %}</th>
 							<th>{% trans "Piece" %}</th>
 							<th>{% trans "Comments" %}</th>
+							<th>{% trans "Questions" %}</th>
 							<th>{% trans "Picture" %}</th>
 							<th>{% trans "Quantity" %}</th>
 						</thead>
@@ -90,6 +91,23 @@
 								<td>{{item.category_name}}</td>
 								<td>{{item.piece_name}}</td>
 								<td>{{item.comments}}</td>
+								<td><ul>
+									{% for question in item.questions %}
+										{% if question.type in 'text,boolean' %}
+										<li>{{question.text}}:&nbsp;
+											{% if question.type == 'text' %}
+												{{question.value}}
+											{% else %}
+												{% if question.value %}
+													{% trans "Yes" %}
+												{% else %}
+													{% trans "No" %}
+												{% endif %}
+											{% endif %}
+										</li>
+										{% endif %}
+									{% endfor %}</ul>
+								</td>
 								<td>{% if item.picture %}<img src="/media/{{item.picture}}" style="height:50px;" />{% endif %}</td>
 								<td>{{item.quantity}}</td>
 							</tr>

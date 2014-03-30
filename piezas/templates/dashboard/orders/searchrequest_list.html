@@ -109,7 +109,7 @@
                             <td>{{ searchrequest.date_created }}</td>
                             <td>{{ searchrequest.expiration_date }}</td>
                             <td>
-                                <a class="btn btn-info" href="{% url 'dashboard:searchrequest-detail' number=1 %}">{% trans "View" %}</a>
+                                <a class="btn btn-info" href="{% url 'dashboard:searchrequest-detail' number=searchrequest.id %}">{% trans "View" %}</a>
                             </td>
                         </tr>
                     {% endfor %}
