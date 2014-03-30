@@ -1,14 +1,20 @@
 # Only define custom UserManager/UserModel when Django >= 1.5
 from django.contrib.auth import models as auth_models
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
-from oscar.models.fields import PhoneNumberField
+import re
 
 TYPE_CHOICES = (
     ('customer', _('Workshop')),
     ('provider', _('Scrapping'))
 )
+
+def validate_phone_number(value):
+    result = re.match(r'^\+?(\d{7,15})$', value)
+    if result is None or not result:
+        raise ValidationError(_('%s is not a valid phone number') % value)
 
 if hasattr(auth_models, 'BaseUserManager'):
 
@@ -65,6 +71,10 @@ if hasattr(auth_models, 'BaseUserManager'):
         type = models.CharField(_('Customer type'), choices=TYPE_CHOICES, max_length=15, default='customer')
         cif = models.CharField(_('CIF'), max_length=9)
         promotional_code = models.CharField(_('Promotional code'), max_length=50, blank=True, null=True)
+        contact_person = models.CharField(
+            _('Contact person'), max_length=255, blank=False)
+        phone_number = models.CharField(_("Contact phone"), blank=False, max_length=255,
+            help_text=_("In case we need to call you"), validators=[validate_phone_number])
         date_joined = models.DateTimeField(_('date joined'),
                                            default=timezone.now)
 

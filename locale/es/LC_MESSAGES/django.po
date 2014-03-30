@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-30 11:26+0200\n"
+"POT-Creation-Date: 2014-03-30 12:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -529,65 +529,70 @@ msgstr ""
 msgid "Address '%s' created"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:9
+#: piezas/apps/customuser/models.py:10
 msgid "Workshop"
 msgstr "Taller"
 
-#: piezas/apps/customuser/models.py:10
+#: piezas/apps/customuser/models.py:11
 msgid "Scrapping"
 msgstr "Desguace"
 
-#: piezas/apps/customuser/models.py:45
+#: piezas/apps/customuser/models.py:17
+#, python-format
+msgid "%s is not a valid phone number"
+msgstr "%s no es un número de teléfono válido"
+
+#: piezas/apps/customuser/models.py:51
 msgid "email address"
 msgstr "dirección de correo electrónico"
 
-#: piezas/apps/customuser/models.py:47
+#: piezas/apps/customuser/models.py:53
 msgid "Commercial name"
 msgstr "Nombre comercial"
 
-#: piezas/apps/customuser/models.py:49
+#: piezas/apps/customuser/models.py:55
 msgid "Social name"
 msgstr "Nombre social"
 
-#: piezas/apps/customuser/models.py:51
+#: piezas/apps/customuser/models.py:57
 #: piezas/templates/dashboard/partners/partner_manage.html:55
 #: piezas/templates/dashboard/partners/partner_user_list.html:46
 #: piezas/templates/dashboard/partners/partner_user_select.html:53
 msgid "First name"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:53
+#: piezas/apps/customuser/models.py:59
 #: piezas/templates/dashboard/partners/partner_manage.html:56
 #: piezas/templates/dashboard/partners/partner_user_list.html:47
 #: piezas/templates/dashboard/partners/partner_user_select.html:54
 msgid "Last name"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:55
+#: piezas/apps/customuser/models.py:61
 msgid "Staff status"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:56
+#: piezas/apps/customuser/models.py:62
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: piezas/apps/customuser/models.py:59
+#: piezas/apps/customuser/models.py:65
 #: piezas/templates/dashboard/users/detail.html:46
 msgid "Active"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:60
+#: piezas/apps/customuser/models.py:66
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: piezas/apps/customuser/models.py:63
+#: piezas/apps/customuser/models.py:69
 #: piezas/templates/dashboard/users/detail.html:52
 msgid "Validated"
 msgstr "Validado"
 
-#: piezas/apps/customuser/models.py:64
+#: piezas/apps/customuser/models.py:70
 msgid ""
 "Designates if the user has been validated by admins and has full access to "
 "platform."
@@ -595,27 +600,39 @@ msgstr ""
 "Designa si el usuario ha sido validado por los administradores y tiene "
 "acceso completo a la plataforma"
 
-#: piezas/apps/customuser/models.py:65
+#: piezas/apps/customuser/models.py:71
 msgid "Customer type"
 msgstr "Tipo de cliente"
 
-#: piezas/apps/customuser/models.py:66
+#: piezas/apps/customuser/models.py:72
 #: piezas/templates/dashboard/users/detail.html:66
 #: piezas/templates/dashboard/users/index.html:79
 msgid "CIF"
 msgstr "CIF"
 
-#: piezas/apps/customuser/models.py:67
+#: piezas/apps/customuser/models.py:73
 #: piezas/templates/dashboard/users/detail.html:70
 #: piezas/templates/dashboard/users/index.html:80
 msgid "Promotional code"
 msgstr "Código promocional"
 
-#: piezas/apps/customuser/models.py:68
+#: piezas/apps/customuser/models.py:75
+msgid "Contact person"
+msgstr "Persona de contacto"
+
+#: piezas/apps/customuser/models.py:76
+msgid "Contact phone"
+msgstr "Teléfono de contacto"
+
+#: piezas/apps/customuser/models.py:77
+msgid "In case we need to call you"
+msgstr "En el caso de que necesitemos llamarte"
+
+#: piezas/apps/customuser/models.py:78
 msgid "date joined"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:76
+#: piezas/apps/customuser/models.py:86
 #: piezas/templates/dashboard/orders/order_detail.html:580
 #: piezas/templates/dashboard/reviews/review_delete.html:40
 #: piezas/templates/dashboard/reviews/review_list.html:59
@@ -624,7 +641,7 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: piezas/apps/customuser/models.py:77
+#: piezas/apps/customuser/models.py:87
 #: piezas/templates/dashboard/partners/partner_list.html:46
 #: piezas/templates/dashboard/partners/partner_manage.html:49
 msgid "Users"

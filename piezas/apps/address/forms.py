@@ -5,7 +5,7 @@ from oscar.views.generic import PhoneNumberMixin
 from piezas.apps.address.models import UserAddress
 from django.utils.translation import ugettext_lazy as _
 
-class UserAddressForm(PhoneNumberMixin, AbstractAddressForm):
+class UserAddressForm(AbstractAddressForm):
 
     latitude = forms.DecimalField(label=_('Latitude'), max_digits=40)
     longitude = forms.DecimalField(label=_('Longitude'), max_digits=40)
@@ -13,7 +13,7 @@ class UserAddressForm(PhoneNumberMixin, AbstractAddressForm):
     class Meta:
         model = UserAddress
         exclude = ('title', 'user', 'num_orders', 'hash', 'search_text',
-                   'notes')
+                   'notes', 'first_name', 'last_name', 'phone_number')
 
     def __init__(self, user, *args, **kwargs):
         super(UserAddressForm, self).__init__(*args, **kwargs)
