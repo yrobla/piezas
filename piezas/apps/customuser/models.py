@@ -2,6 +2,7 @@
 from django.contrib.auth import models as auth_models
 from django.core.exceptions import ValidationError
 from django.db import models
+from django_iban.fields import IBANField
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 import re
@@ -75,6 +76,7 @@ if hasattr(auth_models, 'BaseUserManager'):
             _('Contact person'), max_length=255, blank=False)
         phone_number = models.CharField(_("Contact phone"), blank=False, max_length=255,
             help_text=_("In case we need to call you"), validators=[validate_phone_number])
+        iban = IBANField(_('Bank number account (IBAN format)'), blank=True, null=True)
         date_joined = models.DateTimeField(_('date joined'),
                                            default=timezone.now)
 

@@ -77,7 +77,7 @@ class PodAccountAuthView(RegisterUserMixin, TemplateView):
         kwargs['host'] = self.request.get_host()
         kwargs['prefix'] = self.registration_prefix
         kwargs['initial'] = {
-            'redirect_url': reverse('customer:address-create'),
+            'redirect_url': reverse('customer:profile-update'),
         }
         if request and request.method in ('POST', 'PUT'):
             kwargs.update({
@@ -113,7 +113,31 @@ class PodAccountAuthView(RegisterUserMixin, TemplateView):
 
 
 class ProfileView(CoreProfileView):
-    pass
+    def get_profile_fields(self, user):
+        field_data = []
+
+        # Check for custom user model
+        for field_name in User._meta.additional_fields:
+            if field_name == 'iban' and user.type == 'customer':
+                continue
+
+            field_data.append(
+                self.get_model_field_data(user, field_name))
+        # Check for profile class
+        profile_class = get_profile_class()
+        if profile_class:
+            try:
+                profile = profile_class.objects.get(user=user)
+            except ObjectDoesNotExist:
+                profile = profile_class(user=user)
+            field_names = [f.name for f in profile._meta.local_fields]
+            for field_name in field_names:
+                if field_name in ('user', 'id'):
+                    continue
+                field_data.append(
+                    self.get_model_field_data(profile, field_name))
+
+        return field_data
 
 
 class ProfileUpdateView(PageTitleMixin, FormView):
@@ -139,7 +163,16 @@ class ProfileUpdateView(PageTitleMixin, FormView):
         form.save()
 
         messages.success(self.request, _("Profile updated"))
-        return HttpResponseRedirect(self.get_success_url())
+
+        # if no address, redirect to new address, if not, redirect to success
+        try:
+            address = UserAddress.objects.filter(user = self.request.user.id).count()
+            if address > 0:
+                return HttpResponseRedirect(self.get_success_url())
+            else:
+                return HttpResponseRedirect(reverse('customer:address-create'))
+        except:
+            return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse('customer:profile-view')

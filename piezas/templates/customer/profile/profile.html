@@ -17,7 +17,12 @@
                 {% for field in profile_fields %}
                     <tr>
                         <th>{{ field.name }}</th>
-                        <td>{{ field.value|default:"-" }}</td>
+                        <td>{% if field.value == True or field.value == False %}
+				{% if field.value == True %}{% trans "Yes" %}
+				{% else %}{% trans "No" %}{% endif %}
+			{% else %}
+			{{ field.value|default:"-" }}
+			{% endif %}</td>
                     </tr>
                 {% endfor %}
             {% endblock %}

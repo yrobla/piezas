@@ -6,6 +6,7 @@ from oscar.core.compat import get_user_model
 from oscar.apps.customer.forms import EmailUserCreationForm
 from oscar.apps.customer.utils import normalise_email
 from piezas.apps.customuser.models import TYPE_CHOICES
+from django_iban.forms import IBANFormField
 
 User = get_user_model()
 
@@ -16,6 +17,7 @@ class PodEmailUserCreationForm(EmailUserCreationForm):
 
 
 class ProfileForm(forms.ModelForm):
+    iban = IBANFormField(label=_('Bank number account (IBAN format)'), required=True)
 
     def __init__(self, user, *args, **kwargs):
         self.user = user
@@ -23,6 +25,9 @@ class ProfileForm(forms.ModelForm):
         super(ProfileForm, self).__init__(*args, **kwargs)
         if 'email' in self.fields:
             self.fields['email'].required = True
+
+        if user and user.type=='customer':
+            del self.fields['iban']
 
     def clean_email(self):
         """
