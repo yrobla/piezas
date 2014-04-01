@@ -115,7 +115,7 @@
 								{{item_form.piece}}<br /><br />
 								{{item_form.answers}}</td>
 								</td>
-								<td>{% if item_form.picture %}
+								<td>{% if item_form.picture.value %}
 								<img src='/media/{{item_form.picture.value}}' style='max-width:100px;'/>{% endif %}</td>
 								<td>{{item_form.comments}}</td>
 								<td>{{item_form.quantity}}</td>
