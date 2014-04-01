@@ -146,6 +146,8 @@ class SearchRequest(models.Model):
         verbose_name=_("Owner"))
     state = models.CharField(max_length=25, choices=SEARCH_REQUEST_STATES, default='pending')
     expiration_date = models.DateTimeField(_('Expiration Date'), blank=True, null=True)
+    latitude = models.DecimalField(_('Latitude'), max_digits=40, decimal_places=20)
+    longitude = models.DecimalField(_('Longitude'), max_digits=40, decimal_places=20)
 
     @property
     def lines(self):

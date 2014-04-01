@@ -5,6 +5,7 @@ from django.db import models
 from django_iban.fields import IBANField
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from piezas.apps.address.models import UserAddress
 import re
 
 TYPE_CHOICES = (
@@ -16,6 +17,7 @@ def validate_phone_number(value):
     result = re.match(r'^\+?(\d{7,15})$', value)
     if result is None or not result:
         raise ValidationError(_('%s is not a valid phone number') % value)
+
 
 if hasattr(auth_models, 'BaseUserManager'):
 
@@ -120,3 +122,11 @@ if hasattr(auth_models, 'BaseUserManager'):
             alerts = ProductAlert.objects.filter(
                 email=self.email, status=ProductAlert.ACTIVE)
             alerts.update(user=self, key=None, email=None)
+
+        # given an user, return the default shipping address
+        def get_default_shipping_address(self):
+            try:
+                address = UserAddress.objects.get(user=self, is_default_for_shipping=True)
+                return address
+            except Exception as e:
+                return None

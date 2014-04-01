@@ -13,15 +13,6 @@
     </ul>
 {% endblock %}
 {% block content %}
-    {% if searchrequests or form.is_bound %}
-	<div class="well">
-            <form action="." method="get">
-                {% include "partials/form_fields.html" with form=form %}
-                <button type="submit" class="btn btn-primary">{% trans 'Filter results' %}</button>
-                <a href="{% url 'search:request-list' %}" class="btn">{% trans 'Reset' %}</a>
-            </form>
-	</div>
-    {% endif %}
 
     {% if searchrequests %}
         <h3>{{ form.description }}</h3>
@@ -33,7 +24,9 @@
                 <th>{% trans "Model" %}</th>
                 <th>{% trans "Version" %}</th>
                 <th>{% trans "Engine" %}</th>
+                <th>{% trans "Zone" %}</th>
                 <th>{% trans "Num items" %}</th>
+                <th>{% trans "Search type" %}</th>
             </tr>
             {% for searchrequest in searchrequests %}
                 <tr>
@@ -43,7 +36,9 @@
                     <td>{{ searchrequest.model.name }}</td>
                     <td>{{ searchrequest.version.name }}</td>
                     <td>{{ searchrequest.engine }}</td>
+                    <td>{{ searchrequest.zone }}</td>
                     <td>{{ searchrequest.num_items }}</td>
+                    <td>{{ searchrequest.search_type }}</td>
                 </tr>
             {% endfor %}
         </table>

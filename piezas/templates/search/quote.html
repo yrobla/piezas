@@ -74,10 +74,16 @@
 						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.expiration_date|date:'d/m/Y'}}" />
 					</div>
 				</div>
-				<div class="control-group span10">
+				<div class="control-group span5">
 					<label class="control-label">{% trans "Comments" %}:</label>
 					<div class="controls">
 						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.comments}}" />
+					</div>
+				</div>
+				<div class="control-group span5">
+					<label class="control-label">{% trans "Zone" %}:</label>
+					<div class="controls">
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.zone}}" />
 					</div>
 				</div>
 

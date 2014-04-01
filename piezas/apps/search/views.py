@@ -207,10 +207,19 @@ class ConfirmView(FormView):
                 bodywork = models.Bodywork.objects.get(pk=current_data["bodywork"])
                 engine = models.Engine.objects.get(pk=current_data["engine"])
 
+                # get user default shipping address
+                address = self.request.user.get_default_shipping_address()
+                if address is not None:
+                    longitude = address.longitude
+                    latitude = address.latitude
+                else:
+                    longitude = latitude = None
+
                 search_request = models.SearchRequest(brand=brand, model=model,
                     version=version, bodywork=bodywork, engine=engine,
                     frameref=current_data["frameref"], comments=form.cleaned_data["comments"],
-                    owner=self.request.user, expiration_date=form.cleaned_data['expiration_date'])
+                    owner=self.request.user, longitude=longitude, latitude=latitude,
+                    expiration_date=form.cleaned_data['expiration_date'])
                 search_request.save()
 
                 # now create search items
@@ -261,31 +270,65 @@ class PendingSearchRequestsView(ListView):
     template_name = 'search/pending_searchrequest_list.html'
     paginate_by = 20
     model = models.SearchRequest
-    form_class = forms.SearchRequestSearchForm
     page_title = _('Active searches from customers')
     active_tab = 'searchrequests'
 
-    def get(self, request, *args, **kwargs):
-        if 'date_from' in request.GET:
-            self.form = self.form_class(self.request.GET)
-            if not self.form.is_valid():
-                self.object_list = self.get_queryset()
-                ctx = self.get_context_data(object_list=self.object_list)
-                return self.render_to_response(ctx)
-            data = self.form.cleaned_data
-        else:
-            self.form = self.form_class()
-        return super(PendingSearchRequestsView, self).get(request, *args, **kwargs)
-
     def get_queryset(self):
-        qs = self.model._default_manager.filter(state='pending')
-        if self.form.is_bound and self.form.is_valid():
-            qs = qs.filter(**self.form.get_filters())
-        return qs
+        # get user lat and long
+        user_address = self.request.user.get_default_shipping_address()
+        if user_address:
+            current_latitude = user_address.latitude
+            current_longitude = user_address.longitude
+
+            #1- Aquellas Busquedas realizadas por Talleres de <100Km y realizadas en las ultimas 3h
+            #2- Aquellas Busquedas realizadas por Talleres de [200Km 500km] y que lleven activas entre 1:30h y 3h
+            #3- Aquellas Busquedas realizadas por Talleres de [500Km 1000km] y que lleven activas entre 3:00h y 4:30h
+            #4- Aquellas Busquedas realizadas por Talleres de [1000km] y que lleven activas entre 4:30h y 6h
+            qs = self.model.objects.raw("""
+            select catalogue_searchrequest.*,
+            earth_distance(ll_to_earth(latitude,longitude),ll_to_earth(%f,%f)) as distance
+            from catalogue_searchrequest where state = %s and 
+            (
+                (earth_box( ll_to_earth(%f, %f), %d) @> ll_to_earth(latitude, longitude)
+                 and date_created>=(current_timestamp - interval '3 hour')) or 
+                (earth_box( ll_to_earth(%f, %f), %d) @> ll_to_earth(latitude, longitude)
+                 and date_created between (current_timestamp - interval '3 hour') and 
+                 (current_timestamp - interval '90 min')) or
+                (earth_box( ll_to_earth(%f, %f), %d) @> ll_to_earth(latitude, longitude)
+                 and date_created between (current_timestamp - interval '360 min') and 
+                 (current_timestamp - interval '3 hour')) or
+                (earth_box( ll_to_earth(%f, %f), %d) @> ll_to_earth(latitude, longitude)
+                 and date_created between (current_timestamp - interval '6 hour') and 
+                 (current_timestamp - interval '360 min'))
+            )
+            """ % (current_latitude, current_longitude, "'pending'", 
+                   current_latitude, current_longitude, 100000,
+                   current_latitude, current_longitude, 200000,
+                   current_latitude, current_longitude, 500000,
+                   current_latitude, current_longitude, 1000000
+                ))
+            items = list(qs)
+            for item in items:
+                # get zone
+                search_user = item.owner
+                address = search_user.get_default_shipping_address()
+                if address:
+                    item.zone = u'%s - %s' % (address.postcode, address.state)
+                final_distance = item.distance/1000
+                if final_distance<100:
+                    item.search_type = _('Regional')
+                elif final_distance<200:
+                    item.search_type = _('Bordering')
+                elif final_distance<500:
+                    item.search_type = _('Supraregional')
+                else:
+                    item.search_type = _('Regional')
+            return items
+        else:
+            return []
 
     def get_context_data(self, *args, **kwargs):
         ctx = super(PendingSearchRequestsView, self).get_context_data(*args, **kwargs)
-        ctx['form'] = self.form
         return ctx
 
 class QuoteView(UpdateView):
@@ -299,6 +342,12 @@ class QuoteView(UpdateView):
             context['formset'] = forms.InlineQuoteCreationFormSet(self.request.POST, instance=self.object)
         else:
             context['formset'] = forms.InlineQuoteCreationFormSet(instance=self.object)
+
+        # get zone
+        search_user = self.object.owner
+        address = search_user.get_default_shipping_address()
+        if address:
+            self.object.zone = u'%s - %s' % (address.postcode, address.state)
         context['searchrequest'] = self.object
         return context
     
