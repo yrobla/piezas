@@ -22,7 +22,7 @@
 
 {% block content %}
     <div class="row-fluid">
-        <div class="span10 register_form">
+        <div class="span12 register_form">
 
 				<p class="span10">{% trans "Please enter the quote details for that search request" %}</p>
 
@@ -94,33 +94,35 @@
 			 	<h4>{% trans "Pieces to quote" %}</h4>
 
 				<div class="responsible-table">
-					<table class="table table-quote" id="id_searchitemrequest_table">
+					<table class="table table-quote span12" id="id_searchitemrequest_table">
 						<thead><tr>
-							<th>{% trans "Add" %}</th>
 							<th>{% trans "Category" %}</th>
 							<th>{% trans "Piece" %}</th>
+							<th>{% trans "Picture" %}</th>
 							<th>{% trans "Comments" %}</th>
 							<th>{% trans "Quantity" %}</th>
 							<th>{% trans "Served quantity" %}</th>
 							<th>{% trans "Base total excl. tax" %}</th>
-							<th>{% trans "Shipping total excl. tax" %}</th> 							
 							<th>{% trans "Comments for the quote" %}</th>
+							<th>{% trans "Picture of the piece to be sent" %}</th>
 						</tr></thead>
 						<tbody>
 							{% for item_form in formset.forms %}
 							<tr id="{{ item_form.prefix }}-row">
-								<td><input type="checkbox" id="selectforquote-{{item_form.pk}}" /></td>
 								<td>{{item_form.category}}</td>
 								<td>
 								{% for fld in item_form.hidden_fields %}{{ fld }}{% endfor %}
-								{{item_form.piece}}</td>
+								{{item_form.piece}}<br /><br />
+								{{item_form.answers}}</td>
 								</td>
+								<td>{% if item_form.picture %}
+								<img src='/media/{{item_form.picture.value}}' style='max-width:100px;'/>{% endif %}</td>
 								<td>{{item_form.comments}}</td>
 								<td>{{item_form.quantity}}</td>
 								<td>{{item_form.served_quantity}}</td>
 								<td>{{item_form.base_total}}</td>
-								<td>{{item_form.shipping_total}}</td>
 								<td>{{item_form.quote_comments}}</td>
+								<td>{{item_form.quote_picture}}</td>
 							</tr>
 							{% endfor %}
 						</tbody>
@@ -168,7 +170,7 @@
 					</div>
 				</div>
 
-				<div class="span10 form-actions">
+				<div class="span12 form-actions">
 					<button type="submit" class="btn btn-primary btn-large span4">
 					{% trans "Confirm quote" %}
 					</button>

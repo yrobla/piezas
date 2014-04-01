@@ -1,5 +1,6 @@
 import os
 from django import forms
+from django.db.models.fields.files import ImageFieldFile
 from django.forms.extras.widgets import SelectDateWidget
 from oscar.core.loading import get_model
 from django.core.urlresolvers import reverse
@@ -28,7 +29,10 @@ class AjaxImageEditor(CoreAjaxImageEditor):
         file_path = value if value else ''
 
         # use FieldFile.url - get url using storage backend
-        file_url = value if value else ''
+        if isinstance(value, ImageFieldFile):
+            file_url = value.url
+        else:
+            file_url = value if value else ''
         if not file_url.startswith('/media/'):
             file_url = '/media/'+file_url
 
@@ -144,7 +148,8 @@ class QuoteCreationForm(forms.ModelForm):
     class Meta:
         model = SearchRequest
         exclude = ('brand', 'model', 'version', 'bodywork', 'engine', 'frameref', 'comments',
-            'expiration_date', 'date_created', 'date_updated', 'state', 'owner')
+            'expiration_date', 'date_created', 'date_updated', 'state', 'owner',
+            'latitude', 'longitude')
 
     quote_comments = forms.CharField(label=_('Comments for the quote'), required=False,
         widget=forms.Textarea())
@@ -155,22 +160,33 @@ class QuoteItemCreationForm(forms.ModelForm):
     class Meta:
         model = SearchItemRequest
 
-    category = forms.ModelChoiceField(label=_('Category'), queryset=models.Category.objects.all(),
-        widget=forms.Select(attrs={'readonly':'readonly', 'disabled':'disabled'}))
-    piece = forms.ModelChoiceField(label=_('Piece'), queryset=models.Product.objects.all(),
-        widget=forms.Select(attrs={'readonly':'readonly', 'disabled':'disabled'}))
+    def clean(self):
+        cleaned_data = super(QuoteItemCreationForm, self).clean()
+        print cleaned_data
+
+    category = forms.CharField(label=_('Category'), required=False,
+        widget=forms.TextInput(attrs={'readonly':'readonly'}))
+    piece = forms.CharField(label=_('Piece'), required=False,
+        widget=forms.TextInput(attrs={'readonly':'readonly'}))
+    picture = forms.ImageField(widget=AjaxImageEditor(upload_to='searchpictures',
+        max_width=800, max_height=600, crop=1))
+    answers = forms.CharField(label=_('Details'), required=False,
+        widget=forms.Textarea(attrs={'style':'width:250px;height:200px;','readonly':'readonly'}))
     comments = forms.CharField(label=_('Comments'), required=False,
-        widget=forms.Textarea(attrs={'readonly':'readonly', 'disabled':'disabled'}))
-    quantity = forms.IntegerField(label=_('Quantity'), widget=forms.TextInput(
-        attrs={'readonly':'readonly', 'disabled':'disabled'}))
+        widget=forms.Textarea(attrs={'readonly':'readonly'}))
+    quantity = forms.IntegerField(label=_('Quantity'),
+        widget=forms.TextInput(attrs={'readonly':'readonly'}))
+    served_quantity = forms.IntegerField(label=_('Served quantity'), widget=forms.NumberInput(
+        attrs={'style':'width:50px;'}))
+
     served_quantity = forms.IntegerField(label=_('Served quantity'), widget=forms.NumberInput(
         attrs={'style':'width:50px;'}))
     base_total = forms.DecimalField(label=_('Base total excluding tax'), decimal_places=2,
-        max_digits=12, widget=forms.NumberInput(attrs={'style':'width:100px;'}))
-    shipping_total = forms.DecimalField(label=_('Shipping total excluding tax'),
-        decimal_places=2, max_digits=12, widget=forms.NumberInput(attrs={'style':'width:100px;'}))
+        max_digits=12, widget=forms.NumberInput(attrs={'style':'width:100px;'}), initial=0)
     quote_comments = forms.CharField(label=_('Comments for the quote'), required=False,
         widget=forms.Textarea())
+    quote_picture = forms.ImageField(widget=AjaxImageEditor(upload_to='quotepictures',
+        max_width=800, max_height=600, crop=1))
 
 
 InlineQuoteCreationFormSet = inlineformset_factory(SearchRequest, SearchItemRequest, form=QuoteItemCreationForm, extra=0)

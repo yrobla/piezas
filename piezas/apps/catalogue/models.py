@@ -246,7 +246,6 @@ class QuoteItem(models.Model):
     date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
     quantity = models.PositiveIntegerField(_('Quantity'), default=1)
     base_total_excl_tax = models.DecimalField(_('Base total excluding tax'), decimal_places=2, max_digits=12)
-    shipping_total_excl_tax = models.DecimalField(_('Shipping total excluding tax'), decimal_places=2, max_digits=12)
     state = models.CharField(max_length=25, choices=QUOTE_ITEM_STATES, default='pending')
     comments = models.TextField(_('Comments'), blank=True)
     picture = models.ImageField(upload_to='searchpictures/', blank=True, null=True)

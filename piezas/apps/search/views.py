@@ -279,6 +279,8 @@ class PendingSearchRequestsView(ListView):
         if user_address:
             current_latitude = user_address.latitude
             current_longitude = user_address.longitude
+            print current_latitude
+            print current_longitude
 
             #1- Aquellas Busquedas realizadas por Talleres de <100Km y realizadas en las ultimas 3h
             #2- Aquellas Busquedas realizadas por Talleres de [200Km 500km] y que lleven activas entre 1:30h y 3h
@@ -342,6 +344,39 @@ class QuoteView(UpdateView):
             context['formset'] = forms.InlineQuoteCreationFormSet(self.request.POST, instance=self.object)
         else:
             context['formset'] = forms.InlineQuoteCreationFormSet(instance=self.object)
+            for form in context['formset'].forms:
+                if 'served_quantity' not in form.initial:
+                    form.initial['served_quantity'] = form.initial['quantity']
+
+        for form in context['formset'].forms:
+            try:
+                form.initial['category'] = models.Category.objects.get(pk=form.initial['category'])
+            except Exception as e:
+                 pass
+
+            try:
+                form.initial['piece'] = models.Product.objects.get(pk=form.initial['piece'])
+            except:
+                pass
+
+            if 'answers' not in form.initial:
+                try:
+                    search_item = models.SearchItemRequest.objects.get(pk=form.initial['id'])
+                    answers_text = u''
+                    for answer in search_item.answers:
+                        answers_text += u'%s: '% answer.question.text
+                        if answer.question.type == 'boolean':
+                            if answer.boolean_answer:
+                                answers_text += unicode(_('Yes'))
+                            else:
+                                answers_text += unicode(_('No'))
+                        else:
+                            answers_text += answer.text_answer
+                        answers_text += u'\n'
+
+                    form.initial['answers'] = answers_text
+                except Exception as e:
+                    pass
 
         # get zone
         search_user = self.object.owner
