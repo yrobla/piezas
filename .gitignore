@@ -1,2 +1,3 @@
 *.pyc
+piezas/media/*
 piezas/media/searchpictures/*

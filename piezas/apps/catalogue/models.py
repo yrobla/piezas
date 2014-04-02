@@ -238,6 +238,7 @@ QUOTE_ITEM_STATES = (('sent', _('Sent')), ('accepted', _('Accepted')),
     ('rejected', _('Rejected')))
 
 class QuoteItem(models.Model):
+    quote = models.ForeignKey(Quote, verbose_name = _('Associated quote'), blank=False)
     search_item_request = models.ForeignKey(SearchItemRequest, verbose_name = _('Associated search request item'), blank=False)
     owner = models.ForeignKey(
         AUTH_USER_MODEL, related_name='quote_item_owner', null=True,

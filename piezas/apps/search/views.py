@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from oscar.core.loading import get_model
 import json
 import forms
+from piezas import settings
 from piezas.apps.catalogue import models
 
 class HomeView(FormView):
@@ -261,6 +262,9 @@ class ConfirmView(FormView):
 class PlacedView(TemplateView):
     template_name = 'search/placed.html'
 
+class QuotePlacedView(TemplateView):
+    template_name = 'search/quoteplaced.html'
+
 
 class PendingSearchRequestsView(ListView):
     """
@@ -279,8 +283,6 @@ class PendingSearchRequestsView(ListView):
         if user_address:
             current_latitude = user_address.latitude
             current_longitude = user_address.longitude
-            print current_latitude
-            print current_longitude
 
             #1- Aquellas Busquedas realizadas por Talleres de <100Km y realizadas en las ultimas 3h
             #2- Aquellas Busquedas realizadas por Talleres de [200Km 500km] y que lleven activas entre 1:30h y 3h
@@ -385,69 +387,64 @@ class QuoteView(UpdateView):
             self.object.zone = u'%s - %s' % (address.postcode, address.state)
         context['searchrequest'] = self.object
         return context
-    
+
     def form_valid(self, form):
         response = super(QuoteView, self).form_valid(form)
-        context = self.get_context_data()
-        formset = context['formset']
 
-        final_data = {}
-        final_data["engine"] = form.cleaned_data["engine"].id
-        final_data["frameref"] = form.cleaned_data["frameref"]
-        final_data["brand"] = form.cleaned_data["brand"].id
-        final_data["version"] = form.cleaned_data["version"].id
-        final_data["model"] = form.cleaned_data["model"].id
-        final_data["bodywork"] = form.cleaned_data["bodywork"].id
+        request_id = form.initial['id']
+        warranty_days = form.cleaned_data['warranty_days']
+        shipping_days = form.cleaned_data['shipping_days']
+        shipping_total_excl_tax = form.cleaned_data['shipping_total_excl_tax']
+        quote_comments = form.cleaned_data['quote_comments']
+        base_total = 0
+        
+        total_forms = form.data['searchitemrequest_set-TOTAL_FORMS']
+        items = []
+        for i in range(int(total_forms)):
+            data_item = {}
+            data_item['id'] = form.data['searchitemrequest_set-%d-id' % i]
+            data_item['picture'] = form.data['searchitemrequest_set-%d-quote_picture' % i]
+            data_item['quantity'] = form.data['searchitemrequest_set-%d-served_quantity' % i]
+            data_item['line_total'] = form.data['searchitemrequest_set-%d-base_total' % i]
+            data_item['line_comments'] = form.data['searchitemrequest_set-%d-quote_comments' % i]
+            base_total += float(data_item['line_total'])
+            items.append(data_item)
 
-        # formset
-        final_data["pieces"] = []
+        # calc totals
+        shipping_total_incl_tax = float(shipping_total_excl_tax) + float(shipping_total_excl_tax*settings.TPC_TAX/100)
+        grand_total_excl_tax = float(base_total) + float(shipping_total_excl_tax)
+        base_total_incl_tax = float(base_total) + float(base_total*settings.TPC_TAX/100)
+        grand_total_incl_tax = float(base_total_incl_tax) + float(shipping_total_incl_tax)
 
-        if hasattr(formset, 'cleaned_data'):
-            current_formset_data = formset.cleaned_data
-            for current_item in current_formset_data:
-                final_item = {}
-                if "category" in current_item and current_item["category"] and \
-                    "piece" in current_item and current_item["piece"]:
-                    final_item["category"] = current_item["category"].id
-                    final_item["piece"] = current_item["piece"].id
-                    final_item["comments"] = current_item["comments"]
+        # create entries
+        try:
+            search_request = models.SearchRequest.objects.get(pk=request_id)
+            quote = models.Quote(search_request=search_request, owner=self.request.user,
+                                 state='pending', base_total_excl_tax=base_total,
+                                 base_total_incl_tax=base_total_incl_tax,
+                                 shipping_total_excl_tax=shipping_total_excl_tax,
+                                 shipping_total_incl_tax=shipping_total_incl_tax,
+                                 grand_total_excl_tax=grand_total_excl_tax,
+                                 grand_total_incl_tax=grand_total_incl_tax,
+                                 comments=quote_comments, warranty_days=warranty_days,
+                                 shipping_days=shipping_days)
+            quote.save()
 
-                    if "quantity" in current_item and current_item["quantity"]>0:
-                        final_item["quantity"] = current_item["quantity"]
-                    else:
-                        final_item["quantity"] = 1
+            for item in items:
+                # create quote item
+                request_item = models.SearchItemRequest.objects.get(pk=item['id'])
+                quoteitem = models.QuoteItem(quote=quote, search_item_request=request_item,
+                                             owner=self.request.user, quantity=item['quantity'],
+                                             base_total_excl_tax=item['line_total'],
+                                             state='pending', comments=item['line_comments'],
+                                             picture=item['picture'])
+                quoteitem.save()
 
-                    final_data["pieces"].append(final_item)   
+        except Exception as e:
+            print str(e)
+            return False
 
-            self.request.session['search_data'] = json.dumps(final_data)
-            return True
-        else:
-            current_formset_data = formset.data
-            max_item = int(current_formset_data['form-TOTAL_FORMS'])
-
-            for i in range(max_item):
-                final_item = {}
-                prefix = "form-%s-" % i
-                current_category = prefix+"category"
-                current_piece = prefix+"piece"
-                current_quantity = prefix+"quantity"
-                current_comments = prefix+"comments"
-
-                if current_category in current_formset_data and current_formset_data[current_category] and \
-                    current_piece in current_formset_data and current_formset_data[current_piece]:
-                    final_item["category"] = [current_formset_data[current_category],]
-                    final_item["piece"] = [current_formset_data[current_category],]
-                    final_item["comments"] = current_formset_data[current_category]
-
-                    if current_quantity in current_formset_data and current_formset_data[current_quantity]>0:
-                        final_item["quantity"] = current_formset_data[current_quantity]
-                    else:
-                        final_item["quantity"] = 1
-
-                    final_data["pieces"].append(final_item)
-
-            self.request.session['search_data'] = json.dumps(final_data)
-            return True
+        return response
 
     def get_success_url(self):
-        return reverse('search:home')
+        return reverse('search:quoteplaced')

@@ -341,6 +341,7 @@ APPEND_SLASH = True
 OSCAR_HOMEPAGE = '/'
 
 EXCLUDE_TAXES = True
+TPC_TAX = 21
 AUTH_USER_MODEL = 'customuser.PiezasUser'
 AUTH_USER_TABLE = 'piezasuser'
 AJAXIMAGE_AUTH_TEST = (lambda u: True)

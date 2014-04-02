@@ -63,12 +63,6 @@
 					</div>
 				</div>
 				<div class="control-group span5">
-					<label class="control-label">{% trans "Search type" %}:</label>
-					<div class="controls">
-						<input type="text" readonly="readonly" disabled="disabled" value="{% trans searchrequest.search_type %}" />
-					</div>
-				</div>
-				<div class="control-group span5">
 					<label class="control-label">{% trans "Expiration date" %}:</label>
 					<div class="controls">
 						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.expiration_date|date:'d/m/Y'}}" />
@@ -145,17 +139,12 @@
 				</div>
 
 				<div class="control-group span5">
-					<label class="control-label"><strong>{% trans "Shipping total excluding tax" %}:</strong></label>
-					<div class="controls">
-						<input type="text" readonly="readonly" disabled="disabled" value="" id="shipping_total_excluding_tax" />
-					</div>
-				</div>
-				<div class="control-group span5">
 					<label class="control-label"><strong>{% trans "Shipping total including tax" %}:</strong></label>
 					<div class="controls">
 						<input type="text" readonly="readonly" disabled="disabled" value="" id="shipping_total_including_tax" />
 					</div>
 				</div>
+				<div style="clear:both"></div>	
 
 				<div class="control-group span5">
 					<label class="control-label"><strong>{% trans "Grand total excluding tax" %}:</strong></label>
@@ -163,6 +152,7 @@
 						<input type="text" readonly="readonly" disabled="disabled" value="" id="grand_total_excluding_tax" />
 					</div>
 				</div>
+
 				<div class="control-group span5">
 					<label class="control-label"><strong>{% trans "Grand total including tax" %}:</strong></label>
 					<div class="controls">
@@ -180,5 +170,54 @@
         </div>
     </div>
 
+<script type="text/javascript">
+$(document).ready(function()
+{
+	var taxes = 21;
+	recalcTotal();
+	$("input[id*=base_total]").change(function()
+	{
+		recalcTotal();
+	});
+
+	$("#id_shipping_total_excl_tax").change(function()
+	{
+		recalcTotal();
+	});
+
+	function recalcTotal()
+	{
+		var total = 0;
+		$("input[id*=base_total]").each(function()
+		{
+			var current_id = this.id;
+			if (current_id && current_id.indexOf('_tax')==-1)
+			{
+				var current_val = $(this).val();
+				if (current_val>0)
+					total+=parseFloat(current_val);
+			}
+		});
+		$("#base_total_excluding_tax").val(total);
+		with_tax = parseFloat(total + (total*taxes/100)).toFixed(2);
+		$("#base_total_including_tax").val(with_tax);
+
+		var current = parseFloat($("#id_shipping_total_excl_tax").val());
+		var total = parseFloat(current + (current*taxes/100)).toFixed(2);
+		$("#shipping_total_including_tax").val(total);
+
+		var base_without = parseFloat($("#base_total_excluding_tax").val());
+		var shipping_without = parseFloat($("#id_shipping_total_excl_tax").val());
+		var final = (base_without + shipping_without).toFixed(2);
+		$("#grand_total_excluding_tax").val(final);
+
+		var base_with = parseFloat($("#base_total_including_tax").val());
+		var shipping_with = parseFloat($("#shipping_total_including_tax").val());
+		var final = (base_with + shipping_with).toFixed(2);
+		$("#grand_total_including_tax").val(final);
+
+	}
+});
+</script>
 {% endblock content %}
 

@@ -1,10 +1,11 @@
 import os
 from django import forms
+from django.core.validators import MinValueValidator
 from django.db.models.fields.files import ImageFieldFile
 from django.forms.extras.widgets import SelectDateWidget
 from oscar.core.loading import get_model
 from django.core.urlresolvers import reverse
-from django.forms.models import formset_factory, inlineformset_factory
+from django.forms.models import formset_factory, inlineformset_factory, BaseInlineFormSet
 from django.forms.formsets import BaseFormSet
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy
@@ -153,16 +154,33 @@ class QuoteCreationForm(forms.ModelForm):
 
     quote_comments = forms.CharField(label=_('Comments for the quote'), required=False,
         widget=forms.Textarea())
-    warranty_days = forms.IntegerField(label=_('Warranty days'), required=True)
-    shipping_days = forms.IntegerField(label=_('Shipping days'), required=True)
+    warranty_days = forms.IntegerField(label=_('Warranty days'), required=True, validators=[MinValueValidator(0)])
+    shipping_days = forms.IntegerField(label=_('Shipping days'), required=True, validators=[MinValueValidator(0)])
+    shipping_total_excl_tax = forms.DecimalField(label=_('Shipping total excluding tax'),
+        decimal_places=2, max_digits=12, validators=[MinValueValidator(0)], initial=0)
 
+    def clean(self):
+        cleaned_data = super(QuoteCreationForm, self).clean()
+
+        # validate formset
+        max = self.data['searchitemrequest_set-INITIAL_FORMS']
+        for i in range(int(max)):
+            original_quantity = self.data['searchitemrequest_set-%d-quantity' % i]
+            served_quantity = self.data['searchitemrequest_set-%d-served_quantity' % i]
+            base_total = float(self.data['searchitemrequest_set-%d-base_total' % i])
+            if not served_quantity.isdigit() or served_quantity<0:
+                # error
+                raise forms.ValidationError(_('Served quantity must be greater than 0'))
+            if served_quantity>original_quantity:
+                raise forms.ValidationError(_('Served quantity must be at maximum the requested quantity'))
+            if served_quantity>0 and base_total<=0:
+                raise forms.ValidationError(_("Base amount for served pieces must be greater than 0. If you don't want to serve this piece, please set the quantity to 0."))
+
+        return cleaned_data
+    
 class QuoteItemCreationForm(forms.ModelForm):
     class Meta:
         model = SearchItemRequest
-
-    def clean(self):
-        cleaned_data = super(QuoteItemCreationForm, self).clean()
-        print cleaned_data
 
     category = forms.CharField(label=_('Category'), required=False,
         widget=forms.TextInput(attrs={'readonly':'readonly'}))
@@ -187,6 +205,5 @@ class QuoteItemCreationForm(forms.ModelForm):
         widget=forms.Textarea())
     quote_picture = forms.ImageField(widget=AjaxImageEditor(upload_to='quotepictures',
         max_width=800, max_height=600, crop=1))
-
 
 InlineQuoteCreationFormSet = inlineformset_factory(SearchRequest, SearchItemRequest, form=QuoteItemCreationForm, extra=0)

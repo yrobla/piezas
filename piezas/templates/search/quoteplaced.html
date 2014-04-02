@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Homepage' %} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{{ homepage_url }}">{% trans 'Home' %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans 'Quote submitted' %}</li>
+    </ul>
+{% endblock %}
+
+{% block headertext %}
+    {% trans "Quote submitted" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span12 register_form">
+
+		<p>{% trans "Your quote has been successfully submitted and will be visible to the customer." %}</p>
+
+		<div class="span12 form-actions">
+			<a href="{% url 'search:home' %}" class="btn btn-primary btn-large span4">
+			{% trans "Return home" %}</a>
+			<span class="span8"></span>
+		</div>
+        </div>
+    </div>
+{% endblock content %}
+

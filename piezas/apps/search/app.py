@@ -8,6 +8,7 @@ class SearchApplication(CoreSearchApplication):
     index_view = views.HomeView
     confirm_view = views.ConfirmView
     placed_view = views.PlacedView
+    quoteplaced_view = views.QuotePlacedView
     quote_view = views.QuoteView
     pending_search_requests_view = views.PendingSearchRequestsView
 
@@ -24,6 +25,7 @@ class SearchApplication(CoreSearchApplication):
             url(r'^home/$', login_required(self.index_view.as_view()), name='home'),
             url(r'^placesearch/$', login_required(self.confirm_view.as_view()), name='placesearchrequest'),
             url(r'^placed/$', login_required(self.placed_view.as_view()), name='placed'),
+            url(r'^quoteplaced/$', login_required(self.quoteplaced_view.as_view()), name='quoteplaced'),
             url(r'^pendingrequests/$', login_required(self.pending_search_requests_view.as_view()), name='request-list'),
             url(r'^createquote/(?P<pk>[\w-]*)/$',
                 login_required(self.quote_view.as_view()),
