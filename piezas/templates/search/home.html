@@ -134,7 +134,7 @@ $(document).ready(function()
 
 	function fill_field(current_parent, current_child, category_value, product_value)
 	{
-		var current_id = $(current_child).id;
+		var current_id = current_child.id;
 		if (!category_value || category_value=='')
 		{
                         options = '<option value="">---------<'+'/option>';
@@ -224,7 +224,6 @@ $(document).ready(function()
 
 	$("select.category").change(function(){
 		var category_value = $(this).val();
-		
 		var related_product = $(this).parent().parent().find("select.piece");
 		if (related_product.length>0)
 		{
