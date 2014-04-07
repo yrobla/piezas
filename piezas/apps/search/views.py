@@ -135,7 +135,6 @@ class HomeView(FormView):
                                     return HttpResponse(json.dumps({"result":False, "error_message":unicode(_('Please include all mandatory pictures'))}), mimetype='application/json')
 
                     except Exception as e:
-                        print str(e)
                         pass
 
                 else:
@@ -147,7 +146,7 @@ class HomeView(FormView):
             return HttpResponse(json.dumps({"result":result}), mimetype='application/json')
         else:
             self.form_invalid(form)
-            return HttpResponse(json.dumps({"result":False}), mimetype='application/json')
+            return HttpResponse(json.dumps({"result":False, "error_message": unicode(_('Please fill all mandatory fields'))}), mimetype='application/json')
 
 
 class ConfirmView(FormView):

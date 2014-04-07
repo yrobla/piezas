@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-02 16:27+0200\n"
+"POT-Creation-Date: 2014-04-07 20:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -284,7 +284,7 @@ msgstr "Booleano"
 msgid "Text"
 msgstr "Texto"
 
-#: piezas/apps/catalogue/models.py:110 piezas/templates/search/home.html:53
+#: piezas/apps/catalogue/models.py:110 piezas/templates/search/home.html:52
 msgid "Photo"
 msgstr "Foto"
 
@@ -417,7 +417,7 @@ msgstr "Pieza a buscar"
 #: piezas/templates/dashboard/orders/order_detail.html:96
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:80
 #: piezas/templates/search/confirm.html:86
-#: piezas/templates/search/home.html:54 piezas/templates/search/quote.html:97
+#: piezas/templates/search/home.html:53 piezas/templates/search/quote.html:97
 msgid "Quantity"
 msgstr ""
 
@@ -1596,13 +1596,16 @@ msgstr "La cantidad servida debe ser mayor que 0"
 
 #: piezas/apps/search/forms.py:175
 msgid "Served quantity must be at maximum the requested quantity"
-msgstr "La cantidad servida debe ser como mucho el máximo de la cantidad solicitada"
+msgstr ""
+"La cantidad servida debe ser como mucho el máximo de la cantidad solicitada"
 
 #: piezas/apps/search/forms.py:177
 msgid ""
 "Base amount for served pieces must be greater than 0. If you don't want to "
 "serve this piece, please set the quantity to 0."
-msgstr "El total base para las piezas servidas debe ser mayor que 0. Si no quieres servir esta pieza, por favor establece la cantidad servida a 0."
+msgstr ""
+"El total base para las piezas servidas debe ser mayor que 0. Si no quieres "
+"servir esta pieza, por favor establece la cantidad servida a 0."
 
 #: piezas/apps/search/forms.py:191
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:66
@@ -1628,24 +1631,28 @@ msgstr "Por favor completa las preguntas obligatorias"
 msgid "Please include all mandatory pictures"
 msgstr "Por favor incluye todas las fotos obligatorias"
 
-#: piezas/apps/search/views.py:277 piezas/templates/index.html:46
+#: piezas/apps/search/views.py:149
+msgid "Please fill all mandatory fields"
+msgstr "Por favor completa las preguntas obligatorias"
+
+#: piezas/apps/search/views.py:276 piezas/templates/index.html:46
 #: piezas/templates/search/pending_searchrequest_list.html:12
 msgid "Active searches from customers"
 msgstr "Búsquedas activas de talleres"
 
-#: piezas/apps/search/views.py:323 piezas/apps/search/views.py:329
+#: piezas/apps/search/views.py:322 piezas/apps/search/views.py:328
 msgid "Regional"
 msgstr "Regional"
 
-#: piezas/apps/search/views.py:325
+#: piezas/apps/search/views.py:324
 msgid "Bordering"
 msgstr "Limítrofe"
 
-#: piezas/apps/search/views.py:327
+#: piezas/apps/search/views.py:326
 msgid "Supraregional"
 msgstr "Supraregional"
 
-#: piezas/apps/search/views.py:372
+#: piezas/apps/search/views.py:371
 #: piezas/templates/catalogue/partials/review.html:40
 #: piezas/templates/customer/profile/profile.html:21
 #: piezas/templates/dashboard/offers/offer_list.html:66
@@ -1656,7 +1663,7 @@ msgstr "Supraregional"
 msgid "Yes"
 msgstr ""
 
-#: piezas/apps/search/views.py:374
+#: piezas/apps/search/views.py:373
 #: piezas/templates/catalogue/partials/review.html:45
 #: piezas/templates/customer/profile/profile.html:22
 #: piezas/templates/dashboard/offers/offer_list.html:68
@@ -3895,7 +3902,6 @@ msgstr "No hay categorías establecidas para esta pieza"
 #: piezas/templates/dashboard/catalogue/product_update.html:96
 #: piezas/templates/dashboard/catalogue/product_update.html:175
 #: piezas/templates/search/confirm.html:84
-#: piezas/templates/search/home.html:52
 msgid "Questions"
 msgstr "Preguntas"
 
@@ -6191,20 +6197,20 @@ msgstr ""
 msgid "Please enter the criteria for the pieces you want to search"
 msgstr "Por favor entra los criterios para las piezas que quieras buscar"
 
-#: piezas/templates/search/home.html:80
-msgid "Show/hide questions"
-msgstr "Mostrar/ocultar preguntas"
-
-#: piezas/templates/search/home.html:84 piezas/templates/search/home.html:208
-#: piezas/templates/search/home.html:215
+#: piezas/templates/search/home.html:83 piezas/templates/search/home.html:214
+#: piezas/templates/search/home.html:221
 msgid "No questions for this product"
 msgstr "No hay preguntas para esta pieza"
 
 #: piezas/templates/search/home.html:92
+msgid "Add piece"
+msgstr "Añadir nueva pieza"
+
+#: piezas/templates/search/home.html:98
 msgid "Confirm search request"
 msgstr "Confirmar petición de búsqueda"
 
-#: piezas/templates/search/home.html:198
+#: piezas/templates/search/home.html:204
 msgid "It's mandatory to attach a picture"
 msgstr "Es obligatorio adjuntar una foto"
 
@@ -6319,6 +6325,9 @@ msgid ""
 "%(suggestion)s\">\"%(suggestion)s\"</a>?\n"
 "                    "
 msgstr ""
+
+#~ msgid "Show/hide questions"
+#~ msgstr "Mostrar/ocultar preguntas"
 
 #~ msgid "Add"
 #~ msgstr "Añadir"

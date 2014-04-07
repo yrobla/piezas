@@ -49,13 +49,12 @@
 							<th>{% trans "Category" %}</th>
 							<th>{% trans "Piece" %}</th>
 							<th>{% trans "Comments" %}</th>
-							<th>{% trans "Questions" %}</th>
 							<th>{% trans "Photo" %}</th>
 							<th>{% trans "Quantity" %}</th>
 						</thead>
 						<tbody>
 							{% for item_form in formset.forms %}
-							<tr id="{{ item_form.prefix }}-row">
+							<tr id="{{ item_form.prefix }}-row" class="pieces-row">
 								<td>{{item_form.category}}
                 {% block errors %}
                     {% for error in item_form.category.errors %}
@@ -77,18 +76,25 @@
 
 								</td>
 								<td>{{item_form.comments}}</td>
-								<td><buttton type="button" class="toggle_questions btn">{% trans "Show/hide questions" %}</button></td>
 								<td>{{item_form.picture}}</td>
 								<td>{{item_form.quantity}}</td>
 							</tr>
-							<tr><td colspan="6" style='border:0px;'><div class="questions" style="display:none;">{% trans "No questions for this product" %}</div></td></tr>
+							<tr id="{{ item_form.prefix }}-row-questions">
+								<td colspan="6" style='border:0px;'><div class="questions well">{% trans "No questions for this product" %}</div></td>
+							</tr>
 							{% endfor %}
 						</tbody>
 					</table>
 				</div>
 
+				<div class="span12">
+					<button type="button" class="btn" id="button_add">
+					{% trans "Add piece" %}
+					</button>
+				</div>
 				<div class="span12 form-actions">
-					<button type="submit" class="btn btn-primary btn-large span4">
+
+					<button type="submit" class="btn btn-primary btn-large">
 					{% trans "Confirm search request" %}
 					</button>
 					<span class="span8"></span>
@@ -170,7 +176,7 @@ $(document).ready(function()
 	                $.getJSON("/catalogue/productquestions/"+product_value+"/", function(data){
 				if (data.length>0)
 				{
-					var final_html = "<table class='table span9'>";
+					var final_html = "<table class='table span12' style='background-color:transparent;margin-top:0px;'>";
 					for (var i in data)
 					{
 						current_item = data[i];
@@ -229,12 +235,38 @@ $(document).ready(function()
 		}
 	})
 
-	$(".toggle_questions").click(function()
+	$("#button_add").click(function() {
+		var visible_rows = $("#id_searchitemrequest_table tr[class=pieces-row]:visible").length;
+		if (visible_rows<50)
+		{
+			show_table_row(visible_rows);
+		}
+		if (visible_rows>=49)
+		{
+			$("#button_add").hide();
+		}
+	});
+
+	function hide_table_row(val)
 	{
-		var next_row = $(this).parent().parent('tr').next();
-		var current_cell = $(next_row).children()[0];
-		var questions = $(current_cell).find("div.questions")[0];
-		$(questions).toggle("fast");
+		questions_id = val.id;
+		$("#"+questions_id).hide();
+		$("#"+questions_id+'-questions').hide();
+	}
+	function show_table_row(index)
+	{
+		questions_id = "form-"+index+"-row";
+		$("#"+questions_id).show();
+		$("#"+questions_id+'-questions').show();
+	}
+
+	// only show first 2 items or the ones without content
+	$("#id_searchitemrequest_table tr[class=pieces-row]").each(function(counter, val)
+	{
+		if (counter>1) 
+		{
+			hide_table_row(val);
+		}
 	});
 
 	$("select.piece").trigger("change");
@@ -242,4 +274,3 @@ $(document).ready(function()
 </script>
 
 {% endblock content %}
-

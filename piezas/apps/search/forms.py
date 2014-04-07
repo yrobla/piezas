@@ -89,7 +89,7 @@ class SearchConfirmForm(forms.Form):
             raise forms.ValidationError(_('Expiration date must be greater than today'))
         return data
 
-SearchCreationFormSet = formset_factory(SearchCreationFormItem, formset=SearchItemRequestFormSet, extra=10)
+SearchCreationFormSet = formset_factory(SearchCreationFormItem, formset=SearchItemRequestFormSet, extra=50)
 
 
 class SearchRequestSearchForm(forms.Form):
