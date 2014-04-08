@@ -183,9 +183,14 @@ $(document).ready(function()
 						if (current_item.type=='boolean')
 						{
 							final_html += "<tr><th style='border-top:0px;'>"+current_item.text+"</th>";
-							final_html+="<td style='border-top:0px;'><input type='checkbox' id='question_"+current_item.id+"' name='question_"+current_item.id+"' ";
-							if (current_item.value=='on') final_html+=" checked='checked' ";
-							final_html+="/></td>";
+							final_html+="<td style='border-top:0px;'><select id='question_"+current_item.id+"' name='question_"+current_item.id+"' >";
+							final_html+="<option value='0' ";
+							if (current_item.value=='0') final_html+=" selected='selected' ";
+							final_html+=">{% trans "No" %}</option>";
+							final_html+="<option value='1' ";
+							if (current_item.value=='1') final_html+=" selected='selected' ";
+							final_html+=">{% trans "Yes" %}</option>";
+							final_html+="</select></td>";
 						}
 						else if (current_item.type=='text')
 						{

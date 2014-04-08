@@ -169,16 +169,18 @@ class ProductForm(forms.ModelForm):
         self.save_m2m()
         return object
 
-    def clean(self):
-        data = self.cleaned_data
-        return super(ProductForm, self).clean()
-
 class ProductQuestionForm(forms.ModelForm):
-    class Meta:
-        model = ProductQuestion
-        widgets = {'text': forms.TextInput(attrs={'maxlength':255, 'size':100})}
+    text = forms.CharField(max_length=255, required=False)
+    options = forms.CharField(max_length=1024, required=False,
+                              widget=forms.TextInput(attrs={'size':500, 'style':'width:750px;'}))
+
+    def clean(self):
+        cleaned_data = super(ProductQuestionForm, self).clean()
+        if 'text' in cleaned_data and 'type' in cleaned_data and cleaned_data['type']=='list':
+            if 'options' not in cleaned_data or not cleaned_data['options']:
+                raise forms.ValidationError(_('You must fill the options separated by pipes'))
+        return cleaned_data
 
 
 ProductQuestionsFormSet = inlineformset_factory(
-    Product, ProductQuestion, form=ProductQuestionForm,
-    extra=1, fields=('text', 'type'))
+    Product, ProductQuestion, form=ProductQuestionForm, extra=1, fields=('text', 'type', 'options'))

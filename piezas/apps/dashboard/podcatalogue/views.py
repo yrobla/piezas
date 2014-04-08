@@ -1133,7 +1133,6 @@ class ProductCreateUpdateView(CoreProductCreateUpdateView):
         # Save formsets
         category_formset.save()
         questions_formset.save()
-
         return HttpResponseRedirect(self.get_success_url())
 
     def forms_invalid(self, form, category_formset, questions_formset):
@@ -1162,7 +1161,7 @@ class ProductCreateUpdateView(CoreProductCreateUpdateView):
 
         is_valid = all([
             form.is_valid(),
-            category_formset.is_valid(), True
+            category_formset.is_valid(), questions_formset.is_valid()
         ])
 
         if is_valid:

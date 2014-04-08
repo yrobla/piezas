@@ -107,11 +107,15 @@ class Product(AbstractProduct):
     pass
 
 
-QUESTION_TYPES = (('boolean', _('Boolean')), ('text', _('Text')), ('photo', _('Photo')))
+QUESTION_TYPES = (('boolean', _('Boolean')), ('text', _('Text')), ('photo', _('Photo')),
+                  ('list', _('Option list')))
 
 class ProductQuestion(models.Model):
     text = models.CharField(_('Product question'), max_length=255)
-    type = models.CharField(_('Question type'), max_length=25, choices=QUESTION_TYPES, default='boolean')
+    type = models.CharField(_('Question type'), max_length=25, choices=QUESTION_TYPES,
+        default='boolean')
+    options = models.TextField(_('List of options, separated by pipes'), blank=True)
+    
     product = models.ForeignKey(Product, verbose_name=_("Piece"),
         help_text=_('Piece to ask for'), related_name='product_question')
 
@@ -192,7 +196,7 @@ class SearchItemRequestAnswers(models.Model):
     search_item_request = models.ForeignKey(SearchItemRequest, verbose_name = _('Search item request'), blank=True, null=True)
     question = models.ForeignKey(ProductQuestion, verbose_name=_('Piece question'), help_text=_('Question associated to piece'), related_name='piece_question')
     boolean_answer = models.NullBooleanField(_('Answer for boolean types'), blank=True, null=True)
-    text_answer = models.TextField(_('Anser for text types'), blank=True, null=True)
+    text_answer = models.TextField(_('Answer for text types'), blank=True, null=True)
     image_answer = models.ImageField(upload_to='media/searchpictures/', blank=True, null=True)
 
     owner = models.ForeignKey(
@@ -203,8 +207,11 @@ class SearchItemRequestAnswers(models.Model):
 
     def __unicode__(self):
         if self.question.type == 'boolean':
-            return u'%s - %s' % (self.question.text, self.boolean_answer)
-        elif self.question.type == 'text':
+            if self.boolean_answer:
+                return u'%s - %s' % (self.question.text, _('Yes'))
+            else:
+                return u'%s - %s' % (self.question.text, _('No'))
+        elif self.question.type == 'text' or self.question_type == 'list':
             return u'%s - %s' % (self.question.text, self.text_answer)
         else:
             return u'%s - %s' % (self.question.text, _('Image'))
