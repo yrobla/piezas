@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-08 19:33+0200\n"
+"POT-Creation-Date: 2014-04-08 19:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -745,9 +745,17 @@ msgstr ""
 msgid "Model"
 msgstr "Modelo"
 
+#: piezas/apps/dashboard/podcatalogue/forms.py:173
+msgid "Question title"
+msgstr "Título de la pregunta"
+
+#: piezas/apps/dashboard/podcatalogue/forms.py:174
+msgid "Options separated by pipes"
+msgstr "Listado de opciones, separadas por pipes (|)"
+
 #: piezas/apps/dashboard/podcatalogue/forms.py:181
 msgid "You must fill the options separated by pipes"
-msgstr ""
+msgstr "Debes introducir las opciones separadas por pipes (|)"
 
 #: piezas/apps/dashboard/podcatalogue/views.py:72
 #, python-format
@@ -2875,7 +2883,7 @@ msgstr ""
 
 #: piezas/templates/customer/login_registration.html:28
 msgid "Logging in..."
-msgstr ""
+msgstr "Autentificando..."
 
 #: piezas/templates/customer/login_registration.html:33
 #: piezas/templates/customer/login_registration.html:36

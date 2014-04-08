@@ -170,8 +170,8 @@ class ProductForm(forms.ModelForm):
         return object
 
 class ProductQuestionForm(forms.ModelForm):
-    text = forms.CharField(max_length=255, required=False)
-    options = forms.CharField(max_length=1024, required=False,
+    text = forms.CharField(label=_('Question title'), max_length=255, required=False)
+    options = forms.CharField(label=_('Options separated by pipes'), max_length=1024, required=False,
                               widget=forms.TextInput(attrs={'size':500, 'style':'width:750px;'}))
 
     def clean(self):
