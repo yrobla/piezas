@@ -203,6 +203,21 @@ $(document).ready(function()
 							}
 							final_html+="/></td>";
 						}
+						else if (current_item.type=='list')
+						{
+							var options = current_item.options.split('|');
+							final_html += "<tr><th style='border-top:0px;'>"+current_item.text+"</th>";
+							final_html+="<td style='border-top:0px;'><select id='question_"+current_item.id+"' name='question_"+current_item.id+"' >";
+
+							for (var i in options)
+							{
+								var current_option = options[i];
+								final_html+="<option value='"+current_option+"' ";
+								if (current_item.value==current_option) final_html+=" selected='selected' ";
+								final_html+=">"+current_option+"</option>";
+							}
+							final_html+="</select></td>";
+						}
 						else
 						{
 							// foto, usar el campo principal

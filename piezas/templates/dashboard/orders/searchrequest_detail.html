@@ -103,7 +103,7 @@
 					<td><ul>
 						{% for answer in line.answers %}
 						<li>{{answer.question.text}}:
-						{% if answer.question.type == 'text' %}
+						{% if answer.question.type in 'text,list' %}
 						{{answer.text_answer}}
 						{% else %}
 							{% if answer.boolean_answer == True %}

@@ -23,6 +23,7 @@ class ProductQuestionsView(View):
                 result_item["id"] = question.id
                 result_item["type"] = question.type
                 result_item["text"] = question.text
+                result_item["options"] = question.options
 
                 # check if we have value in session
                 question_key = 'question_'+str(question.id)

@@ -237,10 +237,10 @@ class ConfirmView(FormView):
                     questions = models.ProductQuestion.objects.filter(product=piece_model)
                     for question in questions:
                         question_key = 'question_'+str(question.id)
-                        if question.type in ('text','boolean'):
+                        if question.type in ('text','boolean','list'):
                             answer = models.SearchItemRequestAnswers(search_item_request=search_request_item,
                                 question=question)
-                            if question.type=='text' and question_key in current_data:
+                            if question.type in ('text','list') and question_key in current_data:
                                 answer.text_answer = current_data[question_key]
                             else:
                                 answer.boolean_answer = (question_key in current_data)

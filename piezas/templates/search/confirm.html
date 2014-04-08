@@ -93,9 +93,9 @@
 								<td>{{item.comments}}</td>
 								<td><ul>
 									{% for question in item.questions %}
-										{% if question.type in 'text,boolean' %}
+										{% if question.type in 'text,boolean,list' %}
 										<li>{{question.text}}:&nbsp;
-											{% if question.type == 'text' %}
+											{% if question.type in 'text,list' %}
 												{{question.value}}
 											{% else %}
 												{% if question.value %}
