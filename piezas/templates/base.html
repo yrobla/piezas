@@ -47,6 +47,7 @@
 			<link rel="stylesheet" type="text/css" href="{% static "oscar/css/jquery-ui/jquery-ui-1.10.4.custom.min.css" %}">
 			<link rel="stylesheet" type="text/css" href="{% static "shared-bg/css/bootstrap-progress.min.css" %}">
 			<link rel="stylesheet" type="text/css" href="{% static "ajaximage/css/styles.css" %}">
+			<link rel="stylesheet" type="text/css" href="{% static "lightbox/css/bootstrap-lightbox.min.css" %}">
                     {% endif %}
                 {% endcompress %}
             {% endblock %}
@@ -64,7 +65,6 @@
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVhxduiAwlXYgzf19U98RnJbUkJOvdlns&sensor=false"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-            <script>window.jQuery || document.write('<script src="{% static "oscar/js/jquery/jquery-1.9.1.min.js" %}"><\/script>')</script>
         {% endblock %}
 
 	<script src="{% static "oscar/js/dynamic-formset/jquery.formset.min.js" %}"></script>
@@ -73,6 +73,11 @@
 	<script src="{% static "shared-bg/js/jquery.iframe-transport.js" %}"></script>
 	<script src="{% static "shared-bg/js/jquery.fileupload.js" %}"></script>
 	<script src="{% static "ajaximage/js/ajaximage.js" %}"></script>
+
+            <!-- Twitter Bootstrap -->
+            <script type="text/javascript" src="{% static "oscar/js/bootstrap/bootstrap.min.js" %}"></script>
+	    <script type="text/javascript" src="{% static "lightbox/js/bootstrap-lightbox.min.js" %}"></script>
+	    <script type="text/javascript" src="{% static "lightbox/js/bootstrap-img-lightbox-tooltip.js" %}"></script>
 
 	<script type="text/javascript">
 	var $ = jQuery.noConflict()
@@ -93,8 +98,7 @@
         {# Local scripts #}
         {% block scripts %}
             {% compress js %}
-            <!-- Twitter Bootstrap -->
-            <script type="text/javascript" src="{% static "oscar/js/bootstrap/bootstrap.min.js" %}"></script>
+
             <!-- Oscar -->
             <script src="{% static "oscar/js/oscar/ui.js" %}" type="text/javascript" charset="utf-8"></script>
             {% endcompress %}

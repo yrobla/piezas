@@ -108,7 +108,7 @@
 										{% endif %}
 									{% endfor %}</ul>
 								</td>
-								<td>{% if item.picture %}<img src="/media/{{item.picture}}" style="height:50px;" />{% endif %}</td>
+								<td>{% if item.picture %}<img class="search_item" src="/media/{{item.picture}}" style="height:50px;" />{% endif %}</td>
 								<td>{{item.quantity}}</td>
 							</tr>
 							{% endfor %}
@@ -126,12 +126,28 @@
         </div>
     </div>
 
+<div id="demoLightbox" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-header" 
+      style="position:absolute; height:20px; left:100%; margin-left: 10px; padding:0; border:0;">
+
+         <button type="button" class="close" 
+           style="color:white; font-size: 30px;" 
+           onclick='$("#demoLightbox").lightbox("hide")'> × </button>
+
+   </div>
+   <div class='lightbox-content'>
+     <img src="">
+   </div>
+</div>
+
  <script>
     $( ".datepicker" ).datepicker({
       changeMonth: true,
       format: 'dd/mm/yyyy',
       weekStart:1
     });
+
+$("img.search_item").img_lightbox_tooltip();
   </script>
 {% endblock content %}
 

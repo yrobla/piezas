@@ -110,7 +110,7 @@
 								{{item_form.answers}}</td>
 								</td>
 								<td>{% if item_form.picture.value %}
-								<img src='/media/{{item_form.picture.value}}' style='max-width:100px;'/>{% endif %}</td>
+								<img src='/media/{{item_form.picture.value}}' style='max-width:100px;' class="search_item"/>{% endif %}</td>
 								<td>{{item_form.comments}}</td>
 								<td>{{item_form.quantity}}</td>
 								<td>{{item_form.served_quantity}}</td>
@@ -170,6 +170,20 @@
         </div>
     </div>
 
+<div id="demoLightbox" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-header" 
+      style="position:absolute; height:20px; left:100%; margin-left: 10px; padding:0; border:0;">
+
+         <button type="button" class="close" 
+           style="color:white; font-size: 30px;" 
+           onclick='$("#demoLightbox").lightbox("hide")'> × </button>
+
+   </div>
+   <div class='lightbox-content'>
+     <img src="">
+   </div>
+</div>
+
 <script type="text/javascript">
 $(document).ready(function()
 {
@@ -217,6 +231,7 @@ $(document).ready(function()
 		$("#grand_total_including_tax").val(final);
 
 	}
+	$("img.search_item").img_lightbox_tooltip();
 });
 </script>
 {% endblock content %}

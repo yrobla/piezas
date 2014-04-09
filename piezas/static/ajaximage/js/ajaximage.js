@@ -34,8 +34,10 @@ $ajaxImage(function(){
       },
 
       done: function(e, data){
-        $ajaxImage(el).find('.link').attr('href', '/media/'+data.result.url)
+        $ajaxImage(el).find('.link').attr('href', 'javascript:void(0)')
+	$ajaxImage(el).find('.link').attr('data-toggle', 'lightbox');
         $ajaxImage(el).find('img').attr('src', '/media/'+data.result.url)
+	$ajaxImage(el).find('img').img_lightbox_tooltip();
         $ajaxImage(el).attr('class', 'ajaximage img-active')
         $ajaxImage(el).find('input[type=hidden]').val(data.result.filename)
         $ajaxImage(el).find('.bar').css({width: '0%'})
