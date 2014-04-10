@@ -6277,7 +6277,7 @@ msgstr "Por favor entra los criterios para las piezas que quieras buscar"
 
 #: piezas/templates/search/home.html:45
 msgid "Add picture to gallery"
-msgstr ""
+msgstr "Añadir foto a la galería"
 
 #: piezas/templates/search/home.html:90 piezas/templates/search/home.html:256
 #: piezas/templates/search/home.html:263
