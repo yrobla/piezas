@@ -283,6 +283,10 @@ OSCAR_DASHBOARD_NAVIGATION = [
                 'url_name': 'dashboard:order-searchrequest-list',
             },
             {
+                'label': _('Quotes'),
+                'url_name': 'dashboard:quote-list',
+            },
+            {
                 'label': _('Statistics'),
                 'url_name': 'dashboard:order-stats',
             },

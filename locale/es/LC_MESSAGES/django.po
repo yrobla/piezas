@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-10 18:33+0200\n"
+"POT-Creation-Date: 2014-04-10 20:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,6 +38,8 @@ msgstr ""
 #: piezas/templates/dashboard/orders/line_detail.html:13
 #: piezas/templates/dashboard/orders/order_detail.html:14
 #: piezas/templates/dashboard/orders/order_list.html:15
+#: piezas/templates/dashboard/orders/quote_detail.html:14
+#: piezas/templates/dashboard/orders/quote_list.html:15
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:14
 #: piezas/templates/dashboard/orders/searchrequest_list.html:15
 #: piezas/templates/dashboard/orders/shippingaddress_form.html:11
@@ -164,15 +166,20 @@ msgstr ""
 msgid "Search requests"
 msgstr "Peticiones de búsqueda"
 
-#: piezas/settings.py:286 piezas/templates/dashboard/orders/statistics.html:21
+#: piezas/settings.py:286
+#: piezas/templates/dashboard/orders/quote_detail.html:18
+msgid "Quotes"
+msgstr "Presupuestos"
+
+#: piezas/settings.py:290 piezas/templates/dashboard/orders/statistics.html:21
 msgid "Statistics"
 msgstr ""
 
-#: piezas/settings.py:290
+#: piezas/settings.py:294
 msgid "Partners"
 msgstr ""
 
-#: piezas/settings.py:296 piezas/templates/dashboard/index.html:113
+#: piezas/settings.py:300 piezas/templates/dashboard/index.html:113
 #: piezas/templates/dashboard/users/detail.html:18
 #: piezas/templates/dashboard/users/index.html:8
 #: piezas/templates/dashboard/users/index.html:13
@@ -180,38 +187,38 @@ msgstr ""
 msgid "Customers"
 msgstr ""
 
-#: piezas/settings.py:300
+#: piezas/settings.py:304
 msgid "Customer management"
 msgstr ""
 
-#: piezas/settings.py:306
+#: piezas/settings.py:310
 msgid "Content"
 msgstr ""
 
-#: piezas/settings.py:310
+#: piezas/settings.py:314
 #: piezas/templates/dashboard/promotions/promotion_list.html:7
 #: piezas/templates/dashboard/promotions/promotion_list.html:12
 #: piezas/templates/dashboard/promotions/promotion_list.html:38
 msgid "Content blocks"
 msgstr ""
 
-#: piezas/settings.py:314
+#: piezas/settings.py:318
 #: piezas/templates/dashboard/promotions/pagepromotion_list.html:24
 msgid "Content blocks by page"
 msgstr ""
 
-#: piezas/settings.py:318 piezas/templates/dashboard/pages/delete.html:18
+#: piezas/settings.py:322 piezas/templates/dashboard/pages/delete.html:18
 #: piezas/templates/dashboard/pages/index.html:8
 #: piezas/templates/dashboard/pages/index.html:17
 #: piezas/templates/dashboard/pages/update.html:17
 msgid "Pages"
 msgstr ""
 
-#: piezas/settings.py:322
+#: piezas/settings.py:326
 msgid "Email templates"
 msgstr ""
 
-#: piezas/settings.py:326
+#: piezas/settings.py:330
 #: piezas/templates/catalogue/reviews/review_detail.html:5
 #: piezas/templates/catalogue/reviews/review_detail.html:26
 #: piezas/templates/dashboard/reviews/review_delete.html:18
@@ -224,7 +231,7 @@ msgstr ""
 msgid "Reviews"
 msgstr ""
 
-#: piezas/settings.py:332 piezas/templates/dashboard/reports/index.html:6
+#: piezas/settings.py:336 piezas/templates/dashboard/reports/index.html:6
 msgid "Reports"
 msgstr ""
 
@@ -246,7 +253,7 @@ msgstr "Marca de coche"
 #: piezas/apps/catalogue/models.py:60 piezas/apps/catalogue/models.py:79
 #: piezas/apps/catalogue/models.py:98 piezas/apps/catalogue/models.py:146
 #: piezas/apps/catalogue/models.py:188 piezas/apps/catalogue/models.py:216
-#: piezas/apps/catalogue/models.py:241 piezas/apps/catalogue/models.py:264
+#: piezas/apps/catalogue/models.py:241 piezas/apps/catalogue/models.py:273
 #: piezas/apps/offer/models.py:166 piezas/apps/offer/models.py:774
 msgid "Date Created"
 msgstr ""
@@ -255,7 +262,7 @@ msgstr ""
 #: piezas/apps/catalogue/models.py:61 piezas/apps/catalogue/models.py:80
 #: piezas/apps/catalogue/models.py:99 piezas/apps/catalogue/models.py:147
 #: piezas/apps/catalogue/models.py:189 piezas/apps/catalogue/models.py:217
-#: piezas/apps/catalogue/models.py:242 piezas/apps/catalogue/models.py:265
+#: piezas/apps/catalogue/models.py:242 piezas/apps/catalogue/models.py:274
 msgid "Date Updated"
 msgstr ""
 
@@ -305,11 +312,12 @@ msgid "List of options, separated by pipes"
 msgstr "Listado de opciones, separadas por pipes (|)"
 
 #: piezas/apps/catalogue/models.py:119 piezas/apps/catalogue/models.py:180
-#: piezas/apps/search/forms.py:203
+#: piezas/apps/search/forms.py:204
 #: piezas/templates/basket/partials/basket_content.html:27
+#: piezas/templates/dashboard/orders/quote_detail.html:81
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:83
 #: piezas/templates/search/confirm.html:82
-#: piezas/templates/search/home.html:57 piezas/templates/search/quote.html:94
+#: piezas/templates/search/home.html:57 piezas/templates/search/quote.html:95
 msgid "Piece"
 msgstr "Pieza"
 
@@ -367,23 +375,26 @@ msgid "Frame reference"
 msgstr "Número de bastidor"
 
 #: piezas/apps/catalogue/models.py:145 piezas/apps/catalogue/models.py:181
-#: piezas/apps/catalogue/models.py:250 piezas/apps/catalogue/models.py:269
+#: piezas/apps/catalogue/models.py:250 piezas/apps/catalogue/models.py:278
 #: piezas/apps/search/forms.py:89 piezas/apps/search/forms.py:97
-#: piezas/apps/search/forms.py:209
+#: piezas/apps/search/forms.py:210
 #: piezas/templates/basket/partials/basket_content.html:34
 #: piezas/templates/basket/partials/searchrequest_content.html:15
+#: piezas/templates/dashboard/orders/quote_detail.html:148
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:84
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:159
 #: piezas/templates/search/confirm.html:83
 #: piezas/templates/search/home.html:58 piezas/templates/search/quote.html:72
-#: piezas/templates/search/quote.html:96
+#: piezas/templates/search/quote.html:97
 msgid "Comments"
 msgstr "Comentarios"
 
 #: piezas/apps/catalogue/models.py:150 piezas/apps/catalogue/models.py:187
 #: piezas/apps/catalogue/models.py:215 piezas/apps/catalogue/models.py:240
-#: piezas/apps/catalogue/models.py:263
-#: piezas/apps/dashboard/podorders/views.py:194
+#: piezas/apps/catalogue/models.py:272
+#: piezas/apps/dashboard/podorders/views.py:195
+#: piezas/apps/dashboard/podorders/views.py:426
+#: piezas/templates/dashboard/orders/quote_list.html:96
 #: piezas/templates/dashboard/orders/searchrequest_list.html:96
 msgid "Owner"
 msgstr "Propietario"
@@ -393,12 +404,13 @@ msgid "Expiration Date"
 msgstr "Fecha de expiración"
 
 #: piezas/apps/catalogue/models.py:178 piezas/apps/search/forms.py:85
-#: piezas/apps/search/forms.py:201
+#: piezas/apps/search/forms.py:202
 #: piezas/templates/dashboard/catalogue/product_update.html:156
 #: piezas/templates/dashboard/comms/list.html:34
+#: piezas/templates/dashboard/orders/quote_detail.html:80
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:82
 #: piezas/templates/search/confirm.html:81
-#: piezas/templates/search/home.html:56 piezas/templates/search/quote.html:93
+#: piezas/templates/search/home.html:56 piezas/templates/search/quote.html:94
 msgid "Category"
 msgstr ""
 
@@ -410,8 +422,8 @@ msgstr "Categoría a buscar"
 msgid "Piece to search for"
 msgstr "Pieza a buscar"
 
-#: piezas/apps/catalogue/models.py:182 piezas/apps/catalogue/models.py:266
-#: piezas/apps/search/forms.py:87 piezas/apps/search/forms.py:211
+#: piezas/apps/catalogue/models.py:182 piezas/apps/catalogue/models.py:275
+#: piezas/apps/search/forms.py:87 piezas/apps/search/forms.py:212
 #: piezas/templates/basket/partials/basket_content.html:35
 #: piezas/templates/basket/partials/searchrequest_content.html:16
 #: piezas/templates/checkout/checkout.html:105
@@ -423,15 +435,20 @@ msgstr "Pieza a buscar"
 #: piezas/templates/dashboard/orders/line_detail.html:139
 #: piezas/templates/dashboard/orders/line_detail.html:170
 #: piezas/templates/dashboard/orders/order_detail.html:96
+#: piezas/templates/dashboard/orders/quote_detail.html:82
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:81
 #: piezas/templates/search/confirm.html:86
-#: piezas/templates/search/home.html:60 piezas/templates/search/quote.html:97
+#: piezas/templates/search/home.html:60 piezas/templates/search/quote.html:98
 msgid "Quantity"
 msgstr ""
 
-#: piezas/apps/catalogue/models.py:190 piezas/templates/basket/basket.html:6
+#: piezas/apps/catalogue/models.py:190
+#: piezas/apps/dashboard/podorders/views.py:424
+#: piezas/templates/basket/basket.html:6
 #: piezas/templates/basket/basket.html:15
 #: piezas/templates/basket/basket.html:23
+#: piezas/templates/dashboard/orders/quote_detail.html:45
+#: piezas/templates/dashboard/orders/quote_list.html:94
 msgid "Search request"
 msgstr "Petición de búsqueda"
 
@@ -483,11 +500,11 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: piezas/apps/catalogue/models.py:231 piezas/apps/catalogue/models.py:255
+#: piezas/apps/catalogue/models.py:231 piezas/apps/catalogue/models.py:264
 msgid "Sent"
 msgstr ""
 
-#: piezas/apps/catalogue/models.py:231 piezas/apps/catalogue/models.py:255
+#: piezas/apps/catalogue/models.py:231 piezas/apps/catalogue/models.py:264
 msgid "Accepted"
 msgstr ""
 
@@ -495,7 +512,7 @@ msgstr ""
 msgid "Partially accepted"
 msgstr ""
 
-#: piezas/apps/catalogue/models.py:232 piezas/apps/catalogue/models.py:256
+#: piezas/apps/catalogue/models.py:232 piezas/apps/catalogue/models.py:265
 msgid "Rejected"
 msgstr ""
 
@@ -503,44 +520,50 @@ msgstr ""
 msgid "Associated search request"
 msgstr "Petición de búsqueda asociada"
 
-#: piezas/apps/catalogue/models.py:244 piezas/apps/catalogue/models.py:267
-#: piezas/apps/search/forms.py:218 piezas/templates/search/quote.html:129
+#: piezas/apps/catalogue/models.py:244 piezas/apps/catalogue/models.py:276
+#: piezas/apps/search/forms.py:219 piezas/templates/search/quote.html:197
 msgid "Base total excluding tax"
 msgstr "Total base sin impuestos"
 
-#: piezas/apps/catalogue/models.py:245 piezas/templates/search/quote.html:135
+#: piezas/apps/catalogue/models.py:245 piezas/templates/search/quote.html:203
 msgid "Base total including tax"
 msgstr "Total base con impuestos"
 
-#: piezas/apps/catalogue/models.py:246 piezas/apps/search/forms.py:175
+#: piezas/apps/catalogue/models.py:246 piezas/apps/search/forms.py:176
 msgid "Shipping total excluding tax"
 msgstr "Gastos de envío sin impuestos"
 
-#: piezas/apps/catalogue/models.py:247 piezas/templates/search/quote.html:142
+#: piezas/apps/catalogue/models.py:247 piezas/templates/search/quote.html:210
 msgid "Shipping total including tax"
 msgstr "Gastos de envío con impuestos"
 
-#: piezas/apps/catalogue/models.py:248 piezas/templates/search/quote.html:150
+#: piezas/apps/catalogue/models.py:248 piezas/templates/search/quote.html:218
 msgid "Grand total excluding tax"
 msgstr "Total final sin impuestos"
 
-#: piezas/apps/catalogue/models.py:249 piezas/templates/search/quote.html:157
+#: piezas/apps/catalogue/models.py:249 piezas/templates/search/quote.html:225
 msgid "Grand total including tax"
 msgstr "Total final con impuestos"
 
-#: piezas/apps/catalogue/models.py:251 piezas/apps/search/forms.py:173
+#: piezas/apps/catalogue/models.py:251
+#: piezas/apps/dashboard/podorders/views.py:435
+#: piezas/apps/search/forms.py:174
+#: piezas/templates/dashboard/orders/quote_detail.html:153
 msgid "Warranty days"
 msgstr "Días de garantía"
 
-#: piezas/apps/catalogue/models.py:252 piezas/apps/search/forms.py:174
+#: piezas/apps/catalogue/models.py:252
+#: piezas/apps/dashboard/podorders/views.py:436
+#: piezas/apps/search/forms.py:175
+#: piezas/templates/dashboard/orders/quote_detail.html:157
 msgid "Shipping days"
 msgstr "Plazo de envío en días"
 
-#: piezas/apps/catalogue/models.py:259
+#: piezas/apps/catalogue/models.py:268
 msgid "Associated quote"
 msgstr "Presupuesto asociado"
 
-#: piezas/apps/catalogue/models.py:260
+#: piezas/apps/catalogue/models.py:269
 msgid "Associated search request item"
 msgstr "Elemento de la petición de búsqueda asociada"
 
@@ -706,6 +729,7 @@ msgstr ""
 #: piezas/templates/dashboard/offers/offer_detail.html:64
 #: piezas/templates/dashboard/offers/summary.html:10
 #: piezas/templates/dashboard/orders/order_detail.html:36
+#: piezas/templates/dashboard/orders/quote_detail.html:33
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:33
 #: piezas/templates/dashboard/podcatalogue/bodywork_list.html:65
 #: piezas/templates/dashboard/podcatalogue/bodywork_list.html:66
@@ -949,18 +973,21 @@ msgid "Your submitted data was not valid - please correct the below errors"
 msgstr ""
 
 #: piezas/apps/dashboard/podorders/forms.py:7
-#: piezas/apps/dashboard/podorders/views.py:191
+#: piezas/apps/dashboard/podorders/views.py:192
 #: piezas/templates/dashboard/orders/searchrequest_list.html:93
 #: piezas/templates/search/pending_searchrequest_list.html:21
 msgid "Search request number"
 msgstr "Número de la petición de búsqueda"
 
 #: piezas/apps/dashboard/podorders/forms.py:8
+#: piezas/apps/dashboard/podorders/forms.py:47
 msgid "Owner name"
 msgstr "Propietario"
 
 #: piezas/apps/dashboard/podorders/forms.py:11
-#: piezas/apps/dashboard/podorders/views.py:193
+#: piezas/apps/dashboard/podorders/forms.py:50
+#: piezas/apps/dashboard/podorders/views.py:194
+#: piezas/apps/dashboard/podorders/views.py:425
 #: piezas/apps/offer/models.py:100
 #: piezas/templates/customer/anon_order.html:14
 #: piezas/templates/customer/anon_order.html:59
@@ -971,6 +998,8 @@ msgstr "Propietario"
 #: piezas/templates/dashboard/orders/order_detail.html:99
 #: piezas/templates/dashboard/orders/order_detail.html:493
 #: piezas/templates/dashboard/orders/order_list.html:97
+#: piezas/templates/dashboard/orders/quote_detail.html:48
+#: piezas/templates/dashboard/orders/quote_list.html:95
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:48
 #: piezas/templates/dashboard/orders/searchrequest_list.html:95
 #: piezas/templates/dashboard/orders/statistics.html:59
@@ -983,92 +1012,156 @@ msgid "Status"
 msgstr ""
 
 #: piezas/apps/dashboard/podorders/forms.py:14
+#: piezas/apps/dashboard/podorders/forms.py:53
 msgid "Date from"
 msgstr ""
 
 #: piezas/apps/dashboard/podorders/forms.py:15
+#: piezas/apps/dashboard/podorders/forms.py:54
 msgid "Date to"
 msgstr ""
 
 #: piezas/apps/dashboard/podorders/forms.py:17
+#: piezas/apps/dashboard/podorders/forms.py:56
 msgid "HTML"
 msgstr ""
 
 #: piezas/apps/dashboard/podorders/forms.py:18
+#: piezas/apps/dashboard/podorders/forms.py:57
 msgid "CSV"
 msgstr ""
 
 #: piezas/apps/dashboard/podorders/forms.py:22
+#: piezas/apps/dashboard/podorders/forms.py:61
 msgid "Get results as"
 msgstr ""
 
-#: piezas/apps/dashboard/podorders/views.py:24
+#: piezas/apps/dashboard/podorders/forms.py:46
+#: piezas/apps/dashboard/podorders/views.py:423
+#: piezas/templates/dashboard/orders/quote_list.html:93
+msgid "Quote number"
+msgstr "Número de presupuesto"
+
+#: piezas/apps/dashboard/podorders/views.py:25
+#: piezas/apps/dashboard/podorders/views.py:256
 #, python-format
 msgid "%(main_filter)s %(name_filter)s%(date_filter)s%(state_filter)s"
 msgstr ""
 
-#: piezas/apps/dashboard/podorders/views.py:58 piezas/apps/search/forms.py:129
+#: piezas/apps/dashboard/podorders/views.py:59 piezas/apps/search/forms.py:129
 msgid "All search requests"
 msgstr "Todas las peticiones de búsqueda"
 
-#: piezas/apps/dashboard/podorders/views.py:67
+#: piezas/apps/dashboard/podorders/views.py:68
 msgid "Search requests without an state"
 msgstr "Peticiones de búsqueda sin estado"
 
-#: piezas/apps/dashboard/podorders/views.py:69
+#: piezas/apps/dashboard/podorders/views.py:70
 #, python-format
 msgid "Search requests with state '%s'"
 msgstr "Peticiones de búsqueda con estado '%s'"
 
-#: piezas/apps/dashboard/podorders/views.py:74
+#: piezas/apps/dashboard/podorders/views.py:75
 #, python-format
 msgid "Search requests with number starting with \"%(searchrequest_number)s\""
 msgstr ""
 "Peticiones de búsqueda con número que comienza por \"%(searchrequest_number)s"
 "\""
 
-#: piezas/apps/dashboard/podorders/views.py:78
+#: piezas/apps/dashboard/podorders/views.py:79
+#: piezas/apps/dashboard/podorders/views.py:310
 #, python-format
 msgid " with user name matching '%(name)s'"
 msgstr "con usuario que concuerda con '%(name)s'"
 
-#: piezas/apps/dashboard/podorders/views.py:83
+#: piezas/apps/dashboard/podorders/views.py:84
+#: piezas/apps/dashboard/podorders/views.py:315
 #, python-format
 msgid " placed between %(start_date)s and %(end_date)s"
 msgstr ""
 
-#: piezas/apps/dashboard/podorders/views.py:87
+#: piezas/apps/dashboard/podorders/views.py:88
+#: piezas/apps/dashboard/podorders/views.py:319
 #, python-format
 msgid " placed since %s"
 msgstr ""
 
-#: piezas/apps/dashboard/podorders/views.py:91
+#: piezas/apps/dashboard/podorders/views.py:92
+#: piezas/apps/dashboard/podorders/views.py:323
 #, python-format
 msgid " placed before %s"
 msgstr ""
 
-#: piezas/apps/dashboard/podorders/views.py:95
+#: piezas/apps/dashboard/podorders/views.py:96
+#: piezas/apps/dashboard/podorders/views.py:327
 #, python-format
 msgid " with status %(state)s"
 msgstr "con estado %(state)s"
 
-#: piezas/apps/dashboard/podorders/views.py:192
+#: piezas/apps/dashboard/podorders/views.py:193
 #: piezas/templates/dashboard/orders/order_list.html:96
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:45
 #: piezas/templates/dashboard/orders/searchrequest_list.html:94
 msgid "Number of items"
 msgstr ""
 
-#: piezas/apps/dashboard/podorders/views.py:195
+#: piezas/apps/dashboard/podorders/views.py:196
+#: piezas/apps/dashboard/podorders/views.py:427
 msgid "Creation date"
 msgstr "Fecha de creación"
 
-#: piezas/apps/dashboard/podorders/views.py:196 piezas/apps/search/forms.py:98
+#: piezas/apps/dashboard/podorders/views.py:197
+#: piezas/apps/dashboard/podorders/views.py:428 piezas/apps/search/forms.py:98
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:47
 #: piezas/templates/search/pending_searchrequest_list.html:22
 #: piezas/templates/search/quote.html:66
 msgid "Expiration date"
 msgstr "Fecha de expiración"
+
+#: piezas/apps/dashboard/podorders/views.py:290
+msgid "All quotes"
+msgstr "Todos los presupuestos"
+
+#: piezas/apps/dashboard/podorders/views.py:299
+msgid "Quotes without an state"
+msgstr "Presupuestos sin estado"
+
+#: piezas/apps/dashboard/podorders/views.py:301
+#, python-format
+msgid "Quotes with state '%s'"
+msgstr "Presupuestos con estado '%s'"
+
+#: piezas/apps/dashboard/podorders/views.py:306
+#, python-format
+msgid "Quotes with number starting with \"%(quote_number)s\""
+msgstr ""
+"Presupuestos con número que comienza por \"%(quote_number)s"
+"\""
+
+#: piezas/apps/dashboard/podorders/views.py:429
+#: piezas/templates/dashboard/orders/quote_detail.html:88
+msgid "Base total (excl tax)"
+msgstr "Total base sin impuestos"
+
+#: piezas/apps/dashboard/podorders/views.py:430
+msgid "Base total (inc tax)"
+msgstr "Total base con impuestos"
+
+#: piezas/apps/dashboard/podorders/views.py:431
+msgid "Shipping total (excl tax)"
+msgstr "Gastos de envío sin impuestos"
+
+#: piezas/apps/dashboard/podorders/views.py:432
+msgid "Shipping total (incl tax)"
+msgstr "Gastos de envío con impuestos"
+
+#: piezas/apps/dashboard/podorders/views.py:433
+msgid "Grand total (excl tax)"
+msgstr "Total final sin impuestos"
+
+#: piezas/apps/dashboard/podorders/views.py:434
+msgid "Grand total (incl tax)"
+msgstr "Total final con impuestos"
 
 #: piezas/apps/dashboard/podusers/views.py:23
 msgid "Users' status successfully changed"
@@ -1669,21 +1762,21 @@ msgstr "Búsquedas que caducan desde %(date_from)s"
 msgid "Serach requests not expiring until %(date_to)s"
 msgstr "Búsquedas que no caducan hasta %(date_to)s"
 
-#: piezas/apps/search/forms.py:171 piezas/apps/search/forms.py:220
-#: piezas/templates/search/quote.html:100
+#: piezas/apps/search/forms.py:172 piezas/apps/search/forms.py:221
+#: piezas/templates/search/quote.html:101
 msgid "Comments for the quote"
 msgstr "Comentarios para el presupuesto"
 
-#: piezas/apps/search/forms.py:189
+#: piezas/apps/search/forms.py:190
 msgid "Served quantity must be greater than 0"
 msgstr "La cantidad servida debe ser mayor que 0"
 
-#: piezas/apps/search/forms.py:191
+#: piezas/apps/search/forms.py:192
 msgid "Served quantity must be at maximum the requested quantity"
 msgstr ""
 "La cantidad servida debe ser como mucho el máximo de la cantidad solicitada"
 
-#: piezas/apps/search/forms.py:193
+#: piezas/apps/search/forms.py:194
 msgid ""
 "Base amount for served pieces must be greater than 0. If you don't want to "
 "serve this piece, please set the quantity to 0."
@@ -1691,15 +1784,18 @@ msgstr ""
 "El total base para las piezas servidas debe ser mayor que 0. Si no quieres "
 "servir esta pieza, por favor establece la cantidad servida a 0."
 
-#: piezas/apps/search/forms.py:207
+#: piezas/apps/search/forms.py:208
+#: piezas/templates/dashboard/orders/quote_detail.html:66
+#: piezas/templates/dashboard/orders/quote_detail.html:117
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:66
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:129
 #: piezas/templates/dashboard/partners/partner_manage.html:28
 msgid "Details"
 msgstr "Detalles"
 
-#: piezas/apps/search/forms.py:213 piezas/apps/search/forms.py:216
-#: piezas/templates/search/quote.html:98
+#: piezas/apps/search/forms.py:214 piezas/apps/search/forms.py:217
+#: piezas/templates/dashboard/orders/quote_detail.html:83
+#: piezas/templates/search/quote.html:99
 msgid "Served quantity"
 msgstr "Cantidad servida"
 
@@ -1976,7 +2072,7 @@ msgid "Search new piece"
 msgstr "Buscar nueva pieza"
 
 #: piezas/templates/basket/partials/basket_content.html:89
-#: piezas/templates/search/confirm.html:189
+#: piezas/templates/search/confirm.html:190
 msgid "Submit search request"
 msgstr "Enviar petición de búsqueda"
 
@@ -3337,6 +3433,7 @@ msgstr ""
 #: piezas/templates/customer/wishlists/wishlists_list.html:19
 #: piezas/templates/dashboard/orders/order_detail.html:137
 #: piezas/templates/dashboard/orders/order_list.html:125
+#: piezas/templates/dashboard/orders/quote_list.html:112
 #: piezas/templates/dashboard/orders/searchrequest_list.html:112
 #: piezas/templates/dashboard/pages/index.html:69
 #: piezas/templates/dashboard/reports/partials/order_report.html:30
@@ -3490,6 +3587,7 @@ msgstr ""
 
 #: piezas/templates/customer/profile/profile.html:13
 #: piezas/templates/dashboard/orders/order_detail.html:37
+#: piezas/templates/dashboard/orders/quote_detail.html:34
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:34
 msgid "Email address"
 msgstr ""
@@ -3890,6 +3988,9 @@ msgstr "Buscar piezas"
 #: piezas/templates/dashboard/orders/order_list.html:30
 #: piezas/templates/dashboard/orders/order_list.html:51
 #: piezas/templates/dashboard/orders/order_list.html:67
+#: piezas/templates/dashboard/orders/quote_list.html:30
+#: piezas/templates/dashboard/orders/quote_list.html:51
+#: piezas/templates/dashboard/orders/quote_list.html:67
 #: piezas/templates/dashboard/orders/searchrequest_list.html:30
 #: piezas/templates/dashboard/orders/searchrequest_list.html:51
 #: piezas/templates/dashboard/orders/searchrequest_list.html:67
@@ -4672,12 +4773,15 @@ msgstr ""
 
 #: piezas/templates/dashboard/orders/order_list.html:52
 #: piezas/templates/dashboard/orders/order_list.html:58
+#: piezas/templates/dashboard/orders/quote_list.html:52
+#: piezas/templates/dashboard/orders/quote_list.html:58
 #: piezas/templates/dashboard/orders/searchrequest_list.html:52
 #: piezas/templates/dashboard/orders/searchrequest_list.html:58
 msgid "Advanced Search"
 msgstr ""
 
 #: piezas/templates/dashboard/orders/order_list.html:66
+#: piezas/templates/dashboard/orders/quote_list.html:66
 #: piezas/templates/dashboard/orders/searchrequest_list.html:66
 msgid "Close"
 msgstr ""
@@ -4687,11 +4791,13 @@ msgid "Download selected orders as a CSV"
 msgstr ""
 
 #: piezas/templates/dashboard/orders/order_list.html:86
+#: piezas/templates/dashboard/orders/quote_list.html:85
 #: piezas/templates/dashboard/orders/searchrequest_list.html:85
 msgid "Download"
 msgstr ""
 
 #: piezas/templates/dashboard/orders/order_list.html:93
+#: piezas/templates/dashboard/orders/quote_list.html:92
 #: piezas/templates/dashboard/orders/searchrequest_list.html:92
 msgid "Select all"
 msgstr ""
@@ -4708,6 +4814,101 @@ msgstr ""
 msgid "No orders found."
 msgstr ""
 
+#: piezas/templates/dashboard/orders/quote_detail.html:8
+#, python-format
+msgid "Quote %(number)s"
+msgstr "Presupuesto %(number)s"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:26
+#, python-format
+msgid "Quote #%(number)s"
+msgstr "Presupuesto #%(number)s"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:31
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:31
+msgid "Owner Information"
+msgstr "Información del propietario"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:43
+msgid "Quote information"
+msgstr "Información del presupuesto"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:46
+#: piezas/templates/dashboard/orders/quote_list.html:97
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:46
+#: piezas/templates/dashboard/orders/searchrequest_list.html:97
+#: piezas/templates/dashboard/reports/partials/open_basket_report.html:12
+msgid "Date of creation"
+msgstr ""
+
+#: piezas/templates/dashboard/orders/quote_detail.html:47
+#: piezas/templates/dashboard/orders/quote_list.html:98
+msgid "Date updated"
+msgstr "Fecha de actualización"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:59
+msgid "Quote Details"
+msgstr "Detalles del presupuesto"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:67
+#: piezas/templates/dashboard/orders/quote_detail.html:74
+msgid "Quote items"
+msgstr "Elementos del presupuesto"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:84
+msgid "Request comments"
+msgstr "Comentarios de la petición de búsqueda"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:85
+msgid "Quote comments"
+msgstr "Comentarios del presupuesto"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:86
+msgid "Request picture"
+msgstr "Foto de la petición de búsqueda"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:87
+msgid "Quote picture"
+msgstr "Foto del presupuesto"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:123
+msgid "Base total (excl. tax)"
+msgstr "Total base sin impuestos"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:127
+msgid "Base total (incl. tax)"
+msgstr "Total base sin impuestos"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:131
+msgid "Shipping total (excl. tax)"
+msgstr "Gastos de envío sin impuestos"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:135
+msgid "Shipping total (incl. tax)"
+msgstr "Gastos de envío sin impuestos"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:139
+msgid "Grand total (excl. tax)"
+msgstr "Total final sin impuestos"
+
+#: piezas/templates/dashboard/orders/quote_detail.html:143
+msgid "Grand total (incl. tax)"
+msgstr "Total final con impuestos"
+
+#: piezas/templates/dashboard/orders/quote_list.html:9
+#: piezas/templates/dashboard/orders/quote_list.html:18
+#: piezas/templates/dashboard/orders/quote_list.html:24
+msgid "Quote management"
+msgstr "Gestión de presupuestos"
+
+#: piezas/templates/dashboard/orders/quote_list.html:83
+msgid "Download selected quotes as a CSV"
+msgstr "Descargar los presupuestos seleccionados como CSV"
+
+#: piezas/templates/dashboard/orders/quote_list.html:125
+msgid "No quotes found."
+msgstr "No se han encontrado presupuestos."
+
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:8
 #, python-format
 msgid "Search request %(number)s"
@@ -4718,19 +4919,9 @@ msgstr "Petición de búsqueda %(number)s"
 msgid "Search request #%(number)s"
 msgstr "Petición de búsqueda #%(number)s"
 
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:31
-msgid "Owner Information"
-msgstr "Información del propietario"
-
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:43
 msgid "Search Request information"
 msgstr "Información de la petición de búsqueda"
-
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:46
-#: piezas/templates/dashboard/orders/searchrequest_list.html:97
-#: piezas/templates/dashboard/reports/partials/open_basket_report.html:12
-msgid "Date of creation"
-msgstr ""
 
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:59
 msgid "Search request Details"
@@ -4744,6 +4935,7 @@ msgstr "Elementos de la petición de búsqueda"
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:68
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:170
 #: piezas/templates/search/confirm.html:120
+#: piezas/templates/search/quote.html:129
 msgid "Photo gallery"
 msgstr "Galería de fotos"
 
@@ -4763,7 +4955,7 @@ msgstr "Respuestas"
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:231
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:237
 #: piezas/templates/search/confirm.html:85
-#: piezas/templates/search/quote.html:95
+#: piezas/templates/search/quote.html:96
 msgid "Picture"
 msgstr "Foto"
 
@@ -6263,7 +6455,7 @@ msgstr "Por favor confirma la búsqueda que será enviada a los proveedores"
 msgid "Pieces to search"
 msgstr "Piezas a buscar"
 
-#: piezas/templates/search/confirm.html:187
+#: piezas/templates/search/confirm.html:188
 msgid "Return to search"
 msgstr "Volver a la búsqueda"
 
@@ -6342,23 +6534,23 @@ msgid "Please enter the quote details for that search request"
 msgstr ""
 "Por favor entra los detalles del presupuesto para esta petición de búsqueda"
 
-#: piezas/templates/search/quote.html:88
+#: piezas/templates/search/quote.html:89
 msgid "Pieces to quote"
 msgstr "Piezas a presupuestar"
 
-#: piezas/templates/search/quote.html:99
+#: piezas/templates/search/quote.html:100
 msgid "Base total excl. tax"
 msgstr "Total base sin impuestos"
 
-#: piezas/templates/search/quote.html:101
+#: piezas/templates/search/quote.html:102
 msgid "Picture of the piece to be sent"
 msgstr "Foto de la pieza que será enviada"
 
-#: piezas/templates/search/quote.html:126
+#: piezas/templates/search/quote.html:194
 msgid "Quote summary"
 msgstr "Resumen del presupuesto"
 
-#: piezas/templates/search/quote.html:165
+#: piezas/templates/search/quote.html:233
 msgid "Confirm quote"
 msgstr "Confirmar presupuesto"
 
@@ -6413,9 +6605,6 @@ msgstr ""
 
 #~ msgid "Add"
 #~ msgstr "Añadir"
-
-#~ msgid "Shipping total excl. tax"
-#~ msgstr "Gastos de envío sin impuestos"
 
 #~ msgid "Border area"
 #~ msgstr "Limítrofe"

@@ -251,6 +251,15 @@ class Quote(models.Model):
     warranty_days = models.PositiveIntegerField(_('Warranty days'), blank=True, null=True)
     shipping_days = models.PositiveIntegerField(_('Shipping days'), blank=True, null=True)
 
+    @property
+    def lines(self):
+        items = QuoteItem.objects.filter(quote=self)
+        return items
+
+    @property
+    def num_items(self):
+        return self.lines.count()        
+
 
 QUOTE_ITEM_STATES = (('sent', _('Sent')), ('accepted', _('Accepted')),
     ('rejected', _('Rejected')))

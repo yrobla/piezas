@@ -1,0 +1,177 @@
+{% extends 'dashboard/layout.html' %}
+{% load i18n %}
+{% load currency_filters %}
+
+{% block body_class %}{{ block.super }} orders{% endblock %}
+
+{% block title %}
+    {% blocktrans with number=quote.id %}Quote {{ number }}{% endblocktrans %} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li>
+            <a href="{% url 'dashboard:quote-list' %}">{% trans "Quotes" %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">#{{ quote.id }}</li>
+    </ul>
+{% endblock %}
+
+{% block headertext %}
+    {% blocktrans with number=quote.id %}Quote #{{ number }}{% endblocktrans %}
+{% endblock  %}
+
+{% block dashboard_content %}
+    <table class="table table-striped table-bordered table-hover">
+        <caption><i class="icon-group icon-large"></i>{% trans "Owner Information" %}</caption>
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Email address" %}</th>
+            </tr>
+            <tr>
+                <td>{{ quote.owner.get_full_name|default:"-" }}</td>
+                <td>{{ quote.owner.email|default:"-" }}</td>
+            </tr>
+    </table>
+
+    <table class="table table-striped table-bordered table-hover">
+        <caption><i class="icon-shopping-cart icon-large"></i>{% trans "Quote information" %}</caption>
+        <tr>
+            <th>{% trans "Search request" %}</th>
+            <th>{% trans "Date of creation" %}</th>
+            <th>{% trans "Date updated" %}</th>
+            <th>{% trans "Status" %}</th>
+        </tr>
+        <tr>
+            <td><a href="{% url 'dashboard:searchrequest-detail' number=quote.search_request.id %}">{{ quote.search_request.id }}</td>
+            <td>{{ quote.date_created|date:"d/m/y" }}</td>
+            <td>{{ quote.date_updated|date:"d/m/y" }}</td>
+            <td>{{quote.state}}</td>
+        </tr>
+    </table>
+
+    <div class="sub-header">
+        <h2>{% trans "Quote Details" %}</h2>
+    </div>
+
+    <div class="tabbable dashboard">
+
+        <ul class="nav nav-tabs">
+            {% block nav_tabs %}
+                <li class="{% if active_tab == 'detail' %}active{% endif %}"><a href="#detail" data-toggle="tab">{% trans "Details" %}</a></li>
+                <li class="{% if active_tab == 'lines' %}active{% endif %}"><a href="#lines" data-toggle="tab">{% trans "Quote items" %}</a></li>
+            {% endblock nav_tabs %}
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane {% if active_tab == 'lines' %}active{% endif %}" id="lines">
+                <div class="table-header">
+                    <h3>{% trans "Quote items" %}</h3>
+                </div>
+                    {% block quote_items %}
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{% trans "Category" %}</th>
+                                    <th>{% trans "Piece" %}</th>
+                                    <th>{% trans "Quantity" %}</th>
+                                    <th>{% trans "Served quantity" %}</th>
+                                    <th>{% trans "Request comments" %}</th>
+                                    <th>{% trans "Quote comments" %}</th>
+                                    <th>{% trans "Request picture" %}</th>
+                                    <th>{% trans "Quote picture" %}</th>
+                                    <th>{% trans "Base total (excl tax)" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for line in quote.lines.all %}
+                                    <tr>
+					<td>{{ line.search_item_request.category}}</td>
+					<td>{{ line.search_item_request.piece}}</td>
+					<td>{{ line.search_item_request.quantity}}</td>
+                                        <td>{{ line.quantity }}</td>
+                                        <td>{{ line.search_item_request.comments}}</td>
+                                        <td>{{ line.comments}}</td>
+					<td>{% if line.search_item_request.picture %}
+						<img src="/media/{{ line.search_item_request.picture }}" style="height:50px;" />
+					{% endif %}</td>
+					<td>{% if line.picture %}
+						<img src="/media/{{ line.picture }}" style="height:50px;" />
+					{% endif %}</td>
+					<td>{{line.base_total_excl_tax}} €</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endblock quote_items %}
+            </div>
+
+            <div class="tab-pane {% if active_tab == 'detail' %}active{% endif %}" id="detail">
+                {% block tab_details %}
+                    <div class="table-header">
+                        <h3>{% trans "Details" %}</h3>
+                    </div>
+
+                    <table class="table table-striped table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <th>{% trans "Base total (excl. tax)" %}</th>
+                                <td>{{ quote.base_total_excl_tax }} €</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans "Base total (incl. tax)" %}</th>
+                                <td>{{ quote.base_total_incl_tax }} €</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans "Shipping total (excl. tax)" %}</th>
+                                <td>{{ quote.shipping_total_excl_tax }} €</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans "Shipping total (incl. tax)" %}</th>
+                                <td>{{ quote.shipping_total_excl_tax }} €</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans "Grand total (excl. tax)" %}</th>
+                                <td>{{ quote.grand_total_excl_tax }} €</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans "Grand total (incl. tax)" %}</th>
+                                <td>{{ quote.grand_total_incl_tax }} €</td>
+                            </tr>
+
+                            <tr>
+                                <th>{% trans "Comments" %}</th>
+                                <td>{{ quote.comments}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>{% trans "Warranty days" %}</th>
+                                <td>{{ quote.warranty_days }}</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans "Shipping days" %}</th>
+                                <td>{{ quote.shipping_days }}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                {% endblock %}
+            </div>
+
+            {% block extra_tabs %}{% endblock %}
+        </div>
+    </div>
+
+{% endblock dashboard_content %}
+
+{% block onbodyload %}
+    {{ block.super }}
+    oscar.dashboard.orders.initTabs();
+    oscar.dashboard.orders.initTable();
+{% endblock %}
+
