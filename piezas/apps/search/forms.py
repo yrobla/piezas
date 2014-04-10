@@ -166,7 +166,8 @@ class QuoteCreationForm(forms.ModelForm):
         model = SearchRequest
         exclude = ('brand', 'model', 'version', 'bodywork', 'engine', 'frameref', 'comments',
             'expiration_date', 'date_created', 'date_updated', 'state', 'owner',
-            'latitude', 'longitude')
+            'latitude', 'longitude', 'picture1', 'picture2', 'picture3', 'picture4',
+            'picture5', 'picture6', 'picture7', 'picture8', 'picture9', 'picture10')
 
     quote_comments = forms.CharField(label=_('Comments for the quote'), required=False,
         widget=forms.Textarea())

@@ -81,6 +81,7 @@
 					</div>
 				</div>
 
+
 			<form id="quote_form" action="." method="post" class="form-horizontal span12">
 				{% csrf_token %}
 
@@ -123,6 +124,73 @@
 					</table>
 				</div>
 				{% include "partials/form_fields.html" %}
+
+                                <div>
+                                        <h4>{% trans "Photo gallery" %}</h4>
+                                        <div style="clear:both"><br /></div>
+
+                                        {% if searchrequest.picture1%}
+                                        <div class="span3">
+                                                <img class="search_item" src="/media/{{searchrequest.picture1}}" style="height:50px;" />
+                                        </div>
+                                        {% endif %}
+
+                                        {% if searchrequest.picture2%}
+                                        <div class="span3">
+                                                <img class="search_item" src="/media/{{searchrequest.picture2}}" style="height:50px;" />
+                                        </div>
+                                        {% endif %}
+
+                                        {% if searchrequest.picture3%}
+                                        <div class="span3">
+                                                <img class="search_item" src="/media/{{searchrequest.picture3}}" style="height:50px;" />
+                                        </div>
+                                        {% endif %}
+
+                                        {% if searchrequest.picture4%}
+                                        <div class="span3">
+                                                <img class="search_item" src="/media/{{searchrequest.picture4}}" style="height:50px;" />
+                                        </div>
+                                        {% endif %}
+
+                                        {% if searchrequest.picture5%}
+                                        <div class="span3">
+                                                <img class="search_item" src="/media/{{searchrequest.picture5}}" style="height:50px;" />
+                                        </div>
+                                        {% endif %}
+
+                                        {% if searchrequest.picture6%}
+                                        <div class="span3">
+                                                <img class="search_item" src="/media/{{searchrequest.picture6}}" style="height:50px;" />
+                                        </div>
+                                        {% endif %}
+
+                                        {% if searchrequest.picture7%}
+                                        <div class="span3">
+                                                <img class="search_item" src="/media/{{searchrequest.picture7}}" style="height:50px;" />
+                                        </div>
+                                        {% endif %}
+
+                                        {% if searchrequest.picture8%}
+                                        <div class="span3">
+                                                <img class="search_item" src="/media/{{searchrequest.picture8}}" style="height:50px;" />
+                                        </div>
+                                        {% endif %}
+
+                                        {% if searchrequest.picture9%}
+                                        <div class="span3">
+                                                <img class="search_item" src="/media/{{searchrequest.picture9}}" style="height:50px;" />
+                                        </div>
+                                        {% endif %}
+
+                                        {% if searchrequest.picture10%}
+                                        <div class="span3">
+                                                <img class="search_item" src="/media/{{searchrequest.picture10}}" style="height:50px;" />
+                                        </div>
+                                        {% endif %}
+				</div>
+				<div style="clear:both"></div>
+
 			 	<h4>{% trans "Quote summary" %}</h4>
 
 				<div class="control-group span5">
