@@ -64,12 +64,28 @@ class SearchCreationForm(forms.Form):
     engine = forms.ModelChoiceField(label=_('Engine'), required=True, queryset = Engine.objects.all())
     frameref = forms.CharField(label=_('Frame reference'), max_length=255, required=False)
 
+    picture1 = forms.CharField(label=_('Picture #1'),  widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
+    picture2 = forms.CharField(label=_('Picture #2'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
+    picture3 = forms.CharField(label=_('Picture #3'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
+    picture4 = forms.CharField(label=_('Picture #4'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
+    picture5 = forms.CharField(label=_('Picture #5'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
+    picture6 = forms.CharField(label=_('Picture #6'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
+    picture7 = forms.CharField(label=_('Picture #7'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
+    picture8 = forms.CharField(label=_('Picture #8'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
+    picture9 = forms.CharField(label=_('Picture #9'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
+    picture10 = forms.CharField(label=_('Picture #10'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
+
+    def clean_picture1(self):
+        data = self.cleaned_data['picture1']
+        print data
+        return data
+
 
 class SearchCreationFormItem(forms.Form):
     category = forms.ModelChoiceField(label=_('Category'), required=True, queryset = Category.objects.all(), widget=forms.Select(attrs={'class':'category'}))
     piece = forms.ModelChoiceField(label=_('Product'), required=True, queryset = Product.objects.all(), widget=forms.Select(attrs={'class':'piece'}))
     quantity = forms.IntegerField(label=_('Quantity'), required=True, initial=1)
-    picture = forms.ImageField(widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1))
+    picture = forms.ImageField(widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
     comments = forms.CharField(label=_('Comments'), required=False, widget=forms.Textarea(attrs={'style':'height:50px;width:200px'}))
 
 

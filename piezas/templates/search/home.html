@@ -40,6 +40,13 @@
 				<p>{% trans "Please enter the criteria for the pieces you want to search" %}</p>
 				{% include "partials/form_fields.html" %}
 
+				<div class="span12">
+					<button type="button" class="btn" id="button_add_picture">
+					{% trans "Add picture to gallery" %}
+					</button>
+				</div>
+				<div style="clear:both"><br /></div>
+
 				{{ formset.management_form }}
 			 	<h4>{% trans "Pieces to search" %}</h4>
 
@@ -119,6 +126,8 @@
 <script type="text/javascript">
 $(document).ready(function()
 {
+	var current_picture = 0;
+
 	$("#search_pieces_form").submit(function()
 	{
 		$("#error_show").html("");
@@ -279,6 +288,12 @@ $(document).ready(function()
 		}
 	});
 
+	$("#button_add_picture").click(function()
+	{
+		current_picture+=1;
+		$("#id_picture"+current_picture).parent().parent().parent().show();
+	});
+
 	function hide_table_row(val)
 	{
 		questions_id = val.id;
@@ -302,6 +317,21 @@ $(document).ready(function()
 	});
 
 	$("select.piece").trigger("change");
+
+	// hide all images at start
+	for (var i=1;i<=10;i++)
+	{
+		var id = "#id_picture"+i;
+		var current_val = $(id).val();
+		if (!current_val)
+		{
+			$(id).parent().parent().parent().hide();
+		}
+		else
+		{
+			current_picture = i;
+		}
+	}
 });
 </script>
 

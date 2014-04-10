@@ -63,6 +63,17 @@ class HomeView(FormView):
         final_data["model"] = form.cleaned_data["model"].id
         final_data["bodywork"] = form.cleaned_data["bodywork"].id
 
+        final_data["picture1"] = form.cleaned_data["picture1"]
+        final_data["picture2"] = form.cleaned_data["picture2"]
+        final_data["picture3"] = form.cleaned_data["picture3"]
+        final_data["picture4"] = form.cleaned_data["picture4"]
+        final_data["picture5"] = form.cleaned_data["picture5"]
+        final_data["picture6"] = form.cleaned_data["picture6"]
+        final_data["picture7"] = form.cleaned_data["picture7"]
+        final_data["picture8"] = form.cleaned_data["picture8"]
+        final_data["picture9"] = form.cleaned_data["picture9"]
+        final_data["picture10"] = form.cleaned_data["picture10"]
+
         # formset
         final_data["pieces"] = []
 
@@ -219,7 +230,18 @@ class ConfirmView(FormView):
                     version=version, bodywork=bodywork, engine=engine,
                     frameref=current_data["frameref"], comments=form.cleaned_data["comments"],
                     owner=self.request.user, longitude=longitude, latitude=latitude,
-                    expiration_date=form.cleaned_data['expiration_date'])
+                    expiration_date=form.cleaned_data['expiration_date'],
+                    picture1=current_data['picture1'],
+                    picture2=current_data['picture2'],
+                    picture3=current_data['picture3'],
+                    picture4=current_data['picture4'],
+                    picture5=current_data['picture5'],
+                    picture6=current_data['picture6'],
+                    picture7=current_data['picture7'],
+                    picture8=current_data['picture8'],
+                    picture9=current_data['picture9'],
+                    picture10=current_data['picture10'],
+                    )
                 search_request.save()
 
                 # now create search items

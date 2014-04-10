@@ -153,6 +153,17 @@ class SearchRequest(models.Model):
     latitude = models.DecimalField(_('Latitude'), max_digits=40, decimal_places=20)
     longitude = models.DecimalField(_('Longitude'), max_digits=40, decimal_places=20)
 
+    picture1 = models.CharField(max_length=255, blank=True, null=True)
+    picture2 = models.CharField(max_length=255, blank=True, null=True)
+    picture3 = models.CharField(max_length=255, blank=True, null=True)
+    picture4 = models.CharField(max_length=255, blank=True, null=True)
+    picture5 = models.CharField(max_length=255, blank=True, null=True)
+    picture6 = models.CharField(max_length=255, blank=True, null=True)
+    picture7 = models.CharField(max_length=255, blank=True, null=True)
+    picture8 = models.CharField(max_length=255, blank=True, null=True)
+    picture9 = models.CharField(max_length=255, blank=True, null=True)
+    picture10 = models.CharField(max_length=255, blank=True, null=True)
+
     @property
     def lines(self):
         items = SearchItemRequest.objects.filter(search_request=self)
