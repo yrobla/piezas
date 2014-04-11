@@ -1,0 +1,226 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load staticfiles %}
+
+{% block title %}
+    {% trans 'Homepage' %} | {{ block.super }}
+{% endblock %}
+
+{% block extrahead %}
+<script src="{% static "oscar/js/datepicker/bootstrap-datepicker.js" %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static "oscar/css/datepicker.css" %}" />
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">{% trans 'Home' %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans 'Quote details' %}</li>
+    </ul>
+{% endblock %}
+
+{% block headertext %}
+    {% trans "Quote details" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span12 register_form">
+
+	 	<h4>{% trans "Search details" %}</h4>
+		<div class="responsive-table">
+			<table class="table span12">
+			<tr><th>{% trans "Brand" %}</th><td>{{quote.search_request.brand}}</td></tr>
+			<tr><th>{% trans "Model" %}</th><td>{{quote.search_request.model}}</td></tr>
+			<tr><th>{% trans "Version" %}</th><td>{{quote.search_request.version}}</td></tr>
+			<tr><th>{% trans "Bodywork" %}</th><td>{{quote.search_request.bodywork}}</td></tr>
+			<tr><th>{% trans "Engine" %}</th><td>{{quote.search_request.engine}}</td></tr>
+			<tr><th>{% trans "Frame reference" %}</th><td>{{quote.search_request.frameref}}</td></tr>
+			<tr><th>{% trans "Comments" %}</th><td>{{quote.search_request.comments}}</td></tr>
+			<tr><th>{% trans "Date created" %}</th><td>{{quote.search_request.date_created}}</td></tr>
+			<tr><th>{% trans "Date updated" %}</th><td>{{quote.search_request.date_updated}}</td></tr>
+			<tr><th>{% trans "State" %}</th><td>{{quote.search_request.state}}</td></tr>
+			<tr><th>{% trans "Expiration date" %}</th><td>{{quote.search_request.expiration_date}}</td></tr>
+			</table>
+		</div>
+		<div style="clear:both"><br /></div>
+
+		<h4>{% trans "Pieces detail" %}</h4>
+		<div class="responsible-table">
+			<table class="table" id="id_searchitemrequest_table">
+				<thead><tr>
+					<th>{% trans "Category" %}</th>
+					<th>{% trans "Piece" %}</th>
+					<th>{% trans "Search request comments" %}</th>
+					<th>{% trans "Quote comments" %}</th>
+					<th>{% trans "Questions" %}</th>
+					<th>{% trans "Search request picture" %}</th>
+					<th>{% trans "Quote picture" %}</th>
+					<th>{% trans "Requested quantity" %}</th>
+					<th>{% trans "Served quantity" %}</th>
+					<th>{% trans "Base total (excl tax)" %}</th>
+					<th>{% trans "Select item" %}</th>
+				</tr></thead>
+				<tbody>
+					{% for item in quote.lines %}
+					<tr>
+						<td>{{item.search_item_request.category}}</td>
+						<td>{{item.search_item_request.piece}}</td>
+						<td>{{item.search_item_request.comments}}</td>
+						<td>{{item.comments}}</td>
+						<td><ul>
+		{% for question in item.search_item_request.answers %}
+			{% if question.question.type in 'text,boolean,list' %}
+				<li>{{question.question.text}}:&nbsp;
+				{% if question.question.type in 'text,list' %}
+					{{question.text_answer}}
+				{% else %}
+					{% if question.boolean_answer %}
+						{% trans "Yes" %}
+					{% else %}
+						{% trans "No" %}
+					{% endif %}
+				{% endif %}
+				</li>
+			{% endif %}
+		{% endfor %}</ul>
+						</td>
+						<td>{% if item.search_item_request.picture %}<img class="search_item" src="/media/{{item.search_item_request.picture}}" style="height:50px;" />{% endif %}</td>
+						<td>{% if item.picture %}<img class="search_item" src="/media/{{item.picture}}" style="height:50px;" />{% endif %}</td>
+						<td>{{item.search_item_request.quantity}}</td>
+						<td>{{item.quantity}}</td>
+						<td>{{item.base_total_excl_tax}} €</td>
+						<td><input type="checkbox" id="search_item_request[{{item.id}}]" name="search_item_request[{{item.id}}]" checked="checked" /></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div style="clear:both"><br /></div>
+
+				<div>
+					<h4>{% trans "Photo gallery" %}</h4>
+					<div style="clear:both"><br /></div>
+
+					{% if quote.search_request.picture1%}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture1}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture2%}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture2}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture3 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture3}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture4 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture4}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture5 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture5}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture6 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture6}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture7 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture7}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture8 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture8}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture9 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture9}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture10 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture10}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+
+				</div>
+				<div style="clear:both"><br /></div>
+
+		<h4>{% trans "Quote summary" %}</h4>
+		<div class="responsive-table">
+			<table class="table span12">
+			<tr><th>{% trans "Owner" %}</th><td>{% if quote.owner.commercial_name %}
+			{{quote.owner.commercial_name}}{% else %}{{quote.owner}}{% endif %}</td></tr>
+
+			<tr><th>{% trans "Date created" %}</th><td>{{quote.date_created}}</td></tr>
+			<tr><th>{% trans "Date updated" %}</th><td>{{quote.date_updated}}</td></tr>
+			<tr><th>{% trans "Base total (excl tax)" %}</th><td>{{quote.base_total_excl_tax}} €</td></tr>
+			<tr><th>{% trans "Base total (incl tax)" %}</th><td>{{quote.base_total_incl_tax}} €</td></tr>
+			<tr><th>{% trans "Shipping total (excl tax)" %}</th><td>{{quote.shipping_total_excl_tax}} €</td></tr>
+			<tr><th>{% trans "Shipping total (incl tax)" %}</th><td>{{quote.shipping_total_incl_tax}} €</td></tr>
+			<tr><th>{% trans "Grand total (excl tax)" %}</th><td>{{quote.grand_total_excl_tax}} €</td></tr>
+			<tr><th>{% trans "Grand total (incl tax)" %}</th><td>{{quote.grand_total_incl_tax}} €</td></tr>
+			<tr><th>{% trans "Comments" %}</th><td>{{quote.comments}}</td></tr>
+			<tr><th>{% trans "Warranty days" %}</th><td>{{quote.warranty_days}}</td></tr>
+			<tr><th>{% trans "Shipping days" %}</th><td>{{quote.shipping_days}}</td></tr>
+
+			</table>
+		</div>
+		<div style="clear:both"><br /></div>
+
+				<div class="span12 form-actions">
+					<button type="button" class="span4 btn btn-large btn-primary">{% trans "Accept quote" %}</button>
+					<button type="button" class="span4 btn btn-large">{% trans "Ask for shipping recalc" %}</button>
+				</div>
+			</form>
+        </div>
+    </div>
+
+<div id="demoLightbox" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-header" 
+      style="position:absolute; height:20px; left:100%; margin-left: 10px; padding:0; border:0;">
+
+         <button type="button" class="close" 
+           style="color:white; font-size: 30px;" 
+           onclick='$("#demoLightbox").lightbox("hide")'> × </button>
+
+   </div>
+   <div class='lightbox-content'>
+     <img src="">
+   </div>
+</div>
+
+ <script>
+    $( ".datepicker" ).datepicker({
+      changeMonth: true,
+      format: 'dd/mm/yyyy',
+      weekStart:1
+    });
+
+$("img.search_item").img_lightbox_tooltip();
+  </script>
+{% endblock content %}
+

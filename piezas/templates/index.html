@@ -43,7 +43,7 @@
 		<h4><a href="{% url 'search:home' %}">{% trans "Search pieces" %}</a></h4>
 	</div>
 	<div class="span4">
-		<h4><a href="{% url 'customer:order-list' %}">{% trans "Search request history" %}</a></h4>
+		<h4><a href="{% url 'search:activequotes' %}">{% trans "Active quotes" %}</a></h4>
 	</div>
 	{% endif %}
 	{% if user.type == "provider" %}

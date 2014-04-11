@@ -1,0 +1,192 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load staticfiles %}
+
+{% block title %}
+    {% trans 'Homepage' %} | {{ block.super }}
+{% endblock %}
+
+{% block extrahead %}
+<script src="{% static "oscar/js/datepicker/bootstrap-datepicker.js" %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static "oscar/css/datepicker.css" %}" />
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">{% trans 'Home' %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans 'Search request details' %}</li>
+    </ul>
+{% endblock %}
+
+{% block headertext %}
+    {% trans "Search request details" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span12 register_form">
+
+	 	<h4>{% trans "Search details" %}</h4>
+		<div class="responsive-table">
+			<table class="table span12">
+			<tr><th>{% trans "Brand" %}</th><td>{{searchrequest.brand}}</td></tr>
+			<tr><th>{% trans "Model" %}</th><td>{{searchrequest.model}}</td></tr>
+			<tr><th>{% trans "Version" %}</th><td>{{searchrequest.version}}</td></tr>
+			<tr><th>{% trans "Bodywork" %}</th><td>{{searchrequest.bodywork}}</td></tr>
+			<tr><th>{% trans "Engine" %}</th><td>{{searchrequest.engine}}</td></tr>
+			<tr><th>{% trans "Frame reference" %}</th><td>{{searchrequest.frameref}}</td></tr>
+			<tr><th>{% trans "Comments" %}</th><td>{{searchrequest.comments}}</td></tr>
+			<tr><th>{% trans "Date created" %}</th><td>{{searchrequest.date_created}}</td></tr>
+			<tr><th>{% trans "Date updated" %}</th><td>{{searchrequest.date_updated}}</td></tr>
+			<tr><th>{% trans "State" %}</th><td>{{searchrequest.state}}</td></tr>
+			<tr><th>{% trans "Expiration date" %}</th><td>{{searchrequest.expiration_date}}</td></tr>
+			</table>
+		</div>
+		<div style="clear:both"><br /></div>
+
+		<h4>{% trans "Pieces detail" %}</h4>
+		<div class="responsible-table">
+			<table class="table" id="id_searchitemrequest_table">
+				<thead><tr>
+					<th>{% trans "Category" %}</th>
+					<th>{% trans "Piece" %}</th>
+					<th>{% trans "Comments" %}</th>
+					<th>{% trans "Questions" %}</th>
+					<th>{% trans "Picture" %}</th>
+					<th>{% trans "Quantity" %}</th>
+				</tr></thead>
+				<tbody>
+					{% for item in searchrequest.lines %}
+					<tr>
+						<td>{{item.category}}</td>
+						<td>{{item.piece}}</td>
+						<td>{{item.comments}}</td>
+						<td><ul>
+		{% for question in item.answers %}
+			{% if question.question.type in 'text,boolean,list' %}
+				<li>{{question.question.text}}:&nbsp;
+				{% if question.question.type in 'text,list' %}
+					{{question.text_answer}}
+				{% else %}
+					{% if question.boolean_answer %}
+						{% trans "Yes" %}
+					{% else %}
+						{% trans "No" %}
+					{% endif %}
+				{% endif %}
+				</li>
+			{% endif %}
+		{% endfor %}</ul>
+						</td>
+						<td>{% if item.picture %}<img class="search_item" src="/media/{{item.picture}}" style="height:50px;" />{% endif %}</td>
+						<td>{{item.quantity}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+				<div>
+					<h4>{% trans "Photo gallery" %}</h4>
+					<div style="clear:both"><br /></div>
+
+					{% if searchrequest.picture1%}
+					<div class="span3">
+						<img class="search_item" src="/media/{{searchrequest.picture1}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if searchrequest.picture2%}
+					<div class="span3">
+						<img class="search_item" src="/media/{{searchrequest.picture2}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if searchrequest.picture3 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{searchrequest.picture3}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if searchrequest.picture4 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{searchrequest.picture4}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if searchrequest.picture5 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{searchrequest.picture5}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if searchrequest.picture6 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{searchrequest.picture6}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if searchrequest.picture7 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{searchrequest.picture7}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if searchrequest.picture8 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{searchrequest.picture8}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if searchrequest.picture9 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{searchrequest.picture9}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if searchrequest.picture10 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{searchrequest.picture10}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+
+				</div>
+				<div style="clear:both"></div>
+
+				<div class="span12 form-actions">
+					<a href="javascript:history.back();" class="span4 btn btn-large"><< {% trans "Back" %}</a>
+				</div>
+			</form>
+        </div>
+    </div>
+
+<div id="demoLightbox" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-header" 
+      style="position:absolute; height:20px; left:100%; margin-left: 10px; padding:0; border:0;">
+
+         <button type="button" class="close" 
+           style="color:white; font-size: 30px;" 
+           onclick='$("#demoLightbox").lightbox("hide")'> × </button>
+
+   </div>
+   <div class='lightbox-content'>
+     <img src="">
+   </div>
+</div>
+
+ <script>
+    $( ".datepicker" ).datepicker({
+      changeMonth: true,
+      format: 'dd/mm/yyyy',
+      weekStart:1
+    });
+
+$("img.search_item").img_lightbox_tooltip();
+  </script>
+{% endblock content %}
+

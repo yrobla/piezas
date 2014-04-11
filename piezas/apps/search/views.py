@@ -1,7 +1,7 @@
 from django.core.files.storage import default_storage
 from django.http import HttpResponse, Http404
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import CreateView, FormView, TemplateView, ListView
+from django.views.generic import CreateView, FormView, TemplateView, ListView, DetailView
 from django.views.generic.edit import UpdateView
 from django.core.urlresolvers import reverse
 from oscar.core.loading import get_model
@@ -469,3 +469,40 @@ class QuoteView(UpdateView):
 
     def get_success_url(self):
         return reverse('search:quoteplaced')
+
+
+class ActiveQuotesView(ListView):
+    """
+    View active quotes for that customer
+    """
+    context_object_name = "quotes"
+    template_name = 'search/activequotes_list.html'
+    paginate_by = 20
+    model = models.Quote
+    page_title = _('Active quotes')
+    active_tab = 'quotes'
+
+    def get_queryset(self):
+        # only show quotes for searches that belong to user
+        queryset = models.Quote.objects.filter(search_request__owner=self.request.user, state='pending')
+        return queryset
+
+
+class SearchDetailView(DetailView):
+    model = models.SearchRequest
+    context_object_name = 'searchrequest'
+    template_name = 'search/detail.html'
+    searchrequest_actions = ()
+
+    def get_object(self, queryset=None):
+        return models.SearchRequest.objects.get(id=self.kwargs['number'])
+
+
+class QuoteDetailView(DetailView):
+    model = models.Quote
+    context_object_name = 'quote'
+    template_name = 'search/quotedetail.html'
+    quote_actions = ()
+
+    def get_object(self, queryset=None):
+        return models.Quote.objects.get(id=self.kwargs['number'])
