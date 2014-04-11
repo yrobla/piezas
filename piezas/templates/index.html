@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block content %}
-{% if not user.is_validated %}
+{% if not user.is_validated and not user.is_staff %}
 <div class="alert alert-error">
 	<span class="error">
 	{% trans "Your account still is not validated. You will have limited functionality until your account is validated by the administrators of the site." %}
@@ -32,6 +32,11 @@
 </div>
 {% endif %}
 <div class="span12 well">
+{% if user.is_staff %}
+	<div class="span4">
+		<h4><a href="{% url 'dashboard:index' %}">{% trans "Admin Dashboard" %}</a></h4>
+	</div>
+{% else %}
 	{% if user.is_validated %}
 	{% if user.type == "customer" %}
 	<div class="span4">
@@ -50,6 +55,7 @@
 	<div class="span4">
 		<h4><a href="{% url 'customer:summary' %}">{% trans "My personal data" %}</a></h4>
 	</div>
+{% endif %}
 </div>
 
 {% endblock content %}
