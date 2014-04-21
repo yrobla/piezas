@@ -19,3 +19,4 @@ django-smart-selects
 pillow
 django-ajaximage
 django-iban
+python-dateutil

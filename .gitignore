@@ -1,3 +1,8 @@
 *.pyc
 piezas/media/*
 piezas/media/searchpictures/*
+bin
+local
+include
+lib
+piezas/apps/*.pyc

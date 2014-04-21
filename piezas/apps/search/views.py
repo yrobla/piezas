@@ -5,6 +5,9 @@ from django.views.generic import CreateView, FormView, TemplateView, ListView, D
 from django.views.generic.edit import UpdateView
 from django.core.urlresolvers import reverse
 from oscar.core.loading import get_model
+from datetime import datetime
+import math
+from dateutil import tz
 import json
 import forms
 from piezas import settings
@@ -315,26 +318,30 @@ class PendingSearchRequestsView(ListView):
             from catalogue_searchrequest where state = %s and 
             (
                 (earth_box( ll_to_earth(%f, %f), %d) @> ll_to_earth(latitude, longitude)
-                 and date_created>=(current_timestamp - interval '3 hour')) or 
+                 and date_created between (current_timestamp - interval '%d min') and current_timestamp) or 
                 (earth_box( ll_to_earth(%f, %f), %d) @> ll_to_earth(latitude, longitude)
-                 and date_created between (current_timestamp - interval '3 hour') and 
-                 (current_timestamp - interval '90 min')) or
+                 and date_created between (current_timestamp - interval '%d min') and 
+                 (current_timestamp - interval '%d min')) or
                 (earth_box( ll_to_earth(%f, %f), %d) @> ll_to_earth(latitude, longitude)
-                 and date_created between (current_timestamp - interval '360 min') and 
-                 (current_timestamp - interval '3 hour')) or
+                 and date_created between (current_timestamp - interval '%d min') and 
+                 (current_timestamp - interval '%d min')) or
                 (earth_box( ll_to_earth(%f, %f), %d) @> ll_to_earth(latitude, longitude)
-                 and date_created between (current_timestamp - interval '6 hour') and 
-                 (current_timestamp - interval '360 min'))
+                 and date_created between (current_timestamp - interval '%d min') and 
+                 (current_timestamp - interval '%d min'))
             )
             """ % (current_latitude, current_longitude, "'pending'", 
-                   current_latitude, current_longitude, 100000,
-                   current_latitude, current_longitude, 200000,
-                   current_latitude, current_longitude, 500000,
-                   current_latitude, current_longitude, 1000000
+                   current_latitude, current_longitude, 100000, (settings.SEARCH_INTERVAL_MIN*2),
+                   current_latitude, current_longitude, 200000, (settings.SEARCH_INTERVAL_MIN*3), settings.SEARCH_INTERVAL_MIN,
+                   current_latitude, current_longitude, 500000, (settings.SEARCH_INTERVAL_MIN*4), (settings.SEARCH_INTERVAL_MIN*3),
+                   current_latitude, current_longitude, 1000000, (settings.SEARCH_INTERVAL_MIN*5), (settings.SEARCH_INTERVAL_MIN*4),
                 ))
             items = list(qs)
             for item in items:
                 # get zone
+                current_time = datetime.utcnow()
+                creation_date = item.date_created.astimezone(tz.tzutc()).replace(tzinfo=None)
+                time_diff = current_time - creation_date
+
                 search_user = item.owner
                 address = search_user.get_default_shipping_address()
                 if address:
@@ -342,12 +349,20 @@ class PendingSearchRequestsView(ListView):
                 final_distance = item.distance/1000
                 if final_distance<100:
                     item.search_type = _('Regional')
+                    item.remaining_time = (2*settings.SEARCH_INTERVAL_MIN*60) - time_diff.total_seconds()
                 elif final_distance<200:
                     item.search_type = _('Bordering')
+                    item.remaining_time = (3*settings.SEARCH_INTERVAL_MIN*60) - time_diff.total_seconds()
                 elif final_distance<500:
+                    item.remaining_time = (4*settings.SEARCH_INTERVAL_MIN*60) - time_diff.total_seconds()
                     item.search_type = _('Supraregional')
                 else:
+                    item.remaining_time = (5*settings.SEARCH_INTERVAL_MIN*60) - time_diff.total_seconds()
                     item.search_type = _('Regional')
+
+                mins = math.floor(item.remaining_time/60)
+                secs = math.floor(item.remaining_time - (mins*60))
+                item.remaining_time = "%d:%02d" % (mins, secs)
             return items
         else:
             return []

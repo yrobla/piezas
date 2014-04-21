@@ -27,6 +27,7 @@
                 <th>{% trans "Zone" %}</th>
                 <th>{% trans "Num items" %}</th>
                 <th>{% trans "Search type" %}</th>
+		<th>{% trans "Remaining time" %}</th>
             </tr>
             {% for searchrequest in searchrequests %}
                 <tr>
@@ -39,7 +40,9 @@
                     <td>{{ searchrequest.zone }}</td>
                     <td>{{ searchrequest.num_items }}</td>
                     <td>{{ searchrequest.search_type }}</td>
+		    <td><span class="remainingtime id='remainingtime_{{searchrequest.id}}'">{{searchrequest.remaining_time}}</span></td>
                 </tr>
+
             {% endfor %}
         </table>
     {% else %}
@@ -49,6 +52,34 @@
     {% include "partials/pagination.html" %}
 
 <div style="clear:both"><br /></div>
+
+	<script type="text/javascript">
+	$("span.remainingtime").each(function()
+	{
+		    	var $timer = $(this);
+
+		var interval = setInterval(function() 
+		{
+			var timer_str = $timer.html();
+			timer_str = timer_str.split(':');
+		    	var minutes = parseInt(timer_str[0], 10);
+		    	var seconds = parseInt(timer_str[1], 10);
+		    	seconds -= 1;
+	    		if (minutes < 0) return clearInterval(interval);
+		    	if (minutes < 10 && minutes.length != 2) minutes = '0' + minutes;
+		    	if (seconds < 0 && minutes != 0) {
+	        		minutes -= 1;
+	        		seconds = 59;
+		    	}
+		    	else if (seconds < 10 && length.seconds != 2) seconds = '0' + seconds;
+			$timer.html(minutes + ':' + seconds);
+   
+		    	if (minutes == 0 && seconds == 0)
+        			clearInterval(interval);
+		}, 1000);
+	});
+	</script>
+
 {% endblock %}
 
 {% block extrastyles %}
