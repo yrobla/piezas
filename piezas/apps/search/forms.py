@@ -91,15 +91,6 @@ class SearchItemRequestFormSet(BaseFormSet):
 
 class SearchConfirmForm(forms.Form):
     comments = forms.CharField(label=_('Comments'), required=False, widget=forms.Textarea(attrs={'style':'height:50px;width:200px'}))
-    expiration_date = forms.DateField(label=_('Expiration date'), required=False,
-        widget=forms.TextInput(attrs={'class':'datepicker'}))
-
-    def clean_expiration_date(self):
-        data = self.cleaned_data['expiration_date']
-        # check if is greater than today
-        if data and data<=date.today():
-            raise forms.ValidationError(_('Expiration date must be greater than today'))
-        return data
 
 SearchCreationFormSet = formset_factory(SearchCreationFormItem, formset=SearchItemRequestFormSet, extra=50)
 
@@ -148,20 +139,13 @@ class SearchRequestSearchForm(forms.Form):
         date_from = self.cleaned_data['date_from']
         date_to = self.cleaned_data['date_to']
         kwargs = {}
-        if date_from and date_to:
-            kwargs['expiration_date__range'] = [date_from, date_to]
-        elif date_from and not date_to:
-            kwargs['expiration_date__gt'] = date_from
-        elif not date_from and date_to:
-            kwargs['expiration_date__lt'] = date_to
-        return kwargs
 
 
 class QuoteCreationForm(forms.ModelForm):
     class Meta:
         model = SearchRequest
         exclude = ('brand', 'model', 'version', 'bodywork', 'engine', 'frameref', 'comments',
-            'expiration_date', 'date_created', 'date_updated', 'state', 'owner',
+            'date_created', 'date_updated', 'state', 'owner',
             'latitude', 'longitude', 'picture1', 'picture2', 'picture3', 'picture4',
             'picture5', 'picture6', 'picture7', 'picture8', 'picture9', 'picture10')
 

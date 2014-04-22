@@ -194,7 +194,6 @@ class SearchrequestListView(BulkEditMixin, ListView):
                      ('state', _('Status')),
                      ('owner', _('Owner')),
                      ('creation_date', _('Creation date')),
-                     ('expiration_date', _('Expiration date')),
                      )
         columns = SortedDict()
         for k, v in meta_data:
@@ -205,11 +204,6 @@ class SearchrequestListView(BulkEditMixin, ListView):
             row = columns.copy()
             row['id'] = searchrequest.id
             row['creation_date'] = format_datetime(searchrequest.date_created, 'DATETIME_FORMAT')
-            if searchrequest.expiration_date is not None:
-                row['expiration_date'] = format_datetime(searchrequest.expiration_date, 'DATETIME_FORMAT')
-            else:
-                row['expiration_date'] = ''
-
             row['state'] = searchrequest.state
             row['num_items'] = searchrequest.num_items
             row['owner'] = searchrequest.owner.email
@@ -425,7 +419,6 @@ class QuoteListView(BulkEditMixin, ListView):
                      ('state', _('Status')),
                      ('owner', _('Owner')),
                      ('date_created', _('Creation date')),
-                     ('date_updated', _('Expiration date')),
                      ('base_total_excl_tax', _('Base total (excl tax)')),
                      ('base_total_incl_tax', _('Base total (inc tax)')),
                      ('shipping_total_excl_tax', _('Shipping total (excl tax)')),

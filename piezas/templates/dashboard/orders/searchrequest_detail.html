@@ -44,13 +44,11 @@
         <tr>
             <th>{% trans "Number of items" %}</th>
             <th>{% trans "Date of creation" %}</th>
-            <th>{% trans "Expiration date" %}</th>
             <th>{% trans "Status" %}</th>
         </tr>
         <tr>
             <td>{{ searchrequest.num_items }}</td>
             <td>{{ searchrequest.date_created|date:"d/m/y" }}</td>
-            <td>{{ searchrequest.expiration_date|date:"d/m/y" }}</td>
             <td>{% trans searchrequest.state %}</td>
         </tr>
     </table>

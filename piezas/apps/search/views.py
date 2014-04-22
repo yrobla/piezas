@@ -234,7 +234,6 @@ class ConfirmView(FormView):
                     version=version, bodywork=bodywork, engine=engine,
                     frameref=current_data["frameref"], comments=form.cleaned_data["comments"],
                     owner=self.request.user, longitude=longitude, latitude=latitude,
-                    expiration_date=form.cleaned_data['expiration_date'],
                     picture1=current_data['picture1'],
                     picture2=current_data['picture2'],
                     picture3=current_data['picture3'],

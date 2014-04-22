@@ -95,7 +95,6 @@
                         <th>{% trans "Status" %}</th>
                         <th>{% trans "Owner" %}</th>
                         <th>{% trans "Date of creation" %}</th>
-                        <th>{% trans "Date of expiration" %}</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -107,7 +106,6 @@
                             <td>{% trans searchrequest.state %}</td>
 			    <td>{{ searchrequest.owner.email }}</td>
                             <td>{{ searchrequest.date_created }}</td>
-                            <td>{{ searchrequest.expiration_date }}</td>
                             <td>
                                 <a class="btn btn-info" href="{% url 'dashboard:searchrequest-detail' number=searchrequest.id %}">{% trans "View" %}</a>
                             </td>
