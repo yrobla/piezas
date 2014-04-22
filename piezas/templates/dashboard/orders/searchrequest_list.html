@@ -91,6 +91,7 @@
                     <tr>
                         <th>{% trans "Select all" %}</th>
                         <th>{% anchor 'id' _("Search request number") %}</th>
+			<th>{% trans "Search name" %}</th>
                         <th>{% trans "Number of items" %}</th>
                         <th>{% trans "Status" %}</th>
                         <th>{% trans "Owner" %}</th>
@@ -102,6 +103,7 @@
                     <tr>
                         <td><input type="checkbox" name="selected_searchrequest" class="selected_searchrequest" value="{{ searchrequest.id }}"/>
                             <td><a href="{% url 'dashboard:searchrequest-detail' number=searchrequest.id %}">{{ searchrequest.id }}</a></td>
+			    <td>{{ searchrequest.name}}</td>
 			    <td>{{ searchrequest.num_items}}</td>
                             <td>{% trans searchrequest.state %}</td>
 			    <td>{{ searchrequest.owner.email }}</td>

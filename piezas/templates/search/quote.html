@@ -89,8 +89,6 @@
 							<th>{% trans "Piece" %}</th>
 							<th>{% trans "Picture" %}</th>
 							<th>{% trans "Comments" %}</th>
-							<th>{% trans "Quantity" %}</th>
-							<th>{% trans "Served quantity" %}</th>
 							<th>{% trans "Base total excl. tax" %}</th>
 							<th>{% trans "Comments for the quote" %}</th>
 							<th>{% trans "Picture of the piece to be sent" %}</th>
@@ -107,8 +105,6 @@
 								<td>{% if item_form.picture.value %}
 								<img src='/media/{{item_form.picture.value}}' style='max-width:100px;' class="search_item"/>{% endif %}</td>
 								<td>{{item_form.comments}}</td>
-								<td>{{item_form.quantity}}</td>
-								<td>{{item_form.served_quantity}}</td>
 								<td>{{item_form.base_total}}</td>
 								<td>{{item_form.quote_comments}}</td>
 								<td>{{item_form.quote_picture}}</td>

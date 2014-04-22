@@ -191,8 +191,7 @@ class SearchItemRequest(models.Model):
     state = models.CharField(max_length=25, choices=SEARCH_REQUEST_STATES, default='pending')
 
     def __unicode__(self):
-        return u'%s - %s - %s - %s' % (self.category, self.piece, self.quantity,
-            self.comments)
+        return u'%s - %s - %s' % (self.category, self.piece, self.comments)
 
     @property
     def answers(self):

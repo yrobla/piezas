@@ -44,10 +44,6 @@ class HomeView(FormView):
                     initial_item['comments'] = item['comments']
                     initial_item['picture'] = item['picture']
 
-                    if "quantity" in item:
-                        initial_item['quantity'] = item['quantity']
-                    else:
-                        initial_item['quantity'] = 1
                     initial.append(initial_item)
 
             context['formset'] = forms.SearchCreationFormSet(initial=initial)
@@ -89,7 +85,6 @@ class HomeView(FormView):
             prefix = "form-%s-" % i
             current_category = prefix+"category"
             current_piece = prefix+"piece"
-            current_quantity = prefix+"quantity"
             current_comments = prefix+"comments"
             current_picture = prefix+"picture"
 
@@ -102,10 +97,6 @@ class HomeView(FormView):
 
                 final_item["picture"] = current_formset_data[current_picture]
 
-                if current_quantity in current_formset_data and current_formset_data[current_quantity]>0:
-                    final_item["quantity"] = current_formset_data[current_quantity]
-                else:
-                    final_item["quantity"] = 1
                 final_data["pieces"].append(final_item)
 
         # questions
@@ -253,7 +244,7 @@ class ConfirmView(FormView):
                     piece_model = models.Product.objects.get(pk=piece["piece"])
 
                     search_request_item = models.SearchItemRequest(category=category,
-                        piece=piece_model, comments=piece["comments"], quantity=piece["quantity"],
+                        piece=piece_model, comments=piece["comments"],
                         owner=self.request.user, search_request=search_request, state='pending',
                         picture=piece["picture"])
                     search_request_item.save()
@@ -382,9 +373,6 @@ class QuoteView(UpdateView):
             context['formset'] = forms.InlineQuoteCreationFormSet(self.request.POST, instance=self.object)
         else:
             context['formset'] = forms.InlineQuoteCreationFormSet(instance=self.object)
-            for form in context['formset'].forms:
-                if 'served_quantity' not in form.initial:
-                    form.initial['served_quantity'] = form.initial['quantity']
 
         for form in context['formset'].forms:
             try:
@@ -440,7 +428,6 @@ class QuoteView(UpdateView):
             data_item = {}
             data_item['id'] = form.data['searchitemrequest_set-%d-id' % i]
             data_item['picture'] = form.data['searchitemrequest_set-%d-quote_picture' % i]
-            data_item['quantity'] = form.data['searchitemrequest_set-%d-served_quantity' % i]
             data_item['line_total'] = form.data['searchitemrequest_set-%d-base_total' % i]
             data_item['line_comments'] = form.data['searchitemrequest_set-%d-quote_comments' % i]
             base_total += float(data_item['line_total'])
@@ -470,8 +457,7 @@ class QuoteView(UpdateView):
                 # create quote item
                 request_item = models.SearchItemRequest.objects.get(pk=item['id'])
                 quoteitem = models.QuoteItem(quote=quote, search_item_request=request_item,
-                                             owner=self.request.user, quantity=item['quantity'],
-                                             base_total_excl_tax=item['line_total'],
+                                             owner=self.request.user, base_total_excl_tax=item['line_total'],
                                              state='pending', comments=item['line_comments'],
                                              picture=item['picture'])
                 quoteitem.save()

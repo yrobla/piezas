@@ -80,7 +80,6 @@ class SearchCreationForm(forms.Form):
 class SearchCreationFormItem(forms.Form):
     category = forms.ModelChoiceField(label=_('Category'), required=True, queryset = Category.objects.all(), widget=forms.Select(attrs={'class':'category'}))
     piece = forms.ModelChoiceField(label=_('Product'), required=True, queryset = Product.objects.all(), widget=forms.Select(attrs={'class':'piece'}))
-    quantity = forms.IntegerField(label=_('Quantity'), required=True, initial=1)
     picture = forms.ImageField(widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
     comments = forms.CharField(label=_('Comments'), required=False, widget=forms.Textarea(attrs={'style':'height:50px;width:200px'}))
 
@@ -162,16 +161,7 @@ class QuoteCreationForm(forms.ModelForm):
         # validate formset
         max = self.data['searchitemrequest_set-INITIAL_FORMS']
         for i in range(int(max)):
-            original_quantity = self.data['searchitemrequest_set-%d-quantity' % i]
-            served_quantity = self.data['searchitemrequest_set-%d-served_quantity' % i]
             base_total = float(self.data['searchitemrequest_set-%d-base_total' % i])
-            if not served_quantity.isdigit() or served_quantity<0:
-                # error
-                raise forms.ValidationError(_('Served quantity must be greater than 0'))
-            if served_quantity>original_quantity:
-                raise forms.ValidationError(_('Served quantity must be at maximum the requested quantity'))
-            if served_quantity>0 and base_total<=0:
-                raise forms.ValidationError(_("Base amount for served pieces must be greater than 0. If you don't want to serve this piece, please set the quantity to 0."))
 
         return cleaned_data
     
@@ -189,13 +179,7 @@ class QuoteItemCreationForm(forms.ModelForm):
         widget=forms.Textarea(attrs={'style':'width:250px;height:200px;','readonly':'readonly'}))
     comments = forms.CharField(label=_('Comments'), required=False,
         widget=forms.Textarea(attrs={'readonly':'readonly'}))
-    quantity = forms.IntegerField(label=_('Quantity'),
-        widget=forms.TextInput(attrs={'readonly':'readonly'}))
-    served_quantity = forms.IntegerField(label=_('Served quantity'), widget=forms.NumberInput(
-        attrs={'style':'width:50px;'}))
 
-    served_quantity = forms.IntegerField(label=_('Served quantity'), widget=forms.NumberInput(
-        attrs={'style':'width:50px;'}))
     base_total = forms.DecimalField(label=_('Base total excluding tax'), decimal_places=2,
         max_digits=12, widget=forms.NumberInput(attrs={'style':'width:100px;'}), initial=0)
     quote_comments = forms.CharField(label=_('Comments for the quote'), required=False,

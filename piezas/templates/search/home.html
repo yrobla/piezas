@@ -57,7 +57,6 @@
 							<th>{% trans "Piece" %}</th>
 							<th>{% trans "Comments" %}</th>
 							<th>{% trans "Photo" %}</th>
-							<th>{% trans "Quantity" %}</th>
 						</thead>
 						<tbody>
 							{% for item_form in formset.forms %}
@@ -84,7 +83,6 @@
 								</td>
 								<td>{{item_form.comments}}</td>
 								<td>{{item_form.picture}}</td>
-								<td>{{item_form.quantity}}</td>
 							</tr>
 							<tr id="{{ item_form.prefix }}-row-questions">
 								<td colspan="6" style='border:0px;'><div class="questions well">{% trans "No questions for this product" %}</div></td>

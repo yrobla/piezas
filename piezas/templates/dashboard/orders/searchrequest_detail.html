@@ -76,7 +76,6 @@
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>{% trans "Quantity" %}</th>
                                     <th>{% trans "Category" %}</th>
                                     <th>{% trans "Piece" %}</th>
                                     <th>{% trans "Comments" %}</th>
@@ -87,7 +86,6 @@
                             <tbody>
                                 {% for line in searchrequest.lines.all %}
                                     <tr>
-                                        <td>{{ line.quantity }}</td>
                                         <td>
                                             {% if line.category %}
                                                 <a href="{% url 'dashboard:catalogue-category-detail-list' pk=line.category.id %}">{{ line.category }}</a>
@@ -129,6 +127,10 @@
 
                     <table class="table table-striped table-bordered table-hover">
                         <tbody>
+			    <tr>
+				<th>{% trans "Search name" %}</th>
+				<td>{{ searchrequest.name }}</td>
+			    </tr>
                             <tr>
                                 <th>{% trans "Brand" %}</th>
                                 <td>{{ searchrequest.brand.name }}</td>

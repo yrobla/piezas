@@ -79,8 +79,6 @@
                                 <tr>
                                     <th>{% trans "Category" %}</th>
                                     <th>{% trans "Piece" %}</th>
-                                    <th>{% trans "Quantity" %}</th>
-                                    <th>{% trans "Served quantity" %}</th>
                                     <th>{% trans "Request comments" %}</th>
                                     <th>{% trans "Quote comments" %}</th>
                                     <th>{% trans "Request picture" %}</th>
@@ -93,8 +91,6 @@
                                     <tr>
 					<td>{{ line.search_item_request.category}}</td>
 					<td>{{ line.search_item_request.piece}}</td>
-					<td>{{ line.search_item_request.quantity}}</td>
-                                        <td>{{ line.quantity }}</td>
                                         <td>{{ line.search_item_request.comments}}</td>
                                         <td>{{ line.comments}}</td>
 					<td>{% if line.search_item_request.picture %}

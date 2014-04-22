@@ -89,7 +89,6 @@
 							<th>{% trans "Comments" %}</th>
 							<th>{% trans "Questions" %}</th>
 							<th>{% trans "Picture" %}</th>
-							<th>{% trans "Quantity" %}</th>
 						</thead>
 						<tbody>
 							{% for item in search_data.pieces %}
@@ -115,7 +114,6 @@
 									{% endfor %}</ul>
 								</td>
 								<td>{% if item.picture %}<img class="search_item" src="/media/{{item.picture}}" style="height:50px;" />{% endif %}</td>
-								<td>{{item.quantity}}</td>
 							</tr>
 							{% endfor %}
 						</tbody>
