@@ -148,6 +148,7 @@ INSTALLED_APPS = [
     'compressor',
     'smart_selects',
     'ajaximage',
+    'django_iban',
     'piezas.apps.customuser',
     'piezas.apps.dashboard.podcatalogue', 'piezas.apps.dashboard.podorders',
     'piezas.apps.dashboard.podusers', 'piezas.apps.dashboard',

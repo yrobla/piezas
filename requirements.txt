@@ -18,5 +18,4 @@ raven==4.0.3
 django-smart-selects
 pillow
 django-ajaximage
-django-iban
 python-dateutil
