@@ -143,6 +143,7 @@ class SearchRequest(models.Model):
         blank=True, null=True, related_name='product_engine')
     frameref = models.CharField(_('Frame reference'), max_length=255, blank=True, null=True)
     comments = models.TextField(_('Comments'), blank=True)
+    name = models.CharField(_('Search name'), max_length=255, blank=True, null=True)
     date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
     date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
     owner = models.ForeignKey(

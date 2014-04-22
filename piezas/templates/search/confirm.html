@@ -38,6 +38,12 @@
 			 	<h4>{% trans "Pieces to search" %}</h4>
 
 				<div class="control-group">
+					<label for="brand" class="control-label">{% trans "Search name" %}</label>
+					<div class="controls">
+						<input type="text" readonly="1" value="{{search_data.name}}" />
+					</div>
+				</div>
+				<div class="control-group">
 					<label for="brand" class="control-label">{% trans "Brand" %}</label>
 					<div class="controls">
 						<input type="text" readonly="1" value="{{search_data.brand_name}}" />

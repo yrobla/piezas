@@ -59,6 +59,7 @@ class HomeView(FormView):
         formset = context['formset']
 
         final_data = {}
+        final_data["name"] = form.cleaned_data["name"]
         final_data["engine"] = form.cleaned_data["engine"].id
         final_data["frameref"] = form.cleaned_data["frameref"]
         final_data["brand"] = form.cleaned_data["brand"].id
@@ -229,7 +230,7 @@ class ConfirmView(FormView):
                 else:
                     longitude = latitude = None
 
-                search_request = models.SearchRequest(brand=brand, model=model,
+                search_request = models.SearchRequest(name=current_data["name"], brand=brand, model=model,
                     version=version, bodywork=bodywork, engine=engine,
                     frameref=current_data["frameref"], comments=form.cleaned_data["comments"],
                     owner=self.request.user, longitude=longitude, latitude=latitude,

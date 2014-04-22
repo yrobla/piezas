@@ -57,6 +57,7 @@ Piece = get_model('catalogue', 'Product')
 Category = get_model('catalogue', 'Category')
 
 class SearchCreationForm(forms.Form):
+    name = forms.CharField(label=_('Search name'), required=False)
     brand = forms.ModelChoiceField(label=_('Brand'), required=True, queryset = Brand.objects.all())
     model = ChainedModelChoiceField(label=_('Model'), required=True, app_name='catalogue', model_name='Model', chain_field='brand', model_field='brand', show_all=False, auto_choose=False)
     version = ChainedModelChoiceField(label=_('Version'), required=True, app_name='catalogue', model_name='Version', chain_field='model', model_field='model', show_all=False, auto_choose=False)
@@ -74,11 +75,6 @@ class SearchCreationForm(forms.Form):
     picture8 = forms.CharField(label=_('Picture #8'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
     picture9 = forms.CharField(label=_('Picture #9'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
     picture10 = forms.CharField(label=_('Picture #10'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
-
-    def clean_picture1(self):
-        data = self.cleaned_data['picture1']
-        print data
-        return data
 
 
 class SearchCreationFormItem(forms.Form):
