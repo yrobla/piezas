@@ -22,69 +22,75 @@
 
 {% block content %}
     <div class="row-fluid">
-        <div class="span12 register_form">
+        <div class="span10 register_form">
 
-				<p class="span10">{% trans "Please enter the quote details for that search request" %}</p>
+				<p>{% trans "Please enter the quote details for that search request" %}</p>
 
-				<div class="control-group span5">
+				<div class="control-group span3">
 					<label class="control-label">{% trans "Brand" %}:</label>
 					<div class="controls">
 						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.brand.name}}" />
 					</div>
 				</div>
-				<div class="control-group span5">
+				<div class="control-group span3">
 					<label class="control-label">{% trans "Model" %}:</label>
 					<div class="controls">
 						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.model.name}}" />
 					</div>
 				</div>
-				<div class="control-group span5">
+				<div class="control-group span3">
 					<label class="control-label">{% trans "Version" %}:</label>
 					<div class="controls">
 						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.version.name}}" />
 					</div>
 				</div>
-				<div class="control-group span5">
+				<div class="span1"></div>
+				<div class="control-group span3">
 					<label class="control-label">{% trans "Engine" %}:</label>
 					<div class="controls">
 						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.engine.name}}" />
 					</div>
 				</div>
-				<div class="control-group span5">
+				<div class="control-group span3">
 					<label class="control-label">{% trans "Bodywork" %}:</label>
 					<div class="controls">
 						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.bodywork.name}}" />
 					</div>
 				</div>
-				<div class="control-group span5">
+				<div class="control-group span3">
 					<label class="control-label">{% trans "Frame reference" %}:</label>
 					<div class="controls">
 						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.frameref}}" />
 					</div>
 				</div>
-				<div class="control-group span5">
+				<div class="span1"></div>
+				<div class="control-group span3">
 					<label class="control-label">{% trans "Comments" %}:</label>
 					<div class="controls">
 						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.comments}}" />
 					</div>
 				</div>
-				<div class="control-group span5">
+				<div class="control-group span3">
 					<label class="control-label">{% trans "Zone" %}:</label>
 					<div class="controls">
 						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.zone}}" />
 					</div>
 				</div>
+				<div class="span4"></div>
+			<div style="clear:both"></div>
 
-
-			<form id="quote_form" action="." method="post" class="form-horizontal span12">
+			<form id="quote_form" action="." method="post" class="form-horizontal">
 				{% csrf_token %}
 
 				{{ formset.management_form }}
+				{% include "partials/form_fields.html" %}
+
 			 	<h4>{% trans "Pieces to quote" %}</h4>
 
 				<div class="responsible-table">
-					<table class="table table-quote span12" id="id_searchitemrequest_table">
+					<table class="table table-quote" id="id_searchitemrequest_table">
 						<thead><tr>
+							<th></th>
 							<th>{% trans "Category" %}</th>
 							<th>{% trans "Piece" %}</th>
 							<th>{% trans "Picture" %}</th>
@@ -95,7 +101,9 @@
 						</tr></thead>
 						<tbody>
 							{% for item_form in formset.forms %}
-							<tr id="{{ item_form.prefix }}-row">
+							<tr id="{{ item_form.prefix }}-row-{{item_form.id.value}}">
+								<td><span class="icon-trash" style="cursor:pointer;" data-id="{{item_form.prefix}}-row-{{item_form.id.value}}"></span>
+								</td>
 								<td>{{item_form.category}}</td>
 								<td>
 								{% for fld in item_form.hidden_fields %}{{ fld }}{% endfor %}
@@ -113,7 +121,6 @@
 						</tbody>
 					</table>
 				</div>
-				{% include "partials/form_fields.html" %}
 
                                 <div>
                                         <h4>{% trans "Photo gallery" %}</h4>
@@ -242,6 +249,20 @@
    </div>
 </div>
 
+<div id="confirmation" class="modal hide" data-id="">
+    <div class="modal-header">
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="close" id="btnClose">×</a>
+         <h3>{% trans "Delete row" %}</h3>
+    </div>
+    <div class="modal-body">
+        <p>{% trans "Are you sure you want to delete the row in the quote?" %}</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" id="btnYes" class="btn danger">{% trans "Yes" %}</a>
+      <a href="#" id="btnNo" data-dismiss="modal" aria-hidden="true" class="btn secondary">{% trans "No" %}</a>
+    </div>
+</div>
+
 <script type="text/javascript">
 $(document).ready(function()
 {
@@ -290,6 +311,36 @@ $(document).ready(function()
 
 	}
 	$("img.search_item").img_lightbox_tooltip();
+
+	$("#confirmation").on('show', function()
+	{
+		var id=$(this).data('id');
+		removeBtn = $(this).find('.danger');
+	});
+
+	$(".icon-trash").click(function(e)
+	{
+		e.preventDefault();
+		var id = $(this).data('id');
+		$("#confirmation").data("id", id);
+		// confirm deletion
+		$("#confirmation").modal('show');
+	});
+
+	$("#btnYes").click(function()
+	{
+		var id=$("#confirmation").data("id");
+
+		var set = id.split("-");
+		var final_id = "#id_"+set[0]+"-"+set[1]+"-quantity";
+		$(final_id).val(0);
+		var final_total = "#id_"+set[0]+"-"+set[1]+"-base_total";
+		$(final_total).val(0);
+		$('[data-id='+id+']').parent().parent().hide();
+		$("#confirmation").modal('hide');
+		recalcTotal();
+	});
+
 });
 </script>
 {% endblock content %}

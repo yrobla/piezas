@@ -426,12 +426,14 @@ class QuoteView(UpdateView):
         items = []
         for i in range(int(total_forms)):
             data_item = {}
-            data_item['id'] = form.data['searchitemrequest_set-%d-id' % i]
-            data_item['picture'] = form.data['searchitemrequest_set-%d-quote_picture' % i]
-            data_item['line_total'] = form.data['searchitemrequest_set-%d-base_total' % i]
-            data_item['line_comments'] = form.data['searchitemrequest_set-%d-quote_comments' % i]
-            base_total += float(data_item['line_total'])
-            items.append(data_item)
+            quantity = form.data['searchitemrequest_set-%d-quantity' % i]
+            if int(quantity) > 0:
+                data_item['id'] = form.data['searchitemrequest_set-%d-id' % i]
+                data_item['picture'] = form.data['searchitemrequest_set-%d-quote_picture' % i]
+                data_item['line_total'] = form.data['searchitemrequest_set-%d-base_total' % i]
+                data_item['line_comments'] = form.data['searchitemrequest_set-%d-quote_comments' % i]
+                base_total += float(data_item['line_total'])
+                items.append(data_item)
 
         # calc totals
         shipping_total_incl_tax = float(shipping_total_excl_tax) + float(shipping_total_excl_tax*settings.TPC_TAX/100)

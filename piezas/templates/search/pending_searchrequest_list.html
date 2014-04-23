@@ -24,7 +24,7 @@
                 <th>{% trans "Version" %}</th>
                 <th>{% trans "Engine" %}</th>
                 <th>{% trans "Zone" %}</th>
-                <th>{% trans "Num items" %}</th>
+                <th class="span4">{% trans "Num items" %}</th>
                 <th>{% trans "Search type" %}</th>
 		<th>{% trans "Remaining time" %}</th>
             </tr>
@@ -36,7 +36,15 @@
                     <td>{{ searchrequest.version.name }}</td>
                     <td>{{ searchrequest.engine }}</td>
                     <td>{{ searchrequest.zone }}</td>
-                    <td>{{ searchrequest.num_items }}</td>
+                    <td class="span4"><span class="span1">{{ searchrequest.num_items }}</span>&nbsp;&nbsp;<button class="btn pieces_show">{% trans "Show/hide pieces" %}</button>
+			<div style="clear:both"></div><div class="pieces_container" style="display:none;"><br />
+			<ul>
+			{% for line in searchrequest.lines %}
+			<li style="font-size:11px;">{{line}}</li>
+			{% endfor %}
+			</ul>
+			</div>
+		    </td>
                     <td>{{ searchrequest.search_type }}</td>
 		    <td><span class="remainingtime id='remainingtime_{{searchrequest.id}}'">{{searchrequest.remaining_time}}</span></td>
                 </tr>
@@ -88,6 +96,16 @@
 		    	if (minutes == 0 && seconds == 0)
         			clearInterval(interval);
 		}, 1000);
+	});
+
+	$(".pieces_show").click(function()
+	{
+		var container = $(this).parent().find("div.pieces_container");
+		if (container && container.length>0)
+		{
+			var current = container[0];
+			$(current).toggle();
+		}
 	});
 	</script>
 

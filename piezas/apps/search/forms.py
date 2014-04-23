@@ -143,7 +143,7 @@ class SearchRequestSearchForm(forms.Form):
 class QuoteCreationForm(forms.ModelForm):
     class Meta:
         model = SearchRequest
-        exclude = ('brand', 'model', 'version', 'bodywork', 'engine', 'frameref', 'comments',
+        exclude = ('name', 'brand', 'model', 'version', 'bodywork', 'engine', 'frameref', 'comments',
             'date_created', 'date_updated', 'state', 'owner',
             'latitude', 'longitude', 'picture1', 'picture2', 'picture3', 'picture4',
             'picture5', 'picture6', 'picture7', 'picture8', 'picture9', 'picture10')
@@ -179,6 +179,7 @@ class QuoteItemCreationForm(forms.ModelForm):
         widget=forms.Textarea(attrs={'style':'width:250px;height:200px;','readonly':'readonly'}))
     comments = forms.CharField(label=_('Comments'), required=False,
         widget=forms.Textarea(attrs={'readonly':'readonly'}))
+    quantity = forms.IntegerField(label=_('Quantity'), initial=1, widget=forms.HiddenInput())
 
     base_total = forms.DecimalField(label=_('Base total excluding tax'), decimal_places=2,
         max_digits=12, widget=forms.NumberInput(attrs={'style':'width:100px;'}), initial=0)
