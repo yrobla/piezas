@@ -52,14 +52,11 @@
 			<table class="table" id="id_searchitemrequest_table">
 				<thead><tr>
 					<th>{% trans "Category" %}</th>
-					<th>{% trans "Piece" %}</th>
+					<th class="span4">{% trans "Piece" %}</th>
 					<th>{% trans "Search request comments" %}</th>
 					<th>{% trans "Quote comments" %}</th>
-					<th>{% trans "Questions" %}</th>
 					<th>{% trans "Search request picture" %}</th>
 					<th>{% trans "Quote picture" %}</th>
-					<th>{% trans "Requested quantity" %}</th>
-					<th>{% trans "Served quantity" %}</th>
 					<th>{% trans "Base total (excl tax)" %}</th>
 					<th>{% trans "Select item" %}</th>
 				</tr></thead>
@@ -67,10 +64,11 @@
 					{% for item in quote.lines %}
 					<tr>
 						<td>{{item.search_item_request.category}}</td>
-						<td>{{item.search_item_request.piece}}</td>
-						<td>{{item.search_item_request.comments}}</td>
-						<td>{{item.comments}}</td>
-						<td><ul>
+						<td class="span4">{{item.search_item_request.piece}}<br />
+<a href="javascript:;" class="showhidedetails">{% trans "Show / hide piece details" %}</a>
+
+<div class="details" style="display:none;">
+						<ul>
 		{% for question in item.search_item_request.answers %}
 			{% if question.question.type in 'text,boolean,list' %}
 				<li>{{question.question.text}}:&nbsp;
@@ -86,13 +84,14 @@
 				</li>
 			{% endif %}
 		{% endfor %}</ul>
-						</td>
+</div>
+</td>
+						<td>{{item.search_item_request.comments}}</td>
+						<td>{{item.comments}}</td>
 						<td>{% if item.search_item_request.picture %}<img class="search_item" src="/media/{{item.search_item_request.picture}}" style="height:50px;" />{% endif %}</td>
 						<td>{% if item.picture %}<img class="search_item" src="/media/{{item.picture}}" style="height:50px;" />{% endif %}</td>
-						<td>{{item.search_item_request.quantity}}</td>
-						<td>{{item.quantity}}</td>
 						<td>{{item.base_total_excl_tax}} €</td>
-						<td><input type="checkbox" id="search_item_request[{{item.id}}]" name="search_item_request[{{item.id}}]" checked="checked" /></td>
+						<td><input type="checkbox" id="searchitemrequest_{{item.id}}" name="search_item_request[{{item.id}}]" checked="checked" class="search_item" /></td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -191,25 +190,21 @@
 		<div style="clear:both"><br /></div>
 
 				<div class="span12 form-actions">
-					<button type="button" class="span4 btn btn-large btn-primary">{% trans "Accept quote" %}</button>
-					<button type="button" class="span4 btn btn-large">{% trans "Ask for shipping recalc" %}</button>
+					<button type="submit" class="span4 btn btn-large btn-primary btn_accept">{% trans "Accept quote" %}</button>
+					<button type="submit" class="span4 btn btn-large btn_recalc">{% trans "Ask for shipping recalc" %}</button>
 				</div>
 			</form>
         </div>
     </div>
 
-<div id="demoLightbox" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
-   <div class="modal-header" 
-      style="position:absolute; height:20px; left:100%; margin-left: 10px; padding:0; border:0;">
-
-         <button type="button" class="close" 
-           style="color:white; font-size: 30px;" 
-           onclick='$("#demoLightbox").lightbox("hide")'> × </button>
-
-   </div>
-   <div class='lightbox-content'>
-     <img src="">
-   </div>
+<div id="error_modal" class="modal hide" data-id="">
+    <div class="modal-header">
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="close" id="btnClose">×</a>
+         <h3>{% trans "Errors on quote acceptation" %}</h3>
+    </div>
+    <div class="modal-body">
+        <p>{% trans "Please select at least one of the items in the quote" %}</p>
+    </div>
 </div>
 
  <script>
@@ -219,7 +214,78 @@
       weekStart:1
     });
 
-$("img.search_item").img_lightbox_tooltip();
+	$(document).ready(function()
+	{
+		$("img.search_item").img_lightbox_tooltip();
+		$(".showhidedetails").click(function()
+		{
+	                var container = $(this).parent().find("div.details");
+        	        if (container.length>0)
+                	{
+                        	var current = $(container[0]);
+	                        current.toggle();
+        	        }
+
+		});
+
+		function validateSubmit()
+		{
+			// at least we need one item selected
+			var checked = $(".search_item:checked");
+			if (checked.length<=0)
+			{
+				// open alert
+				$("#error_modal").modal("show");
+				return false;
+			}
+			return true;
+		}
+
+		$(".btn_accept").click(function()
+		{
+			result = validateSubmit();
+			if (result)
+			{
+				var checked = $(".search_item:checked");
+				var ids = [];
+				for (var i=0;i<checked.length;i++)
+				{
+					var set = checked[i].id.split("_");
+					var selected = set[1];
+					ids.push(selected);
+				}
+				// send a post request
+				$.post(	"{% url 'search:acceptquote' %}",
+					{"ids":ids.join()},
+					function(data) {
+						console.log("in data");
+					}, "json");
+			}
+		});
+
+		$(".btn_recalc").click(function()
+		{
+			result = validateSubmit();
+			if (result)
+			{
+				var checked = $(".search_item:checked");
+				var ids = [];
+				for (var i=0;i<checked.length;i++)
+				{
+					var set = checked[i].id.split("_");
+					var selected = set[1];
+					ids.push(selected);
+				}
+				// send a post request
+				$.post(	"{% url 'search:recalcquote' %}",
+					{"ids":ids.join()},
+					function(data) {
+						console.log("in data");
+					}, "json");
+			}
+		});
+
+	});
   </script>
 {% endblock content %}
 

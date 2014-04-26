@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-26 09:55+0200\n"
+"POT-Creation-Date: 2014-04-26 10:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -823,7 +823,7 @@ msgid "Answer for text types"
 msgstr ""
 
 #: local/piezas/apps/catalogue/models.py:221
-#: local/piezas/apps/search/views.py:396
+#: local/piezas/apps/search/views.py:397
 #: local/piezas/templates/catalogue/partials/review.html:40
 #: local/piezas/templates/customer/profile/profile.html:21
 #: local/piezas/templates/dashboard/offers/offer_list.html:66
@@ -836,7 +836,7 @@ msgstr ""
 #: local/piezas/templates/search/quote.html:263
 #: local/piezas/templates/search/quote.html:277
 #: local/piezas/templates/search/quotedetail.html:81
-#: piezas/apps/catalogue/models.py:221 piezas/apps/search/views.py:396
+#: piezas/apps/catalogue/models.py:221 piezas/apps/search/views.py:397
 #: piezas/templates/catalogue/partials/review.html:40
 #: piezas/templates/customer/profile/profile.html:21
 #: piezas/templates/dashboard/offers/offer_list.html:66
@@ -853,7 +853,7 @@ msgid "Yes"
 msgstr ""
 
 #: local/piezas/apps/catalogue/models.py:223
-#: local/piezas/apps/search/views.py:398
+#: local/piezas/apps/search/views.py:399
 #: local/piezas/templates/catalogue/partials/review.html:45
 #: local/piezas/templates/customer/profile/profile.html:22
 #: local/piezas/templates/dashboard/offers/offer_list.html:68
@@ -866,7 +866,7 @@ msgstr ""
 #: local/piezas/templates/search/quote.html:264
 #: local/piezas/templates/search/quote.html:278
 #: local/piezas/templates/search/quotedetail.html:83
-#: piezas/apps/catalogue/models.py:223 piezas/apps/search/views.py:398
+#: piezas/apps/catalogue/models.py:223 piezas/apps/search/views.py:399
 #: piezas/templates/catalogue/partials/review.html:45
 #: piezas/templates/customer/profile/profile.html:22
 #: piezas/templates/dashboard/offers/offer_list.html:68
@@ -2536,22 +2536,22 @@ msgstr "Por favor completa las preguntas obligatorias"
 msgid "Active searches from customers"
 msgstr "Búsquedas activas de talleres"
 
-#: local/piezas/apps/search/views.py:342 local/piezas/apps/search/views.py:352
-#: piezas/apps/search/views.py:342 piezas/apps/search/views.py:352
+#: local/piezas/apps/search/views.py:343 local/piezas/apps/search/views.py:353
+#: piezas/apps/search/views.py:343 piezas/apps/search/views.py:353
 msgid "Regional"
 msgstr "Regional"
 
-#: local/piezas/apps/search/views.py:345 piezas/apps/search/views.py:345
+#: local/piezas/apps/search/views.py:346 piezas/apps/search/views.py:346
 msgid "Bordering"
 msgstr "Limítrofe"
 
-#: local/piezas/apps/search/views.py:349 piezas/apps/search/views.py:349
+#: local/piezas/apps/search/views.py:350 piezas/apps/search/views.py:350
 msgid "Supraregional"
 msgstr "Supraregional"
 
-#: local/piezas/apps/search/views.py:485 local/piezas/templates/index.html:46
+#: local/piezas/apps/search/views.py:486 local/piezas/templates/index.html:46
 #: local/piezas/templates/search/activequotes_list.html:12
-#: piezas/apps/search/views.py:485 piezas/templates/index.html:46
+#: piezas/apps/search/views.py:486 piezas/templates/index.html:46
 #: piezas/templates/search/activequotes_list.html:12
 msgid "Active quotes"
 msgstr "Presupuestos activos"
@@ -5029,9 +5029,7 @@ msgid "Date submitted"
 msgstr ""
 
 #: local/piezas/templates/customer/order/order_list.html:52
-#: local/piezas/templates/search/pending_searchrequest_list.html:55
 #: piezas/templates/customer/order/order_list.html:52
-#: piezas/templates/search/pending_searchrequest_list.html:55
 msgid "You haven't placed any orders."
 msgstr ""
 
@@ -8964,6 +8962,11 @@ msgstr "Presupuestar"
 msgid "Show/hide pieces"
 msgstr "Mostrar/ocultar piezas"
 
+#: local/piezas/templates/search/pending_searchrequest_list.html:55
+#: piezas/templates/search/pending_searchrequest_list.html:55
+msgid "There are no pending search requests"
+msgstr "No hay peticiones de búsqueda pedientes"
+
 #: local/piezas/templates/search/placed.html:14
 #: piezas/templates/search/placed.html:14
 msgid "Add new piece"
@@ -9069,7 +9072,9 @@ msgstr "Erorres en el presupuesto"
 msgid ""
 "Please make sure that all mandatory fields are filled and that all lines in "
 "quote have a base total"
-msgstr "Por favor asegúrate de que todos los campos obligatorios están rellenados y que todas las líneas del presupuesto tienen un importe"
+msgstr ""
+"Por favor asegúrate de que todos los campos obligatorios están rellenados y "
+"que todas las líneas del presupuesto tienen un importe"
 
 #: local/piezas/templates/search/quotedetail.html:21
 #: local/piezas/templates/search/quotedetail.html:26
@@ -9205,9 +9210,6 @@ msgstr ""
 
 #~ msgid "User type"
 #~ msgstr "Tipo de usuario"
-
-#~ msgid "Pending search requests"
-#~ msgstr "Peticiones de búsqueda pedientes"
 
 #~ msgid "closed"
 #~ msgstr "Cerrado"

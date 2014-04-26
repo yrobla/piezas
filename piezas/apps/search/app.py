@@ -30,6 +30,8 @@ class SearchApplication(CoreSearchApplication):
             url(r'^placesearch/$', login_required(self.confirm_view.as_view()), name='placesearchrequest'),
             url(r'^placed/$', login_required(self.placed_view.as_view()), name='placed'),
             url(r'^quoteplaced/$', login_required(self.quoteplaced_view.as_view()), name='quoteplaced'),
+            url(r'^acceptquote/$', login_required(self.quoteplaced_view.as_view()), name='acceptquote'),
+            url(r'^recalcquote/$', login_required(self.quoteplaced_view.as_view()), name='recalcquote'),
             url(r'^pendingrequests/$', login_required(self.pending_search_requests_view.as_view()), name='request-list'),
             url(r'^detail/(?P<number>[\w-]*)/$', login_required(self.search_detail_view.as_view()), name='detail'),
             url(r'^quotedetail/(?P<number>[\w-]*)/$', login_required(self.quote_detail_view.as_view()), name='quotedetail'),

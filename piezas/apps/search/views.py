@@ -307,6 +307,7 @@ class PendingSearchRequestsView(ListView):
             select catalogue_searchrequest.*,
             earth_distance(ll_to_earth(latitude,longitude),ll_to_earth(%f,%f)) as distance
             from catalogue_searchrequest where state = %s and 
+            id not in (select search_request_id from catalogue_quote where owner_id = %s) and 
             (
                 (earth_box( ll_to_earth(%f, %f), %d) @> ll_to_earth(latitude, longitude)
                  and date_created between (current_timestamp - interval '%d min') and current_timestamp) or 
@@ -320,7 +321,7 @@ class PendingSearchRequestsView(ListView):
                  and date_created between (current_timestamp - interval '%d min') and 
                  (current_timestamp - interval '%d min'))
             )
-            """ % (current_latitude, current_longitude, "'pending'", 
+            """ % (current_latitude, current_longitude, "'pending'", self.request.user.id,
                    current_latitude, current_longitude, 100000, (settings.SEARCH_INTERVAL_MIN*2),
                    current_latitude, current_longitude, 200000, (settings.SEARCH_INTERVAL_MIN*3), settings.SEARCH_INTERVAL_MIN,
                    current_latitude, current_longitude, 500000, (settings.SEARCH_INTERVAL_MIN*4), (settings.SEARCH_INTERVAL_MIN*3),
