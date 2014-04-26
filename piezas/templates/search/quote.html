@@ -92,7 +92,7 @@
 						<thead><tr>
 							<th></th>
 							<th>{% trans "Category" %}</th>
-							<th>{% trans "Piece" %}</th>
+							<th class="span4">{% trans "Piece" %}</th>
 							<th>{% trans "Picture" %}</th>
 							<th>{% trans "Comments" %}</th>
 							<th>{% trans "Base total excl. tax" %}</th>
@@ -105,10 +105,12 @@
 								<td><span class="icon-trash" style="cursor:pointer;" data-id="{{item_form.prefix}}-row-{{item_form.id.value}}"></span>
 								</td>
 								<td>{{item_form.category}}</td>
-								<td>
+								<td class="span4">
 								{% for fld in item_form.hidden_fields %}{{ fld }}{% endfor %}
-								{{item_form.piece}}<br /><br />
-								{{item_form.answers}}</td>
+								{{item_form.piece}}
+								<br /><a href="javascript:;" class="showhidedetails">{% trans "Show / hide piece details" %}</a>
+								<div class="details" style="display:none;"><br />
+								{{item_form.answers}}</div></td>
 								</td>
 								<td>{% if item_form.picture.value %}
 								<img src='/media/{{item_form.picture.value}}' style='max-width:100px;' class="search_item"/>{% endif %}</td>
@@ -226,7 +228,7 @@
 				</div>
 
 				<div class="span12 form-actions">
-					<button type="submit" class="btn btn-primary btn-large span4">
+					<button type="submit" class="btn btn-primary btn-large span4" id="submit_button">
 					{% trans "Confirm quote" %}
 					</button>
 					<span class="span8"></span>
@@ -260,6 +262,30 @@
     <div class="modal-footer">
       <a href="#" id="btnYes" class="btn danger">{% trans "Yes" %}</a>
       <a href="#" id="btnNo" data-dismiss="modal" aria-hidden="true" class="btn secondary">{% trans "No" %}</a>
+    </div>
+</div>
+
+<div id="submit_confirmation" class="modal hide" data-id="">
+    <div class="modal-header">
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="close" id="btnClose">×</a>
+         <h3>{% trans "Submit quote" %}</h3>
+    </div>
+    <div class="modal-body">
+        <p>{% trans "Are you sure you want to submit this quote?" %}</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" id="btnYesSubmit" class="btn danger">{% trans "Yes" %}</a>
+      <a href="#" id="btnNoSubmit" data-dismiss="modal" aria-hidden="true" class="btn secondary">{% trans "No" %}</a>
+    </div>
+</div>
+
+<div id="error_modal" class="modal hide" data-id="">
+    <div class="modal-header">
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="close" id="btnClose">×</a>
+         <h3>{% trans "Errors on quote" %}</h3>
+    </div>
+    <div class="modal-body">
+        <p>{% trans "Please make sure that all mandatory fields are filled and that all lines in quote have a base total" %}</p>
     </div>
 </div>
 
@@ -339,6 +365,54 @@ $(document).ready(function()
 		$('[data-id='+id+']').parent().parent().hide();
 		$("#confirmation").modal('hide');
 		recalcTotal();
+	});
+
+	$(".showhidedetails").click(function(e)
+	{
+		var container = $(this).parent().find("div.details");
+		if (container.length>0)
+		{
+			var current = $(container[0]);
+			current.toggle();
+		}
+	});
+
+	$("#submit_button").click(function()
+	{
+		// check if all lines have amount
+		has_result = true;
+		if (!$("#id_warranty_days").val() || !$("#id_shipping_days").val())
+		{
+			has_result = false;
+		}
+		else
+		{
+			$(".base_total").each(function(index, value)
+			{
+				var current_val = parseInt($(value).val());
+				if (current_val<=0)
+				{
+					has_result = false;
+				}
+			});
+		}
+		if (has_result)
+		{
+			$("#submit_confirmation").modal('show');
+		}
+		else
+		{
+			$("#error_modal").modal('show');
+			has_result = false;
+			return false;
+		}
+		return false;
+	});
+
+	$("#btnYesSubmit").click(function()
+	{
+		$("#submit_confirmation").modal('hide');
+		$("#quote_form").submit();
 	});
 
 });

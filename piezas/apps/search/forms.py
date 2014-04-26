@@ -182,7 +182,7 @@ class QuoteItemCreationForm(forms.ModelForm):
     quantity = forms.IntegerField(label=_('Quantity'), initial=1, widget=forms.HiddenInput())
 
     base_total = forms.DecimalField(label=_('Base total excluding tax'), decimal_places=2,
-        max_digits=12, widget=forms.NumberInput(attrs={'style':'width:100px;'}), initial=0)
+        max_digits=12, widget=forms.NumberInput(attrs={'style':'width:100px;', 'class':'base_total'}), initial=0)
     quote_comments = forms.CharField(label=_('Comments for the quote'), required=False,
         widget=forms.Textarea())
     quote_picture = forms.ImageField(widget=AjaxImageEditor(upload_to='quotepictures',
