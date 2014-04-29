@@ -207,6 +207,21 @@
     </div>
 </div>
 
+<div id="recalc_confirmation" class="modal hide" data-id="">
+    <div class="modal-header">
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="close" id="btnClose">×</a>
+         <h3>{% trans "Confirm shipping recalc request" %}</h3>
+    </div>
+    <div class="modal-body">
+	<div id="error_container" class="alert alert-error" style="display:none;"></div>
+        <p>{% trans "Are you sure you want to ask for a recalc of shipping?" %}</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" id="btnYesSubmit" class="btn danger">{% trans "Yes" %}</a>
+      <a href="#" id="btnNoSubmit" data-dismiss="modal" aria-hidden="true" class="btn secondary">{% trans "No" %}</a>
+    </div>
+</div>
+
  <script>
     $( ".datepicker" ).datepicker({
       changeMonth: true,
@@ -255,33 +270,52 @@
 					ids.push(selected);
 				}
 				// send a post request
-				$.post(	"{% url 'search:acceptquote' %}",
-					{"ids":ids.join()},
-					function(data) {
-						console.log("in data");
-					}, "json");
+				$('<form action="{% url 'search:acceptquote' %}" method="POST">' + 
+				    '<input type="hidden" name="quote_id" value="{{quote.id}}" />'+
+				    '<input type="hidden" name="ids" value="' + ids.join() + '">' +
+				    '</form>').submit();
 			}
 		});
+
+	        $("#btnYesSubmit").click(function()
+        	{
+			$("#error_container").html("");
+			$("#error_container").hide();
+			var checked = $(".search_item:checked");
+			var ids = [];
+			for (var i=0;i<checked.length;i++)
+			{
+				var set = checked[i].id.split("_");
+				var selected = set[1];
+				ids.push(selected);
+			}
+			// send a post request
+			$.post("{% url 'search:recalcquote' %}",
+			       	{"quote_id":{{quote.id}}, "ids":ids.join()},
+				function(data)
+				{
+					if (data.result=='KO')
+					{
+						$("#error_container").html(data.error);
+						$("#error_container").show();
+					}
+					else
+					{
+						// redirect to recalc asked
+						location.href='{% url 'search:recalcplaced' %}';
+					}
+					return false;
+				}
+			);
+        	});
 
 		$(".btn_recalc").click(function()
 		{
 			result = validateSubmit();
 			if (result)
 			{
-				var checked = $(".search_item:checked");
-				var ids = [];
-				for (var i=0;i<checked.length;i++)
-				{
-					var set = checked[i].id.split("_");
-					var selected = set[1];
-					ids.push(selected);
-				}
-				// send a post request
-				$.post(	"{% url 'search:recalcquote' %}",
-					{"ids":ids.join()},
-					function(data) {
-						console.log("in data");
-					}, "json");
+				$("#recalc_confirmation").modal("show");
+				return false;
 			}
 		});
 

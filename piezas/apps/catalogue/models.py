@@ -228,6 +228,7 @@ class SearchItemRequestAnswers(models.Model):
 
 
 QUOTE_STATES = (('sent', _('Sent')), ('accepted', _('Accepted')),
+    ('pending_recalc', _('Pending from recalc')),
     ('partially_accepted', _('Partially accepted')), ('rejected', _('Rejected')),
     ('expired', _('Expired')))
 

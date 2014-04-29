@@ -1,7 +1,7 @@
 from django.core.files.storage import default_storage
 from django.http import HttpResponse, Http404
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import CreateView, FormView, TemplateView, ListView, DetailView
+from django.views.generic import CreateView, FormView, TemplateView, ListView, DetailView, View
 from django.views.generic.edit import UpdateView
 from django.core.urlresolvers import reverse
 from oscar.core.loading import get_model
@@ -510,3 +510,37 @@ class QuoteDetailView(DetailView):
 
     def get_object(self, queryset=None):
         return models.Quote.objects.get(id=self.kwargs['number'])
+
+class RecalcQuoteView(View):
+    def post(self, request, *args, **kwargs):
+        quote_id = request.POST.get('quote_id', '')
+        line_ids = request.POST.get('ids', '').split(',')
+
+        # mark the quote for recalc, mark the lines as accepted
+        response_data = {}
+        if line_ids and len(line_ids)>0:
+            quote = models.Quote.objects.get(pk=quote_id)
+            if quote:
+                quote.state = 'pending_recalc'
+                quote.save()
+
+                # mark all the lines as accepted or rejected
+                lines = models.QuoteItem.objects.filter(quote=quote)
+                for line in lines:
+                    if line.id in line_ids:
+                        line.state = 'accepted'
+                    else:
+                        line.state = 'rejected'
+                    line.save()
+                response_data['result'] = 'OK'
+            else:
+                response_data['result'] = 'KO'
+                response_data['error'] = _('We cannot find your quote. Please try again.')
+        else:
+            response_data['result'] = 'KO'
+            response_data['error'] = _('There has been an error processing your request. Please try again.')
+
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+class RecalcPlacedView(TemplateView):
+    template_name = 'search/recalcplaced.html'
