@@ -14,8 +14,10 @@ class SearchApplication(CoreSearchApplication):
     active_quote_view = views.ActiveQuotesView
     search_detail_view = views.SearchDetailView
     quote_detail_view = views.QuoteDetailView
+    quote_accept_view = views.QuoteAcceptView
     recalc_quote_view = views.RecalcQuoteView
     recalcplaced_view = views.RecalcPlacedView
+    orderplaced_view = views.OrderPlacedView
 
     def get_urls(self):
         # The form class has to be passed to the __init__ method as that is how
@@ -32,7 +34,7 @@ class SearchApplication(CoreSearchApplication):
             url(r'^placesearch/$', login_required(self.confirm_view.as_view()), name='placesearchrequest'),
             url(r'^placed/$', login_required(self.placed_view.as_view()), name='placed'),
             url(r'^quoteplaced/$', login_required(self.quoteplaced_view.as_view()), name='quoteplaced'),
-            url(r'^acceptquote/$', login_required(self.quoteplaced_view.as_view()), name='acceptquote'),
+            url(r'^acceptquote/(?P<number>[\w-]*)/$', login_required(self.quote_accept_view.as_view()), name='acceptquote'),
             url(r'^recalcquote/$', login_required(self.recalc_quote_view.as_view()), name='recalcquote'),
             url(r'^recalcplaced/$', login_required(self.recalcplaced_view.as_view()), name='recalcplaced'),
             url(r'^pendingrequests/$', login_required(self.pending_search_requests_view.as_view()), name='request-list'),
@@ -41,7 +43,8 @@ class SearchApplication(CoreSearchApplication):
             url(r'^createquote/(?P<pk>[\w-]*)/$',
                 login_required(self.quote_view.as_view()),
                 name='quote'),
-
+            url(r'^placeorder/$', login_required(self.recalc_quote_view.as_view()), name='placeorder'),
+            url(r'^orderplaced/$', login_required(self.orderplaced_view.as_view()), name='orderplaced'),
         )
         return self.post_process_urls(urlpatterns)
 

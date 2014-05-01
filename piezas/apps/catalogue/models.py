@@ -5,6 +5,7 @@ from oscar.apps.catalogue.models import ProductImage
 from oscar.core.compat import AUTH_USER_MODEL
 from smart_selects.db_fields import ChainedForeignKey
 from oscar.apps.catalogue.models import Category
+from oscar.apps.order.models import Order
 
 class BrandManager(models.Manager):
 
@@ -250,6 +251,7 @@ class Quote(models.Model):
     comments = models.TextField(_('Comments'), blank=True)
     warranty_days = models.PositiveIntegerField(_('Warranty days'), blank=True, null=True)
     shipping_days = models.PositiveIntegerField(_('Shipping days'), blank=True, null=True)
+    order = models.ForeignKey(Order, verbose_name = _('Associated order'), blank=True, null=True)
 
     @property
     def lines(self):

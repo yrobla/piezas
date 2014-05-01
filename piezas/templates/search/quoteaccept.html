@@ -18,12 +18,12 @@
             <a href="/">{% trans 'Home' %}</a>
             <span class="divider">/</span>
         </li>
-        <li class="active">{% trans 'Quote details' %}</li>
+        <li class="active">{% trans 'Quote accept' %}</li>
     </ul>
 {% endblock %}
 
 {% block headertext %}
-    {% trans "Quote details" %}
+    {% trans "Quote accept" %}
 {% endblock %}
 
 {% block content %}
@@ -58,10 +58,9 @@
 					<th>{% trans "Search request picture" %}</th>
 					<th>{% trans "Quote picture" %}</th>
 					<th>{% trans "Base total (excl tax)" %}</th>
-					<th>{% trans "Select item" %}</th>
 				</tr></thead>
 				<tbody>
-					{% for item in quote.lines %}
+					{% for item in lines %}
 					<tr>
 						<td>{{item.search_item_request.category}}</td>
 						<td class="span4">{{item.search_item_request.piece}}<br />
@@ -91,7 +90,6 @@
 						<td>{% if item.search_item_request.picture %}<img class="search_item" src="/media/{{item.search_item_request.picture}}" style="height:50px;" />{% endif %}</td>
 						<td>{% if item.picture %}<img class="search_item" src="/media/{{item.picture}}" style="height:50px;" />{% endif %}</td>
 						<td>{{item.base_total_excl_tax}} €</td>
-						<td><input type="checkbox" id="searchitemrequest_{{item.id}}" name="search_item_request[{{item.id}}]" checked="checked" class="search_item" /></td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -175,12 +173,12 @@
 
 			<tr><th>{% trans "Date created" %}</th><td>{{quote.date_created}}</td></tr>
 			<tr><th>{% trans "Date updated" %}</th><td>{{quote.date_updated}}</td></tr>
-			<tr><th>{% trans "Base total (excl tax)" %}</th><td>{{quote.base_total_excl_tax}} €</td></tr>
-			<tr><th>{% trans "Base total (incl tax)" %}</th><td>{{quote.base_total_incl_tax}} €</td></tr>
-			<tr><th>{% trans "Shipping total (excl tax)" %}</th><td>{{quote.shipping_total_excl_tax}} €</td></tr>
-			<tr><th>{% trans "Shipping total (incl tax)" %}</th><td>{{quote.shipping_total_incl_tax}} €</td></tr>
-			<tr><th>{% trans "Grand total (excl tax)" %}</th><td>{{quote.grand_total_excl_tax}} €</td></tr>
-			<tr><th>{% trans "Grand total (incl tax)" %}</th><td>{{quote.grand_total_incl_tax}} €</td></tr>
+			<tr><th>{% trans "Base total (excl tax)" %}</th><td>{{base_total_excl_tax}} €</td></tr>
+			<tr><th>{% trans "Base total (incl tax)" %}</th><td>{{base_total_incl_tax}} €</td></tr>
+			<tr><th>{% trans "Shipping total (excl tax)" %}</th><td>{{shipping_total_excl_tax}} €</td></tr>
+			<tr><th>{% trans "Shipping total (incl tax)" %}</th><td>{{shipping_total_incl_tax}} €</td></tr>
+			<tr><th>{% trans "Grand total (excl tax)" %}</th><td>{{grand_total_excl_tax}} €</td></tr>
+			<tr><th>{% trans "Grand total (incl tax)" %}</th><td>{{grand_total_incl_tax}} €</td></tr>
 			<tr><th>{% trans "Comments" %}</th><td>{{quote.comments}}</td></tr>
 			<tr><th>{% trans "Warranty days" %}</th><td>{{quote.warranty_days}}</td></tr>
 			<tr><th>{% trans "Shipping days" %}</th><td>{{quote.shipping_days}}</td></tr>
@@ -189,32 +187,42 @@
 		</div>
 		<div style="clear:both"><br /></div>
 
+		<h4>{% trans "Choose payment method" %}</h4>
+		<div class="span12">
+			<div class="span6"><br />
+				<input type="radio" name="payment_method" value="payondelivery" checked="checked" />&nbsp;
+				<strong>{% trans "Pay on delivery" %}</strong><br />
+				<span>{% trans "You will pay after receiving the package" %}</span>
+			</div>
+
+			<div class="span6"><br />
+				<input type="radio" name="payment_method" value="transfer" />&nbsp;
+				<strong>{% trans "Bank account transfer" %}</strong><br />
+				<div>
+					{% trans "Send the amount as a transfer to" %}:<br />
+					{{quote.owner.commercial_name}}<br />
+					{{quote.owner.cif}}<br />
+					{{quote.owner.iban}}
+				</div>
+			</div>
+		</div>
+		<div style="clear:both"><br /></div>
+
 				<div class="span12 form-actions">
-					<button type="submit" class="span4 btn btn-large btn-primary btn_accept">{% trans "Accept quote" %}</button>
-					<button type="submit" class="span4 btn btn-large btn_recalc">{% trans "Ask for shipping recalc" %}</button>
+					<button type="submit" class="span4 btn btn-large btn-primary btn_accept">{% trans "Place order" %}</button>
 				</div>
 			</form>
         </div>
     </div>
 
-<div id="error_modal" class="modal hide" data-id="">
+<div id="order_confirmation" class="modal hide" data-id="">
     <div class="modal-header">
         <a href="#" data-dismiss="modal" aria-hidden="true" class="close" id="btnClose">×</a>
-         <h3>{% trans "Errors on quote acceptation" %}</h3>
-    </div>
-    <div class="modal-body">
-        <p>{% trans "Please select at least one of the items in the quote" %}</p>
-    </div>
-</div>
-
-<div id="recalc_confirmation" class="modal hide" data-id="">
-    <div class="modal-header">
-        <a href="#" data-dismiss="modal" aria-hidden="true" class="close" id="btnClose">×</a>
-         <h3>{% trans "Confirm shipping recalc request" %}</h3>
+         <h3>{% trans "Confirm order placement" %}</h3>
     </div>
     <div class="modal-body">
 	<div id="error_container" class="alert alert-error" style="display:none;"></div>
-        <p>{% trans "Are you sure you want to ask for a recalc of shipping?" %}</p>
+        <p>{% trans "Are you sure you want to confirm the order?" %}</p>
     </div>
     <div class="modal-footer">
       <a href="#" id="btnYesSubmit" class="btn danger">{% trans "Yes" %}</a>
@@ -223,11 +231,6 @@
 </div>
 
  <script>
-    $( ".datepicker" ).datepicker({
-      changeMonth: true,
-      format: 'dd/mm/yyyy',
-      weekStart:1
-    });
 
 	$(document).ready(function()
 	{
@@ -243,79 +246,25 @@
 
 		});
 
-		function validateSubmit()
-		{
-			// at least we need one item selected
-			var checked = $(".search_item:checked");
-			if (checked.length<=0)
-			{
-				// open alert
-				$("#error_modal").modal("show");
-				return false;
-			}
-			return true;
-		}
-
 		$(".btn_accept").click(function()
 		{
-			result = validateSubmit();
-			if (result)
-			{
-				var checked = $(".search_item:checked");
-				var ids = [];
-				for (var i=0;i<checked.length;i++)
-				{
-					var set = checked[i].id.split("_");
-					var selected = set[1];
-					ids.push(selected);
-				}
-				final_ids = ids.join();
-				location.href='{% url 'search:acceptquote' number=quote.id%}?lines='+final_ids;
-			}
+			$("#order_confirmation").modal("show");
 		});
 
 	        $("#btnYesSubmit").click(function()
         	{
-			$("#error_container").html("");
-			$("#error_container").hide();
-			var checked = $(".search_item:checked");
-			var ids = [];
-			for (var i=0;i<checked.length;i++)
-			{
-				var set = checked[i].id.split("_");
-				var selected = set[1];
-				ids.push(selected);
-			}
+			var payment_method = $('input[name=payment_method]:checked').val();
 			// send a post request
-			$.post("{% url 'search:recalcquote' %}",
-			       	{"quote_id":{{quote.id}}, "ids":ids.join()},
+			$.post("{% url 'search:placeorder' %}",
+			       	{"quote_id":{{quote.id}}, "ids":{{line_ids}}, "payment_method": payment_method},
 				function(data)
 				{
-					if (data.result=='KO')
-					{
-						$("#error_container").html(data.error);
-						$("#error_container").show();
-					}
-					else
-					{
-						// redirect to recalc asked
-						location.href='{% url 'search:recalcplaced' %}';
-					}
+					// redirect to order placed
+					location.href='{% url 'search:orderplaced' %}';
 					return false;
 				}
 			);
         	});
-
-		$(".btn_recalc").click(function()
-		{
-			result = validateSubmit();
-			if (result)
-			{
-				$("#recalc_confirmation").modal("show");
-				return false;
-			}
-		});
-
 	});
   </script>
 {% endblock content %}

@@ -280,6 +280,9 @@ class PlacedView(TemplateView):
 class QuotePlacedView(TemplateView):
     template_name = 'search/quoteplaced.html'
 
+class OrderPlacedView(TemplateView):
+    template_name = 'search/orderplaced.html'
+
 
 class PendingSearchRequestsView(ListView):
     """
@@ -510,6 +513,41 @@ class QuoteDetailView(DetailView):
 
     def get_object(self, queryset=None):
         return models.Quote.objects.get(id=self.kwargs['number'])
+
+class QuoteAcceptView(DetailView):
+    model = models.Quote
+    context_object_name = 'quote'
+    template_name = 'search/quoteaccept.html'
+    quote_actions = ()
+
+    def get_context_data(self, *args, **kwargs):
+        lines = self.request.GET.get('lines', '')
+        line_items = []
+        line_ids = []
+        base_total = 0
+        for line in lines.split(','):
+            quote_line = models.QuoteItem.objects.get(id=line)
+            line_items.append(quote_line)
+            line_ids.append('%s' % quote_line.id)
+            base_total += quote_line.base_total_excl_tax
+
+        context = super(QuoteAcceptView, self).get_context_data(**kwargs)
+        context['lines'] = line_items
+        context['line_ids'] = ','.join(line_ids)
+
+        quote = kwargs['object']
+        context['base_total_excl_tax'] = base_total
+        context['base_total_incl_tax'] = float(base_total) + float(base_total*settings.TPC_TAX/100)
+        context['shipping_total_excl_tax'] = quote.shipping_total_excl_tax
+        context['shipping_total_incl_tax'] = quote.shipping_total_incl_tax
+        context['grand_total_excl_tax'] = float(base_total) + float(context['shipping_total_excl_tax'])
+        context['grand_total_incl_tax'] = float(context['base_total_incl_tax']) + float(context['shipping_total_incl_tax'])
+
+        return context
+
+    def get_object(self, queryset=None):
+        return models.Quote.objects.get(id=self.kwargs['number'])
+
 
 class RecalcQuoteView(View):
     def post(self, request, *args, **kwargs):
