@@ -5,6 +5,8 @@ from django.views.generic import CreateView, FormView, TemplateView, ListView, D
 from django.views.generic.edit import UpdateView
 from django.core.urlresolvers import reverse
 from oscar.core.loading import get_model
+from oscar.apps.order.models import Order, Line, BillingAddress, ShippingAddress
+from oscar.apps.partner.models import Partner
 from datetime import datetime
 import math
 from dateutil import tz
@@ -12,6 +14,7 @@ import json
 import forms
 from piezas import settings
 from piezas.apps.catalogue import models
+from django.contrib.sites.models import Site
 
 class HomeView(FormView):
     form_class = forms.SearchCreationForm
@@ -582,3 +585,93 @@ class RecalcQuoteView(View):
 
 class RecalcPlacedView(TemplateView):
     template_name = 'search/recalcplaced.html'
+
+class PlaceOrderView(View):
+    def post(self, request, *args, **kwargs):
+        quote_id = request.POST.get('quote_id', '')
+        line_ids = request.POST.get('ids', '').split(',')
+        payment_method = request.POST.get('payment_method', 'payondelivery')
+
+        quote = models.Quote.objects.get(pk=quote_id)
+        response_data = {}
+        if quote and line_ids and len(line_ids)>0:
+            base_total = 0
+            for line_id in line_ids:
+                line = models.QuoteItem.objects.get(pk=line_id)
+                base_total += line.base_total_excl_tax
+
+            # create order
+            order = Order()
+            order.site = Site.objects.get_current()
+                
+            # get user address
+            order.billing_address = BillingAddress()
+            if request.user.get_default_billing_address():
+                order.billing_address.__dict__ = request.user.get_default_billing_address().__dict__
+            else:
+                order.billing_address.__dict__ = request.user.get_default_shipping_address().__dict__
+
+            order.shipping_address = ShippingAddress()
+            order.shipping_address.__dict__ = request.user.get_default_shipping_address().__dict__
+            order.currency = 'EUR'
+            order.status = 'pending_payment'
+
+            # get totals
+            order.total_excl_tax = base_total
+            order.total_incl_tax = float(base_total) + float(base_total*settings.TPC_TAX/100)
+            order.shipping_excl_tax = quote.shipping_total_excl_tax
+            order.shipping_incl_tax = quote.shipping_total_incl_tax
+            order.save()
+
+            # create order lines
+            for line_id in line_ids:
+                order_line = Line()
+                order_line.order = order
+                line = models.QuoteItem.objects.get(pk=line_id)
+
+                # check if owner is partner, if not, create it
+                try:
+                    partner = Partner.objects.get(code=request.owner.cif)
+                except:
+                    partner = Partner()
+                    partner.code = quote.owner.cif
+                    partner.name = quote.owner.commercial_name
+                    partner.save()
+                    
+                order_line.partner = partner
+                order_line.partner_name = quote.owner.commercial_name
+                order_line.partner_sku = quote.owner.cif
+                order_line.title = line.search_item_request
+                order_line.upc = line.search_item_request.id
+                order_line.product = line.search_item_request.piece
+                order_line.quantity = 1
+
+                order_line.unit_price_excl_tax = line.base_total_excl_tax
+                order_line.line_price_excl_tax = line.base_total_excl_tax
+                order_line.line_price_incl_tax = float(line.base_total_excl_tax) + float(line.base_total_excl_tax*settings.TPC_TAX/100)
+
+                order_line.line_price_before_discounts_incl_tax = float(line.base_total_excl_tax) + float(line.base_total_excl_tax*settings.TPC_TAX/100)
+                order_line.line_price_before_discounts_excl_tax = line.base_total_excl_tax
+                order_line.save()
+                
+
+            # associate order with quote
+            quote.order = order
+            quote.state = 'accepted'
+            quote.save()
+
+            # mark all the lines as accepted or rejected
+            lines = models.QuoteItem.objects.filter(quote=quote)
+            for line in lines:
+                if line.id in line_ids:
+                    line.state = 'accepted'
+                else:
+                    line.state = 'rejected'
+                line.save()
+            response_data['result'] = 'OK'
+        else:
+            response_data['result'] = 'KO'
+            response_data['error'] = _('There has been an error processing your request. Please try again.')
+
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+

@@ -130,3 +130,11 @@ if hasattr(auth_models, 'BaseUserManager'):
                 return address
             except Exception as e:
                 return None
+
+        # given an user, return the default billing address
+        def get_default_billing_address(self):
+            try:
+                address = UserAddress.objects.get(user=self, is_default_for_billing=True)
+                return address
+            except Exception as e:
+                return None

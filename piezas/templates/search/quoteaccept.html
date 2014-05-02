@@ -259,9 +259,12 @@
 			       	{"quote_id":{{quote.id}}, "ids":{{line_ids}}, "payment_method": payment_method},
 				function(data)
 				{
-					// redirect to order placed
-					location.href='{% url 'search:orderplaced' %}';
-					return false;
+					if (data.result=="OK")
+					{
+						// redirect to order placed
+						location.href='{% url 'search:orderplaced' %}';
+						return false;
+					}
 				}
 			);
         	});

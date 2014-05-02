@@ -17,6 +17,7 @@ class SearchApplication(CoreSearchApplication):
     quote_accept_view = views.QuoteAcceptView
     recalc_quote_view = views.RecalcQuoteView
     recalcplaced_view = views.RecalcPlacedView
+    place_order_view = views.PlaceOrderView
     orderplaced_view = views.OrderPlacedView
 
     def get_urls(self):
@@ -43,7 +44,7 @@ class SearchApplication(CoreSearchApplication):
             url(r'^createquote/(?P<pk>[\w-]*)/$',
                 login_required(self.quote_view.as_view()),
                 name='quote'),
-            url(r'^placeorder/$', login_required(self.recalc_quote_view.as_view()), name='placeorder'),
+            url(r'^placeorder/$', login_required(self.place_order_view.as_view()), name='placeorder'),
             url(r'^orderplaced/$', login_required(self.orderplaced_view.as_view()), name='orderplaced'),
         )
         return self.post_process_urls(urlpatterns)
