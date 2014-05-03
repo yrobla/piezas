@@ -256,7 +256,7 @@
 			var payment_method = $('input[name=payment_method]:checked').val();
 			// send a post request
 			$.post("{% url 'search:placeorder' %}",
-			       	{"quote_id":{{quote.id}}, "ids":{{line_ids}}, "payment_method": payment_method},
+			       	{"quote_id":{{quote.id}}, "ids":'{{line_ids}}', "payment_method": payment_method},
 				function(data)
 				{
 					if (data.result=="OK")

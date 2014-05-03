@@ -602,17 +602,10 @@ class PlaceOrderView(View):
 
             # create order
             order = Order()
+            order.number = quote.id
+            order.user = request.user
             order.site = Site.objects.get_current()
                 
-            # get user address
-            order.billing_address = BillingAddress()
-            if request.user.get_default_billing_address():
-                order.billing_address.__dict__ = request.user.get_default_billing_address().__dict__
-            else:
-                order.billing_address.__dict__ = request.user.get_default_shipping_address().__dict__
-
-            order.shipping_address = ShippingAddress()
-            order.shipping_address.__dict__ = request.user.get_default_shipping_address().__dict__
             order.currency = 'EUR'
             order.status = 'pending_payment'
 
@@ -631,7 +624,7 @@ class PlaceOrderView(View):
 
                 # check if owner is partner, if not, create it
                 try:
-                    partner = Partner.objects.get(code=request.owner.cif)
+                    partner = Partner.objects.get(code=quote.owner.cif)
                 except:
                     partner = Partner()
                     partner.code = quote.owner.cif
@@ -654,6 +647,22 @@ class PlaceOrderView(View):
                 order_line.line_price_before_discounts_excl_tax = line.base_total_excl_tax
                 order_line.save()
                 
+
+            # create addresses
+            shipping_address = ShippingAddress()
+            shipping_address.__dict__ = request.user.get_default_shipping_address().__dict__
+            shipping_address.save()
+            order.shipping_address = shipping_address
+
+            # get user address
+            billing_address = BillingAddress()
+            if request.user.get_default_billing_address():
+                billing_address.__dict__ = request.user.get_default_billing_address().__dict__
+            else:
+                billing_address.__dict__ = request.user.get_default_shipping_address().__dict__
+            billing_address.save()
+            order.billing_address = billing_address
+            order.save()
 
             # associate order with quote
             quote.order = order
