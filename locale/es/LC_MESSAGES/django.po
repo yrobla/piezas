@@ -9421,3 +9421,6 @@ msgstr ""
 
 #~ msgid "searchrequests"
 #~ msgstr "peticiones de búsqueda"
+
+msgid "pending_payment"
+msgstr "Pendiente de pago"

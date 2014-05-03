@@ -156,6 +156,7 @@ INSTALLED_APPS = [
 INSTALLED_APPS = INSTALLED_APPS + get_core_apps([
     'piezas.apps.customer', 
     'piezas.apps.catalogue',
+    'piezas.apps.order',
     'piezas.apps.search',
     'piezas.apps.address'
 ])

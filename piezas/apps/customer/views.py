@@ -5,12 +5,16 @@ from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import logout as auth_logout, login as auth_login
+from django.shortcuts import get_object_or_404
 from django.views.generic import (TemplateView, ListView, DetailView,
                                   CreateView, UpdateView, DeleteView,
                                   FormView, RedirectView)
 from django.http import HttpResponseRedirect, Http404
+
 from oscar.apps.customer.views import ProfileView as CoreProfileView
 from oscar.core.compat import get_user_model
+from oscar.views.generic import PostActionMixin
+from piezas.apps.order.models import Order
 import forms
 
 from piezas.apps.address.forms import UserAddressForm
@@ -20,6 +24,7 @@ PageTitleMixin, RegisterUserMixin = get_classes(
 EmailAuthenticationForm, EmailUserCreationForm, ProfileForm = get_classes(
     'customer.forms', ['EmailAuthenticationForm', 'PodEmailUserCreationForm',
                        'ProfileForm'])
+OrderSearchForm = get_class('customer.forms', 'OrderSearchForm')
 
 ProfileForm = forms.ProfileForm
 User = get_user_model()
@@ -208,4 +213,132 @@ class AddressCreateView(PageTitleMixin, CreateView):
         messages.success(self.request,
                          _("Address '%s' created") % self.object.summary)
         return reverse('customer:address-list')
+
+# =============
+# Order history
+# =============
+
+class OrderHistoryView(PageTitleMixin, ListView):
+    """
+    Customer order history
+    """
+    context_object_name = "orders"
+    template_name = 'customer/order/order_list.html'
+    paginate_by = 20
+    model = Order
+    form_class = OrderSearchForm
+    page_title = _('Order History')
+    active_tab = 'orders'
+
+    def get(self, request, *args, **kwargs):
+        if 'date_from' in request.GET:
+            self.form = self.form_class(self.request.GET)
+            if not self.form.is_valid():
+                self.object_list = self.get_queryset()
+                ctx = self.get_context_data(object_list=self.object_list)
+                return self.render_to_response(ctx)
+            data = self.form.cleaned_data
+
+            # If the user has just entered an order number, try and look it up
+            # and redirect immediately to the order detail page.
+            if data['order_number'] and not (data['date_to'] or
+                                             data['date_from']):
+                try:
+                    order = Order.objects.get(
+                        number=data['order_number'], user=self.request.user)
+                except Order.DoesNotExist:
+                    pass
+                else:
+                    return HttpResponseRedirect(
+                        reverse('customer:order',
+                                kwargs={'order_number': order.number}))
+        else:
+            self.form = self.form_class()
+        return super(OrderHistoryView, self).get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        qs = self.model._default_manager.filter(user=self.request.user)
+        if self.form.is_bound and self.form.is_valid():
+            qs = qs.filter(**self.form.get_filters())
+        return qs
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(OrderHistoryView, self).get_context_data(*args, **kwargs)
+        ctx['form'] = self.form
+        return ctx
+
+class OrderDetailView(PageTitleMixin, PostActionMixin, DetailView):
+    model = Order
+    active_tab = 'orders'
+
+    def get_template_names(self):
+        return ["customer/order/order_detail.html"]
+
+    def get_page_title(self):
+        """
+        Order number as page title
+        """
+        return u'%s #%s' % (_('Order'), self.object.number)
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(self.model, user=self.request.user,
+                                 number=self.kwargs['order_number'])
+
+    def do_reorder(self, order):  # noqa (too complex (10))
+        """
+        'Re-order' a previous order.
+
+        This puts the contents of the previous order into your basket
+        """
+        # Collect lines to be added to the basket and any warnings for lines
+        # that are no longer available.
+        basket = self.request.basket
+        lines_to_add = []
+        warnings = []
+        for line in order.lines.all():
+            is_available, reason = line.is_available_to_reorder(
+                basket, self.request.strategy)
+            if is_available:
+                lines_to_add.append(line)
+            else:
+                warnings.append(reason)
+
+        # Check whether the number of items in the basket won't exceed the
+        # maximum.
+        total_quantity = sum([line.quantity for line in lines_to_add])
+        is_quantity_allowed, reason = basket.is_quantity_allowed(
+            total_quantity)
+        if not is_quantity_allowed:
+            messages.warning(self.request, reason)
+            self.response = HttpResponseRedirect(
+                reverse('customer:order-list'))
+            return
+
+        # Add any warnings
+        for warning in warnings:
+            messages.warning(self.request, warning)
+
+        for line in lines_to_add:
+            options = []
+            for attribute in line.attributes.all():
+                if attribute.option:
+                    options.append({
+                        'option': attribute.option,
+                        'value': attribute.value})
+            basket.add_product(line.product, line.quantity, options)
+
+        if len(lines_to_add) > 0:
+            self.response = HttpResponseRedirect(reverse('basket:summary'))
+            messages.info(
+                self.request,
+                _("All available lines from order %(number)s "
+                  "have been added to your basket") % {'number': order.number})
+        else:
+            self.response = HttpResponseRedirect(
+                reverse('customer:order-list'))
+            messages.warning(
+                self.request,
+                _("It is not possible to re-order order %(number)s "
+                  "as none of its lines are available to purchase") %
+                {'number': order.number})
 

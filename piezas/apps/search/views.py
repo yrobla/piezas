@@ -5,7 +5,8 @@ from django.views.generic import CreateView, FormView, TemplateView, ListView, D
 from django.views.generic.edit import UpdateView
 from django.core.urlresolvers import reverse
 from oscar.core.loading import get_model
-from oscar.apps.order.models import Order, Line, BillingAddress, ShippingAddress
+from oscar.apps.order.models import Line, BillingAddress, ShippingAddress
+from piezas.apps.order.models import Order
 from oscar.apps.partner.models import Partner
 from datetime import datetime
 import math
@@ -614,6 +615,11 @@ class PlaceOrderView(View):
             order.total_incl_tax = float(base_total) + float(base_total*settings.TPC_TAX/100)
             order.shipping_excl_tax = quote.shipping_total_excl_tax
             order.shipping_incl_tax = quote.shipping_total_incl_tax
+
+            # payment method
+            order.payment_method = payment_method
+            if payment_method == 'transfer':
+                order.bank_account = quote.owner.iban
             order.save()
 
             # create order lines

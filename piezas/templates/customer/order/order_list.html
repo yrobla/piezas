@@ -1,4 +1,4 @@
-{% extends "customer/baseaccountpage.html" %}
+{% extends "layout.html" %}
 {% load i18n %}
 {% load currency_filters %}
 {% load staticfiles %}
@@ -9,15 +9,11 @@
             <a href="/">{% trans 'Home' %}</a>
             <span class="divider">/</span>
         </li>
-        <li>
-            <a href="{% url 'customer:summary' %}">{% trans 'Account' %}</a>
-            <span class="divider">/</span>
-        </li>
         <li class="active">{% trans 'Order history' %}</li>
     </ul>
 {% endblock %}
 
-{% block tabcontent %}
+{% block content %}
 
     {% if orders or form.is_bound %}
         <div class="well">
@@ -54,7 +50,7 @@
 
     {% include "partials/pagination.html" %}
 
-{% endblock tabcontent %}
+{% endblock content %}
 
 {% block extrastyles %}
     {{ block.super }}

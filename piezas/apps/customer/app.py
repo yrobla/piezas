@@ -8,6 +8,7 @@ class CustomerApplication(CoreCustomerApplication):
     profile_view = views.ProfileView
     profile_update_view = views.ProfileUpdateView
     address_create_view = views.AddressCreateView
-
+    order_history_view = views.OrderHistoryView
+    order_detail_view = views.OrderDetailView
 
 application = CustomerApplication()

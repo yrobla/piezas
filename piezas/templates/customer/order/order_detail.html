@@ -28,6 +28,9 @@
 
 
 {% block content %}
+    <h3>{% trans 'Order status' %}</h3>
+	<p>{% trans order.status %}</p>
+
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
@@ -103,5 +106,14 @@
                 <p>{% for field in order.shipping_address.active_address_fields %}
                         {{ field }}<br/>
                     {% endfor %}</p>
+
+    <h3>{% trans 'Payment method' %}</h3>
+
+	{% if order.payment_method == 'transfer' %}
+		<p>{% trans "Bank account transfer" %}</p>
+		<p>{% trans "Bank number account (IBAN format)" %}: {{order.bank_account}}</p>
+	{% else %}
+		<p>{% trans "Pay on delivery" %}</p>
+	{% endif %}
 <div style="clear:both;"> <br /> </div>
 {% endblock content %}
