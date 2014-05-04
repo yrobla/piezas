@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% load i18n %}
+{% load currency_filters %}
+{% load staticfiles %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">{% trans 'Home' %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans 'Quotes pending from shipping recalc' %}</li>
+    </ul>
+{% endblock %}
+{% block content %}
+
+    {% if quotes %}
+        <h3>{{ form.description }}</h3>
+        <table class="table table-striped table-bordered">
+            <tr>
+		<th>{% trans "Quote id" %}</th>
+                <th>{% trans "Search request" %}</th>
+                <th>{% trans "User" %}</th>
+                <th>{% trans "Date created" %}</th>
+                <th>{% trans "Date updated" %}</th>
+		<th>{% trans "Total items" %}</th>
+		<th>{% trans "Total items requested" %}</th>
+                <th>{% trans "Base total (incl tax)" %}</th>
+                <th>{% trans "Shipping total (incl tax)" %}</th>
+            </tr>
+            {% for quote in quotes %}
+                <tr>
+                    <td><div class="span2">{{quote.id}}&nbsp;&nbsp;<button type="button" class="button" onClick='location.href="{% url 'search:confirmrecalcquote' number=quote.id %}";return false;'>{% trans "Recal quote" %}</button></div></td>
+                    <td><a href="{% url 'search:detail' number=quote.search_request.id %}">{{quote.search_request.id}}</a></td>
+                    <td>{{quote.search_request.owner}}</td>
+                    <td>{{ quote.date_created }}</td>
+                    <td>{{ quote.date_updated }}</td>
+		    <td>{{ quote.search_request.num_items }}</td>
+		    <td>{{ quote.num_accepted_items }}</td>
+                    <td>{{ quote.base_total_incl_tax }} €</td>
+                    <td>{{ quote.shipping_total_incl_tax }} €</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>{% trans "You don't have any pending quotes." %}</p>
+    {% endif %}
+
+    {% include "partials/pagination.html" %}
+
+<div style="clear:both"><br /></div>
+{% endblock %}
+
+{% block extrastyles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.css">
+{% endblock %}
+
+{% block cdn_scripts %}
+    {{ block.super }}
+    <script src="//code.jquery.com/ui/1.10.3/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+
+{% block onbodyload %}
+    {{ block.super }}
+    $('#id_date_to, #id_date_from').datepicker({'dateFormat': 'yy-mm-dd'});
+{% endblock %}

@@ -259,8 +259,17 @@ class Quote(models.Model):
         return items
 
     @property
+    def accepted_lines(self):
+        items = QuoteItem.objects.filter(quote=self, state='accepted')
+        return items
+
+    @property
     def num_items(self):
         return self.lines.count()        
+
+    @property
+    def num_accepted_items(self):
+        return self.accepted_lines.count()
 
 
 QUOTE_ITEM_STATES = (('sent', _('Sent')), ('accepted', _('Accepted')),

@@ -31,29 +31,30 @@
 	</span>
 </div>
 {% endif %}
-<div class="span12 well">
+<div class="well">
 {% if user.is_staff %}
-	<div class="span3">
+	<div class="span10">
 		<h4><a href="{% url 'dashboard:index' %}">{% trans "Admin Dashboard" %}</a></h4>
 	</div>
 {% else %}
 	{% if user.is_validated %}
 	{% if user.type == "customer" %}
-	<div class="span3">
+	<div class="span6">
 		<h4><a href="{% url 'search:home' %}">{% trans "Search pieces" %}</a></h4>
 	</div>
-	<div class="span3">
+	<div class="span6">
 		<h4><a href="{% url 'search:activequotes' %}">{% trans "Active quotes" %}</a></h4>
 		<h4><a href="{% url 'customer:order-list' %}">{% trans "Order history" %}</a></h4>
 	</div>
 	{% endif %}
 	{% if user.type == "provider" %}
-	<div class="span3">
+	<div class="span6">
 		<h4><a href="{% url 'search:request-list' %}">{% trans "Active searches from customers" %}</a></h4>
+		<h4><a href="{% url 'search:recalcquotes' %}">{% trans "Quotes pending from recalc" %}</a></h4>
 	</div>
 	{% endif %}
 	{% endif %}
-	<div class="span3">
+	<div class="span6">
 		<h4><a href="{% url 'customer:summary' %}">{% trans "My personal data" %}</a></h4>
 	</div>
 {% endif %}

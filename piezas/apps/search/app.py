@@ -12,10 +12,11 @@ class SearchApplication(CoreSearchApplication):
     quote_view = views.QuoteView
     pending_search_requests_view = views.PendingSearchRequestsView
     active_quote_view = views.ActiveQuotesView
+    recalc_quotes_view = views.RecalcQuotesView
+    recalc_quote_view = views.RecalcQuoteView
     search_detail_view = views.SearchDetailView
     quote_detail_view = views.QuoteDetailView
     quote_accept_view = views.QuoteAcceptView
-    recalc_quote_view = views.RecalcQuoteView
     recalcplaced_view = views.RecalcPlacedView
     place_order_view = views.PlaceOrderView
     orderplaced_view = views.OrderPlacedView
@@ -32,10 +33,12 @@ class SearchApplication(CoreSearchApplication):
                 name='search'),
             url(r'^home/$', login_required(self.index_view.as_view()), name='home'),
             url(r'^activequotes/$', login_required(self.active_quote_view.as_view()), name='activequotes'),
+            url(r'^recalcquotes/$', login_required(self.recalc_quotes_view.as_view()), name='recalcquotes'),
             url(r'^placesearch/$', login_required(self.confirm_view.as_view()), name='placesearchrequest'),
             url(r'^placed/$', login_required(self.placed_view.as_view()), name='placed'),
             url(r'^quoteplaced/$', login_required(self.quoteplaced_view.as_view()), name='quoteplaced'),
             url(r'^acceptquote/(?P<number>[\w-]*)/$', login_required(self.quote_accept_view.as_view()), name='acceptquote'),
+            url(r'^confirmrecalcquote/(?P<number>[\w-]*)/$', login_required(self.quote_accept_view.as_view()), name='confirmrecalcquote'),
             url(r'^recalcquote/$', login_required(self.recalc_quote_view.as_view()), name='recalcquote'),
             url(r'^recalcplaced/$', login_required(self.recalcplaced_view.as_view()), name='recalcplaced'),
             url(r'^pendingrequests/$', login_required(self.pending_search_requests_view.as_view()), name='request-list'),

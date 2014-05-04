@@ -453,7 +453,7 @@ class QuoteView(UpdateView):
         try:
             search_request = models.SearchRequest.objects.get(pk=request_id)
             quote = models.Quote(search_request=search_request, owner=self.request.user,
-                                 state='pending', base_total_excl_tax=base_total,
+                                 state='sent', base_total_excl_tax=base_total,
                                  base_total_incl_tax=base_total_incl_tax,
                                  shipping_total_excl_tax=shipping_total_excl_tax,
                                  shipping_total_incl_tax=shipping_total_incl_tax,
@@ -468,7 +468,7 @@ class QuoteView(UpdateView):
                 request_item = models.SearchItemRequest.objects.get(pk=item['id'])
                 quoteitem = models.QuoteItem(quote=quote, search_item_request=request_item,
                                              owner=self.request.user, base_total_excl_tax=item['line_total'],
-                                             state='pending', comments=item['line_comments'],
+                                             state='sent', comments=item['line_comments'],
                                              picture=item['picture'])
                 quoteitem.save()
 
@@ -495,7 +495,7 @@ class ActiveQuotesView(ListView):
 
     def get_queryset(self):
         # only show quotes for searches that belong to user
-        queryset = models.Quote.objects.filter(search_request__owner=self.request.user, state='pending')
+        queryset = models.Quote.objects.filter(search_request__owner=self.request.user, state='sent')
         return queryset
 
 
@@ -569,7 +569,7 @@ class RecalcQuoteView(View):
                 # mark all the lines as accepted or rejected
                 lines = models.QuoteItem.objects.filter(quote=quote)
                 for line in lines:
-                    if line.id in line_ids:
+                    if unicode(line.id) in line_ids:
                         line.state = 'accepted'
                     else:
                         line.state = 'rejected'
@@ -690,3 +690,18 @@ class PlaceOrderView(View):
 
         return HttpResponse(json.dumps(response_data), content_type="application/json")
 
+class RecalcQuotesView(ListView):
+    """
+    View active quotes for that customer
+    """
+    context_object_name = "quotes"
+    template_name = 'search/recalcquotes_list.html'
+    paginate_by = 20
+    model = models.Quote
+    page_title = _('Quotes pending from shipping recalc')
+    active_tab = 'quotes'
+
+    def get_queryset(self):
+        # only show quotes for searches that belong to user
+        queryset = models.Quote.objects.filter(owner=self.request.user, state='pending_recalc')
+        return queryset
