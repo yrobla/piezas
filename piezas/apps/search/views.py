@@ -705,3 +705,12 @@ class RecalcQuotesView(ListView):
         # only show quotes for searches that belong to user
         queryset = models.Quote.objects.filter(owner=self.request.user, state='pending_recalc')
         return queryset
+
+class QuoteRecalcView(DetailView):
+    model = models.Quote
+    context_object_name = 'quote'
+    template_name = 'search/confirmquoterecalc.html'
+    quote_actions = ()
+
+    def get_object(self, queryset=None):
+        return models.Quote.objects.get(id=self.kwargs['number'])

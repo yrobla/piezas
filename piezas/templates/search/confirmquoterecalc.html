@@ -1,0 +1,338 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load staticfiles %}
+
+{% block title %}
+    {% trans 'Homepage' %} | {{ block.super }}
+{% endblock %}
+
+{% block extrahead %}
+<script src="{% static "oscar/js/datepicker/bootstrap-datepicker.js" %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static "oscar/css/datepicker.css" %}" />
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">{% trans 'Home' %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans 'Quote shipping recalc' %}</li>
+    </ul>
+{% endblock %}
+
+{% block headertext %}
+    {% trans "Quote shipping recalc" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span12 register_form">
+
+	 	<h4>{% trans "Search details" %}</h4>
+		<div class="responsive-table">
+			<table class="table span12">
+			<tr><th>{% trans "Brand" %}</th><td>{{quote.search_request.brand}}</td></tr>
+			<tr><th>{% trans "Model" %}</th><td>{{quote.search_request.model}}</td></tr>
+			<tr><th>{% trans "Version" %}</th><td>{{quote.search_request.version}}</td></tr>
+			<tr><th>{% trans "Bodywork" %}</th><td>{{quote.search_request.bodywork}}</td></tr>
+			<tr><th>{% trans "Engine" %}</th><td>{{quote.search_request.engine}}</td></tr>
+			<tr><th>{% trans "Frame reference" %}</th><td>{{quote.search_request.frameref}}</td></tr>
+			<tr><th>{% trans "Comments" %}</th><td>{{quote.search_request.comments}}</td></tr>
+			<tr><th>{% trans "Date created" %}</th><td>{{quote.search_request.date_created}}</td></tr>
+			<tr><th>{% trans "Date updated" %}</th><td>{{quote.search_request.date_updated}}</td></tr>
+			<tr><th>{% trans "State" %}</th><td>{{quote.search_request.state}}</td></tr>
+			</table>
+		</div>
+		<div style="clear:both"><br /></div>
+
+		<h4>{% trans "Pieces detail" %}</h4>
+		<div class="responsible-table">
+			<table class="table" id="id_searchitemrequest_table">
+				<thead><tr>
+					<th>{% trans "Category" %}</th>
+					<th class="span4">{% trans "Piece" %}</th>
+					<th>{% trans "Search request comments" %}</th>
+					<th>{% trans "Quote comments" %}</th>
+					<th>{% trans "Search request picture" %}</th>
+					<th>{% trans "Quote picture" %}</th>
+					<th>{% trans "Base total (excl tax)" %}</th>
+				</tr></thead>
+				<tbody>
+					{% for item in quote.accepted_lines %}
+					<tr>
+						<td>{{item.search_item_request.category}}</td>
+						<td class="span4">{{item.search_item_request.piece}}<br />
+<a href="javascript:;" class="showhidedetails">{% trans "Show / hide piece details" %}</a>
+
+<div class="details" style="display:none;">
+						<ul>
+		{% for question in item.search_item_request.answers %}
+			{% if question.question.type in 'text,boolean,list' %}
+				<li>{{question.question.text}}:&nbsp;
+				{% if question.question.type in 'text,list' %}
+					{{question.text_answer}}
+				{% else %}
+					{% if question.boolean_answer %}
+						{% trans "Yes" %}
+					{% else %}
+						{% trans "No" %}
+					{% endif %}
+				{% endif %}
+				</li>
+			{% endif %}
+		{% endfor %}</ul>
+</div>
+</td>
+						<td>{{item.search_item_request.comments}}</td>
+						<td>{{item.comments}}</td>
+						<td>{% if item.search_item_request.picture %}<img class="search_item" src="/media/{{item.search_item_request.picture}}" style="height:50px;" />{% endif %}</td>
+						<td>{% if item.picture %}<img class="search_item" src="/media/{{item.picture}}" style="height:50px;" />{% endif %}</td>
+						<td>{{item.base_total_excl_tax}} €</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div style="clear:both"><br /></div>
+
+				<div>
+					<h4>{% trans "Photo gallery" %}</h4>
+					<div style="clear:both"><br /></div>
+
+					{% if quote.search_request.picture1%}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture1}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture2%}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture2}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture3 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture3}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture4 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture4}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture5 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture5}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture6 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture6}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture7 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture7}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture8 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture8}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture9 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture9}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+					{% if quote.search_request.picture10 %}
+					<div class="span3">
+						<img class="search_item" src="/media/{{quote.search_request.picture10}}" style="height:50px;" />
+					</div>
+					{% endif %}
+
+
+				</div>
+				<div style="clear:both"><br /></div>
+
+		<h4>{% trans "Quote summary" %}</h4>
+		<div class="responsive-table">
+			<table class="table span12">
+			<tr><th>{% trans "Owner" %}</th><td>{% if quote.owner.commercial_name %}
+			{{quote.owner.commercial_name}}{% else %}{{quote.owner}}{% endif %}</td></tr>
+
+			<tr><th>{% trans "Date created" %}</th><td>{{quote.date_created}}</td></tr>
+			<tr><th>{% trans "Date updated" %}</th><td>{{quote.date_updated}}</td></tr>
+			<tr><th>{% trans "Base total (excl tax)" %}</th><td>{{quote.base_total_excl_tax}} €</td></tr>
+			<tr><th>{% trans "Base total (incl tax)" %}</th><td>{{quote.base_total_incl_tax}} €</td></tr>
+			<tr><th>{% trans "Shipping total (excl tax)" %}</th><td>{{quote.shipping_total_excl_tax}} €</td></tr>
+			<tr><th>{% trans "New shipping total (excl tax)" %}</th><td><input type="text" name="new_shipping_total" id="new_shipping_total" value="0" /></td></tr>
+			<tr><th>{% trans "Shipping total (incl tax)" %}</th><td>{{quote.shipping_total_incl_tax}} €</td></tr>
+			<tr><th>{% trans "Grand total (excl tax)" %}</th><td>{{quote.grand_total_excl_tax}} €</td></tr>
+			<tr><th>{% trans "Grand total (incl tax)" %}</th><td>{{quote.grand_total_incl_tax}} €</td></tr>
+			<tr><th>{% trans "Comments" %}</th><td>{{quote.comments}}</td></tr>
+			<tr><th>{% trans "Warranty days" %}</th><td>{{quote.warranty_days}}</td></tr>
+			<tr><th>{% trans "Shipping days" %}</th><td>{{quote.shipping_days}}</td></tr>
+
+			</table>
+		</div>
+		<div style="clear:both"><br /></div>
+
+				<div class="span12 form-actions">
+					<button type="submit" class="span4 btn btn-large btn-primary btn_accept">{% trans "Confirm new shipping cost" %}</button>
+					<button type="submit" class="span4 btn btn-large btn_cancel">{% trans "Cancel quote" %}</button>
+				</div>
+			</form>
+        </div>
+    </div>
+
+
+<div id="error_modal" class="modal hide" data-id="">
+    <div class="modal-header">
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="close" id="btnClose">×</a>
+         <h3>{% trans "Errors on quote recalc" %}</h3>
+    </div>
+    <div class="modal-body">
+        <p>{% trans "Please submit a valid shipping amount" %}</p>
+    </div>
+</div>
+
+
+<div id="recalc_confirmation" class="modal hide" data-id="">
+    <div class="modal-header">
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="close" id="btnClose">×</a>
+         <h3>{% trans "Confirm new shipping amount" %}</h3>
+    </div>
+    <div class="modal-body">
+	<div id="error_container" class="alert alert-error" style="display:none;"></div>
+        <p>{% trans "Are you sure you want to update the new shipping amount?" %}</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" id="btnYesSubmit" class="btn danger">{% trans "Yes" %}</a>
+      <a href="#" id="btnNoSubmit" data-dismiss="modal" aria-hidden="true" class="btn secondary">{% trans "No" %}</a>
+    </div>
+</div>
+
+<div id="cancel_confirmation" class="modal hide" data-id="">
+    <div class="modal-header">
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="close" id="btnClose">×</a>
+         <h3>{% trans "Cancel quote" %}</h3>
+    </div>
+    <div class="modal-body">
+	<div id="error_container_cancel" class="alert alert-error" style="display:none;"></div>
+        <p>{% trans "Are you sure you want to cancel the current quote?" %}</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" id="btnYesCancel" class="btn danger">{% trans "Yes" %}</a>
+      <a href="#" id="btnNoCancel" data-dismiss="modal" aria-hidden="true" class="btn secondary">{% trans "No" %}</a>
+    </div>
+</div>
+
+ <script>
+	$(document).ready(function()
+	{
+		$("img.search_item").img_lightbox_tooltip();
+		$(".showhidedetails").click(function()
+		{
+	                var container = $(this).parent().find("div.details");
+        	        if (container.length>0)
+                	{
+                        	var current = $(container[0]);
+	                        current.toggle();
+        	        }
+
+		});
+
+		function validateSubmit()
+		{
+			// shipping amount needs to be a valid number
+			var amount = $("#new_shipping_total").val();
+			if (!(/^\-?([0-9]+(\.[0-9]+)?|Infinity)$/.test(amount)))
+			{
+				// open alert
+				$("#error_modal").modal("show");
+				return false;
+			}
+			return true;
+		}
+
+	        $("#btnYesSubmit").click(function()
+        	{
+			$("#error_container").html("");
+			$("#error_container").hide();
+
+			// send a post request
+			$.post("{% url 'search:sendrecalcquote' %}",
+			       	{"quote_id":{{quote.id}}, "shipping":$("#new_shipping_total").val()},
+				function(data)
+				{
+					if (data.result=='KO')
+					{
+						$("#error_container").html(data.error);
+						$("#error_container").show();
+					}
+					else
+					{
+						// redirect to recalc asked
+						location.href='{% url 'search:sendrecalcplaced' %}';
+					}
+					return false;
+				}
+			);
+        	});
+
+	        $("#btnYesCancel").click(function()
+        	{
+			$("#error_container_cancel").html("");
+			$("#error_container_cancel").hide();
+
+			// send a post request
+			$.post("{% url 'search:cancelquote' %}",
+			       	{"quote_id":{{quote.id}}},
+				function(data)
+				{
+					if (data.result=='KO')
+					{
+						$("#error_container").html(data.error);
+						$("#error_container").show();
+					}
+					else
+					{
+						// redirect to recalc asked
+						location.href='{% url 'search:cancelplaced' %}';
+					}
+					return false;
+				}
+			);
+        	});
+
+		$(".btn_accept").click(function()
+		{
+			result = validateSubmit();
+			if (result)
+			{
+				$("#recalc_confirmation").modal("show");
+				return false;
+			}
+		});
+
+		$(".btn_cancel").click(function()
+		{
+			$("#cancel_confirmation").modal("show");
+			return false;
+		});
+
+	});
+  </script>
+{% endblock content %}
+
