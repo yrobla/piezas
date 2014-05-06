@@ -515,6 +515,12 @@ class QuoteDetailView(DetailView):
     template_name = 'search/quotedetail.html'
     quote_actions = ()
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(QuoteDetailView, self).get_context_data(**kwargs)
+        context['tpc_tax'] = settings.TPC_TAX
+
+        return context
+
     def get_object(self, queryset=None):
         return models.Quote.objects.get(id=self.kwargs['number'])
 

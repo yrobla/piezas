@@ -91,7 +91,9 @@
 						<td>{% if item.search_item_request.picture %}<img class="search_item" src="/media/{{item.search_item_request.picture}}" style="height:50px;" />{% endif %}</td>
 						<td>{% if item.picture %}<img class="search_item" src="/media/{{item.picture}}" style="height:50px;" />{% endif %}</td>
 						<td>{{item.base_total_excl_tax}} €</td>
-						<td><input type="checkbox" id="searchitemrequest_{{item.id}}" name="search_item_request[{{item.id}}]" checked="checked" class="search_item" /></td>
+						<td><input type="checkbox" id="searchitemrequest_{{item.id}}" name="search_item_request[{{item.id}}]" checked="checked" class="search_item_checkbox" />
+						<input type="hidden" id="searchitemrequest_value_{{item.id}}" value="{{item.base_total_excl_tax|stringformat:"f"}}" />
+						</td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -170,20 +172,45 @@
 		<h4>{% trans "Quote summary" %}</h4>
 		<div class="responsive-table">
 			<table class="table span12">
-			<tr><th>{% trans "Owner" %}</th><td>{% if quote.owner.commercial_name %}
+			<tr><th>{% trans "Owner" %}</th><td colspan="2">{% if quote.owner.commercial_name %}
 			{{quote.owner.commercial_name}}{% else %}{{quote.owner}}{% endif %}</td></tr>
 
-			<tr><th>{% trans "Date created" %}</th><td>{{quote.date_created}}</td></tr>
-			<tr><th>{% trans "Date updated" %}</th><td>{{quote.date_updated}}</td></tr>
-			<tr><th>{% trans "Base total (excl tax)" %}</th><td>{{quote.base_total_excl_tax}} €</td></tr>
-			<tr><th>{% trans "Base total (incl tax)" %}</th><td>{{quote.base_total_incl_tax}} €</td></tr>
-			<tr><th>{% trans "Shipping total (excl tax)" %}</th><td>{{quote.shipping_total_excl_tax}} €</td></tr>
-			<tr><th>{% trans "Shipping total (incl tax)" %}</th><td>{{quote.shipping_total_incl_tax}} €</td></tr>
-			<tr><th>{% trans "Grand total (excl tax)" %}</th><td>{{quote.grand_total_excl_tax}} €</td></tr>
-			<tr><th>{% trans "Grand total (incl tax)" %}</th><td>{{quote.grand_total_incl_tax}} €</td></tr>
-			<tr><th>{% trans "Comments" %}</th><td>{{quote.comments}}</td></tr>
-			<tr><th>{% trans "Warranty days" %}</th><td>{{quote.warranty_days}}</td></tr>
-			<tr><th>{% trans "Shipping days" %}</th><td>{{quote.shipping_days}}</td></tr>
+			<tr><th>{% trans "Date created" %}</th><td colspan="2">{{quote.date_created}}</td></tr>
+			<tr><th>{% trans "Date updated" %}</th><td colspan="2">{{quote.date_updated}}</td></tr>
+			<tr><th>{% trans "Base total (excl tax)" %}</th><td>{{quote.base_total_excl_tax}} €
+			<input type="hidden" id="base_total_excl_tax" value="{{quote.base_total_excl_tax|stringformat:"f"}}" />
+			</td>
+			<td><span style="color:green;" id="new_base_total_excl_tax">{{quote.base_total_excl_tax}}</span></td>
+			</tr>
+			<tr><th>{% trans "Base total (incl tax)" %}</th><td>{{quote.base_total_incl_tax}} €
+			<input type="hidden" id="base_total_incl_tax" value="{{quote.base_total_incl_tax|stringformat:"f"}}" />
+			</td>
+			<td><span style="color:green;" id="new_base_total_incl_tax">{{quote.base_total_incl_tax}}</span>
+			</td>
+			</tr>
+			<tr><th>{% trans "Shipping total (excl tax)" %}</th><td>{{quote.shipping_total_excl_tax}} €
+			<input type="hidden" id="shipping_total_excl_tax" value="{{quote.shipping_total_excl_tax|stringformat:"f"}}" />
+			</td>
+			<td><span style="color:green;" id="new_shipping_total_excl_tax">{{quote.shipping_total_excl_tax}}</span></td>
+			</tr>
+			<tr><th>{% trans "Shipping total (incl tax)" %}</th><td>{{quote.shipping_total_incl_tax}} €
+			<input type="hidden" id="shipping_total_incl_tax" value="{{quote.shipping_total_incl_tax|stringformat:"f"}}" />
+			</td>
+			<td><span style="color:green;" id="new_shipping_total_incl_tax">{{quote.shipping_total_incl_tax}}</span></td>
+			</tr>
+			<tr><th>{% trans "Grand total (excl tax)" %}</th><td>{{quote.grand_total_excl_tax}} €
+			<input type="hidden" id="grand_total_excl_tax" value="{{quote.grand_total_excl_tax|stringformat:"f"}}" />
+			</td>
+			<td><span style="color:green;" id="new_grand_total_excl_tax">{{quote.grand_total_excl_tax}}</span></td>
+			</tr>
+			<tr><th>{% trans "Grand total (incl tax)" %}</th><td>{{quote.grand_total_incl_tax}} €
+			<input type="hidden" id="grand_total_incl_tax" value="{{quote.grand_total_incl_tax|stringformat:"f"}}" />
+			</td>
+			<td><span style="color:green;" id="new_grand_total_incl_tax">{{quote.grand_total_incl_tax}}</span></td>
+			</tr>
+			<tr><th>{% trans "Comments" %}</th><td colspan="2">{{quote.comments}}</td></tr>
+			<tr><th>{% trans "Warranty days" %}</th><td colspan="2">{{quote.warranty_days}}</td></tr>
+			<tr><th>{% trans "Shipping days" %}</th><td colspan="2">{{quote.shipping_days}}</td></tr>
 
 			</table>
 		</div>
@@ -256,12 +283,35 @@
 			return true;
 		}
 
+		$(".search_item_checkbox").click(function()
+		{
+			// recalc quote
+			var checked = $(".search_item_checkbox:checked");
+			var base_total = 0;
+			for (var i=0;i<checked.length;i++)
+			{
+				var item = checked[i];
+				set = item.id.split("_");
+				var current_val = $("#searchitemrequest_value_"+set[1]).val();
+				base_total += parseFloat(current_val);
+			}
+			$("#new_base_total_excl_tax").html(base_total.toFixed(2));
+			var base_total_with_tax = base_total + base_total*{{tpc_tax}}/100;
+			$("#new_base_total_incl_tax").html(base_total_with_tax.toFixed(2));
+
+			var grand_total_excl_tax = base_total + parseFloat($("#shipping_total_excl_tax").val());
+			$("#new_grand_total_excl_tax").html(grand_total_excl_tax.toFixed(2));
+
+			var grand_total_incl_tax = base_total_with_tax + parseFloat($("#shipping_total_incl_tax").val());
+			$("#new_grand_total_incl_tax").html(grand_total_incl_tax.toFixed(2));
+		});
+
 		$(".btn_accept").click(function()
 		{
 			result = validateSubmit();
 			if (result)
 			{
-				var checked = $(".search_item:checked");
+				var checked = $(".search_item_checkbox:checked");
 				var ids = [];
 				for (var i=0;i<checked.length;i++)
 				{
@@ -278,7 +328,7 @@
         	{
 			$("#error_container").html("");
 			$("#error_container").hide();
-			var checked = $(".search_item:checked");
+			var checked = $(".search_item_checkbox:checked");
 			var ids = [];
 			for (var i=0;i<checked.length;i++)
 			{
