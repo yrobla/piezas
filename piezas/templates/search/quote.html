@@ -389,10 +389,15 @@ $(document).ready(function()
 		{
 			$(".base_total").each(function(index, value)
 			{
-				var current_val = parseInt($(value).val());
-				if (current_val<=0)
+				// check if parent is visible
+				var container = $(value).parent().parent();
+				if ($(container).is(":visible"))
 				{
-					has_result = false;
+					var current_val = parseInt($(value).val());
+					if (current_val<=0)
+					{
+						has_result = false;
+					}
 				}
 			});
 		}
