@@ -3,6 +3,8 @@
     $.fn.extend({
         img_lightbox_tooltip: function(options) {
             options = $.extend( {}, $.MyFunc.defaults, options );
+	    options.placement = 'left';
+	    options.tooltip_show = 'hover';
 
             this.each(function() {
                 new $.MyFunc(this,options);
