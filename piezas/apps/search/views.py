@@ -720,3 +720,20 @@ class QuoteRecalcView(DetailView):
 
     def get_object(self, queryset=None):
         return models.Quote.objects.get(id=self.kwargs['number'])
+
+    def get_context_data(self, *args, **kwargs):
+        quote = kwargs['object']
+        lines = quote.accepted_lines
+        base_total = 0
+        for quote_line in lines:
+            base_total += quote_line.base_total_excl_tax
+
+        context = super(QuoteRecalcView, self).get_context_data(**kwargs)
+        context['base_total_excl_tax'] = base_total
+        context['base_total_incl_tax'] = float(base_total) + float(base_total*settings.TPC_TAX/100)
+        context['shipping_total_excl_tax'] = quote.shipping_total_excl_tax
+        context['shipping_total_incl_tax'] = quote.shipping_total_incl_tax
+        context['grand_total_excl_tax'] = float(base_total) + float(context['shipping_total_excl_tax'])
+        context['grand_total_incl_tax'] = float(context['base_total_incl_tax']) + float(context['shipping_total_incl_tax'])
+
+        return context

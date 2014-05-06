@@ -173,13 +173,13 @@
 
 			<tr><th>{% trans "Date created" %}</th><td>{{quote.date_created}}</td></tr>
 			<tr><th>{% trans "Date updated" %}</th><td>{{quote.date_updated}}</td></tr>
-			<tr><th>{% trans "Base total (excl tax)" %}</th><td>{{quote.base_total_excl_tax}} €</td></tr>
-			<tr><th>{% trans "Base total (incl tax)" %}</th><td>{{quote.base_total_incl_tax}} €</td></tr>
-			<tr><th>{% trans "Shipping total (excl tax)" %}</th><td>{{quote.shipping_total_excl_tax}} €</td></tr>
+			<tr><th>{% trans "Base total (excl tax)" %}</th><td>{{base_total_excl_tax}} €</td></tr>
+			<tr><th>{% trans "Base total (incl tax)" %}</th><td>{{base_total_incl_tax}} €</td></tr>
+			<tr><th>{% trans "Shipping total (excl tax)" %}</th><td>{{shipping_total_excl_tax}} €</td></tr>
 			<tr><th>{% trans "New shipping total (excl tax)" %}</th><td><input type="text" name="new_shipping_total" id="new_shipping_total" value="0" /></td></tr>
-			<tr><th>{% trans "Shipping total (incl tax)" %}</th><td>{{quote.shipping_total_incl_tax}} €</td></tr>
-			<tr><th>{% trans "Grand total (excl tax)" %}</th><td>{{quote.grand_total_excl_tax}} €</td></tr>
-			<tr><th>{% trans "Grand total (incl tax)" %}</th><td>{{quote.grand_total_incl_tax}} €</td></tr>
+			<tr><th>{% trans "Shipping total (incl tax)" %}</th><td>{{shipping_total_incl_tax}} €</td></tr>
+			<tr><th>{% trans "Grand total (excl tax)" %}</th><td>{{grand_total_excl_tax}} €</td></tr>
+			<tr><th>{% trans "Grand total (incl tax)" %}</th><td>{{grand_total_incl_tax}} €</td></tr>
 			<tr><th>{% trans "Comments" %}</th><td>{{quote.comments}}</td></tr>
 			<tr><th>{% trans "Warranty days" %}</th><td>{{quote.warranty_days}}</td></tr>
 			<tr><th>{% trans "Shipping days" %}</th><td>{{quote.shipping_days}}</td></tr>
