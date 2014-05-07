@@ -125,7 +125,7 @@ class ProductQuestion(models.Model):
 
 
 SEARCH_REQUEST_STATES = (('pending', _('Pending')), ('expired', _('Expired')),
-    ('closed', _('Closed')))
+    ('canceled', _('Canceled')))
 
 class SearchRequest(models.Model):
     brand = models.ForeignKey(Brand, verbose_name=_("Brand"),
