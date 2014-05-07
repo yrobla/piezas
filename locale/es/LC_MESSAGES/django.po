@@ -9066,7 +9066,7 @@ msgstr "Ver presupuesto"
 #: piezas/templates/search/activequotes_list.html:48
 #: piezas/templates/search/recalcquotes_list.html:46
 msgid "You don't have any pending quotes."
-msgstr ""
+msgstr "No tienes ningún presupuesto pendiente"
 
 #: local/piezas/templates/search/confirm.html:21
 #: local/piezas/templates/search/confirm.html:26

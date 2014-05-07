@@ -14,6 +14,7 @@ class SearchApplication(CoreSearchApplication):
     active_quote_view = views.ActiveQuotesView
     recalc_quotes_view = views.RecalcQuotesView
     recalc_quote_view = views.RecalcQuoteView
+    send_recalc_quote_view = views.SendRecalcQuoteView
     search_detail_view = views.SearchDetailView
     quote_detail_view = views.QuoteDetailView
     quote_accept_view = views.QuoteAcceptView
@@ -41,7 +42,7 @@ class SearchApplication(CoreSearchApplication):
             url(r'^acceptquote/(?P<number>[\w-]*)/$', login_required(self.quote_accept_view.as_view()), name='acceptquote'),
             url(r'^confirmrecalcquote/(?P<number>[\w-]*)/$', login_required(self.quote_recalc_view.as_view()), name='confirmrecalcquote'),
             url(r'^recalcquote/$', login_required(self.recalc_quote_view.as_view()), name='recalcquote'),
-            url(r'^sendrecalcquote/$', login_required(self.recalc_quote_view.as_view()), name='sendrecalcquote'),
+            url(r'^sendrecalcquote/$', login_required(self.send_recalc_quote_view.as_view()), name='sendrecalcquote'),
             url(r'^cancelquote/$', login_required(self.recalc_quote_view.as_view()), name='cancelquote'),
             url(r'^recalcplaced/$', login_required(self.recalcplaced_view.as_view()), name='recalcplaced'),
             url(r'^sendrecalcplaced/$', login_required(self.recalcplaced_view.as_view()), name='sendrecalcplaced'),

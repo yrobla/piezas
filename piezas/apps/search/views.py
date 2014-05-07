@@ -590,6 +590,28 @@ class RecalcQuoteView(View):
 
         return HttpResponse(json.dumps(response_data), content_type="application/json")
 
+class SendRecalcQuoteView(View):
+    def post(self, request, *args, **kwargs):
+        quote_id = request.POST.get('quote_id', '')
+        shipping = request.POST.get('shipping', '0')
+
+        # updated shipping cost in the quote, set as sent again
+        response_data = {}
+        quote = models.Quote.objects.get(pk=quote_id)
+        if quote:
+            quote.state = 'sent'
+            quote.shipping_total_excl_tax = float(shipping)
+            quote.shipping_total_incl_tax = quote.shipping_total_excl_tax + float(quote.shipping_total_excl_tax*settings.TPC_TAX/100)
+            quote.grand_total_excl_tax = float(quote.base_total_excl_tax) + float(quote.shipping_total_excl_tax)
+            quote.grand_total_incl_tax = float(quote.base_total_incl_tax) + float(quote.shipping_total_incl_tax)
+            quote.save()
+            response_data['result'] = 'OK'
+        else:
+            response_data['result'] = 'KO'
+            response_data['error'] = _('There has been an error processing your request. Please try again.')
+
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+
 class RecalcPlacedView(TemplateView):
     template_name = 'search/recalcplaced.html'
 
