@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% load i18n %}
+{% load currency_filters %}
+{% load staticfiles %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">{% trans 'Home' %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans 'Expired searches' %}</li>
+    </ul>
+{% endblock %}
+{% block content %}
+
+    {% if searches %}
+        <h3>{{ form.description }}</h3>
+        <table class="table table-striped table-bordered">
+            <tr>
+		<th>{% trans "Search id" %}</th>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Brand" %}</th>
+                <th>{% trans "Model" %}</th>
+                <th>{% trans "Version" %}</th>
+                <th>{% trans "Bodywork" %}</th>
+                <th>{% trans "Engine" %}</th>
+                <th>{% trans "Frameref" %}</th>
+                <th>{% trans "Date created" %}</th>
+		<th>{% trans "Total items" %}</th>
+		<th>{% trans "Total quotes" %}</th>
+            </tr>
+            {% for search in searches %}
+                <tr>
+                    <td><a href="{% url 'search:detail' number=search.id %}">{{search.id}}</a></td>
+		    <td>{{ search.name }}</td>
+                    <td>{{ search.brand.name }}</td>
+                    <td>{{ search.model.name }}</td>
+                    <td>{{ search.version.name }}</td>
+                    <td>{{ search.bodywork.name }}</td>
+                    <td>{{ search.engine.name }}</td>
+                    <td>{{ search.frameref }}</td>
+                    <td>{{ search.date_created }}</td>
+		    <td>{{ search.num_items }}</td>
+		    <td>{{ search.num_quotes }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>{% trans "You don't have any expired searches." %}</p>
+    {% endif %}
+
+    {% include "partials/pagination.html" %}
+
+<div style="clear:both"><br /></div>
+
+{% endblock %}
+
+{% block extrastyles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.css">
+{% endblock %}
+
+{% block cdn_scripts %}
+    {{ block.super }}
+    <script src="//code.jquery.com/ui/1.10.3/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+
+{% block onbodyload %}
+    {{ block.super }}
+    $('#id_date_to, #id_date_from').datepicker({'dateFormat': 'yy-mm-dd'});
+{% endblock %}

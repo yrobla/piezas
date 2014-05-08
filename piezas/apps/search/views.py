@@ -498,6 +498,53 @@ class ActiveQuotesView(ListView):
         queryset = models.Quote.objects.filter(search_request__owner=self.request.user, state='sent')
         return queryset
 
+class ActiveSearchesView(ListView):
+    """
+    View active quotes for that customer
+    """
+    context_object_name = "searches"
+    template_name = 'search/activesearches_list.html'
+    paginate_by = 20
+    model = models.Quote
+    page_title = _('Active searches')
+    active_tab = 'searchrequests'
+
+    def get_queryset(self):
+        # only show quotes for searches that belong to user
+        queryset = models.SearchRequest.objects.filter(owner=self.request.user, state='pending')
+        return queryset
+
+class ExpiredSearchesView(ListView):
+    """
+    View active quotes for that customer
+    """
+    context_object_name = "searches"
+    template_name = 'search/expiredsearches_list.html'
+    paginate_by = 20
+    model = models.Quote
+    page_title = _('Expired searches')
+    active_tab = 'searchrequests'
+
+    def get_queryset(self):
+        # only show quotes for searches that belong to user
+        queryset = models.SearchRequest.objects.filter(owner=self.request.user, state='expired')
+        return queryset
+
+class CanceledSearchesView(ListView):
+    """
+    View active quotes for that customer
+    """
+    context_object_name = "searches"
+    template_name = 'search/canceledsearches_list.html'
+    paginate_by = 20
+    model = models.Quote
+    page_title = _('Canceled searches')
+    active_tab = 'searchrequests'
+
+    def get_queryset(self):
+        # only show quotes for searches that belong to user
+        queryset = models.SearchRequest.objects.filter(owner=self.request.user, state='canceled')
+        return queryset
 
 class SearchDetailView(DetailView):
     model = models.SearchRequest
@@ -614,6 +661,9 @@ class SendRecalcQuoteView(View):
 
 class RecalcPlacedView(TemplateView):
     template_name = 'search/recalcplaced.html'
+
+class CancelPlacedView(TemplateView):
+    template_name = 'search/cancelplaced.html'
 
 class PlaceOrderView(View):
     def post(self, request, *args, **kwargs):
@@ -759,3 +809,20 @@ class QuoteRecalcView(DetailView):
         context['grand_total_incl_tax'] = float(context['base_total_incl_tax']) + float(context['shipping_total_incl_tax'])
 
         return context
+
+class CancelSearchView(View):
+    def post(self, request, *args, **kwargs):
+        search_id = request.POST.get('search_id', '')
+
+        # update search state
+        response_data = {}
+        try:
+            search = models.SearchRequest.objects.get(pk=search_id)
+            search.state = 'canceled'
+            search.save()
+            response_data['result'] = 'OK'
+        except:
+            response_data['result'] = 'KO'
+            response_data['error'] = _('There has been an error processing your request. Please try again.')
+
+        return HttpResponse(json.dumps(response_data), content_type="application/json")

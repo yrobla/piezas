@@ -41,6 +41,9 @@
 	{% if user.type == "customer" %}
 	<div class="span6">
 		<h4><a href="{% url 'search:home' %}">{% trans "Search pieces" %}</a></h4>
+		<h4><a href="{% url 'search:activesearches' %}">{% trans "Active searches" %}</a></h4>
+		<h4><a href="{% url 'search:expiredsearches' %}">{% trans "Expired searches" %}</a></h4>
+		<h4><a href="{% url 'search:canceledsearches' %}">{% trans "Canceled searches" %}</a></h4>
 	</div>
 	<div class="span6">
 		<h4><a href="{% url 'search:activequotes' %}">{% trans "Active quotes" %}</a></h4>

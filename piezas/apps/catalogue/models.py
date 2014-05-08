@@ -174,6 +174,15 @@ class SearchRequest(models.Model):
     def num_items(self):
         return self.lines.count()        
 
+    @property
+    def quotes(self):
+        items = Quote.objects.filter(search_request=self)
+        return items
+
+    @property
+    def num_quotes(self):
+        return self.quotes.count()
+
 
 class SearchItemRequest(models.Model):
     category = models.ForeignKey(Category, verbose_name=_('Category'),
