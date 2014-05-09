@@ -151,7 +151,7 @@ INSTALLED_APPS = [
     'django_iban',
     'piezas.apps.customuser',
     'piezas.apps.dashboard.podcatalogue', 'piezas.apps.dashboard.podorders',
-    'piezas.apps.dashboard.podusers', 'piezas.apps.dashboard', 'piezas'
+    'piezas.apps.dashboard.podusers', 'piezas.apps.dashboard'
 ]
 INSTALLED_APPS = INSTALLED_APPS + get_core_apps([
     'piezas.apps.customer', 
