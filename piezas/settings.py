@@ -354,3 +354,5 @@ AJAXIMAGE_AUTH_TEST = (lambda u: True)
 PHONENUMBER_DEFAULT_FORMAT = 'NATIONAL'
 
 SEARCH_INTERVAL_MIN = 90
+
+ORDER_STATUSES = ['pending_payment', 'paid', 'sent', 'canceled']

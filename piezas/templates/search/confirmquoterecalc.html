@@ -46,6 +46,24 @@
 		</div>
 		<div style="clear:both"><br /></div>
 
+		<h4>{% trans "Customer details" %}</h4>
+
+			<div class="control-group span12">
+				<label class="control-label"><strong>{% trans "Email" %}:</strong> {{quote.search_request.owner.email}}</label>
+			</div>
+			<div class="control-group span12">
+				<label class="control-label"><strong>{% trans "Name" %}:</strong> {{quote.search_request.owner.commercial_name}}</label>
+			</div>
+			<div class="control-group span12">
+				<label class="control-label"><strong>{% trans "Contact person" %}:</strong> {{quote.search_request.owner.contact_person}}</label>
+			</div>
+			<div class="control-group span12">
+				<label class="control-label"><strong>{% trans "Address" %}:</strong> {{quote.search_request.owner.get_default_shipping_address}}</label>
+			</div>
+
+			<div style="clear:both"></div>
+
+
 		<h4>{% trans "Pieces detail" %}</h4>
 		<div class="responsible-table">
 			<table class="table" id="id_searchitemrequest_table">

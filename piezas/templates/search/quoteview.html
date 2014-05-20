@@ -18,12 +18,12 @@
             <a href="/">{% trans 'Home' %}</a>
             <span class="divider">/</span>
         </li>
-        <li class="active">{% trans 'Quote accept' %}</li>
+        <li class="active">{% trans 'Quote details' %}</li>
     </ul>
 {% endblock %}
 
 {% block headertext %}
-    {% trans "Quote accept" %}
+    {% trans "Quote details" %}
 {% endblock %}
 
 {% block content %}
@@ -60,7 +60,7 @@
 					<th>{% trans "Base total (excl tax)" %}</th>
 				</tr></thead>
 				<tbody>
-					{% for item in lines %}
+					{% for item in quote.lines %}
 					<tr>
 						<td>{{item.search_item_request.category}}</td>
 						<td class="span4">{{item.search_item_request.piece}}<br />
@@ -168,69 +168,62 @@
 		<h4>{% trans "Quote summary" %}</h4>
 		<div class="responsive-table">
 			<table class="table span12">
-			<tr><th>{% trans "Owner" %}</th><td>{% if quote.owner.commercial_name %}
+			<tr><th>{% trans "Owner" %}</th><td colspan="2">{% if quote.owner.commercial_name %}
 			{{quote.owner.commercial_name}}{% else %}{{quote.owner}}{% endif %}</td></tr>
 
-			<tr><th>{% trans "Date created" %}</th><td>{{quote.date_created}}</td></tr>
-			<tr><th>{% trans "Date updated" %}</th><td>{{quote.date_updated}}</td></tr>
-			<tr><th>{% trans "Base total (excl tax)" %}</th><td>{{base_total_excl_tax}} €</td></tr>
-			<tr><th>{% trans "Base total (incl tax)" %}</th><td>{{base_total_incl_tax}} €</td></tr>
-			<tr><th>{% trans "Shipping total (excl tax)" %}</th><td>{{shipping_total_excl_tax}} €</td></tr>
-			<tr><th>{% trans "Shipping total (incl tax)" %}</th><td>{{shipping_total_incl_tax}} €</td></tr>
-			<tr><th>{% trans "Grand total (excl tax)" %}</th><td>{{grand_total_excl_tax}} €</td></tr>
-			<tr><th>{% trans "Grand total (incl tax)" %}</th><td>{{grand_total_incl_tax}} €</td></tr>
-			<tr><th>{% trans "Comments" %}</th><td>{{quote.comments}}</td></tr>
-			<tr><th>{% trans "Warranty days" %}</th><td>{{quote.warranty_days}}</td></tr>
-			<tr><th>{% trans "Shipping days" %}</th><td>{{quote.shipping_days}}</td></tr>
+			<tr><th>{% trans "Date created" %}</th><td colspan="2">{{quote.date_created}}</td></tr>
+			<tr><th>{% trans "Date updated" %}</th><td colspan="2">{{quote.date_updated}}</td></tr>
+			<tr><th>{% trans "Base total (excl tax)" %}</th><td>{{quote.base_total_excl_tax}} €
+			<input type="hidden" id="base_total_excl_tax" value="{{quote.base_total_excl_tax|stringformat:"f"}}" />
+			</td>
+			<td><span style="color:green;" id="new_base_total_excl_tax">{{quote.base_total_excl_tax}}</span></td>
+			</tr>
+			<tr><th>{% trans "Base total (incl tax)" %}</th><td>{{quote.base_total_incl_tax}} €
+			<input type="hidden" id="base_total_incl_tax" value="{{quote.base_total_incl_tax|stringformat:"f"}}" />
+			</td>
+			<td><span style="color:green;" id="new_base_total_incl_tax">{{quote.base_total_incl_tax}}</span>
+			</td>
+			</tr>
+			<tr><th>{% trans "Shipping total (excl tax)" %}</th><td>{{quote.shipping_total_excl_tax}} €
+			<input type="hidden" id="shipping_total_excl_tax" value="{{quote.shipping_total_excl_tax|stringformat:"f"}}" />
+			</td>
+			<td><span style="color:green;" id="new_shipping_total_excl_tax">{{quote.shipping_total_excl_tax}}</span></td>
+			</tr>
+			<tr><th>{% trans "Shipping total (incl tax)" %}</th><td>{{quote.shipping_total_incl_tax}} €
+			<input type="hidden" id="shipping_total_incl_tax" value="{{quote.shipping_total_incl_tax|stringformat:"f"}}" />
+			</td>
+			<td><span style="color:green;" id="new_shipping_total_incl_tax">{{quote.shipping_total_incl_tax}}</span></td>
+			</tr>
+			<tr><th>{% trans "Grand total (excl tax)" %}</th><td>{{quote.grand_total_excl_tax}} €
+			<input type="hidden" id="grand_total_excl_tax" value="{{quote.grand_total_excl_tax|stringformat:"f"}}" />
+			</td>
+			<td><span style="color:green;" id="new_grand_total_excl_tax">{{quote.grand_total_excl_tax}}</span></td>
+			</tr>
+			<tr><th>{% trans "Grand total (incl tax)" %}</th><td>{{quote.grand_total_incl_tax}} €
+			<input type="hidden" id="grand_total_incl_tax" value="{{quote.grand_total_incl_tax|stringformat:"f"}}" />
+			</td>
+			<td><span style="color:green;" id="new_grand_total_incl_tax">{{quote.grand_total_incl_tax}}</span></td>
+			</tr>
+			<tr><th>{% trans "Comments" %}</th><td colspan="2">{{quote.comments}}</td></tr>
+			<tr><th>{% trans "Warranty days" %}</th><td colspan="2">{{quote.warranty_days}}</td></tr>
+			<tr><th>{% trans "Shipping days" %}</th><td colspan="2">{{quote.shipping_days}}</td></tr>
 
 			</table>
 		</div>
 		<div style="clear:both"><br /></div>
 
-		<h4>{% trans "Choose payment method" %}</h4>
-		<div class="span12">
-			<div class="span6"><br />
-				<input type="radio" name="payment_method" value="payondelivery" checked="checked" />&nbsp;
-				<strong>{% trans "Pay on delivery" %}</strong><br />
-				<span>{% trans "You will pay after receiving the package" %}</span>
-			</div>
-
-			<div class="span6"><br />
-				<input type="radio" name="payment_method" value="transfer" />&nbsp;
-				<strong>{% trans "Bank account transfer" %}</strong><br />
-				<div>
-					{% trans "Send the amount as a transfer to" %}:<br />
-					{{quote.owner.commercial_name}}<br />
-					{{quote.owner.cif}}<br />
-					{{quote.owner.iban}}
+	<div class="span12 form-actions">
+					<a href="javascript:history.back();" class="span4 btn btn-large"><< {% trans "Back" %}</a>
 				</div>
-			</div>
-		</div>
-		<div style="clear:both"><br /></div>
-
-				<div class="span12 form-actions">
-					<button type="submit" class="span4 btn btn-large btn-primary btn_accept">{% trans "Place order" %}</button>
-				</div>
-			</form>
         </div>
     </div>
 
-<div id="order_confirmation" class="modal hide" data-id="">
-    <div class="modal-header">
-        <a href="#" data-dismiss="modal" aria-hidden="true" class="close" id="btnClose">×</a>
-         <h3>{% trans "Confirm order placement" %}</h3>
-    </div>
-    <div class="modal-body">
-	<div id="error_container" class="alert alert-error" style="display:none;"></div>
-        <p>{% trans "Are you sure you want to confirm the order?" %}</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#" id="btnYesSubmit" class="btn danger">{% trans "Yes" %}</a>
-      <a href="#" id="btnNoSubmit" data-dismiss="modal" aria-hidden="true" class="btn secondary">{% trans "No" %}</a>
-    </div>
-</div>
-
  <script>
+    $( ".datepicker" ).datepicker({
+      changeMonth: true,
+      format: 'dd/mm/yyyy',
+      weekStart:1
+    });
 
 	$(document).ready(function()
 	{
@@ -246,28 +239,6 @@
 
 		});
 
-		$(".btn_accept").click(function()
-		{
-			$("#order_confirmation").modal("show");
-		});
-
-	        $("#btnYesSubmit").click(function()
-        	{
-			var payment_method = $('input[name=payment_method]:checked').val();
-			// send a post request
-			$.post("{% url 'search:placeorder' %}",
-			       	{"quote_id":{{quote.id}}, "ids":'{{line_ids}}', "payment_method": payment_method},
-				function(data)
-				{
-					if (data.result=="OK")
-					{
-						// redirect to order placed
-						location.href='{% url 'search:orderplaced' %}';
-						return false;
-					}
-				}
-			);
-        	});
 	});
   </script>
 {% endblock content %}

@@ -3,21 +3,25 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
+from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import logout as auth_logout, login as auth_login
 from django.shortcuts import get_object_or_404
 from django.views.generic import (TemplateView, ListView, DetailView,
                                   CreateView, UpdateView, DeleteView,
-                                  FormView, RedirectView)
+                                  FormView, RedirectView, View)
 from django.http import HttpResponseRedirect, Http404
 
 from oscar.apps.customer.views import ProfileView as CoreProfileView
 from oscar.core.compat import get_user_model
 from oscar.views.generic import PostActionMixin
 from piezas.apps.order.models import Order
+from piezas.apps.catalogue.models import Quote
 import forms
+import json
 
 from piezas.apps.address.forms import UserAddressForm
+from piezas import settings as piezas_settings
 
 PageTitleMixin, RegisterUserMixin = get_classes(
     'customer.mixins', ['PageTitleMixin', 'RegisterUserMixin'])
@@ -341,4 +345,100 @@ class OrderDetailView(PageTitleMixin, PostActionMixin, DetailView):
                 _("It is not possible to re-order order %(number)s "
                   "as none of its lines are available to purchase") %
                 {'number': order.number})
+
+class OrderProviderHistoryView(PageTitleMixin, ListView):
+    """
+    Provider order history
+    """
+    context_object_name = "orders"
+    template_name = 'customer/order/order_provider_list.html'
+    paginate_by = 20
+    model = Order
+    form_class = OrderSearchForm
+    page_title = _('Order History')
+    active_tab = 'orders'
+
+    def get(self, request, *args, **kwargs):
+        if 'date_from' in request.GET:
+            self.form = self.form_class(self.request.GET)
+            if not self.form.is_valid():
+                self.object_list = self.get_queryset()
+                ctx = self.get_context_data(object_list=self.object_list)
+                return self.render_to_response(ctx)
+            data = self.form.cleaned_data
+
+            # If the user has just entered an order number, try and look it up
+            # and redirect immediately to the order detail page.
+            if data['order_number'] and not (data['date_to'] or
+                                             data['date_from']):
+                try:
+                    order = Order.objects.get(
+                        number=data['order_number'], user=self.request.user)
+                except Order.DoesNotExist:
+                    pass
+                else:
+                    return HttpResponseRedirect(
+                        reverse('customer:order',
+                                kwargs={'order_number': order.number}))
+        else:
+            self.form = self.form_class()
+        return super(OrderProviderHistoryView, self).get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        quote_list = list(Quote.objects.filter(owner=self.request.user).all().values_list('id', flat=True))
+        qs = self.model._default_manager.filter(number__in=quote_list)
+        if self.form.is_bound and self.form.is_valid():
+            qs = qs.filter(**self.form.get_filters())
+        return qs
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(OrderProviderHistoryView, self).get_context_data(*args, **kwargs)
+        ctx['form'] = self.form
+        return ctx
+
+class OrderProviderDetailView(PageTitleMixin, PostActionMixin, DetailView):
+    model = Order
+    active_tab = 'orders'
+
+    def get_template_names(self):
+        return ["customer/order/order_provider_detail.html"]
+
+    def get_page_title(self):
+        """
+        Order number as page title
+        """
+        return u'%s #%s' % (_('Order'), self.object.number)
+
+    def get_object(self, queryset=None):
+        quote_list = list(Quote.objects.filter(owner=self.request.user).all().values_list('id', flat=True))
+        return get_object_or_404(self.model, 
+                                 id=self.kwargs['order_number'], number__in=quote_list)
+
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(OrderProviderDetailView, self).get_context_data(*args, **kwargs)
+        ctx['order_statuses'] = piezas_settings.ORDER_STATUSES
+        return ctx
+
+
+class UpdateOrderStatusView(View):
+    def post(self, request, *args, **kwargs):
+        order_id = request.POST.get('order_id', '')
+        status = request.POST.get('status', '')
+        response_data = {}
+
+        order = Order.objects.get(pk=order_id)
+        if order and status:
+            order.status = status
+            order.save()
+
+            response_data['result'] = 'OK'
+        else:
+            response_data['result'] = 'KO'
+            response_data['error'] = _('There has been an error processing your request. Please try again.')
+
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+class OrderStatusChangedView(TemplateView):
+    template_name = 'customer/order/statuschanged.html'
 

@@ -571,6 +571,21 @@ class QuoteDetailView(DetailView):
     def get_object(self, queryset=None):
         return models.Quote.objects.get(id=self.kwargs['number'])
 
+class QuoteView(DetailView):
+    model = models.Quote
+    context_object_name = 'quote'
+    template_name = 'search/quoteview.html'
+    quote_actions = ()
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(QuoteView, self).get_context_data(**kwargs)
+        context['tpc_tax'] = settings.TPC_TAX
+
+        return context
+
+    def get_object(self, queryset=None):
+        return models.Quote.objects.get(id=self.kwargs['number'])
+
 class QuoteAcceptView(DetailView):
     model = models.Quote
     context_object_name = 'quote'

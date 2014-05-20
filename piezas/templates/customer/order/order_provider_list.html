@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% load i18n %}
+{% load currency_filters %}
+{% load staticfiles %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">{% trans 'Home' %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans 'Received orders' %}</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    {% if orders or form.is_bound %}
+        <div class="well">
+            <h3>{% trans "Filter" %}</h3>
+            <form action="." method="get">
+                {% include "partials/form_fields.html" with form=form %}
+                <button type="submit" class="btn btn-primary">{% trans 'Filter results' %}</button>
+                <a href="{% url 'customer:order-list' %}" class="btn">{% trans 'Reset' %}</a>
+            </form>
+        </div>
+    {% endif %}
+
+    {% if orders %}
+        <h3>{{ form.description }}</h3>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>{% trans "Order number" %}</th>
+                <th>{% trans "Customer" %}</th>
+                <th>{% trans "Quote number" %}</th>
+                <th>{% trans "Num items" %}</th>
+                <th>{% trans "Total inc tax" %}</th>
+                <th>{% trans "Status" %}</th>
+                <th>{% trans "Date submitted" %}</th>
+            </tr>
+            {% for order in orders %}
+                <tr>
+                    <td><a href="{% url 'customer:order_provider' order_number=order.id %}">{{ order.id }}</a></td>
+		    <td>{{ order.user }}</td>
+		    <td><a href="{% url 'search:quoteview' number=order.number %}">{{order.number}}</a></td>
+                    <td>{{ order.num_items }}</td>
+                    <td>{{ order.total_incl_tax|currency:order.currency }}</td>
+		    <td>{% trans order.status %}</td>
+                    <td>{{ order.date_placed }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>{% trans "You haven't received any orders." %}</p>
+    {% endif %}
+
+    {% include "partials/pagination.html" %}
+<div style="clear:both;"> <br /></div>
+{% endblock content %}
+
+{% block extrastyles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.css">
+{% endblock %}
+
+{% block cdn_scripts %}
+    {{ block.super }}
+    <script src="//code.jquery.com/ui/1.10.3/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+
+{% block onbodyload %}
+    {{ block.super }}
+    $('#id_date_to, #id_date_from').datepicker({'dateFormat': 'yy-mm-dd'});
+{% endblock %}

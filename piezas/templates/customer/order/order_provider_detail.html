@@ -1,0 +1,169 @@
+{% extends "layout.html" %}
+{% load currency_filters %}
+{% load display_tags %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Homepage' %} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">{% trans 'Home' %}</a>
+            <span class="divider">/</span>
+        </li>
+    <li>
+        <a href="{% url 'customer:order-list' %}">{% trans 'Order history' %}</a>
+        <span class="divider">/</span>
+    </li>
+
+        <li class="active">{% trans 'Order detail' %}</li>
+    </ul>
+{% endblock %}
+
+{% block headertext %}
+    {% trans "Order detail" %}
+{% endblock %}
+
+
+{% block content %}
+    <h3>{% trans 'Order status' %}</h3>
+
+	<form>
+	<div class="span12"><span class="span6"><select name="order_status" id="order_status">
+	{% for status in order_statuses %}
+	<option value="{{status}}" {%if status == order.status %}selected="selected"{% endif %}>{% trans status %}</option>
+	{% endfor %}
+	</select></span>
+
+	<span class="span4">
+        	<button type="button" class="btn btn-primary btn-large span4" id="submit_button">
+        	{% trans "Update order status" %}
+        	</button></span>
+	</div>
+	<div style="clear:both"><br /></div>
+	</form>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>{% trans 'Product' %}</th>
+                <th>{% trans 'Qty' %}</th>
+                <th>{% trans 'Line price excl tax' %}</th>
+                <th>{% trans 'Line price incl tax' %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in order.lines.all %}
+                {% with product=line.product %}
+                    <tr>
+                        <td>
+                            {% if product %}
+                                <p>
+                                    {{ line.description }}
+                                </p>
+                            {% else %}
+                                <p>
+                                    {{ line.description }}
+                                </p>
+                            {% endif %}
+                        </td>
+                        <td>{{ line.quantity }}</td>
+                        <td>{{ line.line_price_before_discounts_excl_tax|currency:order.currency }}</td>
+                        <td>{{ line.line_price_before_discounts_incl_tax|currency:order.currency }}</td>
+                    </tr>
+                {% endwith %}
+            {% endfor %}
+
+            {% block shipping_totals %}
+                {% if order.has_shipping_discounts %}
+                    <tr>
+                        <td colspan="3">{% trans "Shipping total (excl. discounts)" %}</td>
+                        <td colspan="2">{{ order.shipping_before_discounts_incl_tax|currency:order.currency }}</td>
+                    </tr>
+                    {% for discount in order.shipping_discounts %}
+                    <tr>
+                        <td colspan="3">
+                            <span class="label label-success">{% trans "Discount" %}</span>
+                            {{ discount.offer_name }}
+                        </td>
+                        <td colspan="2">- {{ discount.amount|currency:order.currency }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="3">{% trans "Shipping total (inc. discounts)" %}</th>
+                        <td colspan="2">{{ order.shipping_incl_tax|currency:order.currency }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <th colspan="3">{% trans "Shipping total" %}</th>
+                        <td colspan="2">{{ order.shipping_incl_tax|currency:order.currency }}</td>
+                    </tr>
+                {% endif %}
+            {% endblock %}
+
+            {% block order_total %}
+                <tr>
+                    <th colspan="3">{% trans 'Order total' %}</th>
+                    <td colspan="2">{{ order.total_incl_tax|currency:order.currency }}</td>
+                </tr>
+            {% endblock order_total %}
+        </tbody>
+    </table>
+
+    <hr>
+
+
+	<h3>{% trans "Customer details" %}</h3>
+	<p><strong>{% trans "Email" %}:</strong>&nbsp;{{order.user.email}}</p>
+	<p><strong>{% trans "Commercial name" %}:</strong>&nbsp;{{order.user.commercial_name}}</p>
+	<p><strong>{% trans "Social name" %}:</strong>&nbsp;{{order.user.social_name}}</p>
+	<p><strong>{% trans "User name" %}:</strong>&nbsp;{{order.user.first_name}} {{order.user.last_name}}</p>
+	<p><strong>{% trans "CIF" %}:</strong>&nbsp;{{order.user.cif}}</p>
+	<p><strong>{% trans "Contact person" %}:</strong>&nbsp;{{order.user.contact_person}}</p>
+	<p><strong>{% trans "Phone number" %}:</strong>&nbsp;{{order.user.phone_number}}</p>
+	<div style="clear:both"><br /><br /></div>
+
+    <h3>{% trans 'Shipping Address' %}</h3>
+
+                <p>{% for field in order.shipping_address.active_address_fields %}
+                        {{ field }}<br/>
+                    {% endfor %}</p>
+	<div style="clear:both"><br /><br /></div>
+
+
+    <h3>{% trans 'Payment method' %}</h3>
+
+	{% if order.payment_method == 'transfer' %}
+		<p>{% trans "Bank account transfer" %}</p>
+		<p>{% trans "Bank number account (IBAN format)" %}: {{order.bank_account}}</p>
+	{% else %}
+		<p>{% trans "Pay on delivery" %}</p>
+	{% endif %}
+<div style="clear:both;"> <br /> </div>
+
+<script type="text/javascript">
+$(document).ready(function()
+{
+	$("#submit_button").click(function()
+        {
+        	var order_status = $('#order_status :selected').val();
+console.log(order_status);
+                // send a post request
+                $.post("{% url 'customer:updateorderstatus' %}",
+                	{"order_id":{{order.id}}, "status": order_status},
+                        function(data)
+                        {
+                        	if (data.result=="OK")
+                                {
+	                                // redirect to status changed
+                                        location.href='{% url 'customer:orderstatuschanged' %}';
+                                        return false;
+                                }
+                        }
+                );
+	});
+});
+</script>
+{% endblock content %}

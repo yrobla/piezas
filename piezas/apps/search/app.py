@@ -21,6 +21,7 @@ class SearchApplication(CoreSearchApplication):
     cancel_view = views.CancelSearchView
     search_detail_view = views.SearchDetailView
     quote_detail_view = views.QuoteDetailView
+    quote_view = views.QuoteView
     quote_accept_view = views.QuoteAcceptView
     quote_recalc_view = views.QuoteRecalcView
     recalcplaced_view = views.RecalcPlacedView
@@ -59,6 +60,7 @@ class SearchApplication(CoreSearchApplication):
             url(r'^pendingrequests/$', login_required(self.pending_search_requests_view.as_view()), name='request-list'),
             url(r'^detail/(?P<number>[\w-]*)/$', login_required(self.search_detail_view.as_view()), name='detail'),
             url(r'^quotedetail/(?P<number>[\w-]*)/$', login_required(self.quote_detail_view.as_view()), name='quotedetail'),
+            url(r'^quoteview/(?P<number>[\w-]*)/$', login_required(self.quote_view.as_view()), name='quoteview'),
             url(r'^createquote/(?P<pk>[\w-]*)/$',
                 login_required(self.quote_view.as_view()),
                 name='quote'),
