@@ -8,6 +8,7 @@ from oscar.core.loading import get_model
 from oscar.apps.order.models import Line, BillingAddress, ShippingAddress
 from piezas.apps.order.models import Order
 from oscar.apps.partner.models import Partner
+from oscar.core.loading import get_class
 from datetime import datetime
 import math
 from dateutil import tz
@@ -16,6 +17,9 @@ import forms
 from piezas import settings
 from piezas.apps.catalogue import models
 from django.contrib.sites.models import Site
+
+CommunicationEventType = get_model('customer', 'CommunicationEventType')
+Dispatcher = get_class('customer.utils', 'Dispatcher')
 
 class HomeView(FormView):
     form_class = forms.SearchCreationForm
@@ -370,13 +374,13 @@ class PendingSearchRequestsView(ListView):
         ctx = super(PendingSearchRequestsView, self).get_context_data(*args, **kwargs)
         return ctx
 
-class QuoteView(UpdateView):
+class CreateQuoteView(UpdateView):
     form_class = forms.QuoteCreationForm
     template_name = 'search/quote.html'
     model = models.SearchRequest
 
     def get_context_data(self, *args, **kwargs):
-        context = super(QuoteView, self).get_context_data(**kwargs)
+        context = super(CreateQuoteView, self).get_context_data(**kwargs)
         if self.request.POST:
             context['formset'] = forms.InlineQuoteCreationFormSet(self.request.POST, instance=self.object)
         else:
@@ -421,7 +425,7 @@ class QuoteView(UpdateView):
         return context
 
     def form_valid(self, form):
-        response = super(QuoteView, self).form_valid(form)
+        response = super(CreateQuoteView, self).form_valid(form)
 
         request_id = form.initial['id']
         warranty_days = form.cleaned_data['warranty_days']
@@ -473,8 +477,20 @@ class QuoteView(UpdateView):
                 quoteitem.save()
 
         except Exception as e:
-            print str(e)
             return False
+
+        # send email to original customer
+        commtype_code = 'QUOTE_RECEIVED'
+        context = {'quote':quote}
+        try:
+            event_type = CommunicationEventType.objects.get(code=commtype_code)
+        except CommunicationEventType.DoesNotExist:
+            messages = CommunicationEventType.objects.get_and_render(commtype_code, ctx)
+        else:
+            messages = event_type.get_messages(ctx)
+
+        if messages and messages['body']:
+            Dispatcher().dispatch_user_messages(user, messages)
 
         return response
 

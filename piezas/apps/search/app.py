@@ -10,6 +10,7 @@ class SearchApplication(CoreSearchApplication):
     placed_view = views.PlacedView
     quoteplaced_view = views.QuotePlacedView
     quote_view = views.QuoteView
+    create_quote_view = views.CreateQuoteView
     pending_search_requests_view = views.PendingSearchRequestsView
     active_searches_view = views.ActiveSearchesView
     expired_searches_view = views.ExpiredSearchesView
@@ -21,7 +22,6 @@ class SearchApplication(CoreSearchApplication):
     cancel_view = views.CancelSearchView
     search_detail_view = views.SearchDetailView
     quote_detail_view = views.QuoteDetailView
-    quote_view = views.QuoteView
     quote_accept_view = views.QuoteAcceptView
     quote_recalc_view = views.QuoteRecalcView
     recalcplaced_view = views.RecalcPlacedView
@@ -62,7 +62,7 @@ class SearchApplication(CoreSearchApplication):
             url(r'^quotedetail/(?P<number>[\w-]*)/$', login_required(self.quote_detail_view.as_view()), name='quotedetail'),
             url(r'^quoteview/(?P<number>[\w-]*)/$', login_required(self.quote_view.as_view()), name='quoteview'),
             url(r'^createquote/(?P<pk>[\w-]*)/$',
-                login_required(self.quote_view.as_view()),
+                login_required(self.create_quote_view.as_view()),
                 name='quote'),
             url(r'^placeorder/$', login_required(self.place_order_view.as_view()), name='placeorder'),
             url(r'^orderplaced/$', login_required(self.orderplaced_view.as_view()), name='orderplaced'),
