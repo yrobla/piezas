@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans with number=order.number %}New quote placed for your search request #{{quote.search_request.id}} ({{quote.search_request.name}}){% endblocktrans %}

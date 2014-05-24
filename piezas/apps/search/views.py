@@ -480,8 +480,8 @@ class CreateQuoteView(UpdateView):
             return False
 
         # send email to original customer
-        commtype_code = 'QUOTE_RECEIVED'
-        context = {'quote':quote}
+        commtype_code = 'QUOTE_PLACED'
+        ctx = {'quote':quote}
         try:
             event_type = CommunicationEventType.objects.get(code=commtype_code)
         except CommunicationEventType.DoesNotExist:
@@ -490,7 +490,10 @@ class CreateQuoteView(UpdateView):
             messages = event_type.get_messages(ctx)
 
         if messages and messages['body']:
-            Dispatcher().dispatch_user_messages(user, messages)
+            try:
+                Dispatcher().dispatch_user_messages(search_request.owner, messages)
+            except:
+                pass
 
         return response
 

@@ -1,0 +1,11 @@
+{% extends "customer/emails/base.html" %}
+{% load i18n %}
+
+{% block body %}<p xmlns="http://www.w3.org/1999/html">{% trans 'Hello,' %}</p>
+
+<p>{% blocktrans with search_number=quote.search_request.id search_name=quote.search_request.name %}Hello,
+You have received a new quote for your search request #{{ search_number }} ({{search_name}}).{% endblocktrans %}</p>
+
+<p>{% trans "To check it, please login into our system and access to the quote section." %}</p>
+
+{% endblock %}

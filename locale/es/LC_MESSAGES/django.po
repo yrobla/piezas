@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-20 16:38+0200\n"
+"POT-Creation-Date: 2014-05-24 09:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,12 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-msgid "sent"
-msgstr "Enviado"
-
-msgid "canceled"
-msgstr "Cancelado"
 
 #: django_iban/validators.py:133
 #, python-brace-format
@@ -902,7 +896,7 @@ msgid "Answer for text types"
 msgstr ""
 
 #: local/piezas/apps/catalogue/models.py:231
-#: local/piezas/apps/search/views.py:404
+#: local/piezas/apps/search/views.py:408
 #: local/piezas/templates/catalogue/partials/review.html:40
 #: local/piezas/templates/customer/profile/profile.html:21
 #: local/piezas/templates/dashboard/offers/offer_list.html:66
@@ -923,7 +917,7 @@ msgstr ""
 #: local/piezas/templates/search/quotedetail.html:79
 #: local/piezas/templates/search/quotedetail.html:247
 #: local/piezas/templates/search/quoteview.html:78
-#: piezas/apps/catalogue/models.py:231 piezas/apps/search/views.py:404
+#: piezas/apps/catalogue/models.py:231 piezas/apps/search/views.py:408
 #: piezas/templates/catalogue/partials/review.html:40
 #: piezas/templates/customer/profile/profile.html:21
 #: piezas/templates/dashboard/offers/offer_list.html:66
@@ -948,7 +942,7 @@ msgid "Yes"
 msgstr ""
 
 #: local/piezas/apps/catalogue/models.py:233
-#: local/piezas/apps/search/views.py:406
+#: local/piezas/apps/search/views.py:410
 #: local/piezas/templates/catalogue/partials/review.html:45
 #: local/piezas/templates/customer/profile/profile.html:22
 #: local/piezas/templates/dashboard/offers/offer_list.html:68
@@ -969,7 +963,7 @@ msgstr ""
 #: local/piezas/templates/search/quotedetail.html:81
 #: local/piezas/templates/search/quotedetail.html:248
 #: local/piezas/templates/search/quoteview.html:80
-#: piezas/apps/catalogue/models.py:233 piezas/apps/search/views.py:406
+#: piezas/apps/catalogue/models.py:233 piezas/apps/search/views.py:410
 #: piezas/templates/catalogue/partials/review.html:45
 #: piezas/templates/customer/profile/profile.html:22
 #: piezas/templates/dashboard/offers/offer_list.html:68
@@ -1190,11 +1184,11 @@ msgid ""
 msgstr ""
 
 #: local/piezas/apps/customer/views.py:438
-#: local/piezas/apps/search/views.py:651 local/piezas/apps/search/views.py:673
-#: local/piezas/apps/search/views.py:782 local/piezas/apps/search/views.py:841
-#: piezas/apps/customer/views.py:438 piezas/apps/search/views.py:651
-#: piezas/apps/search/views.py:673 piezas/apps/search/views.py:782
-#: piezas/apps/search/views.py:841
+#: local/piezas/apps/search/views.py:670 local/piezas/apps/search/views.py:692
+#: local/piezas/apps/search/views.py:801 local/piezas/apps/search/views.py:860
+#: piezas/apps/customer/views.py:438 piezas/apps/search/views.py:670
+#: piezas/apps/search/views.py:692 piezas/apps/search/views.py:801
+#: piezas/apps/search/views.py:860
 msgid "There has been an error processing your request. Please try again."
 msgstr "Ha habido errores procesando tu petición. Por favor inténtalo de nuevo"
 
@@ -2792,77 +2786,77 @@ msgstr "Comentarios para el presupuesto"
 msgid "Details"
 msgstr "Detalles"
 
-#: local/piezas/apps/search/views.py:23 piezas/apps/search/views.py:23
+#: local/piezas/apps/search/views.py:27 piezas/apps/search/views.py:27
 msgid "Duplicate products aren't allowed"
 msgstr "Los productos duplicados no están permitidos"
 
-#: local/piezas/apps/search/views.py:140 piezas/apps/search/views.py:140
+#: local/piezas/apps/search/views.py:144 piezas/apps/search/views.py:144
 msgid "Please fill all mandatory questions"
 msgstr "Por favor completa las preguntas obligatorias"
 
-#: local/piezas/apps/search/views.py:145 piezas/apps/search/views.py:145
+#: local/piezas/apps/search/views.py:149 piezas/apps/search/views.py:149
 msgid "Please include all mandatory pictures"
 msgstr "Por favor incluye todas las fotos obligatorias"
 
-#: local/piezas/apps/search/views.py:159 piezas/apps/search/views.py:159
+#: local/piezas/apps/search/views.py:163 piezas/apps/search/views.py:163
 msgid "Please fill all mandatory fields"
 msgstr "Por favor completa las preguntas obligatorias"
 
-#: local/piezas/apps/search/views.py:299 local/piezas/templates/index.html:55
+#: local/piezas/apps/search/views.py:303 local/piezas/templates/index.html:55
 #: local/piezas/templates/search/pending_searchrequest_list.html:12
-#: piezas/apps/search/views.py:299 piezas/templates/index.html:55
+#: piezas/apps/search/views.py:303 piezas/templates/index.html:55
 #: piezas/templates/search/pending_searchrequest_list.html:12
 msgid "Active searches from customers"
 msgstr "Búsquedas activas de talleres"
 
-#: local/piezas/apps/search/views.py:350 local/piezas/apps/search/views.py:360
-#: piezas/apps/search/views.py:350 piezas/apps/search/views.py:360
+#: local/piezas/apps/search/views.py:354 local/piezas/apps/search/views.py:364
+#: piezas/apps/search/views.py:354 piezas/apps/search/views.py:364
 msgid "Regional"
 msgstr "Regional"
 
-#: local/piezas/apps/search/views.py:353 piezas/apps/search/views.py:353
+#: local/piezas/apps/search/views.py:357 piezas/apps/search/views.py:357
 msgid "Bordering"
 msgstr "Limítrofe"
 
-#: local/piezas/apps/search/views.py:357 piezas/apps/search/views.py:357
+#: local/piezas/apps/search/views.py:361 piezas/apps/search/views.py:361
 msgid "Supraregional"
 msgstr "Supraregional"
 
-#: local/piezas/apps/search/views.py:493 local/piezas/templates/index.html:49
+#: local/piezas/apps/search/views.py:512 local/piezas/templates/index.html:49
 #: local/piezas/templates/search/activequotes_list.html:12
-#: piezas/apps/search/views.py:493 piezas/templates/index.html:49
+#: piezas/apps/search/views.py:512 piezas/templates/index.html:49
 #: piezas/templates/search/activequotes_list.html:12
 msgid "Active quotes"
 msgstr "Presupuestos activos"
 
-#: local/piezas/apps/search/views.py:509 local/piezas/templates/index.html:44
+#: local/piezas/apps/search/views.py:528 local/piezas/templates/index.html:44
 #: local/piezas/templates/search/activesearches_list.html:12
-#: piezas/apps/search/views.py:509 piezas/templates/index.html:44
+#: piezas/apps/search/views.py:528 piezas/templates/index.html:44
 #: piezas/templates/search/activesearches_list.html:12
 msgid "Active searches"
 msgstr "Búsquedas activas"
 
-#: local/piezas/apps/search/views.py:525 local/piezas/templates/index.html:45
+#: local/piezas/apps/search/views.py:544 local/piezas/templates/index.html:45
 #: local/piezas/templates/search/expiredsearches_list.html:12
-#: piezas/apps/search/views.py:525 piezas/templates/index.html:45
+#: piezas/apps/search/views.py:544 piezas/templates/index.html:45
 #: piezas/templates/search/expiredsearches_list.html:12
 msgid "Expired searches"
 msgstr "Búsquedas expiradas"
 
-#: local/piezas/apps/search/views.py:541 local/piezas/templates/index.html:46
+#: local/piezas/apps/search/views.py:560 local/piezas/templates/index.html:46
 #: local/piezas/templates/search/canceledsearches_list.html:12
-#: piezas/apps/search/views.py:541 piezas/templates/index.html:46
+#: piezas/apps/search/views.py:560 piezas/templates/index.html:46
 #: piezas/templates/search/canceledsearches_list.html:12
 msgid "Canceled searches"
 msgstr "Búsquedas canceladas"
 
-#: local/piezas/apps/search/views.py:648 piezas/apps/search/views.py:648
+#: local/piezas/apps/search/views.py:667 piezas/apps/search/views.py:667
 msgid "We cannot find your quote. Please try again."
 msgstr "No podemos encontrar tu presupuesto. Por favor inténtalo de nuevo"
 
-#: local/piezas/apps/search/views.py:794
+#: local/piezas/apps/search/views.py:813
 #: local/piezas/templates/search/recalcquotes_list.html:12
-#: piezas/apps/search/views.py:794
+#: piezas/apps/search/views.py:813
 #: piezas/templates/search/recalcquotes_list.html:12
 msgid "Quotes pending from shipping recalc"
 msgstr "Presupuestos pendientes de recálculos de portes"
@@ -4868,8 +4862,10 @@ msgstr ""
 
 #: local/piezas/templates/customer/alerts/emails/alert_body.txt:1
 #: local/piezas/templates/customer/emails/commtype_order_placed_body.html:4
+#: local/piezas/templates/customer/emails/commtype_quote_placed_body.html:4
 #: piezas/templates/customer/alerts/emails/alert_body.txt:1
 #: piezas/templates/customer/emails/commtype_order_placed_body.html:4
+#: piezas/templates/customer/emails/commtype_quote_placed_body.html:4
 msgid "Hello,"
 msgstr ""
 
@@ -5181,6 +5177,52 @@ msgstr ""
 #, python-format
 msgid "Resetting your password at %(site_name)s."
 msgstr ""
+
+#: local/piezas/templates/customer/emails/commtype_quote_placed_body.html:6
+#: piezas/templates/customer/emails/commtype_quote_placed_body.html:6
+#, python-format
+msgid ""
+"Hello,\n"
+"You have received a new quote for your search request #%(search_number)s "
+"(%(search_name)s)."
+msgstr ""
+"Hola,\n"
+"Has recibido un nuevo presupuesto para tu petición de búsqueda #%(search_number)s "
+"(%(search_name)s)."
+
+
+#: local/piezas/templates/customer/emails/commtype_quote_placed_body.html:9
+#: local/piezas/templates/customer/emails/commtype_quote_placed_body.txt:8
+#: piezas/templates/customer/emails/commtype_quote_placed_body.html:9
+#: piezas/templates/customer/emails/commtype_quote_placed_body.txt:8
+msgid ""
+"To check it, please login into our system and access to the quote section."
+msgstr "Para ver sus detalles, por favor entra en nuestro sistema y ve a la sección de presupuestos."
+
+#: local/piezas/templates/customer/emails/commtype_quote_placed_body.txt:4
+#: piezas/templates/customer/emails/commtype_quote_placed_body.txt:4
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"You have received a new quote for your search request #%(search_number)s "
+"(%(search_name)s)."
+msgstr ""
+"Hola,\n"
+"\n"
+"Has recibido un nuevo presupuesto para tu petición de búsqueda #%(search_number)s "
+"(%(search_name)s)."
+
+
+#: local/piezas/templates/customer/emails/commtype_quote_placed_subject.txt:1
+#: piezas/templates/customer/emails/commtype_quote_placed_subject.txt:1
+#, python-format
+msgid ""
+"New quote placed for your search request #%(quote.search_request.id)s "
+"(%(quote.search_request.name)s)"
+msgstr ""
+"Nuevo presupuesto recibido para tu petición de búsqueda #%(quote.search_request.id)s "
+"(%(quote.search_request.name)s)"
 
 #: local/piezas/templates/customer/emails/commtype_registration_body.html:1
 #: local/piezas/templates/customer/emails/commtype_registration_body.txt:1
@@ -9953,41 +9995,47 @@ msgid ""
 "                    "
 msgstr ""
 
-msgid "paid"
-msgstr "Pagado"
+#~ msgid "sent"
+#~ msgstr "Enviado"
 
-msgid "Add"
-msgstr "Añadir"
+#~ msgid "canceled"
+#~ msgstr "Cancelado"
 
-msgid "Border area"
-msgstr "Limítrofe"
+#~ msgid "paid"
+#~ msgstr "Pagado"
 
-msgid "National"
-msgstr "Nacional"
+#~ msgid "Add"
+#~ msgstr "Añadir"
 
-msgid "User type"
-msgstr "Tipo de usuario"
+#~ msgid "Border area"
+#~ msgstr "Limítrofe"
 
-msgid "closed"
-msgstr "Cerrado"
+#~ msgid "National"
+#~ msgstr "Nacional"
 
-msgid "regional"
-msgstr "Regional"
+#~ msgid "User type"
+#~ msgstr "Tipo de usuario"
 
-msgid "national"
-msgstr "National"
+#~ msgid "closed"
+#~ msgstr "Cerrado"
 
-msgid "supraregional"
-msgstr "Supraregional"
+#~ msgid "regional"
+#~ msgstr "Regional"
 
-msgid "pending"
-msgstr "Pendiente"
+#~ msgid "national"
+#~ msgstr "National"
 
-msgid "expired"
-msgstr "Expirada"
+#~ msgid "supraregional"
+#~ msgstr "Supraregional"
 
-msgid "searchrequests"
-msgstr "peticiones de búsqueda"
+#~ msgid "pending"
+#~ msgstr "Pendiente"
 
-msgid "pending_payment"
-msgstr "Pendiente de pago"
+#~ msgid "expired"
+#~ msgstr "Expirada"
+
+#~ msgid "searchrequests"
+#~ msgstr "peticiones de búsqueda"
+
+#~ msgid "pending_payment"
+#~ msgstr "Pendiente de pago"
