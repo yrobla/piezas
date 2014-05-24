@@ -634,6 +634,22 @@ class QuoteAcceptView(DetailView):
         context['grand_total_excl_tax'] = float(base_total) + float(context['shipping_total_excl_tax'])
         context['grand_total_incl_tax'] = float(context['base_total_incl_tax']) + float(context['shipping_total_incl_tax'])
 
+        # send email to quote owner
+        commtype_code = 'QUOTE_ACCEPT'
+        ctx = {'quote':quote}
+        try:
+            event_type = CommunicationEventType.objects.get(code=commtype_code)
+        except CommunicationEventType.DoesNotExist:
+            messages = CommunicationEventType.objects.get_and_render(commtype_code, ctx)
+        else:
+            messages = event_type.get_messages(ctx)
+
+        if messages and messages['body']:
+            try:
+                Dispatcher().dispatch_user_messages(quote.owner, messages)
+            except:
+                pass
+
         return context
 
     def get_object(self, queryset=None):

@@ -1,0 +1,11 @@
+{% extends "customer/emails/base.html" %}
+{% load i18n %}
+
+{% block body %}<p xmlns="http://www.w3.org/1999/html">{% trans 'Hello,' %}</p>
+
+<p>{% blocktrans with quote_number=quote.id %}Hello,
+Your quote #{{ quote_number }} has been accepted and a new order has been placed.{% endblocktrans %}</p>
+
+<p>{% trans "To check it, please login into our system and access to the orders section." %}</p>
+
+{% endblock %}

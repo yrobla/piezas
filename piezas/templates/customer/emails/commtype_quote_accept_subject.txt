@@ -1,0 +1,2 @@
+{% load i18n %}{% blocktrans with quote_number=quote.id %}
+Your quote #{{quote_number}} has been accepted{% endblocktrans %}

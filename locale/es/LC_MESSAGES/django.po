@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-24 10:07+0200\n"
+"POT-Creation-Date: 2014-05-24 10:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1184,11 +1184,11 @@ msgid ""
 msgstr ""
 
 #: local/piezas/apps/customer/views.py:438
-#: local/piezas/apps/search/views.py:670 local/piezas/apps/search/views.py:709
-#: local/piezas/apps/search/views.py:818 local/piezas/apps/search/views.py:877
-#: piezas/apps/customer/views.py:438 piezas/apps/search/views.py:670
-#: piezas/apps/search/views.py:709 piezas/apps/search/views.py:818
-#: piezas/apps/search/views.py:877
+#: local/piezas/apps/search/views.py:686 local/piezas/apps/search/views.py:725
+#: local/piezas/apps/search/views.py:834 local/piezas/apps/search/views.py:893
+#: piezas/apps/customer/views.py:438 piezas/apps/search/views.py:686
+#: piezas/apps/search/views.py:725 piezas/apps/search/views.py:834
+#: piezas/apps/search/views.py:893
 msgid "There has been an error processing your request. Please try again."
 msgstr "Ha habido errores procesando tu petición. Por favor inténtalo de nuevo"
 
@@ -2850,13 +2850,13 @@ msgstr "Búsquedas expiradas"
 msgid "Canceled searches"
 msgstr "Búsquedas canceladas"
 
-#: local/piezas/apps/search/views.py:667 piezas/apps/search/views.py:667
+#: local/piezas/apps/search/views.py:683 piezas/apps/search/views.py:683
 msgid "We cannot find your quote. Please try again."
 msgstr "No podemos encontrar tu presupuesto. Por favor inténtalo de nuevo"
 
-#: local/piezas/apps/search/views.py:830
+#: local/piezas/apps/search/views.py:846
 #: local/piezas/templates/search/recalcquotes_list.html:12
-#: piezas/apps/search/views.py:830
+#: piezas/apps/search/views.py:846
 #: piezas/templates/search/recalcquotes_list.html:12
 msgid "Quotes pending from shipping recalc"
 msgstr "Presupuestos pendientes de recálculos de portes"
@@ -4862,10 +4862,12 @@ msgstr ""
 
 #: local/piezas/templates/customer/alerts/emails/alert_body.txt:1
 #: local/piezas/templates/customer/emails/commtype_order_placed_body.html:4
+#: local/piezas/templates/customer/emails/commtype_quote_accept_body.html:4
 #: local/piezas/templates/customer/emails/commtype_quote_placed_body.html:4
 #: local/piezas/templates/customer/emails/commtype_quote_recalc_body.html:4
 #: piezas/templates/customer/alerts/emails/alert_body.txt:1
 #: piezas/templates/customer/emails/commtype_order_placed_body.html:4
+#: piezas/templates/customer/emails/commtype_quote_accept_body.html:4
 #: piezas/templates/customer/emails/commtype_quote_placed_body.html:4
 #: piezas/templates/customer/emails/commtype_quote_recalc_body.html:4
 msgid "Hello,"
@@ -5180,6 +5182,49 @@ msgstr ""
 msgid "Resetting your password at %(site_name)s."
 msgstr ""
 
+#: local/piezas/templates/customer/emails/commtype_quote_accept_body.html:6
+#: piezas/templates/customer/emails/commtype_quote_accept_body.html:6
+#, python-format
+msgid ""
+"Hello,\n"
+"Your quote #%(quote_number)s has been accepted and a new order has been "
+"placed."
+msgstr ""
+"Hola,\n"
+"Tu presupuesto #%(quote_number)s ha sido aceptado y se ha generado un nuevo pedido. "
+
+#: local/piezas/templates/customer/emails/commtype_quote_accept_body.html:9
+#: local/piezas/templates/customer/emails/commtype_quote_accept_body.txt:8
+#: piezas/templates/customer/emails/commtype_quote_accept_body.html:9
+#: piezas/templates/customer/emails/commtype_quote_accept_body.txt:8
+msgid ""
+"To check it, please login into our system and access to the orders section."
+msgstr ""
+"Para ver sus detalles, por favor entra en nuestro sistema y ve a la sección de pedidos."
+
+#: local/piezas/templates/customer/emails/commtype_quote_accept_body.txt:4
+#: piezas/templates/customer/emails/commtype_quote_accept_body.txt:4
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"Your quote #%(quote_number)s has been accepted and a new order has been "
+"generated."
+msgstr ""
+"Hola,\n"
+"\n"
+"Tu presupuesto #%(quote_number)s ha sido aceptado y se ha generado un nuevo pedido."
+
+#: local/piezas/templates/customer/emails/commtype_quote_accept_subject.txt:1
+#: piezas/templates/customer/emails/commtype_quote_accept_subject.txt:1
+#, python-format
+msgid ""
+"\n"
+"Your quote #%(quote_number)s has been accepted"
+msgstr ""
+"\n"
+"Tu presupuesto #%(quote_number)s ha sido aceptado"
+
 #: local/piezas/templates/customer/emails/commtype_quote_placed_body.html:6
 #: piezas/templates/customer/emails/commtype_quote_placed_body.html:6
 #, python-format
@@ -5235,7 +5280,8 @@ msgid ""
 "You have received a new recalc request for your quote #%(quote_number)s."
 msgstr ""
 "Hola,\n"
-"Has recibido una nueva petición de recálculo para tu presupuesto #%(quote_number)s."
+"Has recibido una nueva petición de recálculo para tu presupuesto #"
+"%(quote_number)s."
 
 #: local/piezas/templates/customer/emails/commtype_quote_recalc_body.html:9
 #: local/piezas/templates/customer/emails/commtype_quote_recalc_body.txt:8
@@ -5245,7 +5291,8 @@ msgid ""
 "To check it, please login into our system and access to the quotes pending "
 "from recalc section."
 msgstr ""
-"Para ver sus detalles por favor entra en nuestro sistema y accede a la sección de presupuestos pendientes de recálculo."
+"Para ver sus detalles por favor entra en nuestro sistema y accede a la "
+"sección de presupuestos pendientes de recálculo."
 
 #: local/piezas/templates/customer/emails/commtype_quote_recalc_body.txt:4
 #: piezas/templates/customer/emails/commtype_quote_recalc_body.txt:4
@@ -5256,7 +5303,8 @@ msgid ""
 "You have received a new recalc request for your quote #%(quote_number)s."
 msgstr ""
 "Hola,\n"
-"Has recibido una nueva petición de recálculo para tu presupuesto #%(quote_number)s."
+"Has recibido una nueva petición de recálculo para tu presupuesto #"
+"%(quote_number)s."
 
 #: local/piezas/templates/customer/emails/commtype_quote_recalc_subject.txt:1
 #: piezas/templates/customer/emails/commtype_quote_recalc_subject.txt:1
@@ -5266,8 +5314,8 @@ msgid ""
 "A shipping recalc has been requested for your quote #%(quote_number)s"
 msgstr ""
 "\n"
-"Una nueva petición de recálculo ha sido recibida para tu presupuesto #%(quote_number)s"
-
+"Una nueva petición de recálculo ha sido recibida para tu presupuesto #"
+"%(quote_number)s"
 
 #: local/piezas/templates/customer/emails/commtype_registration_body.html:1
 #: local/piezas/templates/customer/emails/commtype_registration_body.txt:1

@@ -1,0 +1,9 @@
+{% extends "oscar/customer/emails/base.txt" %}
+{% load i18n %}
+
+{% blocktrans with quote_number=quote.id %}Hello,
+
+Your quote #{{ quote_number }} has been accepted and a new order has been generated.{% endblocktrans %}
+
+{% trans "To check it, please login into our system and access to the orders section." %}
+
