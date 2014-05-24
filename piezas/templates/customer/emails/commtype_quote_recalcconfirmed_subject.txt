@@ -1,0 +1,2 @@
+{% load i18n %}{% blocktrans with search_number=quote.search_request.id search_name=quote.seach_request.name %}
+A quote recalc has been placed for your search request #{{search_number}} ({{search_name}}){% endblocktrans %}
