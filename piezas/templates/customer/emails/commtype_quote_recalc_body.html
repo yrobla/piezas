@@ -1,0 +1,11 @@
+{% extends "customer/emails/base.html" %}
+{% load i18n %}
+
+{% block body %}<p xmlns="http://www.w3.org/1999/html">{% trans 'Hello,' %}</p>
+
+<p>{% blocktrans with quote_number=quote.id %}Hello,
+You have received a new recalc request for your quote #{{ quote_number }}.{% endblocktrans %}</p>
+
+<p>{% trans "To check it, please login into our system and access to the quotes pending from recalc section." %}</p>
+
+{% endblock %}

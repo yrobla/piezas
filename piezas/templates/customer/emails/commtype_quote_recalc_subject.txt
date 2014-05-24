@@ -1,0 +1,2 @@
+{% load i18n %}{% blocktrans with quote_number=quote.id %}
+A shipping recalc has been requested for your quote #{{quote_number}}{% endblocktrans %}

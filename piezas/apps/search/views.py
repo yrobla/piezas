@@ -669,6 +669,23 @@ class RecalcQuoteView(View):
             response_data['result'] = 'KO'
             response_data['error'] = _('There has been an error processing your request. Please try again.')
 
+        # send email to quote owner
+        commtype_code = 'QUOTE_RECALC'
+        ctx = {'quote':quote}
+        try:
+            event_type = CommunicationEventType.objects.get(code=commtype_code)
+        except CommunicationEventType.DoesNotExist:
+            messages = CommunicationEventType.objects.get_and_render(commtype_code, ctx)
+        else:
+            messages = event_type.get_messages(ctx)
+
+        if messages and messages['body']:
+            try:
+                Dispatcher().dispatch_user_messages(quote.owner, messages)
+            except:
+                pass
+
+
         return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 class SendRecalcQuoteView(View):
