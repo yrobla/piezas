@@ -7,6 +7,11 @@ from smart_selects.db_fields import ChainedForeignKey
 from oscar.apps.catalogue.models import Category
 from oscar.apps.order.models import Order
 
+from datetime import datetime
+import math
+from dateutil import tz
+from piezas import settings
+
 class BrandManager(models.Manager):
 
     def base_queryset(self):
@@ -124,8 +129,8 @@ class ProductQuestion(models.Model):
         return self.text
 
 
-SEARCH_REQUEST_STATES = (('pending', _('Pending')), ('expired', _('Expired')),
-    ('canceled', _('Canceled')))
+SEARCH_REQUEST_STATES = (('pending', _('pending')), ('expired', _('expired')),
+    ('canceled', _('canceled')))
 
 class SearchRequest(models.Model):
     brand = models.ForeignKey(Brand, verbose_name=_("Brand"),
@@ -183,6 +188,23 @@ class SearchRequest(models.Model):
     def num_quotes(self):
         return self.quotes.count()
 
+    @property
+    def zone(self):
+        if self.state == 'pending':
+            current_time = datetime.utcnow()
+            creation_date = self.date_created.astimezone(tz.tzutc()).replace(tzinfo=None)
+            time_diff = current_time - creation_date
+
+            if time_diff.total_seconds() < 2*settings.SEARCH_INTERVAL_MIN*60:
+                return _('Regional')
+            elif time_diff.total_seconds() < 3*settings.SEARCH_INTERVAL_MIN*60:
+                return _('Bordering')
+            elif time_diff.total_seconds() < 4*settings.SEARCH_INTERVAL_MIN*60:
+                return _('Supraregional')
+            else:
+                return _('National')
+        else:
+            return u'-'
 
 class SearchItemRequest(models.Model):
     category = models.ForeignKey(Category, verbose_name=_('Category'),

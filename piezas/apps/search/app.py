@@ -13,6 +13,7 @@ class SearchApplication(CoreSearchApplication):
     create_quote_view = views.CreateQuoteView
     pending_search_requests_view = views.PendingSearchRequestsView
     active_searches_view = views.ActiveSearchesView
+    history_searches_view = views.HistorySearchesView
     expired_searches_view = views.ExpiredSearchesView
     canceled_searches_view = views.CanceledSearchesView
     active_quote_view = views.ActiveQuotesView
@@ -42,6 +43,7 @@ class SearchApplication(CoreSearchApplication):
             url(r'^home/$', login_required(self.index_view.as_view()), name='home'),
             url(r'^activequotes/$', login_required(self.active_quote_view.as_view()), name='activequotes'),
             url(r'^activesearches/$', login_required(self.active_searches_view.as_view()), name='activesearches'),
+            url(r'^history/$', login_required(self.history_searches_view.as_view()), name='history'),
             url(r'^expiredsearches/$', login_required(self.expired_searches_view.as_view()), name='expiredsearches'),
             url(r'^canceledsearches/$', login_required(self.canceled_searches_view.as_view()), name='canceledsearches'),
             url(r'^recalcquotes/$', login_required(self.recalc_quotes_view.as_view()), name='recalcquotes'),

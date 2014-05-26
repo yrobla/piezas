@@ -1,0 +1,174 @@
+{% extends "layout.html" %}
+{% load i18n %}
+{% load currency_filters %}
+{% load staticfiles %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">{% trans 'Home' %}</a>
+            <span class="divider">/</span>
+        </li>
+        <li class="active">{% trans 'Search history' %}
+
+    </ul>
+{% endblock %}
+{% block content %}
+
+    {% if searches %}
+        <h3>
+		{% if search_status == 'history' %}
+		{% trans 'All searches' %}
+		{% elif search_status == 'active' %}
+		{% trans 'Active searches' %}
+		{% elif search_status == 'expired' %}
+		{% trans 'Expired searches' %}
+		{% elif search_status == 'canceled' %}
+		{% trans 'Canceled searches' %}
+		{% endif %}
+	</h3><br />
+	<div>
+		{% if search_status != "active" %}
+		<button type="button" class="button" onClick="location.href='{% url 'search:activesearches' %}';return false;">{% trans "Active searches" %}</button>
+		{% endif %}
+		{% if search_status != "expired" %}
+		<button type="button" class="button" onClick="location.href='{% url 'search:expiredsearches' %}';return false;">{% trans "Expired searches" %}</button>
+		{% endif %}
+		{% if search_status != "canceled" %}
+		<button type="button" class="button" onClick="location.href='{% url 'search:canceledsearches' %}';return false;">{% trans "Canceled searches" %}</button>
+		{% endif %}
+		{% if search_status != "history" %}
+		<button type="button" class="button" onClick="location.href='{% url 'search:history' %}';return false;">{% trans "All searches" %}</button>
+		{% endif %}
+	</div>
+        <table class="table table-striped table-bordered">
+            <tr>
+		<th >ID</th>
+                <th>{% trans "Status" %}</th>
+                <th>{% trans "Date created" %}</th>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Brand" %}</th>
+                <th>{% trans "Model" %}</th>
+		<th>{% trans "Number of pieces" %}</th>
+		<th>{% trans "Number of quotes" %}</th>
+		<th>{% trans "Search zone" %}</th>
+            </tr>
+            {% for search in searches %}
+                <tr onClick="location.href='{% url 'search:detail' number=search.id %}';return false;" style="cursor:pointer;">
+                    <td>{{search.id}}
+			{% if search.state == 'pending' %}
+&nbsp;&nbsp;<button type="button" class="button cancel_button" data-attr="{{search.id}}">
+{% trans "Cancel search" %}</button>
+			{% endif %}
+			</td>
+		    <td>{% trans search.state %}</td>
+                    <td>{{ search.date_created|date:"d/m/Y" }}</td>
+		    <td>{{ search.name }}</td>
+                    <td>{{ search.brand.name }}</td>
+                    <td>{{ search.model.name }}</td>
+		    <td><span class="span1">{{ search.num_items }}</span>&nbsp;&nbsp;
+			<button class="btn pieces_show">{% trans "Show/hide pieces" %}</button>
+                        <div style="clear:both"></div><div class="pieces_container" style="display:none;"><br />
+                        <ul>
+                        {% for line in search.lines %}
+                        <li style="font-size:11px;">{{line}}</li>
+                        {% endfor %}
+                        </ul>
+                        </div>
+		    </td>
+		    <td>{{ search.num_quotes }}</td>
+		    <td>{{ search.zone }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>{% trans "You don't have any active searches." %}</p>
+    {% endif %}
+
+    {% include "partials/pagination.html" %}
+
+<div style="clear:both"><br /></div>
+
+<div id="cancel_confirmation" class="modal hide" data-id="">
+    <div class="modal-header">
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="close" id="btnClose">×</a>
+         <h3>{% trans "Cancel search" %}</h3>
+    </div>
+    <div class="modal-body">
+        <div id="error_container" class="alert alert-error" style="display:none;"></div>
+        <p>{% trans "Are you sure you want to cancel this search?" %}</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" id="btnYesSubmit" class="btn danger">{% trans "Yes" %}</a>
+      <a href="#" id="btnNoSubmit" data-dismiss="modal" aria-hidden="true" class="btn secondary">
+{% trans "No" %}</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function()
+{
+	$("#btnYesSubmit").click(function()
+        {
+        	$("#error_container").html("");
+                $("#error_container").hide();
+
+                // send a post request
+                $.post("{% url 'search:cancel' %}",
+                    {"search_id":$("#cancel_confirmation").attr("data-id")},
+                    function(data)
+                    {
+                    	if (data.result=='KO')
+                        {
+                        	$("#error_container").html(data.error);
+                                $("#error_container").show();
+                        }
+                        else
+                        {
+                            // redirect to confirmation
+                            location.href='{% url 'search:cancelplaced' %}';
+                        }
+                        return false;
+                    }
+                );
+        });
+
+
+	$(".cancel_button").click(function()
+        {
+		var current_id = $(this).attr("data-attr");
+		console.log(current_id);
+              	$("#cancel_confirmation").modal("show");
+		$("#cancel_confirmation").attr("data-id", current_id);
+                return false;
+        });
+
+        $(".pieces_show").click(function(event)
+        {
+		event.stopPropagation();
+                var container = $(this).parent().find("div.pieces_container");
+                if (container && container.length>0)
+                {
+                        var current = container[0];
+                        $(current).toggle();
+                }
+        });
+
+});
+</script>
+{% endblock %}
+
+{% block extrastyles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.css">
+{% endblock %}
+
+{% block cdn_scripts %}
+    {{ block.super }}
+    <script src="//code.jquery.com/ui/1.10.3/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+
+{% block onbodyload %}
+    {{ block.super }}
+    $('#id_date_to, #id_date_from').datepicker({'dateFormat': 'yy-mm-dd'});
+{% endblock %}

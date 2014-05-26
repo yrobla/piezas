@@ -361,7 +361,7 @@ class PendingSearchRequestsView(ListView):
                     item.search_type = _('Supraregional')
                 else:
                     item.remaining_time = (5*settings.SEARCH_INTERVAL_MIN*60) - time_diff.total_seconds()
-                    item.search_type = _('Regional')
+                    item.search_type = _('National')
 
                 mins = math.floor(item.remaining_time/60)
                 secs = math.floor(item.remaining_time - (mins*60))
@@ -522,7 +522,7 @@ class ActiveSearchesView(ListView):
     View active quotes for that customer
     """
     context_object_name = "searches"
-    template_name = 'search/activesearches_list.html'
+    template_name = 'search/historysearches_list.html'
     paginate_by = 20
     model = models.Quote
     page_title = _('Active searches')
@@ -533,14 +533,40 @@ class ActiveSearchesView(ListView):
         queryset = models.SearchRequest.objects.filter(owner=self.request.user, state='pending')
         return queryset
 
+    def get_context_data(self, **kwargs):
+        context = super(self.__class__, self).get_context_data(**kwargs)
+        context['search_status'] = 'active'
+        return context
+
+class HistorySearchesView(ListView):
+    """
+    View active quotes for that customer
+    """
+    context_object_name = "searches"
+    template_name = 'search/historysearches_list.html'
+    paginate_by = 20
+    model = models.SearchRequest
+    page_title = _('Search history')
+    active_tab = 'searchrequests'
+
+    def get_queryset(self):
+        # only show quotes for searches that belong to user
+        queryset = models.SearchRequest.objects.filter(owner=self.request.user)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(self.__class__, self).get_context_data(**kwargs)
+        context['search_status'] = 'history'
+        return context
+
 class ExpiredSearchesView(ListView):
     """
     View active quotes for that customer
     """
     context_object_name = "searches"
-    template_name = 'search/expiredsearches_list.html'
+    template_name = 'search/historysearches_list.html'
     paginate_by = 20
-    model = models.Quote
+    model = models.SearchRequest
     page_title = _('Expired searches')
     active_tab = 'searchrequests'
 
@@ -549,14 +575,19 @@ class ExpiredSearchesView(ListView):
         queryset = models.SearchRequest.objects.filter(owner=self.request.user, state='expired')
         return queryset
 
+    def get_context_data(self, **kwargs):
+        context = super(self.__class__, self).get_context_data(**kwargs)
+        context['search_status'] = 'expired'
+        return context
+
 class CanceledSearchesView(ListView):
     """
     View active quotes for that customer
     """
     context_object_name = "searches"
-    template_name = 'search/canceledsearches_list.html'
+    template_name = 'search/historysearches_list.html'
     paginate_by = 20
-    model = models.Quote
+    model = models.SearchRequest
     page_title = _('Canceled searches')
     active_tab = 'searchrequests'
 
@@ -564,6 +595,11 @@ class CanceledSearchesView(ListView):
         # only show quotes for searches that belong to user
         queryset = models.SearchRequest.objects.filter(owner=self.request.user, state='canceled')
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(self.__class__, self).get_context_data(**kwargs)
+        context['search_status'] = 'canceled'
+        return context
 
 class SearchDetailView(DetailView):
     model = models.SearchRequest
