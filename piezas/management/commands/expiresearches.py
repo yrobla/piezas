@@ -8,5 +8,6 @@ from datetime import datetime, timedelta
 from django.utils.timezone import now
 
 date_limit = now() - timedelta(seconds=5*settings.SEARCH_INTERVAL_MIN*60)
-SearchRequest.objects.filter(date_created__lt=date_limit).update(state='expired')
+result = SearchRequest.objects.filter(date_created__lt=date_limit).exclude(state='expired')
+result.update(state='expired')
 
