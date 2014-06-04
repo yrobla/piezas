@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-26 17:12+0200\n"
+"POT-Creation-Date: 2014-06-04 12:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -781,26 +781,26 @@ msgid "Owner"
 msgstr "Propietario"
 
 #: local/piezas/apps/catalogue/models.py:199
-#: local/piezas/apps/search/views.py:354 piezas/apps/catalogue/models.py:199
-#: piezas/apps/search/views.py:354
+#: local/piezas/apps/search/views.py:352 piezas/apps/catalogue/models.py:199
+#: piezas/apps/search/views.py:352
 msgid "Regional"
 msgstr "Regional"
 
 #: local/piezas/apps/catalogue/models.py:201
-#: local/piezas/apps/search/views.py:357 piezas/apps/catalogue/models.py:201
-#: piezas/apps/search/views.py:357
+#: local/piezas/apps/search/views.py:355 piezas/apps/catalogue/models.py:201
+#: piezas/apps/search/views.py:355
 msgid "Bordering"
 msgstr "Limítrofe"
 
 #: local/piezas/apps/catalogue/models.py:203
-#: local/piezas/apps/search/views.py:361 piezas/apps/catalogue/models.py:203
-#: piezas/apps/search/views.py:361
+#: local/piezas/apps/search/views.py:359 piezas/apps/catalogue/models.py:203
+#: piezas/apps/search/views.py:359
 msgid "Supraregional"
 msgstr "Supraregional"
 
 #: local/piezas/apps/catalogue/models.py:205
-#: local/piezas/apps/search/views.py:364 piezas/apps/catalogue/models.py:205
-#: piezas/apps/search/views.py:364
+#: local/piezas/apps/search/views.py:362 piezas/apps/catalogue/models.py:205
+#: piezas/apps/search/views.py:362
 msgid "National"
 msgstr "Nacional"
 
@@ -921,7 +921,7 @@ msgid "Answer for text types"
 msgstr ""
 
 #: local/piezas/apps/catalogue/models.py:253
-#: local/piezas/apps/search/views.py:408
+#: local/piezas/apps/search/views.py:406
 #: local/piezas/templates/catalogue/partials/review.html:40
 #: local/piezas/templates/customer/profile/profile.html:21
 #: local/piezas/templates/dashboard/offers/offer_list.html:66
@@ -943,7 +943,7 @@ msgstr ""
 #: local/piezas/templates/search/quotedetail.html:79
 #: local/piezas/templates/search/quotedetail.html:247
 #: local/piezas/templates/search/quoteview.html:78
-#: piezas/apps/catalogue/models.py:253 piezas/apps/search/views.py:408
+#: piezas/apps/catalogue/models.py:253 piezas/apps/search/views.py:406
 #: piezas/templates/catalogue/partials/review.html:40
 #: piezas/templates/customer/profile/profile.html:21
 #: piezas/templates/dashboard/offers/offer_list.html:66
@@ -969,7 +969,7 @@ msgid "Yes"
 msgstr ""
 
 #: local/piezas/apps/catalogue/models.py:255
-#: local/piezas/apps/search/views.py:410
+#: local/piezas/apps/search/views.py:408
 #: local/piezas/templates/catalogue/partials/review.html:45
 #: local/piezas/templates/customer/profile/profile.html:22
 #: local/piezas/templates/dashboard/offers/offer_list.html:68
@@ -991,7 +991,7 @@ msgstr ""
 #: local/piezas/templates/search/quotedetail.html:81
 #: local/piezas/templates/search/quotedetail.html:248
 #: local/piezas/templates/search/quoteview.html:80
-#: piezas/apps/catalogue/models.py:255 piezas/apps/search/views.py:410
+#: piezas/apps/catalogue/models.py:255 piezas/apps/search/views.py:408
 #: piezas/templates/catalogue/partials/review.html:45
 #: piezas/templates/customer/profile/profile.html:22
 #: piezas/templates/dashboard/offers/offer_list.html:68
@@ -1220,11 +1220,11 @@ msgid ""
 msgstr ""
 
 #: local/piezas/apps/customer/views.py:438
-#: local/piezas/apps/search/views.py:722 local/piezas/apps/search/views.py:761
-#: local/piezas/apps/search/views.py:886 local/piezas/apps/search/views.py:945
-#: piezas/apps/customer/views.py:438 piezas/apps/search/views.py:722
-#: piezas/apps/search/views.py:761 piezas/apps/search/views.py:886
-#: piezas/apps/search/views.py:945
+#: local/piezas/apps/search/views.py:720 local/piezas/apps/search/views.py:759
+#: local/piezas/apps/search/views.py:884 local/piezas/apps/search/views.py:943
+#: piezas/apps/customer/views.py:438 piezas/apps/search/views.py:720
+#: piezas/apps/search/views.py:759 piezas/apps/search/views.py:884
+#: piezas/apps/search/views.py:943
 msgid "There has been an error processing your request. Please try again."
 msgstr "Ha habido errores procesando tu petición. Por favor inténtalo de nuevo"
 
@@ -2680,6 +2680,10 @@ msgstr "Método de pago"
 msgid "IBAN account for transfer payment method"
 msgstr "Cuenta IBAN para el método de pago de transferencia bancaria"
 
+#: local/piezas/apps/search/forms.py:60 piezas/apps/search/forms.py:60
+msgid "---- Door BMW 2034GWZ white ----"
+msgstr "---- Puerta BMW 2034GWZ blanco ----"
+
 #: local/piezas/apps/search/forms.py:63
 #: local/piezas/templates/basket/partials/basket_content.html:30
 #: local/piezas/templates/basket/partials/searchrequest_content.html:11
@@ -2855,60 +2859,60 @@ msgstr "Por favor completa las preguntas obligatorias"
 msgid "Active searches from customers"
 msgstr "Búsquedas activas de talleres"
 
-#: local/piezas/apps/search/views.py:512
+#: local/piezas/apps/search/views.py:510
 #: local/piezas/templates/search/activequotes_list.html:12
-#: piezas/apps/search/views.py:512
+#: piezas/apps/search/views.py:510
 #: piezas/templates/search/activequotes_list.html:12
 msgid "Active quotes"
 msgstr "Presupuestos activos"
 
-#: local/piezas/apps/search/views.py:528
+#: local/piezas/apps/search/views.py:526
 #: local/piezas/templates/search/activesearches_list.html:12
 #: local/piezas/templates/search/historysearches_list.html:23
 #: local/piezas/templates/search/historysearches_list.html:32
-#: piezas/apps/search/views.py:528
+#: piezas/apps/search/views.py:526
 #: piezas/templates/search/activesearches_list.html:12
 #: piezas/templates/search/historysearches_list.html:23
 #: piezas/templates/search/historysearches_list.html:32
 msgid "Active searches"
 msgstr "Búsquedas activas"
 
-#: local/piezas/apps/search/views.py:549 local/piezas/templates/index.html:44
+#: local/piezas/apps/search/views.py:547 local/piezas/templates/index.html:44
 #: local/piezas/templates/search/historysearches_list.html:12
-#: piezas/apps/search/views.py:549 piezas/templates/index.html:44
+#: piezas/apps/search/views.py:547 piezas/templates/index.html:44
 #: piezas/templates/search/historysearches_list.html:12
 msgid "Search history"
 msgstr "Histórico de búsquedas"
 
-#: local/piezas/apps/search/views.py:570
+#: local/piezas/apps/search/views.py:568
 #: local/piezas/templates/search/expiredsearches_list.html:12
 #: local/piezas/templates/search/historysearches_list.html:25
 #: local/piezas/templates/search/historysearches_list.html:35
-#: piezas/apps/search/views.py:570
+#: piezas/apps/search/views.py:568
 #: piezas/templates/search/expiredsearches_list.html:12
 #: piezas/templates/search/historysearches_list.html:25
 #: piezas/templates/search/historysearches_list.html:35
 msgid "Expired searches"
 msgstr "Búsquedas expiradas"
 
-#: local/piezas/apps/search/views.py:591
+#: local/piezas/apps/search/views.py:589
 #: local/piezas/templates/search/canceledsearches_list.html:12
 #: local/piezas/templates/search/historysearches_list.html:27
 #: local/piezas/templates/search/historysearches_list.html:38
-#: piezas/apps/search/views.py:591
+#: piezas/apps/search/views.py:589
 #: piezas/templates/search/canceledsearches_list.html:12
 #: piezas/templates/search/historysearches_list.html:27
 #: piezas/templates/search/historysearches_list.html:38
 msgid "Canceled searches"
 msgstr "Búsquedas canceladas"
 
-#: local/piezas/apps/search/views.py:719 piezas/apps/search/views.py:719
+#: local/piezas/apps/search/views.py:717 piezas/apps/search/views.py:717
 msgid "We cannot find your quote. Please try again."
 msgstr "No podemos encontrar tu presupuesto. Por favor inténtalo de nuevo"
 
-#: local/piezas/apps/search/views.py:898
+#: local/piezas/apps/search/views.py:896
 #: local/piezas/templates/search/recalcquotes_list.html:12
-#: piezas/apps/search/views.py:898
+#: piezas/apps/search/views.py:896
 #: piezas/templates/search/recalcquotes_list.html:12
 msgid "Quotes pending from shipping recalc"
 msgstr "Presupuestos pendientes de recálculos de portes"

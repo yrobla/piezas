@@ -67,17 +67,18 @@
 				</div>
 				<div class="span1"></div>
 				<div class="control-group span3">
-					<label class="control-label">{% trans "Comments" %}:</label>
-					<div class="controls">
-						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.comments}}" />
-					</div>
-				</div>
-				<div class="control-group span3">
 					<label class="control-label">{% trans "Zone" %}:</label>
 					<div class="controls">
 						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.zone}}" />
 					</div>
 				</div>
+				<div class="control-group span6">
+					<label class="control-label">{% trans "Comments" %}:</label>
+					<div class="controls">
+						<textarea readonly="readonly" disabled="disabled" style="width:585px;height:50px;">{{searchrequest.comments}}</textarea>
+					</div>
+				</div>
+
 				<div class="span4"></div>
 			<div style="clear:both"></div>
 

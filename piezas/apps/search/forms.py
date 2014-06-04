@@ -57,13 +57,14 @@ Piece = get_model('catalogue', 'Product')
 Category = get_model('catalogue', 'Category')
 
 class SearchCreationForm(forms.Form):
-    name = forms.CharField(label=_('Search name'), required=False)
+    name = forms.CharField(label=_('Search name'), required=False, widget=forms.TextInput(attrs={'placeholder': _('---- Door BMW 2034GWZ white ----')}))
     brand = forms.ModelChoiceField(label=_('Brand'), required=True, queryset = Brand.objects.all())
     model = ChainedModelChoiceField(label=_('Model'), required=True, app_name='catalogue', model_name='Model', chain_field='brand', model_field='brand', show_all=False, auto_choose=False)
     version = ChainedModelChoiceField(label=_('Version'), required=True, app_name='catalogue', model_name='Version', chain_field='model', model_field='model', show_all=False, auto_choose=False)
     bodywork = forms.ModelChoiceField(label=_('Bodywork'), required=True, queryset = Bodywork.objects.all())
     engine = forms.ModelChoiceField(label=_('Engine'), required=True, queryset = Engine.objects.all())
     frameref = forms.CharField(label=_('Frame reference'), max_length=255, required=False)
+    comments = forms.CharField(label=_('Comments'), required=False, widget=forms.Textarea(attrs={'style':'height:50px;width:400px'}))
 
     picture1 = forms.CharField(label=_('Picture #1'),  widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
     picture2 = forms.CharField(label=_('Picture #2'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
@@ -89,7 +90,7 @@ class SearchItemRequestFormSet(BaseFormSet):
 
 
 class SearchConfirmForm(forms.Form):
-    comments = forms.CharField(label=_('Comments'), required=False, widget=forms.Textarea(attrs={'style':'height:50px;width:200px'}))
+    pass
 
 SearchCreationFormSet = formset_factory(SearchCreationFormItem, formset=SearchItemRequestFormSet, extra=50)
 

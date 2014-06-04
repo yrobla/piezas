@@ -66,6 +66,7 @@ class HomeView(FormView):
         final_data["name"] = form.cleaned_data["name"]
         final_data["engine"] = form.cleaned_data["engine"].id
         final_data["frameref"] = form.cleaned_data["frameref"]
+        final_data["comments"] = form.cleaned_data["comments"]
         final_data["brand"] = form.cleaned_data["brand"].id
         final_data["version"] = form.cleaned_data["version"].id
         final_data["model"] = form.cleaned_data["model"].id
@@ -231,7 +232,7 @@ class ConfirmView(FormView):
 
                 search_request = models.SearchRequest(name=current_data["name"], brand=brand, model=model,
                     version=version, bodywork=bodywork, engine=engine,
-                    frameref=current_data["frameref"], comments=form.cleaned_data["comments"],
+                    frameref=current_data["frameref"], comments=current_data["comments"],
                     owner=self.request.user, longitude=longitude, latitude=latitude,
                     picture1=current_data['picture1'],
                     picture2=current_data['picture2'],
@@ -417,8 +418,6 @@ class CreateQuoteView(UpdateView):
         # get zone
         search_user = self.object.owner
         address = search_user.get_default_shipping_address()
-        if address:
-            self.object.zone = u'%s - %s' % (address.postcode, address.state)
         context['searchrequest'] = self.object
         return context
 

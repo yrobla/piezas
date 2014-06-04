@@ -79,6 +79,12 @@
 						<input type="text" readonly="1" value="{{search_data.frameref}}" />
 					</div>
 				</div>
+				<div class="control-group">
+					<label for="frameref" class="control-label">{% trans "Comments" %}</label>
+					<div class="controls">
+						<textarea readonly="1" style="width:400px;height:50px;">{{search_data.comments}}</textarea>
+					</div>
+				</div>
 				{% include "partials/form_fields.html" %}
 
 				<div class="responsible-table">
