@@ -347,8 +347,6 @@ class PendingSearchRequestsView(ListView):
 
                 search_user = item.owner
                 address = search_user.get_default_shipping_address()
-                if address:
-                    item.zone = u'%s - %s' % (address.postcode, address.state)
                 final_distance = item.distance/1000
                 if final_distance<100:
                     item.search_type = _('Regional')
