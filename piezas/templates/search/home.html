@@ -321,7 +321,7 @@ $(document).ready(function()
 	{
 		var id = "#id_picture"+i;
 		var current_val = $(id).val();
-		if (!current_val)
+ 		if (!current_val)
 		{
 			$(id).parent().parent().parent().hide();
 		}
@@ -330,6 +330,74 @@ $(document).ready(function()
 			current_picture = i;
 		}
 	}
+
+	$("#id_brand").change(function()
+	{
+		var current_text = $("#id_brand option:selected").text();
+		if (current_text=="{% trans "Others" %}")
+		{
+			$("#other_brand").parent().parent().show();
+		}
+		else
+		{
+			$("#other_brand").parent().parent().hide();
+		}
+	});
+	$("#id_model").change(function()
+	{
+		var current_text = $("#id_model option:selected").text();
+		if (current_text=="{% trans "Others" %} - {% trans "Others" %}")
+		{
+			$("#other_model").parent().parent().show();
+		}
+		else
+		{
+			$("#other_model").parent().parent().hide();
+		}
+	});
+	$("#id_version").change(function()
+	{
+		var current_text = $("#id_version option:selected").text();
+		if (current_text=="{% trans "Others" %} - {% trans "Others" %} - {% trans "Others" %}")
+		{
+			$("#other_version").parent().parent().show();
+		}
+		else
+		{
+			$("#other_version").parent().parent().hide();
+		}
+	});
+	$("#id_bodywork").change(function()
+	{
+		var current_text = $("#id_bodywork option:selected").text();
+		if (current_text=="{% trans "Others" %}")
+		{
+			$("#other_bodywork").parent().parent().show();
+		}
+		else
+		{
+			$("#other_bodywork").parent().parent().hide();
+		}
+	});
+	$("#id_engine").change(function()
+	{
+		var current_text = $("#id_engine option:selected").text();
+		if (current_text=="{% trans "Others" %}")
+		{
+			$("#other_engine").parent().parent().show();
+		}
+		else
+		{
+			$("#other_engine").parent().parent().hide();
+		}
+	});
+
+	$("#id_brand").trigger("change");
+	$("#id_model").trigger("change");
+	$("#id_version").trigger("change");
+	$("#id_bodywork").trigger("change");
+	$("#id_engine").trigger("change");
+
 });
 </script>
 

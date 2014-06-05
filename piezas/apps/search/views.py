@@ -65,12 +65,17 @@ class HomeView(FormView):
         final_data = {}
         final_data["name"] = form.cleaned_data["name"]
         final_data["engine"] = form.cleaned_data["engine"].id
+        final_data["other_engine"] = form.cleaned_data["other_engine"]
         final_data["frameref"] = form.cleaned_data["frameref"]
         final_data["comments"] = form.cleaned_data["comments"]
         final_data["brand"] = form.cleaned_data["brand"].id
+        final_data["other_brand"] = form.cleaned_data["other_brand"]
         final_data["version"] = form.cleaned_data["version"].id
+        final_data["other_version"] = form.cleaned_data["other_version"]
         final_data["model"] = form.cleaned_data["model"].id
+        final_data["other_model"] = form.cleaned_data["other_model"]
         final_data["bodywork"] = form.cleaned_data["bodywork"].id
+        final_data["other_bodywork"] = form.cleaned_data["other_bodywork"]
 
         final_data["picture1"] = form.cleaned_data["picture1"]
         final_data["picture2"] = form.cleaned_data["picture2"]
@@ -244,6 +249,11 @@ class ConfirmView(FormView):
                     picture8=current_data['picture8'],
                     picture9=current_data['picture9'],
                     picture10=current_data['picture10'],
+                    other_brand=current_data['other_brand'],
+                    other_model=current_data['other_model'],
+                    other_version=current_data['other_version'],
+                    other_bodywork=current_data['other_bodywork'],
+                    other_engine=current_data['other_engine'],
                     )
                 search_request.save()
 

@@ -135,18 +135,23 @@ SEARCH_REQUEST_STATES = (('pending', _('pending')), ('expired', _('expired')),
 class SearchRequest(models.Model):
     brand = models.ForeignKey(Brand, verbose_name=_("Brand"),
         blank=True, null=True, related_name='product_brand')
+    other_brand = models.CharField(_('Other brand'), max_length=255, blank=True, null=True)
     model = ChainedForeignKey(Model, chained_field="brand", chained_model_field="brand",
         show_all=False, auto_choose=False, verbose_name=_("Car model"),
         help_text=_('Model of the car that it belongs to'), blank=True, null=True,
         related_name='product_model')
+    other_model = models.CharField(_('Other model'), max_length=255, blank=True, null=True)
     version = ChainedForeignKey(Version, chained_field="model", chained_model_field="model",
         show_all=False, auto_choose=True, verbose_name=_("Car version"),
         help_text=_('Version of the car that it belongs to'), blank=True, null=True,
         related_name='product_version')
+    other_version = models.CharField(_('Other version'), max_length=255, blank=True, null=True)
     bodywork = models.ForeignKey(Bodywork, verbose_name=_("Bodywork type"),
         blank=True, null=True, related_name='product_bodywork')
+    other_bodywork = models.CharField(_('Other bodywork'), max_length=255, blank=True, null=True)
     engine = models.ForeignKey(Engine, verbose_name=_("Car engine"),
         blank=True, null=True, related_name='product_engine')
+    other_engine = models.CharField(_('Other engine'), max_length=255, blank=True, null=True)
     frameref = models.CharField(_('Frame reference'), max_length=255, blank=True, null=True)
     comments = models.TextField(_('Comments'), blank=True)
     name = models.CharField(_('Search name'), max_length=255, blank=True, null=True)

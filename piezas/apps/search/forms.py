@@ -57,12 +57,22 @@ Piece = get_model('catalogue', 'Product')
 Category = get_model('catalogue', 'Category')
 
 class SearchCreationForm(forms.Form):
-    name = forms.CharField(label=_('Search name'), required=False, widget=forms.TextInput(attrs={'placeholder': _('---- Door BMW 2034GWZ white ----')}))
+    name = forms.CharField(label=_('Search name'), required=False, widget=forms.TextInput(attrs={'placeholder': _('---- Door BMW 2034GWZ white ----'), 'maxlength':255, 'style':'width:500px;'}))
     brand = forms.ModelChoiceField(label=_('Brand'), required=True, queryset = Brand.objects.all())
+    other_brand = forms.CharField(label=_('Other brand'), max_length=255, required=False,
+        widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'), 'maxlength':255, 'style':'width:500px', 'id':'other_brand'}))
     model = ChainedModelChoiceField(label=_('Model'), required=True, app_name='catalogue', model_name='Model', chain_field='brand', model_field='brand', show_all=False, auto_choose=False)
+    other_model = forms.CharField(label=_('Other model'), max_length=255, required=False,
+        widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'), 'maxlength':255, 'style':'width:500px', 'id':'other_model'}))
     version = ChainedModelChoiceField(label=_('Version'), required=True, app_name='catalogue', model_name='Version', chain_field='model', model_field='model', show_all=False, auto_choose=False)
+    other_version = forms.CharField(label=_('Other version'), max_length=255, required=False,
+        widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'), 'maxlength':255, 'style':'width:500px', 'id':'other_version'}))
     bodywork = forms.ModelChoiceField(label=_('Bodywork'), required=True, queryset = Bodywork.objects.all())
+    other_bodywork = forms.CharField(label=_('Other bodywork'), max_length=255, required=False,
+        widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'), 'maxlength':255, 'style':'width:500px', 'id':'other_bodywork'}))
     engine = forms.ModelChoiceField(label=_('Engine'), required=True, queryset = Engine.objects.all())
+    other_engine = forms.CharField(label=_('Other engine'), max_length=255, required=False,
+        widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'), 'maxlength':255, 'style':'width:500px', 'id':'other_engine'}))
     frameref = forms.CharField(label=_('Frame reference'), max_length=255, required=False)
     comments = forms.CharField(label=_('Comments'), required=False, widget=forms.Textarea(attrs={'style':'height:50px;width:400px'}))
 
@@ -76,6 +86,35 @@ class SearchCreationForm(forms.Form):
     picture8 = forms.CharField(label=_('Picture #8'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
     picture9 = forms.CharField(label=_('Picture #9'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
     picture10 = forms.CharField(label=_('Picture #10'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
+
+    def clean(self):
+        if self.is_valid():
+            brand = self.cleaned_data['brand']
+            if brand:
+                if brand.name == _('Others'):
+                    if 'other_brand' not in self.cleaned_data or not self.cleaned_data['other_brand']:
+                        raise forms.ValidationError(_("Please manually enter the brand field content."))
+            model = self.cleaned_data['model']
+            if model:
+                if model.name == _('Others'):
+                    if 'other_model' not in self.cleaned_data or not self.cleaned_data['other_model']:
+                        raise forms.ValidationError(_("Please manually enter the model field content."))
+            version = self.cleaned_data['version']
+            if version:
+                if version.name == _('Others'):
+                    if 'other_version' not in self.cleaned_data or not self.cleaned_data['other_version']:
+                        raise forms.ValidationError(_("Please manually enter the version field content."))
+            bodywork = self.cleaned_data['bodywork']
+            if bodywork:
+                if bodywork.name == _('Others'):
+                    if 'other_bodywork' not in self.cleaned_data or not self.cleaned_data['other_bodywork']:
+                        raise forms.ValidationError(_("Please manually enter the bodywork field content."))
+            engine = self.cleaned_data['engine']
+            if engine:
+                if engine.name == _('Others'):
+                    if 'other_engine' not in self.cleaned_data or not self.cleaned_data['other_engine']:
+                        raise forms.ValidationError(_("Please manually enter the engine field content."))
+        return super(SearchCreationForm, self).clean()
 
 
 class SearchCreationFormItem(forms.Form):

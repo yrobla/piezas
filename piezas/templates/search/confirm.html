@@ -47,30 +47,49 @@
 					<label for="brand" class="control-label">{% trans "Brand" %}</label>
 					<div class="controls">
 						<input type="text" readonly="1" value="{{search_data.brand_name}}" />
+
+						{% if search_data.other_brand %}
+						<input type="text" readonly="1" value="{{search_data.other_brand}}" />
+						{% endif %}
 					</div>
 				</div>
 				<div class="control-group">
 					<label for="model" class="control-label">{% trans "Model" %}</label>
 					<div class="controls">
 						<input type="text" readonly="1" value="{{search_data.model_name}}" />
+
+						{% if search_data.other_model %}
+						<input type="text" readonly="1" value="{{search_data.other_model}}" />
+						{% endif %}
 					</div>
 				</div>
 				<div class="control-group">
 					<label for="version" class="control-label">{% trans "Version" %}</label>
 					<div class="controls">
 						<input type="text" readonly="1" value="{{search_data.version_name}}" />
+						{% if search_data.other_version %}
+						<input type="text" readonly="1" value="{{search_data.other_version}}" />
+						{% endif %}
 					</div>
 				</div>
 				<div class="control-group">
 					<label for="bodywork" class="control-label">{% trans "Bodywork" %}</label>
 					<div class="controls">
 						<input type="text" readonly="1" value="{{search_data.bodywork_name}}" />
+
+						{% if search_data.other_bodywork %}
+						<input type="text" readonly="1" value="{{search_data.other_bodywork}}" />
+						{% endif %}
 					</div>
 				</div>
 				<div class="control-group">
 					<label for="engine" class="control-label">{% trans "Engine" %}</label>
 					<div class="controls">
 						<input type="text" readonly="1" value="{{search_data.engine_name}}" />
+
+						{% if search_data.other_engine %}
+						<input type="text" readonly="1" value="{{search_data.other_engine}}" />
+						{% endif %}
 					</div>
 				</div>
 				<div class="control-group">
