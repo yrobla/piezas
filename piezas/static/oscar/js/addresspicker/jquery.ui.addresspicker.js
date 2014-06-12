@@ -72,7 +72,10 @@
         geocode: function(options, callback)
         {
           jQuery.ajax({
-            url: "https://maps.googleapis.com/maps/api/geocode/json?" + jQuery.param(options) + '&sensor=false',
+		cache: false,
+		crossDomain: true,
+		dataType: 'json',
+            url: "http://maps.googleapis.com/maps/api/geocode/json?" + jQuery.param(options) + '&sensor=false',
             type: "GET",
             success: function(data) {
               callback(data.results, data.status);
