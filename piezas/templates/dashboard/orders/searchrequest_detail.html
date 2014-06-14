@@ -133,23 +133,33 @@
 			    </tr>
                             <tr>
                                 <th>{% trans "Brand" %}</th>
-                                <td>{{ searchrequest.brand.name }}</td>
+                                <td>{{ searchrequest.brand.name }}
+{% if searchrequest.other_brand %} - {{searchrequest.other_brand}}{% endif %}
+</td>
                             </tr>
                             <tr>
                                 <th>{% trans "Model" %}</th>
-                                <td>{{ searchrequest.model.name }}</td>
+                                <td>{{ searchrequest.model.name }}
+{% if searchrequest.other_model %} - {{searchrequest.other_model}}{% endif %}
+</td>
                             </tr>
                             <tr>
                                 <th>{% trans "Version" %}</th>
-                                <td>{{ searchrequest.version.name }}</td>
+                                <td>{{ searchrequest.version.name }}
+{% if searchrequest.other_version %} - {{searchrequest.other_version}}{% endif %}
+</td>
                             </tr>
                             <tr>
                                 <th>{% trans "Bodywork" %}</th>
-                                <td>{{ searchrequest.bodywork }}</td>
+                                <td>{{ searchrequest.bodywork }}
+{% if searchrequest.other_bodywork %} - {{searchrequest.other_bodywork}}{% endif %}
+</td>
                             </tr>
                             <tr>
                                 <th>{% trans "Engine" %}</th>
-                                <td>{{ searchrequest.engine }}</td>
+                                <td>{{ searchrequest.engine }}
+{% if searchrequest.other_engine %} - {{searchrequest.other_engine}}{% endif %}
+</td>
                             </tr>
                             <tr>
                                 <th>{% trans "Frame reference" %}</th>

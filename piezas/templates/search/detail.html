@@ -33,11 +33,22 @@
 	 	<h4>{% trans "Search details" %}</h4>
 		<div class="responsive-table">
 			<table class="table span12">
-			<tr><th>{% trans "Brand" %}</th><td>{{searchrequest.brand}}</td></tr>
-			<tr><th>{% trans "Model" %}</th><td>{{searchrequest.model}}</td></tr>
-			<tr><th>{% trans "Version" %}</th><td>{{searchrequest.version}}</td></tr>
-			<tr><th>{% trans "Bodywork" %}</th><td>{{searchrequest.bodywork}}</td></tr>
-			<tr><th>{% trans "Engine" %}</th><td>{{searchrequest.engine}}</td></tr>
+			<tr><th>{% trans "Brand" %}</th><td>{{searchrequest.brand}}
+{% if searchrequest.other_brand %} - {{searchrequest.other_brand}}{% endif %}
+</td></tr>
+			<tr><th>{% trans "Model" %}</th><td>{{searchrequest.model.name}}
+{% if searchrequest.other_model %} - {{searchrequest.other_model}}{% endif %}
+</td></tr>
+			<tr><th>{% trans "Version" %}</th><td>{{searchrequest.version.name}}
+{% if searchrequest.other_version %} - {{searchrequest.other_version}}{% endif %}
+
+</td></tr>
+			<tr><th>{% trans "Bodywork" %}</th><td>{{searchrequest.bodywork}}
+{% if searchrequest.other_bodywork %} - {{searchrequest.other_bodywork}}{% endif %}
+</td></tr>
+			<tr><th>{% trans "Engine" %}</th><td>{{searchrequest.engine}}
+{% if searchrequest.other_engine %} - {{searchrequest.other_engine}}{% endif %}
+</td></tr>
 			<tr><th>{% trans "Frame reference" %}</th><td>{{searchrequest.frameref}}</td></tr>
 			<tr><th>{% trans "Comments" %}</th><td>{{searchrequest.comments}}</td></tr>
 			<tr><th>{% trans "Date created" %}</th><td>{{searchrequest.date_created}}</td></tr>

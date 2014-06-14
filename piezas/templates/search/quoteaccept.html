@@ -33,11 +33,21 @@
 	 	<h4>{% trans "Search details" %}</h4>
 		<div class="responsive-table">
 			<table class="table span12">
-			<tr><th>{% trans "Brand" %}</th><td>{{quote.search_request.brand}}</td></tr>
-			<tr><th>{% trans "Model" %}</th><td>{{quote.search_request.model}}</td></tr>
-			<tr><th>{% trans "Version" %}</th><td>{{quote.search_request.version}}</td></tr>
-			<tr><th>{% trans "Bodywork" %}</th><td>{{quote.search_request.bodywork}}</td></tr>
-			<tr><th>{% trans "Engine" %}</th><td>{{quote.search_request.engine}}</td></tr>
+			<tr><th>{% trans "Brand" %}</th><td>{{quote.search_request.brand}}
+{% if quote.search_request.other_brand %} - {{quote.search_request.other_brand}}{% endif %}
+</td></tr>
+			<tr><th>{% trans "Model" %}</th><td>{{quote.search_request.model.name}}
+{% if quote.search_request.other_model %} - {{quote.search_request.other_model}}{% endif %}
+</td></tr>
+			<tr><th>{% trans "Version" %}</th><td>{{quote.search_request.version.name}}
+{% if quote.search_request.other_version %} - {{quote.search_request.other_version}}{% endif %}
+</td></tr>
+			<tr><th>{% trans "Bodywork" %}</th><td>{{quote.search_request.bodywork}}
+{% if quote.search_request.other_bodywork %} - {{quote.search_request.other_bodywork}}{% endif %}
+</td></tr>
+			<tr><th>{% trans "Engine" %}</th><td>{{quote.search_request.engine}}
+{% if quote.search_request.other_engine %} - {{quote.search_request.other_engine}}{% endif %}
+</td></tr>
 			<tr><th>{% trans "Frame reference" %}</th><td>{{quote.search_request.frameref}}</td></tr>
 			<tr><th>{% trans "Comments" %}</th><td>{{quote.search_request.comments}}</td></tr>
 			<tr><th>{% trans "Date created" %}</th><td>{{quote.search_request.date_created}}</td></tr>

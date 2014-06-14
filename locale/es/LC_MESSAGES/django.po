@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-05 14:16+0200\n"
+"POT-Creation-Date: 2014-06-14 09:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -256,30 +256,30 @@ msgstr "Versiones"
 #: local/piezas/settings.py:266 local/piezas/apps/search/forms.py:70
 #: local/piezas/templates/basket/partials/basket_content.html:31
 #: local/piezas/templates/basket/partials/searchrequest_content.html:12
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:147
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:153
 #: local/piezas/templates/search/activesearches_list.html:26
 #: local/piezas/templates/search/canceledsearches_list.html:26
-#: local/piezas/templates/search/confirm.html:65
-#: local/piezas/templates/search/confirmquoterecalc.html:39
-#: local/piezas/templates/search/detail.html:39
+#: local/piezas/templates/search/confirm.html:76
+#: local/piezas/templates/search/confirmquoterecalc.html:45
+#: local/piezas/templates/search/detail.html:46
 #: local/piezas/templates/search/expiredsearches_list.html:26
-#: local/piezas/templates/search/quote.html:57
-#: local/piezas/templates/search/quoteaccept.html:39
-#: local/piezas/templates/search/quotedetail.html:39
+#: local/piezas/templates/search/quote.html:61
+#: local/piezas/templates/search/quoteaccept.html:45
+#: local/piezas/templates/search/quotedetail.html:45
 #: local/piezas/templates/search/quoteview.html:39 piezas/settings.py:266
 #: piezas/apps/search/forms.py:70
 #: piezas/templates/basket/partials/basket_content.html:31
 #: piezas/templates/basket/partials/searchrequest_content.html:12
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:147
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:153
 #: piezas/templates/search/activesearches_list.html:26
 #: piezas/templates/search/canceledsearches_list.html:26
-#: piezas/templates/search/confirm.html:65
-#: piezas/templates/search/confirmquoterecalc.html:39
-#: piezas/templates/search/detail.html:39
+#: piezas/templates/search/confirm.html:76
+#: piezas/templates/search/confirmquoterecalc.html:45
+#: piezas/templates/search/detail.html:46
 #: piezas/templates/search/expiredsearches_list.html:26
-#: piezas/templates/search/quote.html:57
-#: piezas/templates/search/quoteaccept.html:39
-#: piezas/templates/search/quotedetail.html:39
+#: piezas/templates/search/quote.html:61
+#: piezas/templates/search/quoteaccept.html:45
+#: piezas/templates/search/quotedetail.html:45
 #: piezas/templates/search/quoteview.html:39
 msgid "Bodywork"
 msgstr "Tipo de carrocería"
@@ -287,32 +287,32 @@ msgstr "Tipo de carrocería"
 #: local/piezas/settings.py:270 local/piezas/apps/search/forms.py:73
 #: local/piezas/templates/basket/partials/basket_content.html:32
 #: local/piezas/templates/basket/partials/searchrequest_content.html:13
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:151
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:159
 #: local/piezas/templates/search/activesearches_list.html:27
 #: local/piezas/templates/search/canceledsearches_list.html:27
-#: local/piezas/templates/search/confirm.html:71
-#: local/piezas/templates/search/confirmquoterecalc.html:40
-#: local/piezas/templates/search/detail.html:40
+#: local/piezas/templates/search/confirm.html:86
+#: local/piezas/templates/search/confirmquoterecalc.html:48
+#: local/piezas/templates/search/detail.html:49
 #: local/piezas/templates/search/expiredsearches_list.html:27
 #: local/piezas/templates/search/pending_searchrequest_list.html:25
-#: local/piezas/templates/search/quote.html:51
-#: local/piezas/templates/search/quoteaccept.html:40
-#: local/piezas/templates/search/quotedetail.html:40
+#: local/piezas/templates/search/quote.html:54
+#: local/piezas/templates/search/quoteaccept.html:48
+#: local/piezas/templates/search/quotedetail.html:48
 #: local/piezas/templates/search/quoteview.html:40 piezas/settings.py:270
 #: piezas/apps/search/forms.py:73
 #: piezas/templates/basket/partials/basket_content.html:32
 #: piezas/templates/basket/partials/searchrequest_content.html:13
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:151
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:159
 #: piezas/templates/search/activesearches_list.html:27
 #: piezas/templates/search/canceledsearches_list.html:27
-#: piezas/templates/search/confirm.html:71
-#: piezas/templates/search/confirmquoterecalc.html:40
-#: piezas/templates/search/detail.html:40
+#: piezas/templates/search/confirm.html:86
+#: piezas/templates/search/confirmquoterecalc.html:48
+#: piezas/templates/search/detail.html:49
 #: piezas/templates/search/expiredsearches_list.html:27
 #: piezas/templates/search/pending_searchrequest_list.html:25
-#: piezas/templates/search/quote.html:51
-#: piezas/templates/search/quoteaccept.html:40
-#: piezas/templates/search/quotedetail.html:40
+#: piezas/templates/search/quote.html:54
+#: piezas/templates/search/quoteaccept.html:48
+#: piezas/templates/search/quotedetail.html:48
 #: piezas/templates/search/quoteview.html:40
 msgid "Engine"
 msgstr "Tipo de motor"
@@ -440,6 +440,23 @@ msgstr ""
 msgid "Reports"
 msgstr ""
 
+#: local/piezas/settings.py:359 piezas/settings.py:359
+msgid "pending_payment"
+msgstr "Pendiente de pago"
+
+#: local/piezas/settings.py:359 piezas/settings.py:359
+msgid "paid"
+msgstr "Pagado"
+
+#: local/piezas/settings.py:359 piezas/settings.py:359
+msgid "sent"
+msgstr "Enviado"
+
+#: local/piezas/settings.py:359 local/piezas/apps/catalogue/models.py:133
+#: piezas/settings.py:359 piezas/apps/catalogue/models.py:133
+msgid "canceled"
+msgstr "Cancelada"
+
 #: local/piezas/apps/address/forms.py:10 local/piezas/apps/address/models.py:8
 #: local/piezas/apps/catalogue/models.py:164 piezas/apps/address/forms.py:10
 #: piezas/apps/address/models.py:8 piezas/apps/catalogue/models.py:164
@@ -558,29 +575,29 @@ msgstr "Listado de opciones, separadas por pipes (|)"
 
 #: local/piezas/apps/catalogue/models.py:125
 #: local/piezas/apps/catalogue/models.py:217
-#: local/piezas/apps/search/forms.py:185
+#: local/piezas/apps/search/forms.py:214
 #: local/piezas/templates/basket/partials/basket_content.html:27
 #: local/piezas/templates/dashboard/orders/quote_detail.html:81
 #: local/piezas/templates/dashboard/orders/searchrequest_detail.html:80
-#: local/piezas/templates/search/confirm.html:94
-#: local/piezas/templates/search/confirmquoterecalc.html:72
-#: local/piezas/templates/search/detail.html:55
+#: local/piezas/templates/search/confirm.html:113
+#: local/piezas/templates/search/confirmquoterecalc.html:82
+#: local/piezas/templates/search/detail.html:66
 #: local/piezas/templates/search/home.html:57
-#: local/piezas/templates/search/quote.html:117
-#: local/piezas/templates/search/quoteaccept.html:55
-#: local/piezas/templates/search/quotedetail.html:55
+#: local/piezas/templates/search/quote.html:122
+#: local/piezas/templates/search/quoteaccept.html:65
+#: local/piezas/templates/search/quotedetail.html:65
 #: local/piezas/templates/search/quoteview.html:55
 #: piezas/apps/catalogue/models.py:125 piezas/apps/catalogue/models.py:217
-#: piezas/apps/search/forms.py:185
+#: piezas/apps/search/forms.py:214
 #: piezas/templates/basket/partials/basket_content.html:27
 #: piezas/templates/dashboard/orders/quote_detail.html:81
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:80
-#: piezas/templates/search/confirm.html:94
-#: piezas/templates/search/confirmquoterecalc.html:72
-#: piezas/templates/search/detail.html:55 piezas/templates/search/home.html:57
-#: piezas/templates/search/quote.html:117
-#: piezas/templates/search/quoteaccept.html:55
-#: piezas/templates/search/quotedetail.html:55
+#: piezas/templates/search/confirm.html:113
+#: piezas/templates/search/confirmquoterecalc.html:82
+#: piezas/templates/search/detail.html:66 piezas/templates/search/home.html:57
+#: piezas/templates/search/quote.html:122
+#: piezas/templates/search/quoteaccept.html:65
+#: piezas/templates/search/quotedetail.html:65
 #: piezas/templates/search/quoteview.html:55
 msgid "Piece"
 msgstr "Pieza"
@@ -599,11 +616,6 @@ msgstr "Activa"
 #: piezas/apps/catalogue/models.py:132
 msgid "expired"
 msgstr "Expirada"
-
-#: local/piezas/apps/catalogue/models.py:133
-#: piezas/apps/catalogue/models.py:133
-msgid "canceled"
-msgstr "Cancelada"
 
 #: local/piezas/apps/catalogue/models.py:136
 #: local/piezas/apps/dashboard/podcatalogue/forms.py:51
@@ -699,24 +711,24 @@ msgstr "Otro motor"
 #: local/piezas/apps/search/forms.py:76
 #: local/piezas/templates/basket/partials/basket_content.html:33
 #: local/piezas/templates/basket/partials/searchrequest_content.html:14
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:155
-#: local/piezas/templates/search/confirm.html:77
-#: local/piezas/templates/search/confirmquoterecalc.html:41
-#: local/piezas/templates/search/detail.html:41
-#: local/piezas/templates/search/quote.html:63
-#: local/piezas/templates/search/quoteaccept.html:41
-#: local/piezas/templates/search/quotedetail.html:41
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:165
+#: local/piezas/templates/search/confirm.html:96
+#: local/piezas/templates/search/confirmquoterecalc.html:51
+#: local/piezas/templates/search/detail.html:52
+#: local/piezas/templates/search/quote.html:68
+#: local/piezas/templates/search/quoteaccept.html:51
+#: local/piezas/templates/search/quotedetail.html:51
 #: local/piezas/templates/search/quoteview.html:41
 #: piezas/apps/catalogue/models.py:155 piezas/apps/search/forms.py:76
 #: piezas/templates/basket/partials/basket_content.html:33
 #: piezas/templates/basket/partials/searchrequest_content.html:14
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:155
-#: piezas/templates/search/confirm.html:77
-#: piezas/templates/search/confirmquoterecalc.html:41
-#: piezas/templates/search/detail.html:41
-#: piezas/templates/search/quote.html:63
-#: piezas/templates/search/quoteaccept.html:41
-#: piezas/templates/search/quotedetail.html:41
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:165
+#: piezas/templates/search/confirm.html:96
+#: piezas/templates/search/confirmquoterecalc.html:51
+#: piezas/templates/search/detail.html:52
+#: piezas/templates/search/quote.html:68
+#: piezas/templates/search/quoteaccept.html:51
+#: piezas/templates/search/quotedetail.html:51
 #: piezas/templates/search/quoteview.html:41
 msgid "Frame reference"
 msgstr "Número de bastidor"
@@ -725,49 +737,49 @@ msgstr "Número de bastidor"
 #: local/piezas/apps/catalogue/models.py:218
 #: local/piezas/apps/catalogue/models.py:287
 #: local/piezas/apps/catalogue/models.py:325
-#: local/piezas/apps/search/forms.py:77 local/piezas/apps/search/forms.py:95
-#: local/piezas/apps/search/forms.py:191
+#: local/piezas/apps/search/forms.py:77 local/piezas/apps/search/forms.py:124
+#: local/piezas/apps/search/forms.py:220
 #: local/piezas/templates/basket/partials/basket_content.html:34
 #: local/piezas/templates/basket/partials/searchrequest_content.html:15
 #: local/piezas/templates/dashboard/orders/quote_detail.html:144
 #: local/piezas/templates/dashboard/orders/searchrequest_detail.html:81
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:159
-#: local/piezas/templates/search/confirm.html:83
-#: local/piezas/templates/search/confirm.html:95
-#: local/piezas/templates/search/confirmquoterecalc.html:42
-#: local/piezas/templates/search/confirmquoterecalc.html:200
-#: local/piezas/templates/search/detail.html:42
-#: local/piezas/templates/search/detail.html:56
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:169
+#: local/piezas/templates/search/confirm.html:102
+#: local/piezas/templates/search/confirm.html:114
+#: local/piezas/templates/search/confirmquoterecalc.html:52
+#: local/piezas/templates/search/confirmquoterecalc.html:210
+#: local/piezas/templates/search/detail.html:53
+#: local/piezas/templates/search/detail.html:67
 #: local/piezas/templates/search/home.html:58
-#: local/piezas/templates/search/quote.html:76
-#: local/piezas/templates/search/quote.html:119
-#: local/piezas/templates/search/quoteaccept.html:42
-#: local/piezas/templates/search/quoteaccept.html:182
-#: local/piezas/templates/search/quotedetail.html:42
-#: local/piezas/templates/search/quotedetail.html:211
+#: local/piezas/templates/search/quote.html:81
+#: local/piezas/templates/search/quote.html:124
+#: local/piezas/templates/search/quoteaccept.html:52
+#: local/piezas/templates/search/quoteaccept.html:192
+#: local/piezas/templates/search/quotedetail.html:52
+#: local/piezas/templates/search/quotedetail.html:221
 #: local/piezas/templates/search/quoteview.html:42
 #: local/piezas/templates/search/quoteview.html:207
 #: piezas/apps/catalogue/models.py:156 piezas/apps/catalogue/models.py:218
 #: piezas/apps/catalogue/models.py:287 piezas/apps/catalogue/models.py:325
-#: piezas/apps/search/forms.py:77 piezas/apps/search/forms.py:95
-#: piezas/apps/search/forms.py:191
+#: piezas/apps/search/forms.py:77 piezas/apps/search/forms.py:124
+#: piezas/apps/search/forms.py:220
 #: piezas/templates/basket/partials/basket_content.html:34
 #: piezas/templates/basket/partials/searchrequest_content.html:15
 #: piezas/templates/dashboard/orders/quote_detail.html:144
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:81
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:159
-#: piezas/templates/search/confirm.html:83
-#: piezas/templates/search/confirm.html:95
-#: piezas/templates/search/confirmquoterecalc.html:42
-#: piezas/templates/search/confirmquoterecalc.html:200
-#: piezas/templates/search/detail.html:42
-#: piezas/templates/search/detail.html:56 piezas/templates/search/home.html:58
-#: piezas/templates/search/quote.html:76
-#: piezas/templates/search/quote.html:119
-#: piezas/templates/search/quoteaccept.html:42
-#: piezas/templates/search/quoteaccept.html:182
-#: piezas/templates/search/quotedetail.html:42
-#: piezas/templates/search/quotedetail.html:211
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:169
+#: piezas/templates/search/confirm.html:102
+#: piezas/templates/search/confirm.html:114
+#: piezas/templates/search/confirmquoterecalc.html:52
+#: piezas/templates/search/confirmquoterecalc.html:210
+#: piezas/templates/search/detail.html:53
+#: piezas/templates/search/detail.html:67 piezas/templates/search/home.html:58
+#: piezas/templates/search/quote.html:81
+#: piezas/templates/search/quote.html:124
+#: piezas/templates/search/quoteaccept.html:52
+#: piezas/templates/search/quoteaccept.html:192
+#: piezas/templates/search/quotedetail.html:52
+#: piezas/templates/search/quotedetail.html:221
 #: piezas/templates/search/quoteview.html:42
 #: piezas/templates/search/quoteview.html:207
 msgid "Comments"
@@ -794,9 +806,9 @@ msgstr "Nombre de la búsqueda"
 #: local/piezas/apps/dashboard/podorders/views.py:420
 #: local/piezas/templates/dashboard/orders/quote_list.html:96
 #: local/piezas/templates/dashboard/orders/searchrequest_list.html:97
-#: local/piezas/templates/search/confirmquoterecalc.html:188
-#: local/piezas/templates/search/quoteaccept.html:171
-#: local/piezas/templates/search/quotedetail.html:175
+#: local/piezas/templates/search/confirmquoterecalc.html:198
+#: local/piezas/templates/search/quoteaccept.html:181
+#: local/piezas/templates/search/quotedetail.html:185
 #: local/piezas/templates/search/quoteview.html:171
 #: piezas/apps/catalogue/models.py:162 piezas/apps/catalogue/models.py:224
 #: piezas/apps/catalogue/models.py:251 piezas/apps/catalogue/models.py:277
@@ -805,63 +817,63 @@ msgstr "Nombre de la búsqueda"
 #: piezas/apps/dashboard/podorders/views.py:420
 #: piezas/templates/dashboard/orders/quote_list.html:96
 #: piezas/templates/dashboard/orders/searchrequest_list.html:97
-#: piezas/templates/search/confirmquoterecalc.html:188
-#: piezas/templates/search/quoteaccept.html:171
-#: piezas/templates/search/quotedetail.html:175
+#: piezas/templates/search/confirmquoterecalc.html:198
+#: piezas/templates/search/quoteaccept.html:181
+#: piezas/templates/search/quotedetail.html:185
 #: piezas/templates/search/quoteview.html:171
 msgid "Owner"
 msgstr "Propietario"
 
 #: local/piezas/apps/catalogue/models.py:204
-#: local/piezas/apps/search/views.py:353 piezas/apps/catalogue/models.py:204
-#: piezas/apps/search/views.py:353
+#: local/piezas/apps/search/views.py:363 piezas/apps/catalogue/models.py:204
+#: piezas/apps/search/views.py:363
 msgid "Regional"
 msgstr "Regional"
 
 #: local/piezas/apps/catalogue/models.py:206
-#: local/piezas/apps/search/views.py:356 piezas/apps/catalogue/models.py:206
-#: piezas/apps/search/views.py:356
+#: local/piezas/apps/search/views.py:366 piezas/apps/catalogue/models.py:206
+#: piezas/apps/search/views.py:366
 msgid "Bordering"
 msgstr "Limítrofe"
 
 #: local/piezas/apps/catalogue/models.py:208
-#: local/piezas/apps/search/views.py:360 piezas/apps/catalogue/models.py:208
-#: piezas/apps/search/views.py:360
+#: local/piezas/apps/search/views.py:370 piezas/apps/catalogue/models.py:208
+#: piezas/apps/search/views.py:370
 msgid "Supraregional"
 msgstr "Supraregional"
 
 #: local/piezas/apps/catalogue/models.py:210
-#: local/piezas/apps/search/views.py:363 piezas/apps/catalogue/models.py:210
-#: piezas/apps/search/views.py:363
+#: local/piezas/apps/search/views.py:373 piezas/apps/catalogue/models.py:210
+#: piezas/apps/search/views.py:373
 msgid "National"
 msgstr "Nacional"
 
 #: local/piezas/apps/catalogue/models.py:215
-#: local/piezas/apps/search/forms.py:92 local/piezas/apps/search/forms.py:183
+#: local/piezas/apps/search/forms.py:121 local/piezas/apps/search/forms.py:212
 #: local/piezas/templates/dashboard/catalogue/product_update.html:156
 #: local/piezas/templates/dashboard/comms/list.html:34
 #: local/piezas/templates/dashboard/orders/quote_detail.html:80
 #: local/piezas/templates/dashboard/orders/searchrequest_detail.html:79
-#: local/piezas/templates/search/confirm.html:93
-#: local/piezas/templates/search/confirmquoterecalc.html:71
-#: local/piezas/templates/search/detail.html:54
+#: local/piezas/templates/search/confirm.html:112
+#: local/piezas/templates/search/confirmquoterecalc.html:81
+#: local/piezas/templates/search/detail.html:65
 #: local/piezas/templates/search/home.html:56
-#: local/piezas/templates/search/quote.html:116
-#: local/piezas/templates/search/quoteaccept.html:54
-#: local/piezas/templates/search/quotedetail.html:54
+#: local/piezas/templates/search/quote.html:121
+#: local/piezas/templates/search/quoteaccept.html:64
+#: local/piezas/templates/search/quotedetail.html:64
 #: local/piezas/templates/search/quoteview.html:54
-#: piezas/apps/catalogue/models.py:215 piezas/apps/search/forms.py:92
-#: piezas/apps/search/forms.py:183
+#: piezas/apps/catalogue/models.py:215 piezas/apps/search/forms.py:121
+#: piezas/apps/search/forms.py:212
 #: piezas/templates/dashboard/catalogue/product_update.html:156
 #: piezas/templates/dashboard/comms/list.html:34
 #: piezas/templates/dashboard/orders/quote_detail.html:80
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:79
-#: piezas/templates/search/confirm.html:93
-#: piezas/templates/search/confirmquoterecalc.html:71
-#: piezas/templates/search/detail.html:54 piezas/templates/search/home.html:56
-#: piezas/templates/search/quote.html:116
-#: piezas/templates/search/quoteaccept.html:54
-#: piezas/templates/search/quotedetail.html:54
+#: piezas/templates/search/confirm.html:112
+#: piezas/templates/search/confirmquoterecalc.html:81
+#: piezas/templates/search/detail.html:65 piezas/templates/search/home.html:56
+#: piezas/templates/search/quote.html:121
+#: piezas/templates/search/quoteaccept.html:64
+#: piezas/templates/search/quotedetail.html:64
 #: piezas/templates/search/quoteview.html:54
 msgid "Category"
 msgstr ""
@@ -878,7 +890,7 @@ msgstr "Pieza a buscar"
 
 #: local/piezas/apps/catalogue/models.py:219
 #: local/piezas/apps/catalogue/models.py:322
-#: local/piezas/apps/search/forms.py:193
+#: local/piezas/apps/search/forms.py:222
 #: local/piezas/templates/basket/partials/basket_content.html:35
 #: local/piezas/templates/basket/partials/searchrequest_content.html:16
 #: local/piezas/templates/checkout/checkout.html:105
@@ -891,7 +903,7 @@ msgstr "Pieza a buscar"
 #: local/piezas/templates/dashboard/orders/line_detail.html:170
 #: local/piezas/templates/dashboard/orders/order_detail.html:96
 #: piezas/apps/catalogue/models.py:219 piezas/apps/catalogue/models.py:322
-#: piezas/apps/search/forms.py:193
+#: piezas/apps/search/forms.py:222
 #: piezas/templates/basket/partials/basket_content.html:35
 #: piezas/templates/basket/partials/searchrequest_content.html:16
 #: piezas/templates/checkout/checkout.html:105
@@ -953,7 +965,7 @@ msgid "Answer for text types"
 msgstr ""
 
 #: local/piezas/apps/catalogue/models.py:258
-#: local/piezas/apps/search/views.py:407
+#: local/piezas/apps/search/views.py:417
 #: local/piezas/templates/catalogue/partials/review.html:40
 #: local/piezas/templates/customer/profile/profile.html:21
 #: local/piezas/templates/dashboard/offers/offer_list.html:66
@@ -961,21 +973,21 @@ msgstr ""
 #: local/piezas/templates/dashboard/ranges/range_list.html:56
 #: local/piezas/templates/dashboard/ranges/range_product_list.html:111
 #: local/piezas/templates/search/activesearches_list.html:68
-#: local/piezas/templates/search/confirm.html:113
-#: local/piezas/templates/search/confirmquoterecalc.html:95
-#: local/piezas/templates/search/confirmquoterecalc.html:238
-#: local/piezas/templates/search/confirmquoterecalc.html:253
-#: local/piezas/templates/search/detail.html:74
+#: local/piezas/templates/search/confirm.html:132
+#: local/piezas/templates/search/confirmquoterecalc.html:105
+#: local/piezas/templates/search/confirmquoterecalc.html:248
+#: local/piezas/templates/search/confirmquoterecalc.html:263
+#: local/piezas/templates/search/detail.html:85
 #: local/piezas/templates/search/historysearches_list.html:102
 #: local/piezas/templates/search/home.html:212
-#: local/piezas/templates/search/quote.html:285
-#: local/piezas/templates/search/quote.html:299
-#: local/piezas/templates/search/quoteaccept.html:78
-#: local/piezas/templates/search/quoteaccept.html:228
-#: local/piezas/templates/search/quotedetail.html:79
-#: local/piezas/templates/search/quotedetail.html:247
+#: local/piezas/templates/search/quote.html:290
+#: local/piezas/templates/search/quote.html:304
+#: local/piezas/templates/search/quoteaccept.html:88
+#: local/piezas/templates/search/quoteaccept.html:238
+#: local/piezas/templates/search/quotedetail.html:89
+#: local/piezas/templates/search/quotedetail.html:257
 #: local/piezas/templates/search/quoteview.html:78
-#: piezas/apps/catalogue/models.py:258 piezas/apps/search/views.py:407
+#: piezas/apps/catalogue/models.py:258 piezas/apps/search/views.py:417
 #: piezas/templates/catalogue/partials/review.html:40
 #: piezas/templates/customer/profile/profile.html:21
 #: piezas/templates/dashboard/offers/offer_list.html:66
@@ -983,25 +995,25 @@ msgstr ""
 #: piezas/templates/dashboard/ranges/range_list.html:56
 #: piezas/templates/dashboard/ranges/range_product_list.html:111
 #: piezas/templates/search/activesearches_list.html:68
-#: piezas/templates/search/confirm.html:113
-#: piezas/templates/search/confirmquoterecalc.html:95
-#: piezas/templates/search/confirmquoterecalc.html:238
-#: piezas/templates/search/confirmquoterecalc.html:253
-#: piezas/templates/search/detail.html:74
+#: piezas/templates/search/confirm.html:132
+#: piezas/templates/search/confirmquoterecalc.html:105
+#: piezas/templates/search/confirmquoterecalc.html:248
+#: piezas/templates/search/confirmquoterecalc.html:263
+#: piezas/templates/search/detail.html:85
 #: piezas/templates/search/historysearches_list.html:102
 #: piezas/templates/search/home.html:212
-#: piezas/templates/search/quote.html:285
-#: piezas/templates/search/quote.html:299
-#: piezas/templates/search/quoteaccept.html:78
-#: piezas/templates/search/quoteaccept.html:228
-#: piezas/templates/search/quotedetail.html:79
-#: piezas/templates/search/quotedetail.html:247
+#: piezas/templates/search/quote.html:290
+#: piezas/templates/search/quote.html:304
+#: piezas/templates/search/quoteaccept.html:88
+#: piezas/templates/search/quoteaccept.html:238
+#: piezas/templates/search/quotedetail.html:89
+#: piezas/templates/search/quotedetail.html:257
 #: piezas/templates/search/quoteview.html:78
 msgid "Yes"
 msgstr ""
 
 #: local/piezas/apps/catalogue/models.py:260
-#: local/piezas/apps/search/views.py:409
+#: local/piezas/apps/search/views.py:419
 #: local/piezas/templates/catalogue/partials/review.html:45
 #: local/piezas/templates/customer/profile/profile.html:22
 #: local/piezas/templates/dashboard/offers/offer_list.html:68
@@ -1009,21 +1021,21 @@ msgstr ""
 #: local/piezas/templates/dashboard/ranges/range_list.html:58
 #: local/piezas/templates/dashboard/ranges/range_product_list.html:111
 #: local/piezas/templates/search/activesearches_list.html:70
-#: local/piezas/templates/search/confirm.html:115
-#: local/piezas/templates/search/confirmquoterecalc.html:97
-#: local/piezas/templates/search/confirmquoterecalc.html:239
-#: local/piezas/templates/search/confirmquoterecalc.html:254
-#: local/piezas/templates/search/detail.html:76
+#: local/piezas/templates/search/confirm.html:134
+#: local/piezas/templates/search/confirmquoterecalc.html:107
+#: local/piezas/templates/search/confirmquoterecalc.html:249
+#: local/piezas/templates/search/confirmquoterecalc.html:264
+#: local/piezas/templates/search/detail.html:87
 #: local/piezas/templates/search/historysearches_list.html:104
 #: local/piezas/templates/search/home.html:209
-#: local/piezas/templates/search/quote.html:286
-#: local/piezas/templates/search/quote.html:300
-#: local/piezas/templates/search/quoteaccept.html:80
-#: local/piezas/templates/search/quoteaccept.html:229
-#: local/piezas/templates/search/quotedetail.html:81
-#: local/piezas/templates/search/quotedetail.html:248
+#: local/piezas/templates/search/quote.html:291
+#: local/piezas/templates/search/quote.html:305
+#: local/piezas/templates/search/quoteaccept.html:90
+#: local/piezas/templates/search/quoteaccept.html:239
+#: local/piezas/templates/search/quotedetail.html:91
+#: local/piezas/templates/search/quotedetail.html:258
 #: local/piezas/templates/search/quoteview.html:80
-#: piezas/apps/catalogue/models.py:260 piezas/apps/search/views.py:409
+#: piezas/apps/catalogue/models.py:260 piezas/apps/search/views.py:419
 #: piezas/templates/catalogue/partials/review.html:45
 #: piezas/templates/customer/profile/profile.html:22
 #: piezas/templates/dashboard/offers/offer_list.html:68
@@ -1031,19 +1043,19 @@ msgstr ""
 #: piezas/templates/dashboard/ranges/range_list.html:58
 #: piezas/templates/dashboard/ranges/range_product_list.html:111
 #: piezas/templates/search/activesearches_list.html:70
-#: piezas/templates/search/confirm.html:115
-#: piezas/templates/search/confirmquoterecalc.html:97
-#: piezas/templates/search/confirmquoterecalc.html:239
-#: piezas/templates/search/confirmquoterecalc.html:254
-#: piezas/templates/search/detail.html:76
+#: piezas/templates/search/confirm.html:134
+#: piezas/templates/search/confirmquoterecalc.html:107
+#: piezas/templates/search/confirmquoterecalc.html:249
+#: piezas/templates/search/confirmquoterecalc.html:264
+#: piezas/templates/search/detail.html:87
 #: piezas/templates/search/historysearches_list.html:104
 #: piezas/templates/search/home.html:209
-#: piezas/templates/search/quote.html:286
-#: piezas/templates/search/quote.html:300
-#: piezas/templates/search/quoteaccept.html:80
-#: piezas/templates/search/quoteaccept.html:229
-#: piezas/templates/search/quotedetail.html:81
-#: piezas/templates/search/quotedetail.html:248
+#: piezas/templates/search/quote.html:291
+#: piezas/templates/search/quote.html:305
+#: piezas/templates/search/quoteaccept.html:90
+#: piezas/templates/search/quoteaccept.html:239
+#: piezas/templates/search/quotedetail.html:91
+#: piezas/templates/search/quotedetail.html:258
 #: piezas/templates/search/quoteview.html:80
 msgid "No"
 msgstr ""
@@ -1093,83 +1105,83 @@ msgstr "Petición de búsqueda asociada"
 
 #: local/piezas/apps/catalogue/models.py:281
 #: local/piezas/apps/catalogue/models.py:323
-#: local/piezas/apps/search/forms.py:195
-#: local/piezas/templates/search/quote.html:218
+#: local/piezas/apps/search/forms.py:224
+#: local/piezas/templates/search/quote.html:223
 #: piezas/apps/catalogue/models.py:281 piezas/apps/catalogue/models.py:323
-#: piezas/apps/search/forms.py:195 piezas/templates/search/quote.html:218
+#: piezas/apps/search/forms.py:224 piezas/templates/search/quote.html:223
 msgid "Base total excluding tax"
 msgstr "Total base sin impuestos"
 
 #: local/piezas/apps/catalogue/models.py:282
-#: local/piezas/templates/search/quote.html:224
-#: piezas/apps/catalogue/models.py:282 piezas/templates/search/quote.html:224
+#: local/piezas/templates/search/quote.html:229
+#: piezas/apps/catalogue/models.py:282 piezas/templates/search/quote.html:229
 msgid "Base total including tax"
 msgstr "Total base con impuestos"
 
 #: local/piezas/apps/catalogue/models.py:283
-#: local/piezas/apps/search/forms.py:166 piezas/apps/catalogue/models.py:283
-#: piezas/apps/search/forms.py:166
+#: local/piezas/apps/search/forms.py:195 piezas/apps/catalogue/models.py:283
+#: piezas/apps/search/forms.py:195
 msgid "Shipping total excluding tax"
 msgstr "Gastos de envío sin impuestos"
 
 #: local/piezas/apps/catalogue/models.py:284
-#: local/piezas/templates/search/quote.html:231
-#: piezas/apps/catalogue/models.py:284 piezas/templates/search/quote.html:231
+#: local/piezas/templates/search/quote.html:236
+#: piezas/apps/catalogue/models.py:284 piezas/templates/search/quote.html:236
 msgid "Shipping total including tax"
 msgstr "Gastos de envío con impuestos"
 
 #: local/piezas/apps/catalogue/models.py:285
-#: local/piezas/templates/search/quote.html:239
-#: piezas/apps/catalogue/models.py:285 piezas/templates/search/quote.html:239
+#: local/piezas/templates/search/quote.html:244
+#: piezas/apps/catalogue/models.py:285 piezas/templates/search/quote.html:244
 msgid "Grand total excluding tax"
 msgstr "Total final sin impuestos"
 
 #: local/piezas/apps/catalogue/models.py:286
-#: local/piezas/templates/search/quote.html:246
-#: piezas/apps/catalogue/models.py:286 piezas/templates/search/quote.html:246
+#: local/piezas/templates/search/quote.html:251
+#: piezas/apps/catalogue/models.py:286 piezas/templates/search/quote.html:251
 msgid "Grand total including tax"
 msgstr "Total final con impuestos"
 
 #: local/piezas/apps/catalogue/models.py:288
 #: local/piezas/apps/dashboard/podorders/views.py:428
-#: local/piezas/apps/search/forms.py:164
+#: local/piezas/apps/search/forms.py:193
 #: local/piezas/templates/dashboard/orders/quote_detail.html:149
 #: local/piezas/templates/search/activequotes_list.html:29
-#: local/piezas/templates/search/confirmquoterecalc.html:201
-#: local/piezas/templates/search/quoteaccept.html:183
-#: local/piezas/templates/search/quotedetail.html:212
+#: local/piezas/templates/search/confirmquoterecalc.html:211
+#: local/piezas/templates/search/quoteaccept.html:193
+#: local/piezas/templates/search/quotedetail.html:222
 #: local/piezas/templates/search/quoteview.html:208
 #: piezas/apps/catalogue/models.py:288
 #: piezas/apps/dashboard/podorders/views.py:428
-#: piezas/apps/search/forms.py:164
+#: piezas/apps/search/forms.py:193
 #: piezas/templates/dashboard/orders/quote_detail.html:149
 #: piezas/templates/search/activequotes_list.html:29
-#: piezas/templates/search/confirmquoterecalc.html:201
-#: piezas/templates/search/quoteaccept.html:183
-#: piezas/templates/search/quotedetail.html:212
+#: piezas/templates/search/confirmquoterecalc.html:211
+#: piezas/templates/search/quoteaccept.html:193
+#: piezas/templates/search/quotedetail.html:222
 #: piezas/templates/search/quoteview.html:208
 msgid "Warranty days"
 msgstr "Días de garantía"
 
 #: local/piezas/apps/catalogue/models.py:289
 #: local/piezas/apps/dashboard/podorders/views.py:429
-#: local/piezas/apps/search/forms.py:165
+#: local/piezas/apps/search/forms.py:194
 #: local/piezas/templates/dashboard/orders/quote_detail.html:153
 #: local/piezas/templates/search/activequotes_list.html:30
-#: local/piezas/templates/search/confirmquoterecalc.html:202
-#: local/piezas/templates/search/detail.html:173
-#: local/piezas/templates/search/quoteaccept.html:184
-#: local/piezas/templates/search/quotedetail.html:213
+#: local/piezas/templates/search/confirmquoterecalc.html:212
+#: local/piezas/templates/search/detail.html:184
+#: local/piezas/templates/search/quoteaccept.html:194
+#: local/piezas/templates/search/quotedetail.html:223
 #: local/piezas/templates/search/quoteview.html:209
 #: piezas/apps/catalogue/models.py:289
 #: piezas/apps/dashboard/podorders/views.py:429
-#: piezas/apps/search/forms.py:165
+#: piezas/apps/search/forms.py:194
 #: piezas/templates/dashboard/orders/quote_detail.html:153
 #: piezas/templates/search/activequotes_list.html:30
-#: piezas/templates/search/confirmquoterecalc.html:202
-#: piezas/templates/search/detail.html:173
-#: piezas/templates/search/quoteaccept.html:184
-#: piezas/templates/search/quotedetail.html:213
+#: piezas/templates/search/confirmquoterecalc.html:212
+#: piezas/templates/search/detail.html:184
+#: piezas/templates/search/quoteaccept.html:194
+#: piezas/templates/search/quotedetail.html:223
 #: piezas/templates/search/quoteview.html:209
 msgid "Shipping days"
 msgstr "Plazo de envío en días"
@@ -1252,11 +1264,11 @@ msgid ""
 msgstr ""
 
 #: local/piezas/apps/customer/views.py:438
-#: local/piezas/apps/search/views.py:719 local/piezas/apps/search/views.py:758
-#: local/piezas/apps/search/views.py:883 local/piezas/apps/search/views.py:942
-#: piezas/apps/customer/views.py:438 piezas/apps/search/views.py:719
-#: piezas/apps/search/views.py:758 piezas/apps/search/views.py:883
-#: piezas/apps/search/views.py:942
+#: local/piezas/apps/search/views.py:729 local/piezas/apps/search/views.py:768
+#: local/piezas/apps/search/views.py:893 local/piezas/apps/search/views.py:952
+#: piezas/apps/customer/views.py:438 piezas/apps/search/views.py:729
+#: piezas/apps/search/views.py:768 piezas/apps/search/views.py:893
+#: piezas/apps/search/views.py:952
 msgid "There has been an error processing your request. Please try again."
 msgstr "Ha habido errores procesando tu petición. Por favor inténtalo de nuevo"
 
@@ -1384,12 +1396,12 @@ msgstr "Código promocional"
 
 #: local/piezas/apps/customuser/models.py:78
 #: local/piezas/templates/customer/order/order_provider_detail.html:124
-#: local/piezas/templates/search/confirmquoterecalc.html:58
-#: local/piezas/templates/search/quote.html:94
+#: local/piezas/templates/search/confirmquoterecalc.html:68
+#: local/piezas/templates/search/quote.html:99
 #: piezas/apps/customuser/models.py:78
 #: piezas/templates/customer/order/order_provider_detail.html:124
-#: piezas/templates/search/confirmquoterecalc.html:58
-#: piezas/templates/search/quote.html:94
+#: piezas/templates/search/confirmquoterecalc.html:68
+#: piezas/templates/search/quote.html:99
 msgid "Contact person"
 msgstr "Persona de contacto"
 
@@ -1477,10 +1489,10 @@ msgstr ""
 #: local/piezas/templates/dashboard/vouchers/voucher_list.html:46
 #: local/piezas/templates/search/activesearches_list.html:22
 #: local/piezas/templates/search/canceledsearches_list.html:22
-#: local/piezas/templates/search/confirmquoterecalc.html:55
+#: local/piezas/templates/search/confirmquoterecalc.html:65
 #: local/piezas/templates/search/expiredsearches_list.html:22
 #: local/piezas/templates/search/historysearches_list.html:49
-#: local/piezas/templates/search/quote.html:91
+#: local/piezas/templates/search/quote.html:96
 #: piezas/apps/dashboard/podcatalogue/forms.py:32
 #: piezas/apps/dashboard/podcatalogue/forms.py:36
 #: piezas/apps/dashboard/podcatalogue/forms.py:52
@@ -1524,10 +1536,10 @@ msgstr ""
 #: piezas/templates/dashboard/vouchers/voucher_list.html:46
 #: piezas/templates/search/activesearches_list.html:22
 #: piezas/templates/search/canceledsearches_list.html:22
-#: piezas/templates/search/confirmquoterecalc.html:55
+#: piezas/templates/search/confirmquoterecalc.html:65
 #: piezas/templates/search/expiredsearches_list.html:22
 #: piezas/templates/search/historysearches_list.html:49
-#: piezas/templates/search/quote.html:91
+#: piezas/templates/search/quote.html:96
 msgid "Name"
 msgstr ""
 
@@ -1536,40 +1548,40 @@ msgstr ""
 #: local/piezas/apps/search/forms.py:64
 #: local/piezas/templates/basket/partials/basket_content.html:29
 #: local/piezas/templates/basket/partials/searchrequest_content.html:10
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:139
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:141
 #: local/piezas/templates/dashboard/podcatalogue/version_list.html:65
 #: local/piezas/templates/dashboard/podcatalogue/version_list.html:66
 #: local/piezas/templates/search/activesearches_list.html:24
 #: local/piezas/templates/search/canceledsearches_list.html:24
-#: local/piezas/templates/search/confirm.html:53
-#: local/piezas/templates/search/confirmquoterecalc.html:37
-#: local/piezas/templates/search/detail.html:37
+#: local/piezas/templates/search/confirm.html:57
+#: local/piezas/templates/search/confirmquoterecalc.html:39
+#: local/piezas/templates/search/detail.html:39
 #: local/piezas/templates/search/expiredsearches_list.html:24
 #: local/piezas/templates/search/historysearches_list.html:51
 #: local/piezas/templates/search/pending_searchrequest_list.html:23
-#: local/piezas/templates/search/quote.html:38
-#: local/piezas/templates/search/quoteaccept.html:37
-#: local/piezas/templates/search/quotedetail.html:37
+#: local/piezas/templates/search/quote.html:39
+#: local/piezas/templates/search/quoteaccept.html:39
+#: local/piezas/templates/search/quotedetail.html:39
 #: local/piezas/templates/search/quoteview.html:37
 #: piezas/apps/dashboard/podcatalogue/forms.py:72
 #: piezas/apps/dashboard/podcatalogue/forms.py:77
 #: piezas/apps/search/forms.py:64
 #: piezas/templates/basket/partials/basket_content.html:29
 #: piezas/templates/basket/partials/searchrequest_content.html:10
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:139
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:141
 #: piezas/templates/dashboard/podcatalogue/version_list.html:65
 #: piezas/templates/dashboard/podcatalogue/version_list.html:66
 #: piezas/templates/search/activesearches_list.html:24
 #: piezas/templates/search/canceledsearches_list.html:24
-#: piezas/templates/search/confirm.html:53
-#: piezas/templates/search/confirmquoterecalc.html:37
-#: piezas/templates/search/detail.html:37
+#: piezas/templates/search/confirm.html:57
+#: piezas/templates/search/confirmquoterecalc.html:39
+#: piezas/templates/search/detail.html:39
 #: piezas/templates/search/expiredsearches_list.html:24
 #: piezas/templates/search/historysearches_list.html:51
 #: piezas/templates/search/pending_searchrequest_list.html:23
-#: piezas/templates/search/quote.html:38
-#: piezas/templates/search/quoteaccept.html:37
-#: piezas/templates/search/quotedetail.html:37
+#: piezas/templates/search/quote.html:39
+#: piezas/templates/search/quoteaccept.html:39
+#: piezas/templates/search/quotedetail.html:39
 #: piezas/templates/search/quoteview.html:37
 msgid "Model"
 msgstr "Modelo"
@@ -1962,8 +1974,8 @@ msgid "%(main_filter)s %(name_filter)s%(date_filter)s%(state_filter)s"
 msgstr ""
 
 #: local/piezas/apps/dashboard/podorders/views.py:59
-#: local/piezas/apps/search/forms.py:126
-#: piezas/apps/dashboard/podorders/views.py:59 piezas/apps/search/forms.py:126
+#: local/piezas/apps/search/forms.py:155
+#: piezas/apps/dashboard/podorders/views.py:59 piezas/apps/search/forms.py:155
 msgid "All search requests"
 msgstr "Todas las peticiones de búsqueda"
 
@@ -2068,22 +2080,22 @@ msgstr "Presupuestos con número que comienza por \"%(quote_number)s\""
 
 #: local/piezas/apps/dashboard/podorders/views.py:422
 #: local/piezas/templates/dashboard/orders/quote_detail.html:86
-#: local/piezas/templates/search/confirmquoterecalc.html:77
-#: local/piezas/templates/search/confirmquoterecalc.html:193
-#: local/piezas/templates/search/quoteaccept.html:60
-#: local/piezas/templates/search/quoteaccept.html:176
-#: local/piezas/templates/search/quotedetail.html:60
-#: local/piezas/templates/search/quotedetail.html:180
+#: local/piezas/templates/search/confirmquoterecalc.html:87
+#: local/piezas/templates/search/confirmquoterecalc.html:203
+#: local/piezas/templates/search/quoteaccept.html:70
+#: local/piezas/templates/search/quoteaccept.html:186
+#: local/piezas/templates/search/quotedetail.html:70
+#: local/piezas/templates/search/quotedetail.html:190
 #: local/piezas/templates/search/quoteview.html:60
 #: local/piezas/templates/search/quoteview.html:176
 #: piezas/apps/dashboard/podorders/views.py:422
 #: piezas/templates/dashboard/orders/quote_detail.html:86
-#: piezas/templates/search/confirmquoterecalc.html:77
-#: piezas/templates/search/confirmquoterecalc.html:193
-#: piezas/templates/search/quoteaccept.html:60
-#: piezas/templates/search/quoteaccept.html:176
-#: piezas/templates/search/quotedetail.html:60
-#: piezas/templates/search/quotedetail.html:180
+#: piezas/templates/search/confirmquoterecalc.html:87
+#: piezas/templates/search/confirmquoterecalc.html:203
+#: piezas/templates/search/quoteaccept.html:70
+#: piezas/templates/search/quoteaccept.html:186
+#: piezas/templates/search/quotedetail.html:70
+#: piezas/templates/search/quotedetail.html:190
 #: piezas/templates/search/quoteview.html:60
 #: piezas/templates/search/quoteview.html:176
 msgid "Base total (excl tax)"
@@ -2095,63 +2107,63 @@ msgid "Base total (inc tax)"
 msgstr "Total base con impuestos"
 
 #: local/piezas/apps/dashboard/podorders/views.py:424
-#: local/piezas/templates/search/confirmquoterecalc.html:195
-#: local/piezas/templates/search/quoteaccept.html:178
-#: local/piezas/templates/search/quotedetail.html:191
+#: local/piezas/templates/search/confirmquoterecalc.html:205
+#: local/piezas/templates/search/quoteaccept.html:188
+#: local/piezas/templates/search/quotedetail.html:201
 #: local/piezas/templates/search/quoteview.html:187
 #: piezas/apps/dashboard/podorders/views.py:424
-#: piezas/templates/search/confirmquoterecalc.html:195
-#: piezas/templates/search/quoteaccept.html:178
-#: piezas/templates/search/quotedetail.html:191
+#: piezas/templates/search/confirmquoterecalc.html:205
+#: piezas/templates/search/quoteaccept.html:188
+#: piezas/templates/search/quotedetail.html:201
 #: piezas/templates/search/quoteview.html:187
 msgid "Shipping total (excl tax)"
 msgstr "Gastos de envío sin impuestos"
 
 #: local/piezas/apps/dashboard/podorders/views.py:425
 #: local/piezas/templates/search/activequotes_list.html:27
-#: local/piezas/templates/search/confirmquoterecalc.html:197
-#: local/piezas/templates/search/detail.html:171
-#: local/piezas/templates/search/quoteaccept.html:179
-#: local/piezas/templates/search/quotedetail.html:196
+#: local/piezas/templates/search/confirmquoterecalc.html:207
+#: local/piezas/templates/search/detail.html:182
+#: local/piezas/templates/search/quoteaccept.html:189
+#: local/piezas/templates/search/quotedetail.html:206
 #: local/piezas/templates/search/quoteview.html:192
 #: local/piezas/templates/search/recalcquotes_list.html:29
 #: piezas/apps/dashboard/podorders/views.py:425
 #: piezas/templates/search/activequotes_list.html:27
-#: piezas/templates/search/confirmquoterecalc.html:197
-#: piezas/templates/search/detail.html:171
-#: piezas/templates/search/quoteaccept.html:179
-#: piezas/templates/search/quotedetail.html:196
+#: piezas/templates/search/confirmquoterecalc.html:207
+#: piezas/templates/search/detail.html:182
+#: piezas/templates/search/quoteaccept.html:189
+#: piezas/templates/search/quotedetail.html:206
 #: piezas/templates/search/quoteview.html:192
 #: piezas/templates/search/recalcquotes_list.html:29
 msgid "Shipping total (incl tax)"
 msgstr "Gastos de envío con impuestos"
 
 #: local/piezas/apps/dashboard/podorders/views.py:426
-#: local/piezas/templates/search/confirmquoterecalc.html:198
-#: local/piezas/templates/search/quoteaccept.html:180
-#: local/piezas/templates/search/quotedetail.html:201
+#: local/piezas/templates/search/confirmquoterecalc.html:208
+#: local/piezas/templates/search/quoteaccept.html:190
+#: local/piezas/templates/search/quotedetail.html:211
 #: local/piezas/templates/search/quoteview.html:197
 #: piezas/apps/dashboard/podorders/views.py:426
-#: piezas/templates/search/confirmquoterecalc.html:198
-#: piezas/templates/search/quoteaccept.html:180
-#: piezas/templates/search/quotedetail.html:201
+#: piezas/templates/search/confirmquoterecalc.html:208
+#: piezas/templates/search/quoteaccept.html:190
+#: piezas/templates/search/quotedetail.html:211
 #: piezas/templates/search/quoteview.html:197
 msgid "Grand total (excl tax)"
 msgstr "Total final sin impuestos"
 
 #: local/piezas/apps/dashboard/podorders/views.py:427
 #: local/piezas/templates/search/activequotes_list.html:28
-#: local/piezas/templates/search/confirmquoterecalc.html:199
-#: local/piezas/templates/search/detail.html:172
-#: local/piezas/templates/search/quoteaccept.html:181
-#: local/piezas/templates/search/quotedetail.html:206
+#: local/piezas/templates/search/confirmquoterecalc.html:209
+#: local/piezas/templates/search/detail.html:183
+#: local/piezas/templates/search/quoteaccept.html:191
+#: local/piezas/templates/search/quotedetail.html:216
 #: local/piezas/templates/search/quoteview.html:202
 #: piezas/apps/dashboard/podorders/views.py:427
 #: piezas/templates/search/activequotes_list.html:28
-#: piezas/templates/search/confirmquoterecalc.html:199
-#: piezas/templates/search/detail.html:172
-#: piezas/templates/search/quoteaccept.html:181
-#: piezas/templates/search/quotedetail.html:206
+#: piezas/templates/search/confirmquoterecalc.html:209
+#: piezas/templates/search/detail.html:183
+#: piezas/templates/search/quoteaccept.html:191
+#: piezas/templates/search/quotedetail.html:216
 #: piezas/templates/search/quoteview.html:202
 msgid "Grand total (incl tax)"
 msgstr "Total final con impuestos"
@@ -2727,32 +2739,32 @@ msgstr "---- Por favor entra el contenido del campo manualmente ----"
 #: local/piezas/apps/search/forms.py:67
 #: local/piezas/templates/basket/partials/basket_content.html:30
 #: local/piezas/templates/basket/partials/searchrequest_content.html:11
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:143
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:147
 #: local/piezas/templates/search/activesearches_list.html:25
 #: local/piezas/templates/search/canceledsearches_list.html:25
-#: local/piezas/templates/search/confirm.html:59
-#: local/piezas/templates/search/confirmquoterecalc.html:38
-#: local/piezas/templates/search/detail.html:38
+#: local/piezas/templates/search/confirm.html:67
+#: local/piezas/templates/search/confirmquoterecalc.html:42
+#: local/piezas/templates/search/detail.html:42
 #: local/piezas/templates/search/expiredsearches_list.html:25
 #: local/piezas/templates/search/pending_searchrequest_list.html:24
-#: local/piezas/templates/search/quote.html:44
-#: local/piezas/templates/search/quoteaccept.html:38
-#: local/piezas/templates/search/quotedetail.html:38
+#: local/piezas/templates/search/quote.html:46
+#: local/piezas/templates/search/quoteaccept.html:42
+#: local/piezas/templates/search/quotedetail.html:42
 #: local/piezas/templates/search/quoteview.html:38
 #: piezas/apps/search/forms.py:67
 #: piezas/templates/basket/partials/basket_content.html:30
 #: piezas/templates/basket/partials/searchrequest_content.html:11
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:143
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:147
 #: piezas/templates/search/activesearches_list.html:25
 #: piezas/templates/search/canceledsearches_list.html:25
-#: piezas/templates/search/confirm.html:59
-#: piezas/templates/search/confirmquoterecalc.html:38
-#: piezas/templates/search/detail.html:38
+#: piezas/templates/search/confirm.html:67
+#: piezas/templates/search/confirmquoterecalc.html:42
+#: piezas/templates/search/detail.html:42
 #: piezas/templates/search/expiredsearches_list.html:25
 #: piezas/templates/search/pending_searchrequest_list.html:24
-#: piezas/templates/search/quote.html:44
-#: piezas/templates/search/quoteaccept.html:38
-#: piezas/templates/search/quotedetail.html:38
+#: piezas/templates/search/quote.html:46
+#: piezas/templates/search/quoteaccept.html:42
+#: piezas/templates/search/quotedetail.html:42
 #: piezas/templates/search/quoteview.html:38
 msgid "Version"
 msgstr "Versión"
@@ -2797,7 +2809,43 @@ msgstr "Foto #9"
 msgid "Picture #10"
 msgstr "Foto #10"
 
-#: local/piezas/apps/search/forms.py:93
+#: local/piezas/apps/search/forms.py:94 local/piezas/apps/search/forms.py:99
+#: local/piezas/apps/search/forms.py:104 local/piezas/apps/search/forms.py:109
+#: local/piezas/apps/search/forms.py:114
+#: local/piezas/templates/search/home.html:337
+#: local/piezas/templates/search/home.html:349
+#: local/piezas/templates/search/home.html:361
+#: local/piezas/templates/search/home.html:373
+#: local/piezas/templates/search/home.html:385 piezas/apps/search/forms.py:94
+#: piezas/apps/search/forms.py:99 piezas/apps/search/forms.py:104
+#: piezas/apps/search/forms.py:109 piezas/apps/search/forms.py:114
+#: piezas/templates/search/home.html:337 piezas/templates/search/home.html:349
+#: piezas/templates/search/home.html:361 piezas/templates/search/home.html:373
+#: piezas/templates/search/home.html:385
+msgid "Others"
+msgstr "Otros"
+
+#: local/piezas/apps/search/forms.py:96 piezas/apps/search/forms.py:96
+msgid "Please manually enter the brand field content."
+msgstr ""
+
+#: local/piezas/apps/search/forms.py:101 piezas/apps/search/forms.py:101
+msgid "Please manually enter the model field content."
+msgstr ""
+
+#: local/piezas/apps/search/forms.py:106 piezas/apps/search/forms.py:106
+msgid "Please manually enter the version field content."
+msgstr ""
+
+#: local/piezas/apps/search/forms.py:111 piezas/apps/search/forms.py:111
+msgid "Please manually enter the bodywork field content."
+msgstr ""
+
+#: local/piezas/apps/search/forms.py:116 piezas/apps/search/forms.py:116
+msgid "Please manually enter the engine field content."
+msgstr ""
+
+#: local/piezas/apps/search/forms.py:122
 #: local/piezas/templates/checkout/checkout.html:104
 #: local/piezas/templates/customer/anon_order.html:58
 #: local/piezas/templates/customer/alerts/alert_list.html:12
@@ -2811,7 +2859,7 @@ msgstr "Foto #10"
 #: local/piezas/templates/dashboard/reviews/review_list.html:58
 #: local/piezas/templates/dashboard/users/alerts/list.html:45
 #: local/piezas/templates/dashboard/users/alerts/partials/alert.html:6
-#: piezas/apps/search/forms.py:93 piezas/templates/checkout/checkout.html:104
+#: piezas/apps/search/forms.py:122 piezas/templates/checkout/checkout.html:104
 #: piezas/templates/customer/anon_order.html:58
 #: piezas/templates/customer/alerts/alert_list.html:12
 #: piezas/templates/customer/order/order_detail.html:37
@@ -2827,47 +2875,47 @@ msgstr "Foto #10"
 msgid "Product"
 msgstr ""
 
-#: local/piezas/apps/search/forms.py:110 piezas/apps/search/forms.py:110
+#: local/piezas/apps/search/forms.py:139 piezas/apps/search/forms.py:139
 msgid "From"
 msgstr ""
 
-#: local/piezas/apps/search/forms.py:112 piezas/apps/search/forms.py:112
+#: local/piezas/apps/search/forms.py:141 piezas/apps/search/forms.py:141
 msgid "To"
 msgstr ""
 
-#: local/piezas/apps/search/forms.py:117 piezas/apps/search/forms.py:117
+#: local/piezas/apps/search/forms.py:146 piezas/apps/search/forms.py:146
 msgid "At least one field is required."
 msgstr ""
 
-#: local/piezas/apps/search/forms.py:134 piezas/apps/search/forms.py:134
+#: local/piezas/apps/search/forms.py:163 piezas/apps/search/forms.py:163
 #, python-format
 msgid "Search requests expiring between %(date_from)s and %(date_to)s"
 msgstr ""
 
-#: local/piezas/apps/search/forms.py:137 piezas/apps/search/forms.py:137
+#: local/piezas/apps/search/forms.py:166 piezas/apps/search/forms.py:166
 #, python-format
 msgid "Search requests expiring since %(date_from)s"
 msgstr "Búsquedas que caducan desde %(date_from)s"
 
-#: local/piezas/apps/search/forms.py:139 piezas/apps/search/forms.py:139
+#: local/piezas/apps/search/forms.py:168 piezas/apps/search/forms.py:168
 #, python-format
 msgid "Serach requests not expiring until %(date_to)s"
 msgstr "Búsquedas que no caducan hasta %(date_to)s"
 
-#: local/piezas/apps/search/forms.py:162 local/piezas/apps/search/forms.py:197
-#: local/piezas/templates/search/quote.html:121
-#: piezas/apps/search/forms.py:162 piezas/apps/search/forms.py:197
-#: piezas/templates/search/quote.html:121
+#: local/piezas/apps/search/forms.py:191 local/piezas/apps/search/forms.py:226
+#: local/piezas/templates/search/quote.html:126
+#: piezas/apps/search/forms.py:191 piezas/apps/search/forms.py:226
+#: piezas/templates/search/quote.html:126
 msgid "Comments for the quote"
 msgstr "Comentarios para el presupuesto"
 
-#: local/piezas/apps/search/forms.py:189
+#: local/piezas/apps/search/forms.py:218
 #: local/piezas/templates/dashboard/orders/quote_detail.html:66
 #: local/piezas/templates/dashboard/orders/quote_detail.html:113
 #: local/piezas/templates/dashboard/orders/searchrequest_detail.html:64
 #: local/piezas/templates/dashboard/orders/searchrequest_detail.html:125
 #: local/piezas/templates/dashboard/partners/partner_manage.html:28
-#: piezas/apps/search/forms.py:189
+#: piezas/apps/search/forms.py:218
 #: piezas/templates/dashboard/orders/quote_detail.html:66
 #: piezas/templates/dashboard/orders/quote_detail.html:113
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:64
@@ -2880,79 +2928,79 @@ msgstr "Detalles"
 msgid "Duplicate products aren't allowed"
 msgstr "Los productos duplicados no están permitidos"
 
-#: local/piezas/apps/search/views.py:145 piezas/apps/search/views.py:145
+#: local/piezas/apps/search/views.py:150 piezas/apps/search/views.py:150
 msgid "Please fill all mandatory questions"
 msgstr "Por favor completa las preguntas obligatorias"
 
-#: local/piezas/apps/search/views.py:150 piezas/apps/search/views.py:150
+#: local/piezas/apps/search/views.py:155 piezas/apps/search/views.py:155
 msgid "Please include all mandatory pictures"
 msgstr "Por favor incluye todas las fotos obligatorias"
 
-#: local/piezas/apps/search/views.py:164 piezas/apps/search/views.py:164
+#: local/piezas/apps/search/views.py:169 piezas/apps/search/views.py:169
 msgid "Please fill all mandatory fields"
 msgstr "Por favor completa las preguntas obligatorias"
 
-#: local/piezas/apps/search/views.py:304 local/piezas/templates/index.html:52
+#: local/piezas/apps/search/views.py:314 local/piezas/templates/index.html:52
 #: local/piezas/templates/search/pending_searchrequest_list.html:12
-#: piezas/apps/search/views.py:304 piezas/templates/index.html:52
+#: piezas/apps/search/views.py:314 piezas/templates/index.html:52
 #: piezas/templates/search/pending_searchrequest_list.html:12
 msgid "Active searches from customers"
 msgstr "Búsquedas activas de talleres"
 
-#: local/piezas/apps/search/views.py:509
+#: local/piezas/apps/search/views.py:519
 #: local/piezas/templates/search/activequotes_list.html:12
-#: piezas/apps/search/views.py:509
+#: piezas/apps/search/views.py:519
 #: piezas/templates/search/activequotes_list.html:12
 msgid "Active quotes"
 msgstr "Presupuestos activos"
 
-#: local/piezas/apps/search/views.py:525
+#: local/piezas/apps/search/views.py:535
 #: local/piezas/templates/search/activesearches_list.html:12
 #: local/piezas/templates/search/historysearches_list.html:23
 #: local/piezas/templates/search/historysearches_list.html:32
-#: piezas/apps/search/views.py:525
+#: piezas/apps/search/views.py:535
 #: piezas/templates/search/activesearches_list.html:12
 #: piezas/templates/search/historysearches_list.html:23
 #: piezas/templates/search/historysearches_list.html:32
 msgid "Active searches"
 msgstr "Búsquedas activas"
 
-#: local/piezas/apps/search/views.py:546 local/piezas/templates/index.html:44
+#: local/piezas/apps/search/views.py:556 local/piezas/templates/index.html:44
 #: local/piezas/templates/search/historysearches_list.html:12
-#: piezas/apps/search/views.py:546 piezas/templates/index.html:44
+#: piezas/apps/search/views.py:556 piezas/templates/index.html:44
 #: piezas/templates/search/historysearches_list.html:12
 msgid "Search history"
 msgstr "Histórico de búsquedas"
 
-#: local/piezas/apps/search/views.py:567
+#: local/piezas/apps/search/views.py:577
 #: local/piezas/templates/search/expiredsearches_list.html:12
 #: local/piezas/templates/search/historysearches_list.html:25
 #: local/piezas/templates/search/historysearches_list.html:35
-#: piezas/apps/search/views.py:567
+#: piezas/apps/search/views.py:577
 #: piezas/templates/search/expiredsearches_list.html:12
 #: piezas/templates/search/historysearches_list.html:25
 #: piezas/templates/search/historysearches_list.html:35
 msgid "Expired searches"
 msgstr "Búsquedas expiradas"
 
-#: local/piezas/apps/search/views.py:588
+#: local/piezas/apps/search/views.py:598
 #: local/piezas/templates/search/canceledsearches_list.html:12
 #: local/piezas/templates/search/historysearches_list.html:27
 #: local/piezas/templates/search/historysearches_list.html:38
-#: piezas/apps/search/views.py:588
+#: piezas/apps/search/views.py:598
 #: piezas/templates/search/canceledsearches_list.html:12
 #: piezas/templates/search/historysearches_list.html:27
 #: piezas/templates/search/historysearches_list.html:38
 msgid "Canceled searches"
 msgstr "Búsquedas canceladas"
 
-#: local/piezas/apps/search/views.py:716 piezas/apps/search/views.py:716
+#: local/piezas/apps/search/views.py:726 piezas/apps/search/views.py:726
 msgid "We cannot find your quote. Please try again."
 msgstr "No podemos encontrar tu presupuesto. Por favor inténtalo de nuevo"
 
-#: local/piezas/apps/search/views.py:895
+#: local/piezas/apps/search/views.py:905
 #: local/piezas/templates/search/recalcquotes_list.html:12
-#: piezas/apps/search/views.py:895
+#: piezas/apps/search/views.py:905
 #: piezas/templates/search/recalcquotes_list.html:12
 msgid "Quotes pending from shipping recalc"
 msgstr "Presupuestos pendientes de recálculos de portes"
@@ -2997,7 +3045,7 @@ msgstr ""
 msgid "Build"
 msgstr ""
 
-#: local/piezas/templates/base.html:122 piezas/templates/base.html:122
+#: local/piezas/templates/base.html:123 piezas/templates/base.html:123
 msgid "Version:"
 msgstr ""
 
@@ -3354,9 +3402,9 @@ msgid "Search new piece"
 msgstr "Buscar nueva pieza"
 
 #: local/piezas/templates/basket/partials/basket_content.html:89
-#: local/piezas/templates/search/confirm.html:201
+#: local/piezas/templates/search/confirm.html:220
 #: piezas/templates/basket/partials/basket_content.html:89
-#: piezas/templates/search/confirm.html:201
+#: piezas/templates/search/confirm.html:220
 msgid "Submit search request"
 msgstr "Enviar petición de búsqueda"
 
@@ -4078,16 +4126,16 @@ msgstr ""
 #: local/piezas/templates/customer/address/address_list.html:10
 #: local/piezas/templates/dashboard/orders/order_detail.html:415
 #: local/piezas/templates/dashboard/partners/partner_manage.html:38
-#: local/piezas/templates/search/confirmquoterecalc.html:61
-#: local/piezas/templates/search/quote.html:97
+#: local/piezas/templates/search/confirmquoterecalc.html:71
+#: local/piezas/templates/search/quote.html:102
 #: piezas/templates/checkout/checkout.html:32
 #: piezas/templates/checkout/thank_you.html:35
 #: piezas/templates/customer/anon_order.html:25
 #: piezas/templates/customer/address/address_list.html:10
 #: piezas/templates/dashboard/orders/order_detail.html:415
 #: piezas/templates/dashboard/partners/partner_manage.html:38
-#: piezas/templates/search/confirmquoterecalc.html:61
-#: piezas/templates/search/quote.html:97
+#: piezas/templates/search/confirmquoterecalc.html:71
+#: piezas/templates/search/quote.html:102
 msgid "Address"
 msgstr ""
 
@@ -4119,8 +4167,8 @@ msgstr ""
 #: local/piezas/templates/dashboard/reports/partials/user_report.html:8
 #: local/piezas/templates/dashboard/users/detail.html:42
 #: local/piezas/templates/dashboard/users/index.html:74
-#: local/piezas/templates/search/confirmquoterecalc.html:52
-#: local/piezas/templates/search/quote.html:88
+#: local/piezas/templates/search/confirmquoterecalc.html:62
+#: local/piezas/templates/search/quote.html:93
 #: piezas/templates/checkout/checkout.html:44
 #: piezas/templates/checkout/thank_you.html:47
 #: piezas/templates/customer/order/order_provider_detail.html:119
@@ -4133,8 +4181,8 @@ msgstr ""
 #: piezas/templates/dashboard/reports/partials/user_report.html:8
 #: piezas/templates/dashboard/users/detail.html:42
 #: piezas/templates/dashboard/users/index.html:74
-#: piezas/templates/search/confirmquoterecalc.html:52
-#: piezas/templates/search/quote.html:88
+#: piezas/templates/search/confirmquoterecalc.html:62
+#: piezas/templates/search/quote.html:93
 msgid "Email"
 msgstr ""
 
@@ -4274,9 +4322,9 @@ msgid "Submitting..."
 msgstr ""
 
 #: local/piezas/templates/checkout/preview.html:35
-#: local/piezas/templates/search/quoteaccept.html:212
+#: local/piezas/templates/search/quoteaccept.html:222
 #: piezas/templates/checkout/preview.html:35
-#: piezas/templates/search/quoteaccept.html:212
+#: piezas/templates/search/quoteaccept.html:222
 msgid "Place order"
 msgstr ""
 
@@ -4887,15 +4935,15 @@ msgstr ""
 #: local/piezas/templates/search/activequotes_list.html:24
 #: local/piezas/templates/search/activesearches_list.html:29
 #: local/piezas/templates/search/canceledsearches_list.html:29
-#: local/piezas/templates/search/confirmquoterecalc.html:43
-#: local/piezas/templates/search/confirmquoterecalc.html:191
-#: local/piezas/templates/search/detail.html:43
+#: local/piezas/templates/search/confirmquoterecalc.html:53
+#: local/piezas/templates/search/confirmquoterecalc.html:201
+#: local/piezas/templates/search/detail.html:54
 #: local/piezas/templates/search/expiredsearches_list.html:29
 #: local/piezas/templates/search/historysearches_list.html:48
-#: local/piezas/templates/search/quoteaccept.html:43
-#: local/piezas/templates/search/quoteaccept.html:174
-#: local/piezas/templates/search/quotedetail.html:43
-#: local/piezas/templates/search/quotedetail.html:178
+#: local/piezas/templates/search/quoteaccept.html:53
+#: local/piezas/templates/search/quoteaccept.html:184
+#: local/piezas/templates/search/quotedetail.html:53
+#: local/piezas/templates/search/quotedetail.html:188
 #: local/piezas/templates/search/quoteview.html:43
 #: local/piezas/templates/search/quoteview.html:174
 #: local/piezas/templates/search/recalcquotes_list.html:24
@@ -4912,15 +4960,15 @@ msgstr ""
 #: piezas/templates/search/activequotes_list.html:24
 #: piezas/templates/search/activesearches_list.html:29
 #: piezas/templates/search/canceledsearches_list.html:29
-#: piezas/templates/search/confirmquoterecalc.html:43
-#: piezas/templates/search/confirmquoterecalc.html:191
-#: piezas/templates/search/detail.html:43
+#: piezas/templates/search/confirmquoterecalc.html:53
+#: piezas/templates/search/confirmquoterecalc.html:201
+#: piezas/templates/search/detail.html:54
 #: piezas/templates/search/expiredsearches_list.html:29
 #: piezas/templates/search/historysearches_list.html:48
-#: piezas/templates/search/quoteaccept.html:43
-#: piezas/templates/search/quoteaccept.html:174
-#: piezas/templates/search/quotedetail.html:43
-#: piezas/templates/search/quotedetail.html:178
+#: piezas/templates/search/quoteaccept.html:53
+#: piezas/templates/search/quoteaccept.html:184
+#: piezas/templates/search/quotedetail.html:53
+#: piezas/templates/search/quotedetail.html:188
 #: piezas/templates/search/quoteview.html:43
 #: piezas/templates/search/quoteview.html:174
 #: piezas/templates/search/recalcquotes_list.html:24
@@ -5613,19 +5661,19 @@ msgstr ""
 
 #: local/piezas/templates/customer/order/order_detail.html:113
 #: local/piezas/templates/customer/order/order_provider_detail.html:139
-#: local/piezas/templates/search/quoteaccept.html:200
+#: local/piezas/templates/search/quoteaccept.html:210
 #: piezas/templates/customer/order/order_detail.html:113
 #: piezas/templates/customer/order/order_provider_detail.html:139
-#: piezas/templates/search/quoteaccept.html:200
+#: piezas/templates/search/quoteaccept.html:210
 msgid "Bank account transfer"
 msgstr "Transferencia bancaria"
 
 #: local/piezas/templates/customer/order/order_detail.html:116
 #: local/piezas/templates/customer/order/order_provider_detail.html:142
-#: local/piezas/templates/search/quoteaccept.html:194
+#: local/piezas/templates/search/quoteaccept.html:204
 #: piezas/templates/customer/order/order_detail.html:116
 #: piezas/templates/customer/order/order_provider_detail.html:142
-#: piezas/templates/search/quoteaccept.html:194
+#: piezas/templates/search/quoteaccept.html:204
 msgid "Pay on delivery"
 msgstr "Pago contrareembolso"
 
@@ -5727,11 +5775,11 @@ msgid "Update order status"
 msgstr "Actualizar estado del pedido"
 
 #: local/piezas/templates/customer/order/order_provider_detail.html:118
-#: local/piezas/templates/search/confirmquoterecalc.html:49
-#: local/piezas/templates/search/quote.html:85
+#: local/piezas/templates/search/confirmquoterecalc.html:59
+#: local/piezas/templates/search/quote.html:90
 #: piezas/templates/customer/order/order_provider_detail.html:118
-#: piezas/templates/search/confirmquoterecalc.html:49
-#: piezas/templates/search/quote.html:85
+#: piezas/templates/search/confirmquoterecalc.html:59
+#: piezas/templates/search/quote.html:90
 msgid "Customer details"
 msgstr "Detalles del cliente"
 
@@ -6443,12 +6491,12 @@ msgstr "No hay categorías establecidas para esta pieza"
 
 #: local/piezas/templates/dashboard/catalogue/product_update.html:96
 #: local/piezas/templates/dashboard/catalogue/product_update.html:175
-#: local/piezas/templates/search/confirm.html:96
-#: local/piezas/templates/search/detail.html:57
+#: local/piezas/templates/search/confirm.html:115
+#: local/piezas/templates/search/detail.html:68
 #: piezas/templates/dashboard/catalogue/product_update.html:96
 #: piezas/templates/dashboard/catalogue/product_update.html:175
-#: piezas/templates/search/confirm.html:96
-#: piezas/templates/search/detail.html:57
+#: piezas/templates/search/confirm.html:115
+#: piezas/templates/search/detail.html:68
 msgid "Questions"
 msgstr "Preguntas"
 
@@ -7015,14 +7063,14 @@ msgid "Shipping status"
 msgstr ""
 
 #: local/piezas/templates/dashboard/orders/line_detail.html:113
-#: local/piezas/templates/search/detail.html:45
-#: local/piezas/templates/search/quoteaccept.html:45
-#: local/piezas/templates/search/quotedetail.html:45
+#: local/piezas/templates/search/detail.html:56
+#: local/piezas/templates/search/quoteaccept.html:55
+#: local/piezas/templates/search/quotedetail.html:55
 #: local/piezas/templates/search/quoteview.html:45
 #: piezas/templates/dashboard/orders/line_detail.html:113
-#: piezas/templates/search/detail.html:45
-#: piezas/templates/search/quoteaccept.html:45
-#: piezas/templates/search/quotedetail.html:45
+#: piezas/templates/search/detail.html:56
+#: piezas/templates/search/quoteaccept.html:55
+#: piezas/templates/search/quotedetail.html:55
 #: piezas/templates/search/quoteview.html:45
 msgid "State"
 msgstr ""
@@ -7505,25 +7553,25 @@ msgstr ""
 
 #: local/piezas/templates/dashboard/orders/quote_detail.html:47
 #: local/piezas/templates/dashboard/orders/quote_list.html:98
-#: local/piezas/templates/search/confirmquoterecalc.html:44
-#: local/piezas/templates/search/confirmquoterecalc.html:192
-#: local/piezas/templates/search/detail.html:44
-#: local/piezas/templates/search/quoteaccept.html:44
-#: local/piezas/templates/search/quoteaccept.html:175
-#: local/piezas/templates/search/quotedetail.html:44
-#: local/piezas/templates/search/quotedetail.html:179
+#: local/piezas/templates/search/confirmquoterecalc.html:54
+#: local/piezas/templates/search/confirmquoterecalc.html:202
+#: local/piezas/templates/search/detail.html:55
+#: local/piezas/templates/search/quoteaccept.html:54
+#: local/piezas/templates/search/quoteaccept.html:185
+#: local/piezas/templates/search/quotedetail.html:54
+#: local/piezas/templates/search/quotedetail.html:189
 #: local/piezas/templates/search/quoteview.html:44
 #: local/piezas/templates/search/quoteview.html:175
 #: local/piezas/templates/search/recalcquotes_list.html:25
 #: piezas/templates/dashboard/orders/quote_detail.html:47
 #: piezas/templates/dashboard/orders/quote_list.html:98
-#: piezas/templates/search/confirmquoterecalc.html:44
-#: piezas/templates/search/confirmquoterecalc.html:192
-#: piezas/templates/search/detail.html:44
-#: piezas/templates/search/quoteaccept.html:44
-#: piezas/templates/search/quoteaccept.html:175
-#: piezas/templates/search/quotedetail.html:44
-#: piezas/templates/search/quotedetail.html:179
+#: piezas/templates/search/confirmquoterecalc.html:54
+#: piezas/templates/search/confirmquoterecalc.html:202
+#: piezas/templates/search/detail.html:55
+#: piezas/templates/search/quoteaccept.html:54
+#: piezas/templates/search/quoteaccept.html:185
+#: piezas/templates/search/quotedetail.html:54
+#: piezas/templates/search/quotedetail.html:189
 #: piezas/templates/search/quoteview.html:44
 #: piezas/templates/search/quoteview.html:175
 #: piezas/templates/search/recalcquotes_list.html:25
@@ -7548,14 +7596,14 @@ msgid "Request comments"
 msgstr "Comentarios de la petición de búsqueda"
 
 #: local/piezas/templates/dashboard/orders/quote_detail.html:83
-#: local/piezas/templates/search/confirmquoterecalc.html:74
-#: local/piezas/templates/search/quoteaccept.html:57
-#: local/piezas/templates/search/quotedetail.html:57
+#: local/piezas/templates/search/confirmquoterecalc.html:84
+#: local/piezas/templates/search/quoteaccept.html:67
+#: local/piezas/templates/search/quotedetail.html:67
 #: local/piezas/templates/search/quoteview.html:57
 #: piezas/templates/dashboard/orders/quote_detail.html:83
-#: piezas/templates/search/confirmquoterecalc.html:74
-#: piezas/templates/search/quoteaccept.html:57
-#: piezas/templates/search/quotedetail.html:57
+#: piezas/templates/search/confirmquoterecalc.html:84
+#: piezas/templates/search/quoteaccept.html:67
+#: piezas/templates/search/quotedetail.html:67
 #: piezas/templates/search/quoteview.html:57
 msgid "Quote comments"
 msgstr "Comentarios del presupuesto"
@@ -7566,14 +7614,14 @@ msgid "Request picture"
 msgstr "Foto de la petición de búsqueda"
 
 #: local/piezas/templates/dashboard/orders/quote_detail.html:85
-#: local/piezas/templates/search/confirmquoterecalc.html:76
-#: local/piezas/templates/search/quoteaccept.html:59
-#: local/piezas/templates/search/quotedetail.html:59
+#: local/piezas/templates/search/confirmquoterecalc.html:86
+#: local/piezas/templates/search/quoteaccept.html:69
+#: local/piezas/templates/search/quotedetail.html:69
 #: local/piezas/templates/search/quoteview.html:59
 #: piezas/templates/dashboard/orders/quote_detail.html:85
-#: piezas/templates/search/confirmquoterecalc.html:76
-#: piezas/templates/search/quoteaccept.html:59
-#: piezas/templates/search/quotedetail.html:59
+#: piezas/templates/search/confirmquoterecalc.html:86
+#: piezas/templates/search/quoteaccept.html:69
+#: piezas/templates/search/quotedetail.html:69
 #: piezas/templates/search/quoteview.html:59
 msgid "Quote picture"
 msgstr "Foto del presupuesto"
@@ -7657,22 +7705,22 @@ msgid "Search request items"
 msgstr "Elementos de la petición de búsqueda"
 
 #: local/piezas/templates/dashboard/orders/searchrequest_detail.html:66
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:170
-#: local/piezas/templates/search/confirm.html:130
-#: local/piezas/templates/search/confirmquoterecalc.html:118
-#: local/piezas/templates/search/detail.html:93
-#: local/piezas/templates/search/quote.html:150
-#: local/piezas/templates/search/quoteaccept.html:101
-#: local/piezas/templates/search/quotedetail.html:105
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:180
+#: local/piezas/templates/search/confirm.html:149
+#: local/piezas/templates/search/confirmquoterecalc.html:128
+#: local/piezas/templates/search/detail.html:104
+#: local/piezas/templates/search/quote.html:155
+#: local/piezas/templates/search/quoteaccept.html:111
+#: local/piezas/templates/search/quotedetail.html:115
 #: local/piezas/templates/search/quoteview.html:101
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:66
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:170
-#: piezas/templates/search/confirm.html:130
-#: piezas/templates/search/confirmquoterecalc.html:118
-#: piezas/templates/search/detail.html:93
-#: piezas/templates/search/quote.html:150
-#: piezas/templates/search/quoteaccept.html:101
-#: piezas/templates/search/quotedetail.html:105
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:180
+#: piezas/templates/search/confirm.html:149
+#: piezas/templates/search/confirmquoterecalc.html:128
+#: piezas/templates/search/detail.html:104
+#: piezas/templates/search/quote.html:155
+#: piezas/templates/search/quoteaccept.html:111
+#: piezas/templates/search/quotedetail.html:115
 #: piezas/templates/search/quoteview.html:101
 msgid "Photo gallery"
 msgstr "Galería de fotos"
@@ -7683,33 +7731,33 @@ msgid "Answers"
 msgstr "Respuestas"
 
 #: local/piezas/templates/dashboard/orders/searchrequest_detail.html:83
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:177
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:184
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:190
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:197
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:204
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:211
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:218
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:225
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:231
-#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:237
-#: local/piezas/templates/search/confirm.html:97
-#: local/piezas/templates/search/detail.html:58
-#: local/piezas/templates/search/quote.html:118
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:187
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:194
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:200
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:207
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:214
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:221
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:228
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:235
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:241
+#: local/piezas/templates/dashboard/orders/searchrequest_detail.html:247
+#: local/piezas/templates/search/confirm.html:116
+#: local/piezas/templates/search/detail.html:69
+#: local/piezas/templates/search/quote.html:123
 #: piezas/templates/dashboard/orders/searchrequest_detail.html:83
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:177
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:184
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:190
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:197
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:204
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:211
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:218
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:225
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:231
-#: piezas/templates/dashboard/orders/searchrequest_detail.html:237
-#: piezas/templates/search/confirm.html:97
-#: piezas/templates/search/detail.html:58
-#: piezas/templates/search/quote.html:118
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:187
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:194
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:200
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:207
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:214
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:221
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:228
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:235
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:241
+#: piezas/templates/dashboard/orders/searchrequest_detail.html:247
+#: piezas/templates/search/confirm.html:116
+#: piezas/templates/search/detail.html:69
+#: piezas/templates/search/quote.html:123
 msgid "Picture"
 msgstr "Foto"
 
@@ -9608,18 +9656,18 @@ msgid "Send reset email"
 msgstr ""
 
 #: local/piezas/templates/search/activequotes_list.html:21
-#: local/piezas/templates/search/detail.html:168
+#: local/piezas/templates/search/detail.html:179
 #: local/piezas/templates/search/recalcquotes_list.html:21
 #: piezas/templates/search/activequotes_list.html:21
-#: piezas/templates/search/detail.html:168
+#: piezas/templates/search/detail.html:179
 #: piezas/templates/search/recalcquotes_list.html:21
 msgid "Quote id"
 msgstr "Id de presupuesto"
 
 #: local/piezas/templates/search/activequotes_list.html:23
-#: local/piezas/templates/search/detail.html:169
+#: local/piezas/templates/search/detail.html:180
 #: piezas/templates/search/activequotes_list.html:23
-#: piezas/templates/search/detail.html:169
+#: piezas/templates/search/detail.html:180
 msgid "Provider"
 msgstr "Proveedor"
 
@@ -9637,17 +9685,17 @@ msgid "Total items"
 msgstr "Total de elementos"
 
 #: local/piezas/templates/search/activequotes_list.html:26
-#: local/piezas/templates/search/confirmquoterecalc.html:194
-#: local/piezas/templates/search/detail.html:170
-#: local/piezas/templates/search/quoteaccept.html:177
-#: local/piezas/templates/search/quotedetail.html:185
+#: local/piezas/templates/search/confirmquoterecalc.html:204
+#: local/piezas/templates/search/detail.html:181
+#: local/piezas/templates/search/quoteaccept.html:187
+#: local/piezas/templates/search/quotedetail.html:195
 #: local/piezas/templates/search/quoteview.html:181
 #: local/piezas/templates/search/recalcquotes_list.html:28
 #: piezas/templates/search/activequotes_list.html:26
-#: piezas/templates/search/confirmquoterecalc.html:194
-#: piezas/templates/search/detail.html:170
-#: piezas/templates/search/quoteaccept.html:177
-#: piezas/templates/search/quotedetail.html:185
+#: piezas/templates/search/confirmquoterecalc.html:204
+#: piezas/templates/search/detail.html:181
+#: piezas/templates/search/quoteaccept.html:187
+#: piezas/templates/search/quotedetail.html:195
 #: piezas/templates/search/quoteview.html:181
 #: piezas/templates/search/recalcquotes_list.html:28
 msgid "Base total (incl tax)"
@@ -9768,8 +9816,8 @@ msgstr "Por favor confirma la búsqueda que será enviada a los proveedores"
 msgid "Pieces to search"
 msgstr "Piezas a buscar"
 
-#: local/piezas/templates/search/confirm.html:199
-#: piezas/templates/search/confirm.html:199
+#: local/piezas/templates/search/confirm.html:218
+#: piezas/templates/search/confirm.html:218
 msgid "Return to search"
 msgstr "Volver a la búsqueda"
 
@@ -9793,106 +9841,106 @@ msgstr "Recálculo de portes del presupuesto"
 msgid "Search details"
 msgstr "Detalles de la búsqueda"
 
-#: local/piezas/templates/search/confirmquoterecalc.html:67
-#: local/piezas/templates/search/detail.html:50
-#: local/piezas/templates/search/quoteaccept.html:50
-#: local/piezas/templates/search/quotedetail.html:50
+#: local/piezas/templates/search/confirmquoterecalc.html:77
+#: local/piezas/templates/search/detail.html:61
+#: local/piezas/templates/search/quoteaccept.html:60
+#: local/piezas/templates/search/quotedetail.html:60
 #: local/piezas/templates/search/quoteview.html:50
-#: piezas/templates/search/confirmquoterecalc.html:67
-#: piezas/templates/search/detail.html:50
-#: piezas/templates/search/quoteaccept.html:50
-#: piezas/templates/search/quotedetail.html:50
+#: piezas/templates/search/confirmquoterecalc.html:77
+#: piezas/templates/search/detail.html:61
+#: piezas/templates/search/quoteaccept.html:60
+#: piezas/templates/search/quotedetail.html:60
 #: piezas/templates/search/quoteview.html:50
 msgid "Pieces detail"
 msgstr "Detalles de la pieza"
 
-#: local/piezas/templates/search/confirmquoterecalc.html:73
-#: local/piezas/templates/search/quoteaccept.html:56
-#: local/piezas/templates/search/quotedetail.html:56
+#: local/piezas/templates/search/confirmquoterecalc.html:83
+#: local/piezas/templates/search/quoteaccept.html:66
+#: local/piezas/templates/search/quotedetail.html:66
 #: local/piezas/templates/search/quoteview.html:56
-#: piezas/templates/search/confirmquoterecalc.html:73
-#: piezas/templates/search/quoteaccept.html:56
-#: piezas/templates/search/quotedetail.html:56
+#: piezas/templates/search/confirmquoterecalc.html:83
+#: piezas/templates/search/quoteaccept.html:66
+#: piezas/templates/search/quotedetail.html:66
 #: piezas/templates/search/quoteview.html:56
 msgid "Search request comments"
 msgstr "Comentarios de la petición de búsqueda"
 
-#: local/piezas/templates/search/confirmquoterecalc.html:75
-#: local/piezas/templates/search/quoteaccept.html:58
-#: local/piezas/templates/search/quotedetail.html:58
+#: local/piezas/templates/search/confirmquoterecalc.html:85
+#: local/piezas/templates/search/quoteaccept.html:68
+#: local/piezas/templates/search/quotedetail.html:68
 #: local/piezas/templates/search/quoteview.html:58
-#: piezas/templates/search/confirmquoterecalc.html:75
-#: piezas/templates/search/quoteaccept.html:58
-#: piezas/templates/search/quotedetail.html:58
+#: piezas/templates/search/confirmquoterecalc.html:85
+#: piezas/templates/search/quoteaccept.html:68
+#: piezas/templates/search/quotedetail.html:68
 #: piezas/templates/search/quoteview.html:58
 msgid "Search request picture"
 msgstr "Foto de la petición de búsqueda"
 
-#: local/piezas/templates/search/confirmquoterecalc.html:84
-#: local/piezas/templates/search/quote.html:133
-#: local/piezas/templates/search/quoteaccept.html:67
-#: local/piezas/templates/search/quotedetail.html:68
+#: local/piezas/templates/search/confirmquoterecalc.html:94
+#: local/piezas/templates/search/quote.html:138
+#: local/piezas/templates/search/quoteaccept.html:77
+#: local/piezas/templates/search/quotedetail.html:78
 #: local/piezas/templates/search/quoteview.html:67
-#: piezas/templates/search/confirmquoterecalc.html:84
-#: piezas/templates/search/quote.html:133
-#: piezas/templates/search/quoteaccept.html:67
-#: piezas/templates/search/quotedetail.html:68
+#: piezas/templates/search/confirmquoterecalc.html:94
+#: piezas/templates/search/quote.html:138
+#: piezas/templates/search/quoteaccept.html:77
+#: piezas/templates/search/quotedetail.html:78
 #: piezas/templates/search/quoteview.html:67
 msgid "Show / hide piece details"
 msgstr "Mostrar/ocultar detalles de las piezas"
 
-#: local/piezas/templates/search/confirmquoterecalc.html:185
-#: local/piezas/templates/search/quote.html:215
-#: local/piezas/templates/search/quoteaccept.html:168
-#: local/piezas/templates/search/quotedetail.html:172
+#: local/piezas/templates/search/confirmquoterecalc.html:195
+#: local/piezas/templates/search/quote.html:220
+#: local/piezas/templates/search/quoteaccept.html:178
+#: local/piezas/templates/search/quotedetail.html:182
 #: local/piezas/templates/search/quoteview.html:168
-#: piezas/templates/search/confirmquoterecalc.html:185
-#: piezas/templates/search/quote.html:215
-#: piezas/templates/search/quoteaccept.html:168
-#: piezas/templates/search/quotedetail.html:172
+#: piezas/templates/search/confirmquoterecalc.html:195
+#: piezas/templates/search/quote.html:220
+#: piezas/templates/search/quoteaccept.html:178
+#: piezas/templates/search/quotedetail.html:182
 #: piezas/templates/search/quoteview.html:168
 msgid "Quote summary"
 msgstr "Resumen del presupuesto"
 
-#: local/piezas/templates/search/confirmquoterecalc.html:196
-#: piezas/templates/search/confirmquoterecalc.html:196
+#: local/piezas/templates/search/confirmquoterecalc.html:206
+#: piezas/templates/search/confirmquoterecalc.html:206
 msgid "New shipping total (excl tax)"
 msgstr "Nuevos gastos de envío sin impuestos"
 
-#: local/piezas/templates/search/confirmquoterecalc.html:209
-#: piezas/templates/search/confirmquoterecalc.html:209
+#: local/piezas/templates/search/confirmquoterecalc.html:219
+#: piezas/templates/search/confirmquoterecalc.html:219
 msgid "Confirm new shipping cost"
 msgstr "Confirmar nuevos gastos de envío"
 
-#: local/piezas/templates/search/confirmquoterecalc.html:210
-#: local/piezas/templates/search/confirmquoterecalc.html:246
-#: piezas/templates/search/confirmquoterecalc.html:210
-#: piezas/templates/search/confirmquoterecalc.html:246
+#: local/piezas/templates/search/confirmquoterecalc.html:220
+#: local/piezas/templates/search/confirmquoterecalc.html:256
+#: piezas/templates/search/confirmquoterecalc.html:220
+#: piezas/templates/search/confirmquoterecalc.html:256
 msgid "Cancel quote"
 msgstr "Cancelar presupuesto"
 
-#: local/piezas/templates/search/confirmquoterecalc.html:220
-#: piezas/templates/search/confirmquoterecalc.html:220
+#: local/piezas/templates/search/confirmquoterecalc.html:230
+#: piezas/templates/search/confirmquoterecalc.html:230
 msgid "Errors on quote recalc"
 msgstr "Errores en el recálculo de presupuesto"
 
-#: local/piezas/templates/search/confirmquoterecalc.html:223
-#: piezas/templates/search/confirmquoterecalc.html:223
+#: local/piezas/templates/search/confirmquoterecalc.html:233
+#: piezas/templates/search/confirmquoterecalc.html:233
 msgid "Please submit a valid shipping amount"
 msgstr "Por favor introduce un gasto de envío válido"
 
-#: local/piezas/templates/search/confirmquoterecalc.html:231
-#: piezas/templates/search/confirmquoterecalc.html:231
+#: local/piezas/templates/search/confirmquoterecalc.html:241
+#: piezas/templates/search/confirmquoterecalc.html:241
 msgid "Confirm new shipping amount"
 msgstr "Confirmar nuevo importe para gastos de envío"
 
-#: local/piezas/templates/search/confirmquoterecalc.html:235
-#: piezas/templates/search/confirmquoterecalc.html:235
+#: local/piezas/templates/search/confirmquoterecalc.html:245
+#: piezas/templates/search/confirmquoterecalc.html:245
 msgid "Are you sure you want to update the new shipping amount?"
 msgstr "¿Seguro que deseas confirmar este nuevo gasto de envío? "
 
-#: local/piezas/templates/search/confirmquoterecalc.html:250
-#: piezas/templates/search/confirmquoterecalc.html:250
+#: local/piezas/templates/search/confirmquoterecalc.html:260
+#: piezas/templates/search/confirmquoterecalc.html:260
 msgid "Are you sure you want to cancel the current quote?"
 msgstr "¿Seguro que deseas cancelar este presupuesto? "
 
@@ -9903,29 +9951,29 @@ msgstr "¿Seguro que deseas cancelar este presupuesto? "
 msgid "Search request details"
 msgstr "Detalles de la petición de búsqueda"
 
-#: local/piezas/templates/search/detail.html:162
-#: piezas/templates/search/detail.html:162
+#: local/piezas/templates/search/detail.html:173
+#: piezas/templates/search/detail.html:173
 msgid "Received quotes"
 msgstr "Presupuestos recibidos"
 
-#: local/piezas/templates/search/detail.html:174
-#: piezas/templates/search/detail.html:174
+#: local/piezas/templates/search/detail.html:185
+#: piezas/templates/search/detail.html:185
 msgid "Number of quoted pieces"
 msgstr "Número de piezas presupuestadas"
 
-#: local/piezas/templates/search/detail.html:175
-#: piezas/templates/search/detail.html:175
+#: local/piezas/templates/search/detail.html:186
+#: piezas/templates/search/detail.html:186
 msgid "Number of accepted pieces"
 msgstr "Número de piezas aceptadas"
 
-#: local/piezas/templates/search/detail.html:191
-#: piezas/templates/search/detail.html:191
+#: local/piezas/templates/search/detail.html:202
+#: piezas/templates/search/detail.html:202
 msgid "You don't have any received quotes."
 msgstr "No has recibido ningún presupuesto"
 
-#: local/piezas/templates/search/detail.html:199
+#: local/piezas/templates/search/detail.html:210
 #: local/piezas/templates/search/quoteview.html:216
-#: piezas/templates/search/detail.html:199
+#: piezas/templates/search/detail.html:210
 #: piezas/templates/search/quoteview.html:216
 msgid "Back"
 msgstr "Atrás"
@@ -9953,9 +10001,9 @@ msgid "Search zone"
 msgstr "Zona de búsqueda"
 
 #: local/piezas/templates/search/historysearches_list.html:70
-#: local/piezas/templates/search/pending_searchrequest_list.html:39
+#: local/piezas/templates/search/pending_searchrequest_list.html:47
 #: piezas/templates/search/historysearches_list.html:70
-#: piezas/templates/search/pending_searchrequest_list.html:39
+#: piezas/templates/search/pending_searchrequest_list.html:47
 msgid "Show/hide pieces"
 msgstr "Mostrar/ocultar piezas"
 
@@ -9997,11 +10045,6 @@ msgstr "Confirmar petición de búsqueda"
 msgid "It's mandatory to attach a picture"
 msgstr "Es obligatorio adjuntar una foto"
 
-#: local/piezas/templates/search/home.html:343
-#: piezas/templates/search/home.html:343
-msgid "Others"
-msgstr "Otros"
-
 #: local/piezas/templates/search/orderplaced.html:15
 #: local/piezas/templates/search/orderplaced.html:20
 #: piezas/templates/search/orderplaced.html:15
@@ -10019,9 +10062,9 @@ msgstr ""
 "estimados en el presupuesto."
 
 #: local/piezas/templates/search/pending_searchrequest_list.html:26
-#: local/piezas/templates/search/quote.html:70
+#: local/piezas/templates/search/quote.html:75
 #: piezas/templates/search/pending_searchrequest_list.html:26
-#: piezas/templates/search/quote.html:70
+#: piezas/templates/search/quote.html:75
 msgid "Zone"
 msgstr "Zona"
 
@@ -10040,8 +10083,8 @@ msgstr "Tiempo restante"
 msgid "Quote"
 msgstr "Presupuestar"
 
-#: local/piezas/templates/search/pending_searchrequest_list.html:55
-#: piezas/templates/search/pending_searchrequest_list.html:55
+#: local/piezas/templates/search/pending_searchrequest_list.html:63
+#: piezas/templates/search/pending_searchrequest_list.html:63
 msgid "There are no pending search requests"
 msgstr "No hay peticiones de búsqueda pedientes"
 
@@ -10086,12 +10129,12 @@ msgstr ""
 msgid "General details"
 msgstr "Detalles generales"
 
-#: local/piezas/templates/search/quote.html:102
+#: local/piezas/templates/search/quote.html:107
 #: local/piezas/templates/search/quotedetail.html:21
 #: local/piezas/templates/search/quotedetail.html:26
 #: local/piezas/templates/search/quoteview.html:21
 #: local/piezas/templates/search/quoteview.html:26
-#: piezas/templates/search/quote.html:102
+#: piezas/templates/search/quote.html:107
 #: piezas/templates/search/quotedetail.html:21
 #: piezas/templates/search/quotedetail.html:26
 #: piezas/templates/search/quoteview.html:21
@@ -10099,53 +10142,53 @@ msgstr "Detalles generales"
 msgid "Quote details"
 msgstr "Detalles del presupuesto"
 
-#: local/piezas/templates/search/quote.html:110
-#: piezas/templates/search/quote.html:110
+#: local/piezas/templates/search/quote.html:115
+#: piezas/templates/search/quote.html:115
 msgid "Pieces to quote"
 msgstr "Piezas a presupuestar"
 
-#: local/piezas/templates/search/quote.html:120
-#: piezas/templates/search/quote.html:120
+#: local/piezas/templates/search/quote.html:125
+#: piezas/templates/search/quote.html:125
 msgid "Base total excl. tax"
 msgstr "Total base sin impuestos"
 
-#: local/piezas/templates/search/quote.html:122
-#: piezas/templates/search/quote.html:122
+#: local/piezas/templates/search/quote.html:127
+#: piezas/templates/search/quote.html:127
 msgid "Picture of the piece to be sent"
 msgstr "Foto de la pieza que será enviada"
 
-#: local/piezas/templates/search/quote.html:254
-#: piezas/templates/search/quote.html:254
+#: local/piezas/templates/search/quote.html:259
+#: piezas/templates/search/quote.html:259
 msgid "Confirm quote"
 msgstr "Confirmar presupuesto"
 
-#: local/piezas/templates/search/quote.html:279
-#: piezas/templates/search/quote.html:279
+#: local/piezas/templates/search/quote.html:284
+#: piezas/templates/search/quote.html:284
 msgid "Delete row"
 msgstr "Borrar línea"
 
-#: local/piezas/templates/search/quote.html:282
-#: piezas/templates/search/quote.html:282
+#: local/piezas/templates/search/quote.html:287
+#: piezas/templates/search/quote.html:287
 msgid "Are you sure you want to delete the row in the quote?"
 msgstr "¿Seguro que deseas borrar esta línea de presupuesto? "
 
-#: local/piezas/templates/search/quote.html:293
-#: piezas/templates/search/quote.html:293
+#: local/piezas/templates/search/quote.html:298
+#: piezas/templates/search/quote.html:298
 msgid "Submit quote"
 msgstr "Enviar presupuesto"
 
-#: local/piezas/templates/search/quote.html:296
-#: piezas/templates/search/quote.html:296
+#: local/piezas/templates/search/quote.html:301
+#: piezas/templates/search/quote.html:301
 msgid "Are you sure you want to submit this quote?"
 msgstr "¿Seguro que deseas enviar este presupuesto? "
 
-#: local/piezas/templates/search/quote.html:307
-#: piezas/templates/search/quote.html:307
+#: local/piezas/templates/search/quote.html:312
+#: piezas/templates/search/quote.html:312
 msgid "Errors on quote"
 msgstr "Errores en el presupuesto"
 
-#: local/piezas/templates/search/quote.html:310
-#: piezas/templates/search/quote.html:310
+#: local/piezas/templates/search/quote.html:315
+#: piezas/templates/search/quote.html:315
 msgid ""
 "Please make sure that all mandatory fields are filled and that all lines in "
 "quote have a base total"
@@ -10160,63 +10203,63 @@ msgstr ""
 msgid "Quote accept"
 msgstr "Aceptar presupuesto"
 
-#: local/piezas/templates/search/quoteaccept.html:190
-#: piezas/templates/search/quoteaccept.html:190
+#: local/piezas/templates/search/quoteaccept.html:200
+#: piezas/templates/search/quoteaccept.html:200
 msgid "Choose payment method"
 msgstr "Escoge método de pago"
 
-#: local/piezas/templates/search/quoteaccept.html:195
-#: piezas/templates/search/quoteaccept.html:195
+#: local/piezas/templates/search/quoteaccept.html:205
+#: piezas/templates/search/quoteaccept.html:205
 msgid "You will pay after receiving the package"
 msgstr "Realizarás el pago una vez hayas recibido el envío"
 
-#: local/piezas/templates/search/quoteaccept.html:202
-#: piezas/templates/search/quoteaccept.html:202
+#: local/piezas/templates/search/quoteaccept.html:212
+#: piezas/templates/search/quoteaccept.html:212
 msgid "Send the amount as a transfer to"
 msgstr "Envía el importa total como una transferencia a"
 
-#: local/piezas/templates/search/quoteaccept.html:221
-#: piezas/templates/search/quoteaccept.html:221
+#: local/piezas/templates/search/quoteaccept.html:231
+#: piezas/templates/search/quoteaccept.html:231
 msgid "Confirm order placement"
 msgstr "Confirmar creación del pedido"
 
-#: local/piezas/templates/search/quoteaccept.html:225
-#: piezas/templates/search/quoteaccept.html:225
+#: local/piezas/templates/search/quoteaccept.html:235
+#: piezas/templates/search/quoteaccept.html:235
 msgid "Are you sure you want to confirm the order?"
 msgstr "¿Seguro que deseas confirmar este pedido? "
 
-#: local/piezas/templates/search/quotedetail.html:61
-#: piezas/templates/search/quotedetail.html:61
+#: local/piezas/templates/search/quotedetail.html:71
+#: piezas/templates/search/quotedetail.html:71
 msgid "Select item"
 msgstr "Seleccionar elemento"
 
-#: local/piezas/templates/search/quotedetail.html:220
-#: piezas/templates/search/quotedetail.html:220
+#: local/piezas/templates/search/quotedetail.html:230
+#: piezas/templates/search/quotedetail.html:230
 msgid "Accept quote"
 msgstr "Aceptar presupuesto"
 
-#: local/piezas/templates/search/quotedetail.html:221
-#: piezas/templates/search/quotedetail.html:221
+#: local/piezas/templates/search/quotedetail.html:231
+#: piezas/templates/search/quotedetail.html:231
 msgid "Ask for shipping recalc"
 msgstr "Solicitar recálculo de portes"
 
-#: local/piezas/templates/search/quotedetail.html:230
-#: piezas/templates/search/quotedetail.html:230
+#: local/piezas/templates/search/quotedetail.html:240
+#: piezas/templates/search/quotedetail.html:240
 msgid "Errors on quote acceptation"
 msgstr "Errores en la aceptación del presupuesto"
 
-#: local/piezas/templates/search/quotedetail.html:233
-#: piezas/templates/search/quotedetail.html:233
+#: local/piezas/templates/search/quotedetail.html:243
+#: piezas/templates/search/quotedetail.html:243
 msgid "Please select at least one of the items in the quote"
 msgstr "Por favor selecciona al menos uno de los elementos del presupuesto"
 
-#: local/piezas/templates/search/quotedetail.html:240
-#: piezas/templates/search/quotedetail.html:240
+#: local/piezas/templates/search/quotedetail.html:250
+#: piezas/templates/search/quotedetail.html:250
 msgid "Confirm shipping recalc request"
 msgstr "Confirmar petición de recálculo de portes"
 
-#: local/piezas/templates/search/quotedetail.html:244
-#: piezas/templates/search/quotedetail.html:244
+#: local/piezas/templates/search/quotedetail.html:254
+#: piezas/templates/search/quotedetail.html:254
 msgid "Are you sure you want to ask for a recalc of shipping?"
 msgstr "¿Seguro que deseas enviar esta solicitud de recálculo de portes?"
 
@@ -10304,12 +10347,6 @@ msgstr ""
 #~ msgid "Canceled"
 #~ msgstr "Cancelada"
 
-#~ msgid "sent"
-#~ msgstr "Enviado"
-
-#~ msgid "paid"
-#~ msgstr "Pagado"
-
 #~ msgid "Add"
 #~ msgstr "Añadir"
 
@@ -10333,6 +10370,3 @@ msgstr ""
 
 #~ msgid "searchrequests"
 #~ msgstr "peticiones de búsqueda"
-
-#~ msgid "pending_payment"
-#~ msgstr "Pendiente de pago"

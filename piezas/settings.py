@@ -356,3 +356,4 @@ PHONENUMBER_DEFAULT_FORMAT = 'NATIONAL'
 SEARCH_INTERVAL_MIN = 90
 
 ORDER_STATUSES = ['pending_payment', 'paid', 'sent', 'canceled']
+ORDER_STATUSES_DESC = [_('pending_payment'), _('paid'), _('sent'), _('canceled')]

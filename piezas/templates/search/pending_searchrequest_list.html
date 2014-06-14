@@ -31,10 +31,18 @@
             {% for searchrequest in searchrequests %}
                 <tr>
                     <td><span class="span1">{{ searchrequest.id}}</span>&nbsp;<a href="{% url 'search:quote' pk=searchrequest.id %}" class="btn">{% trans "Quote" %}</a></td>
-                    <td>{{ searchrequest.brand.name }}</td>
-                    <td>{{ searchrequest.model.name }}</td>
-                    <td>{{ searchrequest.version.name }}</td>
-                    <td>{{ searchrequest.engine }}</td>
+                    <td>{{ searchrequest.brand.name }}
+{% if searchrequest.other_brand %} - {{searchrequest.other_brand}}{% endif %}
+</td>
+                    <td>{{ searchrequest.model.name }}
+{% if searchrequest.other_model %} - {{searchrequest.other_model}}{% endif %}
+</td>
+                    <td>{{ searchrequest.version.name }}
+{% if searchrequest.other_version %} - {{searchrequest.other_version}}{% endif %}
+</td>
+                    <td>{{ searchrequest.engine }}
+{% if searchrequest.other_engine %} - {{searchrequest.other_engine}}{% endif %}
+</td>
                     <td>{{ searchrequest.zone }}</td>
                     <td class="span4"><span class="span1">{{ searchrequest.num_items }}</span>&nbsp;&nbsp;<button class="btn pieces_show">{% trans "Show/hide pieces" %}</button>
 			<div style="clear:both"></div><div class="pieces_container" style="display:none;"><br />

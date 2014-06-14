@@ -31,32 +31,37 @@
 				<div class="control-group span3">
 					<label class="control-label">{% trans "Brand" %}:</label>
 					<div class="controls">
-						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.brand.name}}" />
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.brand.name}}
+{% if searchrequest.other_brand %} - {{searchrequest.other_brand}}{% endif %}" />
 					</div>
 				</div>
 				<div class="control-group span3">
 					<label class="control-label">{% trans "Model" %}:</label>
 					<div class="controls">
-						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.model.name}}" />
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.model.name}}
+{% if searchrequest.other_model %} - {{searchrequest.other_model}}{% endif %}" />
 					</div>
 				</div>
 				<div class="control-group span3">
 					<label class="control-label">{% trans "Version" %}:</label>
 					<div class="controls">
-						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.version.name}}" />
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.version.name}}
+{% if searchrequest.other_version %} - {{searchrequest.other_version}}{% endif %}" />
 					</div>
 				</div>
 				<div class="span1"></div>
 				<div class="control-group span3">
 					<label class="control-label">{% trans "Engine" %}:</label>
 					<div class="controls">
-						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.engine.name}}" />
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.engine.name}}
+{% if searchrequest.other_engine %} - {{searchrequest.other_engine}}{% endif %}" />
 					</div>
 				</div>
 				<div class="control-group span3">
 					<label class="control-label">{% trans "Bodywork" %}:</label>
 					<div class="controls">
-						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.bodywork.name}}" />
+						<input type="text" readonly="readonly" disabled="disabled" value="{{searchrequest.bodywork.name}}
+{% if searchrequest.other_bodywork %} - {{searchrequest.other_bodywork}}{% endif %}" />
 					</div>
 				</div>
 				<div class="control-group span3">
