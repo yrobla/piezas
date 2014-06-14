@@ -49,8 +49,8 @@
 
 		<h4>{% trans "Pieces detail" %}</h4>
 		<div class="responsible-table">
-			<table class="table" id="id_searchitemrequest_table">
-				<thead><tr>
+			<table class="table table-bordered table-striped" id="id_searchitemrequest_table">
+				<tr>
 					<th>{% trans "Category" %}</th>
 					<th class="span4">{% trans "Piece" %}</th>
 					<th>{% trans "Search request comments" %}</th>
@@ -58,8 +58,7 @@
 					<th>{% trans "Search request picture" %}</th>
 					<th>{% trans "Quote picture" %}</th>
 					<th>{% trans "Base total (excl tax)" %}</th>
-				</tr></thead>
-				<tbody>
+				</tr>
 					{% for item in quote.lines %}
 					<tr>
 						<td>{{item.search_item_request.category}}</td>
@@ -92,7 +91,6 @@
 						<td>{{item.base_total_excl_tax}} €</td>
 					</tr>
 					{% endfor %}
-				</tbody>
 			</table>
 		</div>
 		<div style="clear:both"><br /></div>

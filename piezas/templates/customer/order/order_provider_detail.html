@@ -46,15 +46,12 @@
 	</form>
 
     <table class="table table-striped table-bordered">
-        <thead>
             <tr>
                 <th>{% trans 'Product' %}</th>
                 <th>{% trans 'Qty' %}</th>
                 <th>{% trans 'Line price excl tax' %}</th>
                 <th>{% trans 'Line price incl tax' %}</th>
             </tr>
-        </thead>
-        <tbody>
             {% for line in order.lines.all %}
                 {% with product=line.product %}
                     <tr>
@@ -109,7 +106,6 @@
                     <td colspan="2">{{ order.total_incl_tax|currency:order.currency }}</td>
                 </tr>
             {% endblock order_total %}
-        </tbody>
     </table>
 
     <hr>

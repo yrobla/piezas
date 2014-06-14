@@ -346,7 +346,7 @@ $(document).ready(function()
 	$("#id_model").change(function()
 	{
 		var current_text = $("#id_model option:selected").text();
-		if (current_text=="{% trans "Others" %} - {% trans "Others" %}")
+		if (current_text=="{% trans "Others" %}")
 		{
 			$("#other_model").parent().parent().show();
 		}
@@ -358,7 +358,7 @@ $(document).ready(function()
 	$("#id_version").change(function()
 	{
 		var current_text = $("#id_version option:selected").text();
-		if (current_text=="{% trans "Others" %} - {% trans "Others" %} - {% trans "Others" %}")
+		if (current_text=="{% trans "Others" %}")
 		{
 			$("#other_version").parent().parent().show();
 		}

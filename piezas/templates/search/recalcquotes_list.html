@@ -30,7 +30,7 @@
             </tr>
             {% for quote in quotes %}
                 <tr>
-                    <td><div class="span2">{{quote.id}}&nbsp;&nbsp;<button type="button" class="button" onClick='location.href="{% url 'search:confirmrecalcquote' number=quote.id %}";return false;'>{% trans "Recal quote" %}</button></div></td>
+                    <td><div class="span2"><span class="reference">{{quote.id}}</span>&nbsp;&nbsp;<button type="button" class="button" onClick='location.href="{% url 'search:confirmrecalcquote' number=quote.id %}";return false;'>{% trans "Recal quote" %}</button></div></td>
                     <td><a href="{% url 'search:detail' number=quote.search_request.id %}">{{quote.search_request.id}}</a></td>
                     <td>{{quote.search_request.owner}}</td>
                     <td>{{ quote.date_created }}</td>

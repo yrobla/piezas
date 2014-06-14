@@ -55,7 +55,7 @@
             </tr>
             {% for search in searches %}
                 <tr onClick="location.href='{% url 'search:detail' number=search.id %}';return false;" style="cursor:pointer;">
-                    <td>{{search.id}}
+                    <td><span class="reference">{{search.id}}</span>
 			{% if search.state == 'pending' %}
 &nbsp;&nbsp;<button type="button" class="button cancel_button" data-attr="{{search.id}}">
 {% trans "Cancel search" %}</button>
@@ -63,7 +63,7 @@
 			</td>
 		    <td>{% trans search.state %}</td>
                     <td>{{ search.date_created|date:"d/m/Y" }}</td>
-		    <td>{{ search.name }}</td>
+		    <td><span class="reference">{{ search.name }}</span></td>
                     <td>{{ search.brand.name }}</td>
                     <td>{{ search.model.name }}</td>
 		    <td><span class="span1">{{ search.num_items }}</span>&nbsp;&nbsp;

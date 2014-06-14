@@ -48,7 +48,7 @@ class Model(models.Model):
     objects = ModelManager()
 
     def __unicode__(self):
-        return u'%s - %s' % (self.brand, self.name)
+        return self.name
 
 
 class VersionManager(models.Manager):
@@ -68,7 +68,7 @@ class Version(models.Model):
     objects = VersionManager()
 
     def __unicode__(self):
-        return u'%s - %s' % (self.model, self.name)
+        return self.name
 
 
 class BodyworkManager(models.Manager):

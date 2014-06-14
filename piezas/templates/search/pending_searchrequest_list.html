@@ -30,7 +30,7 @@
             </tr>
             {% for searchrequest in searchrequests %}
                 <tr>
-                    <td><span class="span1">{{ searchrequest.id}}</span>&nbsp;<a href="{% url 'search:quote' pk=searchrequest.id %}" class="btn">{% trans "Quote" %}</a></td>
+                    <td><span class="span1 reference">{{ searchrequest.id}}</span>&nbsp;<a href="{% url 'search:quote' pk=searchrequest.id %}" class="btn">{% trans "Quote" %}</a></td>
                     <td>{{ searchrequest.brand.name }}
 {% if searchrequest.other_brand %} - {{searchrequest.other_brand}}{% endif %}
 </td>

@@ -60,15 +60,14 @@
 
 		<h4>{% trans "Pieces detail" %}</h4>
 		<div class="responsible-table">
-			<table class="table" id="id_searchitemrequest_table">
-				<thead><tr>
+			<table class="table table-striped table-bordered" id="id_searchitemrequest_table">
+				<tr>
 					<th>{% trans "Category" %}</th>
 					<th>{% trans "Piece" %}</th>
 					<th>{% trans "Comments" %}</th>
 					<th>{% trans "Questions" %}</th>
 					<th>{% trans "Picture" %}</th>
-				</tr></thead>
-				<tbody>
+				</tr>
 					{% for item in searchrequest.lines %}
 					<tr>
 						<td>{{item.category}}</td>
@@ -94,7 +93,6 @@
 						<td>{% if item.picture %}<img class="search_item" src="/media/{{item.picture}}" style="height:50px;" />{% endif %}</td>
 					</tr>
 					{% endfor %}
-				</tbody>
 			</table>
 		</div>
 
@@ -174,7 +172,7 @@
 
     {% if searchrequest.quotes %}
         <h3>{{ form.description }}</h3>
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered"><tbody>
             <tr>
 		<th>{% trans "Quote id" %}</th>
                 <th>{% trans "Provider" %}</th>
@@ -187,7 +185,7 @@
             </tr>
             {% for quote in searchrequest.quotes %}
                 <tr onClick="location.href='{% url 'search:quotedetail' number=quote.id %}';return false;" style="cursor:pointer;">
-                    <td>{{quote.id}}</td>
+                    <td><span class="reference">{{quote.id}}</span></td>
                     <td>{% if quote.owner.commercial_name %}{{ quote.owner.commercial_name }}{% else %}{{quote.owner}}{% endif %}</td>
                     <td>{{ quote.base_total_incl_tax }} €</td>
                     <td>{{ quote.shipping_total_incl_tax }} €</td>
@@ -197,7 +195,7 @@
 		    <td>{{quote.num_accepted_items}}</td>
                 </tr>
             {% endfor %}
-        </table>
+        </tbody></table>
     {% else %}
         <p>{% trans "You don't have any received quotes." %}</p>
     {% endif %}

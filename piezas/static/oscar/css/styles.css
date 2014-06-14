@@ -1769,7 +1769,7 @@ table {
   padding: 4px 5px;
 }
 .table-bordered {
-  border: 1px solid #dddddd;
+  border: 1px solid #303030;
   border-collapse: separate;
   *border-collapse: collapse;
   border-left: 0;
@@ -1779,7 +1779,12 @@ table {
 }
 .table-bordered th,
 .table-bordered td {
-  border-left: 1px solid #dddddd;
+  border-left: 1px solid #303030;
+}
+
+.table-bordered th
+{
+	color:#ffffff;
 }
 .table-bordered caption + thead tr:first-child th,
 .table-bordered caption + tbody tr:first-child th,
@@ -1850,10 +1855,14 @@ table {
   -moz-border-radius-topright: 4px;
   border-top-right-radius: 4px;
 }
-.table-striped tbody > tr:nth-child(odd) > td,
-.table-striped tbody > tr:nth-child(odd) > th {
-  background-color: #f9f9f9;
+.table-striped tbody > tr > th {
+  background-color: #303030 !important;
 }
+
+.table-striped tbody > tr:nth-child(odd) > td {
+  background-color: #f0f0f0;
+}
+
 .table-hover tbody tr:hover > td,
 .table-hover tbody tr:hover > th {
   background-color: #f5f5f5;
@@ -8211,4 +8220,9 @@ input[type="number"][id*="quantity"] {
 .table-quote input
 {
 	font-size:11px;
+}
+
+.reference
+{
+	color:#0067A1;
 }
