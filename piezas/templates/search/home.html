@@ -37,28 +37,33 @@
 
 			<form id="search_pieces_form" action="." method="post" class="form-horizontal" enctype="multipart/form-data">
 				{% csrf_token %}
+
+<div clas="span12">
+	<div class="span6">
 				<p>{% trans "Please enter the criteria for the pieces you want to search" %}</p>
 				{% include "partials/form_fields.html" %}
-
-				<div class="span12">
 					<button type="button" class="btn" id="button_add_picture">
 					{% trans "Add picture to gallery" %}
 					</button>
-				</div>
-				<div style="clear:both"><br /></div>
+	</div>
+	<div class="span6">
+		<h4>{% trans "Picture gallery" %}</h4>
+
+		<div id="picture_container"></div>
+	</div>
+</div>
+<div style="clear:both"><br /></div>
 
 				{{ formset.management_form }}
 			 	<h4>{% trans "Pieces to search" %}</h4>
 
 				<div class="responsible-table">
-					<table class="table" id="id_searchitemrequest_table">
-						<thead><tr>
+					<table class="table table-bordered table-striped-2" id="id_searchitemrequest_table">
+						<tr>
 							<th>{% trans "Category" %}</th>
 							<th>{% trans "Piece" %}</th>
 							<th>{% trans "Comments" %}</th>
 							<th>{% trans "Photo" %}</th>
-						</thead>
-						<tbody>
 							{% for item_form in formset.forms %}
 							<tr id="{{ item_form.prefix }}-row" class="pieces-row">
 								<td>{{item_form.category}}
@@ -85,14 +90,15 @@
 								<td>{{item_form.picture}}</td>
 							</tr>
 							<tr id="{{ item_form.prefix }}-row-questions">
-								<td colspan="6" style='border:0px;'><div class="questions well">{% trans "No questions for this product" %}</div></td>
+								<td colspan="6" >
+
+<div class="questions well">{% trans "No questions for this product" %}</div></td>
 							</tr>
 							{% endfor %}
-						</tbody>
 					</table>
 				</div>
 
-				<div class="span12">
+				<div class="span12" style="margin-top:10px;">
 					<button type="button" class="btn" id="button_add">
 					{% trans "Add piece" %}
 					</button>
@@ -202,8 +208,8 @@ $(document).ready(function()
 						current_item = data[i];
 						if (current_item.type=='boolean')
 						{
-							final_html += "<tr><th style='border-top:0px;'>"+current_item.text+"</th>";
-							final_html+="<td style='border-top:0px;'><select id='question_"+current_item.id+"' name='question_"+current_item.id+"' >";
+							final_html += "<tr><th style='border:0px;background-color:transparent;color:#303030'>"+current_item.text+"</th>";
+							final_html+="<td style='border:0px;'><select id='question_"+current_item.id+"' name='question_"+current_item.id+"' >";
 							final_html+="<option value='0' ";
 							if (current_item.value=='0') final_html+=" selected='selected' ";
 							final_html+=">{% trans "No" %}</option>";
@@ -215,8 +221,8 @@ $(document).ready(function()
 						else if (current_item.type=='text')
 						{
 
-							final_html += "<tr><th style='border-top:0px;'>"+current_item.text+"</th>";
-							final_html+="<td style='border-top:0px;'><input type='text' id='question_"+current_item.id+"' name='question_"+current_item.id+"' size=50 maxlength=255 ";
+							final_html += "<tr><th style='border:0px;background-color:transparent;color:#303030;'>"+current_item.text+"</th>";
+							final_html+="<td style='border:0px;'><input type='text' id='question_"+current_item.id+"' name='question_"+current_item.id+"' size=50 maxlength=255 ";
 							if (current_item.value)
 							{
 								final_html+=" value='"+current_item.value+"' ";
@@ -226,8 +232,8 @@ $(document).ready(function()
 						else if (current_item.type=='list')
 						{
 							var options = current_item.options.split('|');
-							final_html += "<tr><th style='border-top:0px;'>"+current_item.text+"</th>";
-							final_html+="<td style='border-top:0px;'><select id='question_"+current_item.id+"' name='question_"+current_item.id+"' >";
+							final_html += "<tr><th style='border:0px;background-color:transparent;color:#303030;'>"+current_item.text+"</th>";
+							final_html+="<td style='border:0px;'><select id='question_"+current_item.id+"' name='question_"+current_item.id+"' >";
 
 							for (var i in options)
 							{
@@ -241,7 +247,7 @@ $(document).ready(function()
 						else
 						{
 							// foto, usar el campo principal
-							final_html+="<tr><td style='border-top:0px;'>{% trans "It's mandatory to attach a picture" %}</td>";
+							final_html+="<tr><td style='border:0px;'>{% trans "It's mandatory to attach a picture" %}</td>";
 						}
 						final_html += "</tr>";
 					}
@@ -397,6 +403,16 @@ $(document).ready(function()
 	$("#id_version").trigger("change");
 	$("#id_bodywork").trigger("change");
 	$("#id_engine").trigger("change");
+
+	$(document).bind("ajaximage_added", function(context, data) {
+		var img_url = data.image;
+		$("#picture_container").append("<div class='span4' style='margin-left:0px;padding:3px;' id='pict_container_"+data.id+"'><img src='/media/"+img_url+"' /></div>");
+	});
+	$(document).bind("ajaximage_removed", function(context, data) {
+		var img_url = data.image;
+
+		$("#pict_container_"+data.id).remove();
+	});
 
 });
 </script>

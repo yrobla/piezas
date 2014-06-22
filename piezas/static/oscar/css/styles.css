@@ -1028,7 +1028,7 @@ input[type="file"] {
   line-height: 30px;
 }
 select {
-  width: 220px;
+  width: 350px;
   border: 1px solid #cccccc;
   background-color: #ffffff;
 }
@@ -1855,8 +1855,9 @@ table {
   -moz-border-radius-topright: 4px;
   border-top-right-radius: 4px;
 }
-.table-striped tbody > tr > th {
-  background-color: #303030 !important;
+.table-striped tbody > tr > th,
+.table-striped-2 tbody > tr > th {
+  background-color: #303030;
 }
 
 .table-striped tbody > tr:nth-child(odd) > td {

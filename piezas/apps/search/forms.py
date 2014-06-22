@@ -57,24 +57,41 @@ Piece = get_model('catalogue', 'Product')
 Category = get_model('catalogue', 'Category')
 
 class SearchCreationForm(forms.Form):
-    name = forms.CharField(label=_('Search name'), required=False, widget=forms.TextInput(attrs={'placeholder': _('---- Door BMW 2034GWZ white ----'), 'maxlength':255, 'style':'width:500px;'}))
-    brand = forms.ModelChoiceField(label=_('Brand'), required=True, queryset = Brand.objects.all())
+    name = forms.CharField(label=_('Search name'), required=False,
+                           widget=forms.TextInput(attrs={'placeholder': _('---- Door BMW 2034GWZ white ----'),
+                           'maxlength':255, 'style':'width:400px;'}))
+    brand = forms.ModelChoiceField(label=_('Brand'), required=True, queryset = Brand.objects.all(),
+                                   widget=forms.Select(attrs={'style':'width:415px;'}))
     other_brand = forms.CharField(label=_('Other brand'), max_length=255, required=False,
-        widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'), 'maxlength':255, 'style':'width:500px', 'id':'other_brand'}))
-    model = ChainedModelChoiceField(label=_('Model'), required=True, app_name='catalogue', model_name='Model', chain_field='brand', model_field='brand', show_all=False, auto_choose=False)
+                                  widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'),
+                                  'maxlength':255, 'style':'width:400px', 'id':'other_brand'}))
+    model = ChainedModelChoiceField(label=_('Model'), required=True, app_name='catalogue', model_name='Model',
+                                    chain_field='brand', model_field='brand', show_all=False, auto_choose=False,
+                                    widget=forms.Select(attrs={'style':'width:415px;'}))
     other_model = forms.CharField(label=_('Other model'), max_length=255, required=False,
-        widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'), 'maxlength':255, 'style':'width:500px', 'id':'other_model'}))
-    version = ChainedModelChoiceField(label=_('Version'), required=True, app_name='catalogue', model_name='Version', chain_field='model', model_field='model', show_all=False, auto_choose=False)
+                                  widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'),
+                                  'maxlength':255, 'style':'width:400px', 'id':'other_model'}))
+    version = ChainedModelChoiceField(label=_('Version'), required=True, app_name='catalogue',
+                                      model_name='Version', chain_field='model', model_field='model',
+                                      show_all=False, auto_choose=False,
+                                      widget=forms.Select(attrs={'style':'width:415px;'}))
     other_version = forms.CharField(label=_('Other version'), max_length=255, required=False,
-        widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'), 'maxlength':255, 'style':'width:500px', 'id':'other_version'}))
-    bodywork = forms.ModelChoiceField(label=_('Bodywork'), required=True, queryset = Bodywork.objects.all())
+                                    widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'),
+                                    'maxlength':255, 'style':'width:400px', 'id':'other_version'}))
+    bodywork = forms.ModelChoiceField(label=_('Bodywork'), required=True, queryset = Bodywork.objects.all(),
+                                      widget=forms.Select(attrs={'style':'width:415px;'}))
     other_bodywork = forms.CharField(label=_('Other bodywork'), max_length=255, required=False,
-        widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'), 'maxlength':255, 'style':'width:500px', 'id':'other_bodywork'}))
-    engine = forms.ModelChoiceField(label=_('Engine'), required=True, queryset = Engine.objects.all())
+                                     widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'),
+                                     'maxlength':255, 'style':'width:400px', 'id':'other_bodywork'}))
+    engine = forms.ModelChoiceField(label=_('Engine'), required=True, queryset = Engine.objects.all(),
+                                    widget=forms.Select(attrs={'style':'width:415px;'}))
     other_engine = forms.CharField(label=_('Other engine'), max_length=255, required=False,
-        widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'), 'maxlength':255, 'style':'width:500px', 'id':'other_engine'}))
-    frameref = forms.CharField(label=_('Frame reference'), max_length=255, required=False)
-    comments = forms.CharField(label=_('Comments'), required=False, widget=forms.Textarea(attrs={'style':'height:50px;width:400px'}))
+                                   widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'),
+                                   'maxlength':255, 'style':'width:400px', 'id':'other_engine'}))
+    frameref = forms.CharField(label=_('Frame reference'), max_length=255, required=False,
+                               widget=forms.TextInput(attrs={'style':'width:400px;'}))
+    comments = forms.CharField(label=_('Comments'), required=False,
+                               widget=forms.Textarea(attrs={'style':'height:50px;width:400px'}))
 
     picture1 = forms.CharField(label=_('Picture #1'),  widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)
     picture2 = forms.CharField(label=_('Picture #2'), widget=AjaxImageEditor(upload_to='searchpictures', max_width=800, max_height=600, crop=1), required=False)

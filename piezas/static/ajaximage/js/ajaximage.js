@@ -41,6 +41,10 @@ $ajaxImage(function(){
         $ajaxImage(el).attr('class', 'ajaximage img-active')
         $ajaxImage(el).find('input[type=hidden]').val(data.result.filename)
         $ajaxImage(el).find('.bar').css({width: '0%'})
+
+	// trigger image added
+	var picture_elem = $(el).find("input[type=hidden]")[0];
+	$(document).trigger("ajaximage_added", {image:data.result.url, id:picture_elem.id});
       }
     })
   }
@@ -57,6 +61,12 @@ $ajaxImage(function(){
       e.preventDefault()
       $ajaxImage(el).find('input[type=hidden]').val('')
       $ajaxImage(el).attr('class', 'ajaximage form-active')
+
+	console.log(el);
+
+	var current_url = $ajaxImage(el).attr('data-url');
+	var picture_elem = $(el).find("input[type=hidden]")[0];
+	$(document).trigger("ajaximage_removed", {image:current_url, id:picture_elem.id});
     })
 
     attach($fileInput, upload_url, el)
