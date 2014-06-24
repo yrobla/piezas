@@ -60,13 +60,15 @@
 				<div class="responsible-table">
 					<table class="table table-bordered table-striped-2" id="id_searchitemrequest_table">
 						<tr>
+							<th></th>
 							<th>{% trans "Category" %}</th>
 							<th>{% trans "Piece" %}</th>
 							<th>{% trans "Comments" %}</th>
 							<th>{% trans "Photo" %}</th>
 							{% for item_form in formset.forms %}
 							<tr id="{{ item_form.prefix }}-row" class="pieces-row">
-								<td>{{item_form.category}}
+								<td><span class="icon-trash" style="cursor:pointer;" data-id="{{item_form.prefix}}-row-{{item_form.id.value}}"></span></td>
+								<td style='border-left:0px;'>{{item_form.category}}
                 {% block errors %}
                     {% for error in item_form.category.errors %}
                         <span class="error-block"><i class="icon-exclamation-sign">
@@ -396,6 +398,31 @@ $(document).ready(function()
 		{
 			$("#other_engine").parent().parent().hide();
 		}
+	});
+
+	$(".icon-trash").click(function()
+	{
+		var parent_row = $(this).parent().parent();
+		var items = $(parent_row).find("select");
+		for (var i=0;i<items.length;i++)
+		{
+			var current = items[i];
+			$(current).val([]);
+		}
+		var comment = $(parent_row).find("textarea");
+		var current = comment[0];
+		$(current).val("");
+
+		var link = $(parent_row).find("a.remove");
+		var current = link[0];
+		$(current).trigger("click");
+
+		var current_id = $(this).attr("data-id");
+		var questions_id = "#"+current_id+"questions";
+		var element = $(questions_id).find("div");
+		var current = element[0];
+		$(current).html("{% trans "No questions for this product" %}");
+
 	});
 
 	$("#id_brand").trigger("change");
