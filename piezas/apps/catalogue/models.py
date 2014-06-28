@@ -194,6 +194,10 @@ class SearchRequest(models.Model):
         return self.quotes.count()
 
     @property
+    def accepted_quotes(self):
+        return self.quotes.filter(state='accepted').count()
+
+    @property
     def zone(self):
         if self.state == 'pending':
             current_time = datetime.utcnow()
