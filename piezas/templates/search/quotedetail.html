@@ -228,8 +228,11 @@
 		<div style="clear:both"><br /></div>
 
 				<div class="span12 form-actions">
+
+					{% if quote.state == 'sent' %}
 					<button type="submit" class="span3 btn btn-large btn-primary btn_accept">{% trans "Accept quote" %}</button>
 					<button type="submit" class="span3 btn btn-large btn_recalc">{% trans "Ask for shipping recalc" %}</button>
+					{% endif %}
                                         <a href="javascript:history.back();" class="span3 btn btn-large"><< {% trans "Back" %}</a>
 				</div>
 			</form>

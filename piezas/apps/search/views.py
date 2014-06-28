@@ -696,7 +696,7 @@ class QuoteAcceptView(DetailView):
         return context
 
     def get_object(self, queryset=None):
-        return models.Quote.objects.get(id=self.kwargs['number'])
+        return models.Quote.objects.get(id=self.kwargs['number'], state='sent')
 
 
 class RecalcQuoteView(View):
