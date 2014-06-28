@@ -33,26 +33,31 @@
 	 	<h4>{% trans "Search details" %}</h4>
 		<div class="responsive-table">
 			<table class="table span12">
-			<tr><th>{% trans "Brand" %}</th><td>{{quote.search_request.brand}}
+			<tr><th style="width:15%;">{% trans "Brand" %}</th><td style="width:35%;">{{quote.search_request.brand}}
 {% if quote.search_request.other_brand %} - {{quote.search_request.other_brand}}{% endif %}
-</td></tr>
+</td>
+			<th style="width:15%;">{% trans "Frame reference" %}</th><td style="width:35%;">{{quote.search_request.frameref}}</td></tr>
+
 			<tr><th>{% trans "Model" %}</th><td>{{quote.search_request.model.name}}
 {% if quote.search_request.other_model %} - {{quote.search_request.other_model}}{% endif %}
-</td></tr>
+</td>
+			<th>{% trans "Comments" %}</th><td>{{quote.search_request.comments}}</td></tr>
+
 			<tr><th>{% trans "Version" %}</th><td>{{quote.search_request.version.name}}
 {% if quote.search_request.other_version %} - {{quote.search_request.other_version}}{% endif %}
-</td></tr>
+</td>
+			<th>{% trans "State" %}</th><td>{% trans quote.search_request.state %}</td></tr>
+
 			<tr><th>{% trans "Bodywork" %}</th><td>{{quote.search_request.bodywork}}
 {% if quote.search_request.other_bodywork %} - {{quote.search_request.other_bodywork}}{% endif %}
-</td></tr>
+</td>
+			<th>{% trans "Date created" %}</th><td>{{quote.search_request.date_created}}</td></tr>
+
 			<tr><th>{% trans "Engine" %}</th><td>{{quote.search_request.engine}}
 {% if quote.search_request.other_engine %} - {{quote.search_request.other_engine}}{% endif %}
-</td></tr>
-			<tr><th>{% trans "Frame reference" %}</th><td>{{quote.search_request.frameref}}</td></tr>
-			<tr><th>{% trans "Comments" %}</th><td>{{quote.search_request.comments}}</td></tr>
-			<tr><th>{% trans "Date created" %}</th><td>{{quote.search_request.date_created}}</td></tr>
-			<tr><th>{% trans "Date updated" %}</th><td>{{quote.search_request.date_updated}}</td></tr>
-			<tr><th>{% trans "State" %}</th><td>{% trans quote.search_request.state %}</td></tr>
+</td>
+			<th>{% trans "Date updated" %}</th><td>{{quote.search_request.date_updated}}</td></tr>
+
 			</table>
 		</div>
 		<div style="clear:both"><br /></div>
@@ -180,45 +185,43 @@
 		<h4>{% trans "Quote summary" %}</h4>
 		<div class="responsive-table">
 			<table class="table span12">
-			<tr><th>{% trans "Owner" %}</th><td colspan="2">{% if quote.owner.commercial_name %}
-			{{quote.owner.commercial_name}}{% else %}{{quote.owner}}{% endif %}</td></tr>
+			<tr><th style="width:15%;">{% trans "Owner" %}</th><td style="width:35%;">{% if quote.owner.commercial_name %}
+			{{quote.owner.commercial_name}}{% else %}{{quote.owner}}{% endif %}</td>
+			<th style="width:15%;">{% trans "Date created" %}</th><td style="width:35%;">{{quote.date_created}}</td></tr>
 
-			<tr><th>{% trans "Date created" %}</th><td colspan="2">{{quote.date_created}}</td></tr>
-			<tr><th>{% trans "Date updated" %}</th><td colspan="2">{{quote.date_updated}}</td></tr>
-			<tr><th>{% trans "Base total (excl tax)" %}</th><td>{{quote.base_total_excl_tax}} €
+			<tr><th>{% trans "Date updated" %}</th><td>{{quote.date_updated}}</td>
+			<th>{% trans "Comments" %}</th><td colspan="2">{{quote.comments}}</td></tr>
+
+
+			<th>{% trans "Base total (excl tax)" %}</th><td>{{quote.base_total_excl_tax}} €
 			<input type="hidden" id="base_total_excl_tax" value="{{quote.base_total_excl_tax|stringformat:"f"}}" />
-			</td>
-			<td><span style="color:green;" id="new_base_total_excl_tax">{{quote.base_total_excl_tax}}</span></td>
-			</tr>
+			<span style="color:green;float:right;margin-right:15px;" id="new_base_total_excl_tax">{{quote.base_total_excl_tax}} €</span></td>
+			<th>{% trans "Warranty days" %}</th><td colspan="2">{{quote.warranty_days}}</td></tr>
+
+
 			<tr><th>{% trans "Base total (incl tax)" %}</th><td>{{quote.base_total_incl_tax}} €
 			<input type="hidden" id="base_total_incl_tax" value="{{quote.base_total_incl_tax|stringformat:"f"}}" />
-			</td>
-			<td><span style="color:green;" id="new_base_total_incl_tax">{{quote.base_total_incl_tax}}</span>
-			</td>
-			</tr>
+			<span style="color:green;float:right;margin-right:15px;" id="new_base_total_incl_tax">{{quote.base_total_incl_tax}} €</span></td>
+			<th>{% trans "Shipping days" %}</th><td colspan="2">{{quote.shipping_days}}</td></tr>
+
 			<tr><th>{% trans "Shipping total (excl tax)" %}</th><td>{{quote.shipping_total_excl_tax}} €
 			<input type="hidden" id="shipping_total_excl_tax" value="{{quote.shipping_total_excl_tax|stringformat:"f"}}" />
-			</td>
-			<td><span style="color:green;" id="new_shipping_total_excl_tax">{{quote.shipping_total_excl_tax}}</span></td>
+			<span style="color:green;float:right;margin-right:15px;" id="new_shipping_total_excl_tax">{{quote.shipping_total_excl_tax}} €</span></td>
 			</tr>
 			<tr><th>{% trans "Shipping total (incl tax)" %}</th><td>{{quote.shipping_total_incl_tax}} €
 			<input type="hidden" id="shipping_total_incl_tax" value="{{quote.shipping_total_incl_tax|stringformat:"f"}}" />
-			</td>
-			<td><span style="color:green;" id="new_shipping_total_incl_tax">{{quote.shipping_total_incl_tax}}</span></td>
+			<span style="color:green;float:right;margin-right:15px;" id="new_shipping_total_incl_tax">{{quote.shipping_total_incl_tax}} €</span></td>
 			</tr>
+
 			<tr><th>{% trans "Grand total (excl tax)" %}</th><td>{{quote.grand_total_excl_tax}} €
 			<input type="hidden" id="grand_total_excl_tax" value="{{quote.grand_total_excl_tax|stringformat:"f"}}" />
-			</td>
-			<td><span style="color:green;" id="new_grand_total_excl_tax">{{quote.grand_total_excl_tax}}</span></td>
+			<span style="color:green;float:right;margin-right:15px;" id="new_grand_total_excl_tax">{{quote.grand_total_excl_tax}} €</span></td>
 			</tr>
+
 			<tr><th>{% trans "Grand total (incl tax)" %}</th><td>{{quote.grand_total_incl_tax}} €
 			<input type="hidden" id="grand_total_incl_tax" value="{{quote.grand_total_incl_tax|stringformat:"f"}}" />
-			</td>
-			<td><span style="color:green;" id="new_grand_total_incl_tax">{{quote.grand_total_incl_tax}}</span></td>
+			<span style="color:green;float:right;margin-right:15px;" id="new_grand_total_incl_tax">{{quote.grand_total_incl_tax}} €</span></td>
 			</tr>
-			<tr><th>{% trans "Comments" %}</th><td colspan="2">{{quote.comments}}</td></tr>
-			<tr><th>{% trans "Warranty days" %}</th><td colspan="2">{{quote.warranty_days}}</td></tr>
-			<tr><th>{% trans "Shipping days" %}</th><td colspan="2">{{quote.shipping_days}}</td></tr>
 
 			</table>
 		</div>

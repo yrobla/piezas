@@ -33,27 +33,31 @@
 	 	<h4>{% trans "Search details" %}</h4>
 		<div class="responsive-table">
 			<table class="table span12">
-			<tr><th>{% trans "Brand" %}</th><td>{{searchrequest.brand}}
+			<tr><th style="width:15%;">{% trans "Brand" %}</th><td style="width:35%;">{{searchrequest.brand}}
 {% if searchrequest.other_brand %} - {{searchrequest.other_brand}}{% endif %}
-</td></tr>
+</td>
+			<th style="width:15%;">{% trans "Frame reference" %}</th><td style="width:35%;">{{searchrequest.frameref}}</td></tr>
+
 			<tr><th>{% trans "Model" %}</th><td>{{searchrequest.model.name}}
 {% if searchrequest.other_model %} - {{searchrequest.other_model}}{% endif %}
-</td></tr>
+</td>
+			<th>{% trans "Comments" %}</th><td>{{searchrequest.comments}}</td></tr>
+
 			<tr><th>{% trans "Version" %}</th><td>{{searchrequest.version.name}}
 {% if searchrequest.other_version %} - {{searchrequest.other_version}}{% endif %}
 
-</td></tr>
-			<tr><th>{% trans "Bodywork" %}</th><td>{{searchrequest.bodywork}}
+</td>
+			<th>{% trans "Date created" %}</th><td>{{searchrequest.date_created}}</td></tr>
+
+			<th>{% trans "Bodywork" %}</th><td>{{searchrequest.bodywork}}
 {% if searchrequest.other_bodywork %} - {{searchrequest.other_bodywork}}{% endif %}
-</td></tr>
+</td>
+			<th>{% trans "Date updated" %}</th><td>{{searchrequest.date_updated}}</td></tr>
+
 			<tr><th>{% trans "Engine" %}</th><td>{{searchrequest.engine}}
 {% if searchrequest.other_engine %} - {{searchrequest.other_engine}}{% endif %}
-</td></tr>
-			<tr><th>{% trans "Frame reference" %}</th><td>{{searchrequest.frameref}}</td></tr>
-			<tr><th>{% trans "Comments" %}</th><td>{{searchrequest.comments}}</td></tr>
-			<tr><th>{% trans "Date created" %}</th><td>{{searchrequest.date_created}}</td></tr>
-			<tr><th>{% trans "Date updated" %}</th><td>{{searchrequest.date_updated}}</td></tr>
-			<tr><th>{% trans "State" %}</th><td>{% trans searchrequest.state %}</td></tr>
+</td>
+			<th>{% trans "State" %}</th><td>{% trans searchrequest.state %}</td></tr>
 			</table>
 		</div>
 		<div style="clear:both"><br /></div>
