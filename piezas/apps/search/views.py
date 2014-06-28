@@ -508,12 +508,12 @@ class CreateQuoteView(UpdateView):
         return reverse('search:quoteplaced')
 
 
-class ActiveQuotesView(ListView):
+class ReceivedQuotesView(ListView):
     """
     View active quotes for that customer
     """
     context_object_name = "quotes"
-    template_name = 'search/activequotes_list.html'
+    template_name = 'search/receivedquotes_list.html'
     paginate_by = 20
     model = models.Quote
     page_title = _('Active quotes')
@@ -521,7 +521,7 @@ class ActiveQuotesView(ListView):
 
     def get_queryset(self):
         # only show quotes for searches that belong to user
-        queryset = models.Quote.objects.filter(search_request__owner=self.request.user, state='sent')
+        queryset = models.Quote.objects.filter(search_request__owner=self.request.user)
         return queryset
 
 class ActiveSearchesView(ListView):
@@ -757,6 +757,7 @@ class SendRecalcQuoteView(View):
         quote = models.Quote.objects.get(pk=quote_id)
         if quote:
             quote.state = 'sent'
+            quote.date_recalc = datetime.now()
             quote.shipping_total_excl_tax = float(shipping)
             quote.shipping_total_incl_tax = quote.shipping_total_excl_tax + float(quote.shipping_total_excl_tax*settings.TPC_TAX/100)
             quote.grand_total_excl_tax = float(quote.base_total_excl_tax) + float(quote.shipping_total_excl_tax)
@@ -877,12 +878,12 @@ class PlaceOrderView(View):
             # associate order with quote
             quote.order = order
             quote.state = 'accepted'
+            quote.date_accepted = datetime.now()
             quote.save()
 
             # mark all the lines as accepted or rejected
-            lines = models.QuoteItem.objects.filter(quote=quote)
-            for line in lines:
-                if line.id in line_ids:
+            for line in quote.lines:
+                if unicode(line.id) in line_ids:
                     line.state = 'accepted'
                 else:
                     line.state = 'rejected'

@@ -18,29 +18,42 @@
         <h3>{{ form.description }}</h3>
         <table class="table table-striped table-bordered">
             <tr>
-		<th>{% trans "Quote id" %}</th>
                 <th>{% trans "Search request" %}</th>
+                <th>{% trans "Search name" %}</th>
+		<th>{% trans "Quote id" %}</th>
                 <th>{% trans "Provider" %}</th>
-                <th>{% trans "Date created" %}</th>
-		<th>{% trans "Total items" %}</th>
                 <th>{% trans "Base total (incl tax)" %}</th>
                 <th>{% trans "Shipping total (incl tax)" %}</th>
                 <th>{% trans "Grand total (incl tax)" %}</th>
-                <th>{% trans "Warranty days" %}</th>
                 <th>{% trans "Shipping days" %}</th>
+		<th>{% trans "Total items" %}</th>
+		<th>{% trans "Total accepted items" %}</th>
+                <th>{% trans "Date last accepted" %}</th>
+                <th>{% trans "State" %}</th>
             </tr>
             {% for quote in quotes %}
                 <tr>
-                    <td><div class="span2">{{quote.id}}&nbsp;&nbsp;<button type="button" class="button" onClick='location.href="{% url 'search:quotedetail' number=quote.id %}";return false;'>{% trans "View quote" %}</button></div></td>
                     <td><a href="{% url 'search:detail' number=quote.search_request.id %}">{{quote.search_request.id}}</a></td>
+		    <td>{{quote.search_request.name}}</td>
+                    <td><div class="span2">{{quote.id}}&nbsp;&nbsp;<button type="button" class="button" onClick='location.href="{% url 'search:quotedetail' number=quote.id %}";return false;'>{% trans "View quote" %}</button></div></td>
                     <td>{% if quote.owner.commercial_name %}{{ quote.owner.commercial_name }}{% else %}{{quote.owner}}{% endif %}</td>
-                    <td>{{ quote.date_created }}</td>
-		    <td>{{ quote.search_request.num_items }}</td>
                     <td>{{ quote.base_total_incl_tax }} €</td>
                     <td>{{ quote.shipping_total_incl_tax }} €</td>
                     <td>{{ quote.grand_total_incl_tax }} €</td>
-                    <td>{{ quote.warranty_days }}</td>
                     <td>{{ quote.shipping_days }}</td>
+		    <td>{{quote.num_items}} / {{ quote.search_request.num_items }}</td>
+		    <td>{{quote.num_accepted_items}}</td>
+                    <td>{{ quote.date_accepted }}</td>
+                    <td>{% if quote.state == 'sent' and quote.date_recalc %}<span style="color:red;font-weight:bold;">{% trans "Recalculated" %}
+			{% elif quote.state == 'sent' or quote.state == 'expired' %}
+				{% trans "Not accepted" %}
+			{% elif quote.state == 'pending_recalc' %}
+				{% trans "Pending from recalc" %}
+			{% elif quote.state == 'accepted' and quote.num_accepted_items < quote.num_items %}
+				<span style="color:orange;">{% trans "Partially accepted" %}</span>
+			{% elif quote.state == 'accepted' %}
+				<span style="color:green;font-weight:bold;">{% trans "Accepted" %}</span>
+			{% endif %}</td>
                 </tr>
             {% endfor %}
         </table>

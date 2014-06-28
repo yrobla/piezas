@@ -16,7 +16,7 @@ class SearchApplication(CoreSearchApplication):
     history_searches_view = views.HistorySearchesView
     expired_searches_view = views.ExpiredSearchesView
     canceled_searches_view = views.CanceledSearchesView
-    active_quote_view = views.ActiveQuotesView
+    received_quote_view = views.ReceivedQuotesView
     recalc_quotes_view = views.RecalcQuotesView
     recalc_quote_view = views.RecalcQuoteView
     send_recalc_quote_view = views.SendRecalcQuoteView
@@ -41,7 +41,7 @@ class SearchApplication(CoreSearchApplication):
                 searchqueryset=self.get_sqs())),
                 name='search'),
             url(r'^home/$', login_required(self.index_view.as_view()), name='home'),
-            url(r'^activequotes/$', login_required(self.active_quote_view.as_view()), name='activequotes'),
+            url(r'^receivedquotes/$', login_required(self.received_quote_view.as_view()), name='receivedquotes'),
             url(r'^activesearches/$', login_required(self.active_searches_view.as_view()), name='activesearches'),
             url(r'^history/$', login_required(self.history_searches_view.as_view()), name='history'),
             url(r'^expiredsearches/$', login_required(self.expired_searches_view.as_view()), name='expiredsearches'),

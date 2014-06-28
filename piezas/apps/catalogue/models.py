@@ -277,6 +277,8 @@ class Quote(models.Model):
         verbose_name=_("Owner"))
     date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
     date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
+    date_accepted = models.DateTimeField(_("Date Accepted"), null=True, blank=True)
+    date_recalc = models.DateTimeField(_("Date Recalculated"), null=True, blank=True)
     state = models.CharField(max_length=25, choices=QUOTE_STATES, default='pending')
     base_total_excl_tax = models.DecimalField(_('Base total excluding tax'), decimal_places=2, max_digits=12)
     base_total_incl_tax = models.DecimalField(_('Base total including tax'), decimal_places=2, max_digits=12)
