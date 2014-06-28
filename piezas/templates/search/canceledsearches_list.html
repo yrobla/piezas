@@ -40,7 +40,7 @@
                     <td>{{ search.bodywork.name }}</td>
                     <td>{{ search.engine.name }}</td>
                     <td>{{ search.frameref }}</td>
-                    <td>{{ search.date_created }}</td>
+                    <td>{{ search.date_created | date:"d/m/Y H:i:s"}}</td>
 		    <td>{{ search.num_items }}</td>
 		    <td>{{ search.num_quotes }}</td>
                 </tr>
@@ -68,5 +68,5 @@
 
 {% block onbodyload %}
     {{ block.super }}
-    $('#id_date_to, #id_date_from').datepicker({'dateFormat': 'yy-mm-dd'});
+    $('#id_date_to, #id_date_from').datepicker({'dateFormat': 'dd/mm/yyyy'});
 {% endblock %}

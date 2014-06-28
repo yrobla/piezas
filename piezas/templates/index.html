@@ -52,6 +52,7 @@
 	<div class="span6">
 		<h4><a href="{% url 'search:request-list' %}">{% trans "Active searches from customers" %}</a></h4>
 		<h4><a href="{% url 'search:recalcquotes' %}">{% trans "Quotes pending from recalc" %}</a></h4>
+		<h4><a href="{% url 'search:sentquotes' %}">{% trans "Sent quotes" %}</a></h4>
 		<h4><a href="{% url 'customer:order-list-provider' %}">{% trans "Received orders" %}</a></h4>
 	</div>
 	{% endif %}

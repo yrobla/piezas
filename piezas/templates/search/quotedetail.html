@@ -51,12 +51,12 @@
 			<tr><th>{% trans "Bodywork" %}</th><td>{{quote.search_request.bodywork}}
 {% if quote.search_request.other_bodywork %} - {{quote.search_request.other_bodywork}}{% endif %}
 </td>
-			<th>{% trans "Date created" %}</th><td>{{quote.search_request.date_created}}</td></tr>
+			<th>{% trans "Date created" %}</th><td>{{quote.search_request.date_created| date:"d/m/Y H:i:s"}}</td></tr>
 
 			<tr><th>{% trans "Engine" %}</th><td>{{quote.search_request.engine}}
 {% if quote.search_request.other_engine %} - {{quote.search_request.other_engine}}{% endif %}
 </td>
-			<th>{% trans "Date updated" %}</th><td>{{quote.search_request.date_updated}}</td></tr>
+			<th>{% trans "Date updated" %}</th><td>{{quote.search_request.date_updated| date:"d/m/Y H:i:s"}}</td></tr>
 
 			</table>
 		</div>
@@ -187,9 +187,9 @@
 			<table class="table span12">
 			<tr><th style="width:15%;">{% trans "Owner" %}</th><td style="width:35%;">{% if quote.owner.commercial_name %}
 			{{quote.owner.commercial_name}}{% else %}{{quote.owner}}{% endif %}</td>
-			<th style="width:15%;">{% trans "Date created" %}</th><td style="width:35%;">{{quote.date_created}}</td></tr>
+			<th style="width:15%;">{% trans "Date created" %}</th><td style="width:35%;">{{quote.date_created| date:"d/m/Y H:i:s"}}</td></tr>
 
-			<tr><th>{% trans "Date updated" %}</th><td>{{quote.date_updated}}</td>
+			<tr><th>{% trans "Date updated" %}</th><td>{{quote.date_updated| date:"d/m/Y H:i:s"}}</td>
 			<th>{% trans "Comments" %}</th><td colspan="2">{{quote.comments}}</td></tr>
 
 

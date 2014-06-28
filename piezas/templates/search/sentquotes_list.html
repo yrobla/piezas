@@ -9,7 +9,7 @@
             <a href="/">{% trans 'Home' %}</a>
             <span class="divider">/</span>
         </li>
-        <li class="active">{% trans 'Quotes pending from shipping recalc' %}</li>
+        <li class="active">{% trans 'Quotes sent' %}</li>
     </ul>
 {% endblock %}
 {% block content %}
@@ -20,29 +20,28 @@
             <tr>
 		<th>{% trans "Quote id" %}</th>
                 <th>{% trans "Search request" %}</th>
-		<th>{% trans "Name" %}</th>
                 <th>{% trans "User" %}</th>
                 <th>{% trans "Date created" %}</th>
-                <th>{% trans "Date recalc asked" %}</th>
+                <th>{% trans "Date updated" %}</th>
 		<th>{% trans "Total items" %}</th>
 		<th>{% trans "Total items requested" %}</th>
                 <th>{% trans "Base total (incl tax)" %}</th>
                 <th>{% trans "Shipping total (incl tax)" %}</th>
+                <th>{% trans "State" %}</th>
             </tr>
             {% for quote in quotes %}
                 <tr>
-                    <td><div class="span2"><span class="reference">{{quote.id}}</span>&nbsp;&nbsp;
-<button type="button" class="button btn btn-success" onClick='location.href="{% url 'search:confirmrecalcquote' number=quote.id %}";return false;' style="font-size:9px;font-weight:bold;"o
->{% trans "Recalc" %}</button></div></td>
+                    <td><div class="span2"><span class="reference">{{quote.id}}</span>{% if quote.state == 'pending_recalc' %}
+&nbsp;&nbsp;<button type="button" class="button" onClick='location.href="{% url 'search:confirmrecalcquote' number=quote.id %}";return false;'>{% trans "Recal quote" %}</button></div>{% endif %}</td>
                     <td><a href="{% url 'search:detail' number=quote.search_request.id %}">{{quote.search_request.id}}</a></td>
-		    <td>{{quote.search_request.name}}</td>
-                    <td>{% if quote.search_request.owner.commercial_name %}{{quote.search_request.owner.commercial_name}}{% else %}{{quote.search_request.owner}}{% endif %}</td>
+                    <td>{{quote.search_request.owner}}</td>
                     <td>{{ quote.date_created | date:"d/m/Y H:i:s"}}</td>
-                    <td>{{ quote.date_recalc | date:"d/m/Y H:i:s"}}</td>
+                    <td>{{ quote.date_updated | date:"d/m/Y H:i:s"}}</td>
 		    <td>{{ quote.search_request.num_items }}</td>
 		    <td>{{ quote.num_accepted_items }}</td>
                     <td>{{ quote.base_total_incl_tax }} €</td>
                     <td>{{ quote.shipping_total_incl_tax }} €</td>
+		    <td>{% trans quote.state %}</td>
                 </tr>
             {% endfor %}
         </table>
@@ -67,5 +66,5 @@
 
 {% block onbodyload %}
     {{ block.super }}
-    $('#id_date_to, #id_date_from').datepicker({'dateFormat': 'yy-mm-dd'});
+    $('#id_date_to, #id_date_from').datepicker({'dateFormat': 'dd/mm/yyyy'});
 {% endblock %}

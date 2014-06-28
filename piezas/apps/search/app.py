@@ -18,6 +18,7 @@ class SearchApplication(CoreSearchApplication):
     canceled_searches_view = views.CanceledSearchesView
     received_quote_view = views.ReceivedQuotesView
     recalc_quotes_view = views.RecalcQuotesView
+    sent_quotes_view = views.SentQuotesView
     recalc_quote_view = views.RecalcQuoteView
     send_recalc_quote_view = views.SendRecalcQuoteView
     cancel_view = views.CancelSearchView
@@ -47,6 +48,7 @@ class SearchApplication(CoreSearchApplication):
             url(r'^expiredsearches/$', login_required(self.expired_searches_view.as_view()), name='expiredsearches'),
             url(r'^canceledsearches/$', login_required(self.canceled_searches_view.as_view()), name='canceledsearches'),
             url(r'^recalcquotes/$', login_required(self.recalc_quotes_view.as_view()), name='recalcquotes'),
+            url(r'^sentquotes/$', login_required(self.sent_quotes_view.as_view()), name='sentquotes'),
             url(r'^placesearch/$', login_required(self.confirm_view.as_view()), name='placesearchrequest'),
             url(r'^placed/$', login_required(self.placed_view.as_view()), name='placed'),
             url(r'^quoteplaced/$', login_required(self.quoteplaced_view.as_view()), name='quoteplaced'),

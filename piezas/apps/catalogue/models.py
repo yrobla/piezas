@@ -268,7 +268,7 @@ class SearchItemRequestAnswers(models.Model):
             return u'%s - %s' % (self.question.text, _('Image'))
 
 
-QUOTE_STATES = (('sent', _('Sent')), ('accepted', _('Accepted')),
+QUOTE_STATES = (('sent', _('Sent')), ('accepted', _('accepted')),
     ('pending_recalc', _('Pending from recalc')),
     ('partially_accepted', _('Partially accepted')), ('rejected', _('Rejected')),
     ('expired', _('Expired')))

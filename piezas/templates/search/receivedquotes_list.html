@@ -43,7 +43,7 @@
                     <td>{{ quote.shipping_days }}</td>
 		    <td>{{quote.num_items}} / {{ quote.search_request.num_items }}</td>
 		    <td>{{quote.num_accepted_items}}</td>
-                    <td>{{ quote.date_accepted }}</td>
+                    <td>{{ quote.date_accepted | date:"d/m/Y H:i:s"}}</td>
                     <td>{% if quote.state == 'sent' and quote.date_recalc %}<span style="color:red;font-weight:bold;">{% trans "Recalculated" %}
 			{% elif quote.state == 'sent' or quote.state == 'expired' %}
 				{% trans "Not accepted" %}
@@ -78,5 +78,5 @@
 
 {% block onbodyload %}
     {{ block.super }}
-    $('#id_date_to, #id_date_from').datepicker({'dateFormat': 'yy-mm-dd'});
+    $('#id_date_to, #id_date_from').datepicker({'dateFormat': 'dd/mm/yyyy'});
 {% endblock %}

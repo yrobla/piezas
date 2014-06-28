@@ -911,6 +911,22 @@ class RecalcQuotesView(ListView):
         queryset = models.Quote.objects.filter(owner=self.request.user, state='pending_recalc')
         return queryset
 
+class SentQuotesView(ListView):
+    """
+    Sent quotes for that customer
+    """
+    context_object_name = "quotes"
+    template_name = 'search/sentquotes_list.html'
+    paginate_by = 20
+    model = models.Quote
+    page_title = _('Quotes sent')
+    active_tab = 'quotes'
+
+    def get_queryset(self):
+        # only show quotes for searches that belong to user
+        queryset = models.Quote.objects.filter(owner=self.request.user)
+        return queryset
+
 class QuoteRecalcView(DetailView):
     model = models.Quote
     context_object_name = 'quote'

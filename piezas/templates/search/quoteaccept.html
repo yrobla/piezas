@@ -46,12 +46,12 @@
 			<tr><th>{% trans "Version" %}</th><td>{{quote.search_request.version.name}}
 {% if quote.search_request.other_version %} - {{quote.search_request.other_version}}{% endif %}
 </td>
-			<th>{% trans "Date created" %}</th><td>{{quote.search_request.date_created}}</td></tr>
+			<th>{% trans "Date created" %}</th><td>{{quote.search_request.date_created| date:"d/m/Y H:i:s"}}</td></tr>
 
 			<tr><th>{% trans "Bodywork" %}</th><td>{{quote.search_request.bodywork}}
 {% if quote.search_request.other_bodywork %} - {{quote.search_request.other_bodywork}}{% endif %}
 </td>
-			<th>{% trans "Date updated" %}</th><td>{{quote.search_request.date_updated}}</td></tr>
+			<th>{% trans "Date updated" %}</th><td>{{quote.search_request.date_updated| date:"d/m/Y H:i:s"}}</td></tr>
 
 			<tr><th>{% trans "Engine" %}</th><td>{{quote.search_request.engine}}
 {% if quote.search_request.other_engine %} - {{quote.search_request.other_engine}}{% endif %}
@@ -184,10 +184,10 @@
 			{{quote.owner.commercial_name}}{% else %}{{quote.owner}}{% endif %}</td>
 			<th style="width:15%;">{% trans "Shipping total (incl tax)" %}</th><td style="width:35%;">{{shipping_total_incl_tax}} €</td></tr>
 
-			<tr><th>{% trans "Date created" %}</th><td>{{quote.date_created}}</td>
+			<tr><th>{% trans "Date created" %}</th><td>{{quote.date_created| date:"d/m/Y H:i:s"}}</td>
 			<th>{% trans "Grand total (excl tax)" %}</th><td>{{grand_total_excl_tax}} €</td></tr>
 
-			<tr><th>{% trans "Date updated" %}</th><td>{{quote.date_updated}}</td>
+			<tr><th>{% trans "Date updated" %}</th><td>{{quote.date_updated| date:"d/m/Y H:i:s"}}</td>
 			<th>{% trans "Comments" %}</th><td>{{quote.comments}}</td></tr>
 
 			<tr><th>{% trans "Base total (excl tax)" %}</th><td>{{base_total_excl_tax}} €</td>

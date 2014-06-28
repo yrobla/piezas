@@ -40,8 +40,8 @@
 			<tr><th>{% trans "Engine" %}</th><td>{{quote.search_request.engine}}</td></tr>
 			<tr><th>{% trans "Frame reference" %}</th><td>{{quote.search_request.frameref}}</td></tr>
 			<tr><th>{% trans "Comments" %}</th><td>{{quote.search_request.comments}}</td></tr>
-			<tr><th>{% trans "Date created" %}</th><td>{{quote.search_request.date_created}}</td></tr>
-			<tr><th>{% trans "Date updated" %}</th><td>{{quote.search_request.date_updated}}</td></tr>
+			<tr><th>{% trans "Date created" %}</th><td>{{quote.search_request.date_created| date:"d/m/Y H:i:s"}}</td></tr>
+			<tr><th>{% trans "Date updated" %}</th><td>{{quote.search_request.date_updated| date:"d/m/Y H:i:s"}}</td></tr>
 			<tr><th>{% trans "State" %}</th><td>{% trans quote.search_request.state %}</td></tr>
 			</table>
 		</div>
@@ -169,8 +169,8 @@
 			<tr><th>{% trans "Owner" %}</th><td colspan="2">{% if quote.owner.commercial_name %}
 			{{quote.owner.commercial_name}}{% else %}{{quote.owner}}{% endif %}</td></tr>
 
-			<tr><th>{% trans "Date created" %}</th><td colspan="2">{{quote.date_created}}</td></tr>
-			<tr><th>{% trans "Date updated" %}</th><td colspan="2">{{quote.date_updated}}</td></tr>
+			<tr><th>{% trans "Date created" %}</th><td colspan="2">{{quote.date_created| date:"d/m/Y H:i:s"}}</td></tr>
+			<tr><th>{% trans "Date updated" %}</th><td colspan="2">{{quote.date_updated| date:"d/m/Y H:i:s"}}</td></tr>
 			<tr><th>{% trans "Base total (excl tax)" %}</th><td>{{quote.base_total_excl_tax}} €
 			<input type="hidden" id="base_total_excl_tax" value="{{quote.base_total_excl_tax|stringformat:"f"}}" />
 			</td>

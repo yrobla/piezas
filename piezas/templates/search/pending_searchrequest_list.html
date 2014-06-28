@@ -23,14 +23,14 @@
                 <th>{% trans "Model" %}</th>
                 <th>{% trans "Version" %}</th>
                 <th>{% trans "Engine" %}</th>
-                <th>{% trans "Zone" %}</th>
+                <th>{% trans "Reference Search" %}</th>
                 <th class="span4">{% trans "Num items" %}</th>
                 <th>{% trans "Search type" %}</th>
 		<th>{% trans "Remaining time" %}</th>
             </tr>
             {% for searchrequest in searchrequests %}
                 <tr>
-                    <td><span class="span1 reference">{{ searchrequest.id}}</span>&nbsp;<a href="{% url 'search:quote' pk=searchrequest.id %}" class="btn">{% trans "Quote" %}</a></td>
+                    <td><span class="span1 reference">{{ searchrequest.id}}</span>&nbsp;<a href="{% url 'search:quote' pk=searchrequest.id %}" class="btn btn-success" style="font-size:9px;font-weight:bold;">{% trans "Quote" %}</a></td>
                     <td>{{ searchrequest.brand.name }}
 {% if searchrequest.other_brand %} - {{searchrequest.other_brand}}{% endif %}
 </td>
@@ -43,8 +43,8 @@
                     <td>{{ searchrequest.engine }}
 {% if searchrequest.other_engine %} - {{searchrequest.other_engine}}{% endif %}
 </td>
-                    <td>{{ searchrequest.zone }}</td>
-                    <td class="span4"><span class="span1">{{ searchrequest.num_items }}</span>&nbsp;&nbsp;<button class="btn pieces_show">{% trans "Show/hide pieces" %}</button>
+                    <td>{{ searchrequest.name }}</td>
+                    <td class="span4"><span class="span1">{{ searchrequest.num_items }}</span>&nbsp;&nbsp;<button class="btn pieces_show" style="font-size:9px;font-weight:bold;">{% trans "Show/hide" %}</button>
 			<div style="clear:both"></div><div class="pieces_container" style="display:none;"><br />
 			<ul>
 			{% for line in searchrequest.lines %}
