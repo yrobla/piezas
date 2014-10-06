@@ -349,15 +349,13 @@ class PendingSearchRequestsView(ListView):
                    current_latitude, current_longitude, 500000, (settings.SEARCH_INTERVAL_MIN*4), (settings.SEARCH_INTERVAL_MIN*3),
                    current_latitude, current_longitude, 1000000, (settings.SEARCH_INTERVAL_MIN*5), (settings.SEARCH_INTERVAL_MIN*4),
                 ))
-            print qs
+
             items = list(qs)
             for item in items:
                 # get zone
                 current_time = datetime.utcnow()
                 creation_date = item.date_created.astimezone(tz.tzutc()).replace(tzinfo=None)
                 time_diff = current_time - creation_date
-
-
                 search_user = item.owner
                 address = search_user.get_default_shipping_address()
                 final_distance = item.distance/1000
@@ -374,9 +372,12 @@ class PendingSearchRequestsView(ListView):
                     item.remaining_time = (5*settings.SEARCH_INTERVAL_MIN*60) - time_diff.total_seconds()
                     item.search_type = _('National')
 
-                mins = math.floor(item.remaining_time/60)
-                secs = math.floor(item.remaining_time - (mins*60))
-                item.remaining_time = "%d:%02d" % (mins, secs)
+                if item.remaining_time > 0:
+                    mins = math.floor(item.remaining_time/60)
+                    secs = math.floor(item.remaining_time - (mins*60))
+                    item.remaining_time = "%d:%02d" % (mins, secs)
+                else:
+                    items.remove(item)
             return items
         else:
             return []
