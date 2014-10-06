@@ -193,6 +193,72 @@ $(document).ready(function()
 		})
 
 	}
+	function fill_field_brand(current_parent, current_child, category_value, product_value)
+	{
+		var current_id = current_child.id;
+		if (!category_value || category_value=='')
+		{
+                        options = '<option value="">---------<'+'/option>';
+			$(current_child).html(options);
+			$(this).html(options);
+			$("#"+current_id+' option:first').attr('selected', 'selected');
+			$(current_child).trigger('change');
+                        return;
+		}
+                $.getJSON("/chaining/filter/catalogue/Model/brand/"+category_value+"/", function(j){
+                	var options = '<option value="">---------<'+'/option>';
+                        for (var i = 0; i < j.length; i++) {
+                            options += '<option value="' + j[i].value + '">' + j[i].display + '<'+'/option>';
+                        }
+                        var width = $(current_child).outerWidth();
+                        $(current_child).html(options);
+                        if (navigator.appVersion.indexOf("MSIE") != -1)
+                            $(current_child).width(width + 'px');
+                        $('#'+current_id+' option:first').attr('selected', 'selected');
+                        var auto_choose = false;
+                        if(product_value){
+                            $('#'+current_id+' option[value="'+ product_value +'"]').attr('selected', 'selected');
+                        }
+                        if(auto_choose && j.length == 1){
+                            $('#'+current_id+' option[value="'+ j[0].value +'"]').attr('selected', 'selected');
+                        }
+                        $(current_child).trigger('change');
+		})
+
+	}
+	function fill_field_model(current_parent, current_child, category_value, product_value)
+	{
+		var current_id = current_child.id;
+		if (!category_value || category_value=='')
+		{
+                        options = '<option value="">---------<'+'/option>';
+			$(current_child).html(options);
+			$(this).html(options);
+			$("#"+current_id+' option:first').attr('selected', 'selected');
+			$(current_child).trigger('change');
+                        return;
+		}
+                $.getJSON("/chaining/filter/catalogue/Version/model/"+category_value+"/", function(j){
+                	var options = '<option value="">---------<'+'/option>';
+                        for (var i = 0; i < j.length; i++) {
+                            options += '<option value="' + j[i].value + '">' + j[i].display + '<'+'/option>';
+                        }
+                        var width = $(current_child).outerWidth();
+                        $(current_child).html(options);
+                        if (navigator.appVersion.indexOf("MSIE") != -1)
+                            $(current_child).width(width + 'px');
+                        $('#'+current_id+' option:first').attr('selected', 'selected');
+                        var auto_choose = false;
+                        if(product_value){
+                            $('#'+current_id+' option[value="'+ product_value +'"]').attr('selected', 'selected');
+                        }
+                        if(auto_choose && j.length == 1){
+                            $('#'+current_id+' option[value="'+ j[0].value +'"]').attr('selected', 'selected');
+                        }
+                        $(current_child).trigger('change');
+		})
+
+	}
 	$("select.piece").change(function()
 	{
 		var product_value = $(this).val();
@@ -349,6 +415,8 @@ $(document).ready(function()
 		else
 		{
 			$("#other_brand").parent().parent().hide();
+			var model = $("#id_model");
+                        fill_field_brand($("#id_brand"), model[0], $(this).val(), '');
 		}
 	});
 	$("#id_model").change(function()
@@ -361,6 +429,8 @@ $(document).ready(function()
 		else
 		{
 			$("#other_model").parent().parent().hide();
+                        var version = $("#id_version");
+                        fill_field_model($("#id_model"), version[0], $(this).val(), '');
 		}
 	});
 	$("#id_version").change(function()

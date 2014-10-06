@@ -5,4 +5,3 @@ bin
 local
 include
 lib
-piezas/apps/*.pyc
