@@ -31,7 +31,8 @@
             </tr>
             {% for quote in quotes %}
                 <tr>
-                    <td><div class="span2"><span class="reference">{{quote.id}}</span>{% if quote.state == 'pending_recalc' %}
+                    <td><div class="span2"><span class="reference">
+			<a href="{% url 'search:quotedetail' number=quote.id %}">{{quote.id}}</a></span>{% if quote.state == 'pending_recalc' %}
 &nbsp;&nbsp;<button type="button" class="button" onClick='location.href="{% url 'search:confirmrecalcquote' number=quote.id %}";return false;'>{% trans "Recal quote" %}</button></div>{% endif %}</td>
                     <td><a href="{% url 'search:detail' number=quote.search_request.id %}">{{quote.search_request.id}}</a></td>
                     <td>{{quote.search_request.owner}}</td>

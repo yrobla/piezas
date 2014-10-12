@@ -188,6 +188,7 @@
 		<th>{% trans "Number of accepted pieces" %}</th>
             </tr>
             {% for quote in searchrequest.quotes %}
+		{% if user.type == 'provider' and quote.owner.id == user.id %}
                 <tr onClick="location.href='{% url 'search:quotedetail' number=quote.id %}';return false;" style="cursor:pointer;">
                     <td><span class="reference">{{quote.id}}</span></td>
                     <td>{% if quote.owner.commercial_name %}{{ quote.owner.commercial_name }}{% else %}{{quote.owner}}{% endif %}</td>
@@ -198,6 +199,18 @@
 		    <td>{{quote.num_items}} / {{ quote.search_request.num_items }}</td>
 		    <td>{{quote.num_accepted_items}}</td>
                 </tr>
+		{% elif user.type == 'customer' %}
+                <tr onClick="location.href='{% url 'search:quotedetail' number=quote.id %}';return false;" style="cursor:pointer;">
+                    <td><span class="reference">{{quote.id}}</span></td>
+                    <td>{% if quote.owner.commercial_name %}{{ quote.owner.commercial_name }}{% else %}{{quote.owner}}{% endif %}</td>
+                    <td>{{ quote.base_total_incl_tax }} €</td>
+                    <td>{{ quote.shipping_total_incl_tax }} €</td>
+                    <td>{{ quote.grand_total_incl_tax }} €</td>
+                    <td>{{ quote.shipping_days }}</td>
+		    <td>{{quote.num_items}} / {{ quote.search_request.num_items }}</td>
+		    <td>{{quote.num_accepted_items}}</td>
+                </tr>
+		{% endif %}
             {% endfor %}
         </tbody></table>
     {% else %}

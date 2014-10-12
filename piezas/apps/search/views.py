@@ -632,7 +632,18 @@ class SearchDetailView(DetailView):
     searchrequest_actions = ()
 
     def get_object(self, queryset=None):
-        return models.SearchRequest.objects.get(id=self.kwargs['number'])
+        object = models.SearchRequest.objects.get(id=self.kwargs['number'])
+
+        # if customer, only can see its own searches
+        if self.request.user.type == 'customer' and object.owner.id != self.request.user.id:
+            raise PermissionDenied()
+        return object
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SearchDetailView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+
+        return context
 
 
 class QuoteDetailView(DetailView):
@@ -644,11 +655,18 @@ class QuoteDetailView(DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(QuoteDetailView, self).get_context_data(**kwargs)
         context['tpc_tax'] = settings.TPC_TAX
+        context['user'] = self.request.user
 
         return context
 
     def get_object(self, queryset=None):
-        return models.Quote.objects.get(id=self.kwargs['number'])
+        object = models.Quote.objects.get(id=self.kwargs['number'])
+        # only customer or owner can see it
+        if self.request.user.type == 'customer' and object.search_request.owner.id != self.request.user.id:
+            raise PermissionDenied()
+        elif self.request.user.type == 'provider' and object.owner.id != self.request.user.id:
+            raise PermissionDenied()
+        return object
 
 class QuoteView(DetailView):
     model = models.Quote
