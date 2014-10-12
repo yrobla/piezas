@@ -101,8 +101,14 @@
 			}
 			$timer.html(minutes+':'+seconds);
    
-		    	if (minutes == 0 && seconds == 0)
+		    	if (minutes <= 0 && seconds <= 0)
+			{
+				// remove from search
+				var row = $timer.parent().parent();
+				$(row).remove();
+				
         			clearInterval(interval);
+			}
 		}, 1000);
 	});
 

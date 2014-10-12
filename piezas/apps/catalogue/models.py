@@ -210,10 +210,53 @@ class SearchRequest(models.Model):
                 return _('Bordering')
             elif time_diff.total_seconds() < 4*settings.SEARCH_INTERVAL_MIN*60:
                 return _('Supraregional')
-            else:
+            elif time_diff.total_seconds() < 5*settings.SEARCH_INTERVAL_MIN*60:
                 return _('National')
+            else:
+                return u'-'
         else:
             return u'-'
+
+    def distance_from_point(self, latitude, longitude):
+        qs = SearchRequest.objects.raw("""
+            SELECT id, earth_distance(ll_to_earth( %f, %f ), ll_to_earth(latitude, longitude)) as distance
+            FROM catalogue_searchrequest WHERE id=%d
+        """ % (latitude, longitude, self.id))
+        if len(list(qs))>0:
+            item = list(qs)[0]
+            return item.distance
+        else:
+            return None
+
+    def has_valid_distance(self, user):
+        # no valid zone
+        if self.zone == '-':
+            return False
+
+        user_address = user.get_default_shipping_address()
+        if not user_address:
+            return False
+
+        # now calculate the distance between the search request and our point
+        if self.zone == _('Regional'):
+            start_distance = 0
+            end_distance = 100000
+        elif self.zone == _('Bordering'):
+            start_distance = 100000
+            end_distance = 200000
+        elif self.zone == _('Supraregional'):
+            start_distance = 200000
+            end_distance = 500000
+        elif self.zone == _('National'):
+            start_distance = 500000
+            end_distance = 1000000
+
+        distance = self.distance_from_point(user_address.latitude, user_address.longitude)
+        if distance is not None:
+            if distance>=start_distance and distance<=end_distance:
+                return True
+        return False
+
 
 class SearchItemRequest(models.Model):
     category = models.ForeignKey(Category, verbose_name=_('Category'),

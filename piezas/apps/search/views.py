@@ -3,6 +3,7 @@ from django.http import HttpResponse, Http404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, FormView, TemplateView, ListView, DetailView, View
 from django.views.generic.edit import UpdateView
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from oscar.core.loading import get_model
 from oscar.apps.order.models import Line, BillingAddress, ShippingAddress
@@ -393,6 +394,19 @@ class CreateQuoteView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(CreateQuoteView, self).get_context_data(**kwargs)
+
+        # only if we are provider
+        if self.request.user.type != 'provider':
+            raise PermissionDenied()
+
+        # validate if search request is available
+        if self.object.state != 'pending':
+            raise PermissionDenied()
+
+        # validate distance
+        if not self.object.has_valid_distance(self.request.user):
+            raise PermissionDenied()
+
         if self.request.POST:
             context['formset'] = forms.InlineQuoteCreationFormSet(self.request.POST, instance=self.object)
         else:
