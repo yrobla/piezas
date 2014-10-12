@@ -731,7 +731,13 @@ class QuoteAcceptView(DetailView):
         return context
 
     def get_object(self, queryset=None):
-        return models.Quote.objects.get(id=self.kwargs['number'], state='sent')
+        object = models.Quote.objects.get(id=self.kwargs['number'], state='sent')
+        # quote can only be accepted by owner of the search
+        if self.request.user.type != 'customer':
+            raise PermissionDenied()
+        if self.request.user.id != object.search_request.owner.id:
+            raise PermissionDenied()
+        return object
 
 
 class RecalcQuoteView(View):
@@ -744,6 +750,9 @@ class RecalcQuoteView(View):
         if line_ids and len(line_ids)>0:
             quote = models.Quote.objects.get(pk=quote_id)
             if quote:
+                if quote.owner.id != self.request.user.id:
+                    raise PermissionDenied()
+
                 quote.state = 'pending_recalc'
                 quote.save()
 
@@ -791,6 +800,9 @@ class SendRecalcQuoteView(View):
         response_data = {}
         quote = models.Quote.objects.get(pk=quote_id)
         if quote:
+            if quote.owner.id != self.request.user.id:
+                raise PermissionDenied()
+
             quote.state = 'sent'
             quote.date_recalc = datetime.now()
             quote.shipping_total_excl_tax = float(shipping)
@@ -834,6 +846,9 @@ class PlaceOrderView(View):
         payment_method = request.POST.get('payment_method', 'payondelivery')
 
         quote = models.Quote.objects.get(pk=quote_id)
+        if self.user.id != quote.search_request.owner.id:
+            raise PermissionDenied()
+
         response_data = {}
         if quote and line_ids and len(line_ids)>0:
             base_total = 0
@@ -969,7 +984,12 @@ class QuoteRecalcView(DetailView):
     quote_actions = ()
 
     def get_object(self, queryset=None):
-        return models.Quote.objects.get(id=self.kwargs['number'])
+        object = models.Quote.objects.get(id=self.kwargs['number'])
+        # only can be accessed by owner
+        if self.request.user.id != object.owner.id:
+            raise PermissionDenied()
+
+        return object
 
     def get_context_data(self, *args, **kwargs):
         quote = kwargs['object']
