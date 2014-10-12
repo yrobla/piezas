@@ -1016,6 +1016,9 @@ class CancelSearchView(View):
         response_data = {}
         try:
             search = models.SearchRequest.objects.get(pk=search_id)
+            if search.owner.id != self.request.user.id:
+                raise PermissionDenied()
+
             search.state = 'canceled'
             search.save()
             response_data['result'] = 'OK'
