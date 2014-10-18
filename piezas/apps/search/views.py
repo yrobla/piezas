@@ -846,7 +846,7 @@ class PlaceOrderView(View):
         payment_method = request.POST.get('payment_method', 'payondelivery')
 
         quote = models.Quote.objects.get(pk=quote_id)
-        if self.user.id != quote.search_request.owner.id:
+        if self.request.user.id != quote.search_request.owner.id:
             raise PermissionDenied()
 
         response_data = {}
