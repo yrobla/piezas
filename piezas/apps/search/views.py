@@ -407,6 +407,16 @@ class CreateQuoteView(UpdateView):
         if not self.object.has_valid_distance(self.request.user):
             raise PermissionDenied()
 
+        # validate if we already sent a quote to this search
+        sent_quotes = None
+        try:
+            sent_quotes = models.Quote.objects.get(search_request=self.object)
+        except:
+            pass
+
+        if sent_quotes:
+            raise PermissionDenied()
+
         if self.request.POST:
             context['formset'] = forms.InlineQuoteCreationFormSet(self.request.POST, instance=self.object)
         else:
@@ -737,6 +747,10 @@ class QuoteAcceptView(DetailView):
             raise PermissionDenied()
         if self.request.user.id != object.search_request.owner.id:
             raise PermissionDenied()
+
+        # only can accept the ones in sent, partially_accepted
+        if object.state != 'sent' and object.state != 'partially_accepted':
+            raise PermissionDenied()
         return object
 
 
@@ -750,7 +764,11 @@ class RecalcQuoteView(View):
         if line_ids and len(line_ids)>0:
             quote = models.Quote.objects.get(pk=quote_id)
             if quote:
-                if quote.owner.id != self.request.user.id:
+                if quote.search_request.owner.id != self.request.user.id:
+                    raise PermissionDenied()
+
+                # only can do recalc of pending quotes
+                if quote.state != 'sent' and quote.state != 'partially_accepted':
                     raise PermissionDenied()
 
                 quote.state = 'pending_recalc'
@@ -788,7 +806,6 @@ class RecalcQuoteView(View):
             except:
                 pass
 
-
         return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 class SendRecalcQuoteView(View):
@@ -802,6 +819,10 @@ class SendRecalcQuoteView(View):
         if quote:
             if quote.owner.id != self.request.user.id:
                 raise PermissionDenied()
+
+            # only send recalc for the ones in pending recalc
+            if quote.state != 'pending_recalc':
+                raise PermissionDenied
 
             quote.state = 'sent'
             quote.date_recalc = datetime.now()
@@ -987,6 +1008,10 @@ class QuoteRecalcView(DetailView):
         object = models.Quote.objects.get(id=self.kwargs['number'])
         # only can be accessed by owner
         if self.request.user.id != object.owner.id:
+            raise PermissionDenied()
+
+        # only can recalc the ones in pending recalc state
+        if object.state != 'pending_recalc':
             raise PermissionDenied()
 
         return object
