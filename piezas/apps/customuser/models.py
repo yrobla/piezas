@@ -69,7 +69,7 @@ if hasattr(auth_models, 'BaseUserManager'):
             help_text=_('Designates whether this user should be treated as '
                         'active. Unselect this instead of deleting accounts.'))
         is_validated = models.BooleanField(
-            _('Validated'), default=False,
+            _('Validated'), default=True,
             help_text=_('Designates if the user has been validated by admins and has full access to platform.'))
         type = models.CharField(_('Customer type'), choices=TYPE_CHOICES, max_length=15, default='customer')
         cif = models.CharField(_('CIF'), max_length=9)

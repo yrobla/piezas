@@ -26,7 +26,9 @@ from forms import ProductQuestionsFormSet
  BodyworkForm,
  BodyworkSearchForm,
  EngineForm,
- EngineSearchForm) \
+ EngineSearchForm,
+ PromotionalcodeForm,
+ PromotionalcodeSearchForm) \
     = get_classes('dashboard.podcatalogue.forms',
                   ('BrandForm',
                    'BrandSearchForm',
@@ -37,7 +39,9 @@ from forms import ProductQuestionsFormSet
                    'BodyworkForm',
                    'BodyworkSearchForm',
                    'EngineForm',
-                   'EngineSearchForm'))
+                   'EngineSearchForm',
+                   'PromotionalcodeForm',
+                   'PromotionalcodeSearchForm'))
 
 ProductForm = get_class('dashboard.podcatalogue.forms', 'ProductForm')
 ProductCategoryFormSet = get_class('dashboard.catalogue.forms', 'ProductCategoryFormSet')
@@ -51,6 +55,7 @@ Model = get_model('catalogue', 'Model')
 Version = get_model('catalogue', 'Version')
 Bodywork = get_model('catalogue', 'Bodywork')
 Engine = get_model('catalogue', 'Engine')
+Promotionalcode = get_model('catalogue', 'PromotionalCode')
 
 # brand
 class BrandListMixin(object):
@@ -1068,7 +1073,207 @@ class BodyworkDeleteView(BodyworkListMixin, generic.DeleteView):
         messages.info(self.request, _("Bodywork deleted successfully"))
         return super(BodyworkDeleteView, self).get_success_url()
 
+# promotional code
+class PromotionalcodeListMixin(object):
 
+    def get_success_url(self):
+        return reverse("dashboard:catalogue-promotionalcode-list")
+
+class PromotionalcodeListView(generic.ListView):
+    """
+    Dashboard view of the version list.
+    Supports the permission-based dashboard.
+    """
+
+    template_name = 'dashboard/podcatalogue/promotionalcode_list.html'
+    model = Promotionalcode
+    context_object_name = 'promotionalcodes'
+    form_class = PromotionalcodeSearchForm
+    description_template = _(u'Promotional codes %(title_filter)s')
+    paginate_by = 20
+    recent_promotionalcodes = 5
+
+    def get_context_data(self, **kwargs):
+        ctx = super(PromotionalcodeListView, self).get_context_data(**kwargs)
+        ctx['form'] = self.form
+        if 'recently_edited' in self.request.GET:
+            ctx['queryset_description'] \
+                = _("Last %(num_promotionalcodes)d edited promotional codes") \
+                % {'num_promotionalcodes': self.recent_promotionalcodes}
+        else:
+            ctx['queryset_description'] = self.description
+
+        return ctx
+
+    def get_queryset(self):
+        """
+        Build the queryset for this list
+        """
+        queryset = Promotionalcode.objects.base_queryset()
+        queryset = self.apply_search(queryset)
+        queryset = self.apply_ordering(queryset)
+
+        return queryset
+
+    def apply_ordering(self, queryset):
+        if 'recently_edited' in self.request.GET:
+            # Just show recently edited
+            queryset = queryset.order_by('-date_updated')
+            queryset = queryset[:self.recent_promotionalcodes]
+        else:
+            # Allow sorting when all
+            queryset = sort_queryset(queryset, self.request,
+                                     ['name',], '-date_created')
+        return queryset
+
+    def apply_search(self, queryset):
+        """
+        Filter the queryset and set the description according to the search
+        parameters given
+        """
+        description_ctx = {'title_filter': ''}
+
+        self.form = self.form_class(self.request.GET)
+
+        if not self.form.is_valid():
+            self.description = self.description_template % description_ctx
+            return queryset
+
+        data = self.form.cleaned_data
+
+        if data.get('name'):
+            queryset = queryset.filter(
+                name__icontains=data['name']).distinct()
+            description_ctx['name_filter'] = _(
+                " including an item with title matching '%s'") % data['name']
+
+        self.description = self.description_template % description_ctx
+
+        return queryset
+
+class PromotionalcodeCreateUpdateView(generic.UpdateView):
+    """
+    Dashboard view that bundles both creating and updating single products.
+    Supports the permission-based dashboard.
+    """
+
+    template_name = 'dashboard/podcatalogue/promotionalcode_update.html'
+    model = Promotionalcode
+    context_object_name = 'promotionalcode'
+
+    form_class = PromotionalcodeForm
+
+    def get_context_data(self, **kwargs):
+        ctx = super(PromotionalcodeCreateUpdateView, self).get_context_data(**kwargs)
+
+        if self.object is None:
+            ctx['title'] = _('Create new promotional code')
+        else:
+            ctx['title'] = ctx['promotionalcode'].code
+        return ctx
+
+    def forms_valid(self, form, formsets):
+        """
+        Save all changes and display a success url.
+        """
+        if not self.creating:
+            # a just created product was already saved in process_all_forms()
+            self.object = form.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def forms_invalid(self, form, formsets):
+        # delete the temporary product again
+        if self.creating and self.object and self.object.pk is not None:
+            self.object.delete()
+            self.object = None
+
+        messages.error(self.request,
+                       _("Your submitted data was not valid - please "
+                         "correct the errors below"))
+        ctx = self.get_context_data(form=form, **formsets)
+        return self.render_to_response(ctx)
+
+    def get_url_with_querystring(self, url):
+        url_parts = [url]
+        if self.request.GET.urlencode():
+            url_parts += [self.request.GET.urlencode()]
+        return "?".join(url_parts)
+
+    def get_object(self, queryset=None):
+        """
+        This parts allows generic.UpdateView to handle creating products as
+        well. The only distinction between an UpdateView and a CreateView
+        is that self.object is None. We emulate this behavior.
+        Additionally, self.product_class is set.
+        """
+        self.creating = not 'pk' in self.kwargs
+        if not self.creating:
+            model = super(PromotionalcodeCreateUpdateView, self).get_object(queryset)
+            return model
+
+    def get_success_url(self):
+        msg = render_to_string(
+            'dashboard/podcatalogue/messages/promotionalcode_saved.html',
+            {
+                'promotionalcode': self.object,
+                'creating': self.creating,
+            })
+        messages.success(self.request, msg)
+        url = reverse('dashboard:catalogue-promotionalcode-list')
+        if self.request.POST.get('action') == 'continue':
+            url = reverse('dashboard:catalogue-promotionalcode',
+                          kwargs={"pk": self.object.id})
+        return self.get_url_with_querystring(url)
+
+
+class PromotionalcodeCreateView(PromotionalcodeListMixin, generic.CreateView):
+    template_name = 'dashboard/podcatalogue/promotionalcode_form.html'
+    model = Promotionalcode
+    form_class = PromotionalcodeForm
+
+    def get_context_data(self, **kwargs):
+        ctx = super(PromotionalcodeCreateView, self).get_context_data(**kwargs)
+        ctx['title'] = _("Add a new promotional code")
+        return ctx
+
+    def get_success_url(self):
+        messages.info(self.request, _("Promotional code created successfully"))
+        return super(PromotionalcodeCreateView, self).get_success_url()
+
+    def get_initial(self):
+        # set child category if set in the URL kwargs
+        initial = super(PromotionalcodeCreateView, self).get_initial()
+        return initial
+
+
+class PromotionalcodeUpdateView(PromotionalcodeListMixin, generic.UpdateView):
+    template_name = 'dashboard/podcatalogue/promotionalcode_form.html'
+    model = Promotionalcode
+    form_class = PromotionalcodeForm
+
+    def get_context_data(self, **kwargs):
+        ctx = super(PromotionalcodeUpdateView, self).get_context_data(**kwargs)
+        return ctx
+
+    def get_success_url(self):
+        messages.info(self.request, _("Promotional code updated successfully"))
+        return super(PromotionalcodeUpdateView, self).get_success_url()
+
+
+class PromotionalcodeDeleteView(PromotionalcodeListMixin, generic.DeleteView):
+    template_name = 'dashboard/podcatalogue/promotionalcode_delete.html'
+    model = Promotionalcode
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(PromotionalcodeDeleteView, self).get_context_data(*args, **kwargs)
+        return ctx
+
+    def get_success_url(self):
+        messages.info(self.request, _("Promotional code deleted successfully"))
+        return super(PromotionalcodeDeleteView, self).get_success_url()
+
+# product
 class ProductCreateUpdateView(CoreProductCreateUpdateView):
     """
     Dashboard view that bundles both creating and updating single products.

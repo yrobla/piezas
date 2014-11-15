@@ -35,18 +35,24 @@ class CatalogueApplication(CoreCatalogueApplication):
     version_create_view = views.VersionCreateView
     version_update_view = views.VersionUpdateView
     version_delete_view = views.VersionDeleteView
-    # bodywork
-    bodywork_list_view = views.BodyworkListView
-    bodywork_createupdate_view = views.BodyworkCreateUpdateView
-    bodywork_create_view = views.BodyworkCreateView
-    bodywork_update_view = views.BodyworkUpdateView
-    bodywork_delete_view = views.BodyworkDeleteView
     # engine
     engine_list_view = views.EngineListView
     engine_createupdate_view = views.EngineCreateUpdateView
     engine_create_view = views.EngineCreateView
     engine_update_view = views.EngineUpdateView
     engine_delete_view = views.EngineDeleteView
+    # bodywork
+    bodywork_list_view = views.BodyworkListView
+    bodywork_createupdate_view = views.BodyworkCreateUpdateView
+    bodywork_create_view = views.BodyworkCreateView
+    bodywork_update_view = views.BodyworkUpdateView
+    bodywork_delete_view = views.BodyworkDeleteView
+    # promotional code
+    promotionalcode_list_view = views.PromotionalcodeListView
+    promotionalcode_createupdate_view = views.PromotionalcodeCreateUpdateView
+    promotionalcode_create_view = views.PromotionalcodeCreateView
+    promotionalcode_update_view = views.PromotionalcodeUpdateView
+    promotionalcode_delete_view = views.PromotionalcodeDeleteView
 
     default_permissions = ['is_staff', ]
     permissions_map = _map = {
@@ -71,16 +77,21 @@ class CatalogueApplication(CoreCatalogueApplication):
         'catalogue-version-create': (['is_staff']),
         'catalogue-version-list': (['is_staff']),
         'catalogue-version-delete': (['is_staff']),
-        # bodywork
-        'catalogue-bodywork': (['is_staff']),
-        'catalogue-bodywork-create': (['is_staff']),
-        'catalogue-bodywork-list': (['is_staff']),
-        'catalogue-bodywork-delete': (['is_staff']),
         # engine
         'catalogue-engine': (['is_staff']),
         'catalogue-engine-create': (['is_staff']),
         'catalogue-engine-list': (['is_staff']),
         'catalogue-engine-delete': (['is_staff']),
+        # bodywork
+        'catalogue-bodywork': (['is_staff']),
+        'catalogue-bodywork-create': (['is_staff']),
+        'catalogue-bodywork-list': (['is_staff']),
+        'catalogue-bodywork-delete': (['is_staff']),
+        # promotional code
+        'catalogue-promotionalcode': (['is_staff']),
+        'catalogue-promotionalcode-create': (['is_staff']),
+        'catalogue-promotionalcode-list': (['is_staff']),
+        'catalogue-promotionalcode-delete': (['is_staff']),
     }
 
     def get_urls(self):
@@ -164,21 +175,6 @@ class CatalogueApplication(CoreCatalogueApplication):
             url(r'^versions/(?P<pk>\d+)/delete/$',
                 self.version_delete_view.as_view(),
                 name='catalogue-version-delete'),
-            # bodyworks
-            url(r'^bodyworks/(?P<pk>\d+)/$',
-                self.bodywork_createupdate_view.as_view(),
-                name='catalogue-bodywork'),
-            url(r'^bodyworks/$', self.bodywork_list_view.as_view(),
-                name='catalogue-bodywork-list'),
-            url(r'^bodywork/create/$',
-                self.bodywork_create_view.as_view(),
-                name='catalogue-bodywork-create'),
-            url(r'^bodyworks/(?P<pk>\d+)/update/$',
-                self.bodywork_update_view.as_view(),
-                name='catalogue-bodywork-update'),
-            url(r'^bodyworks/(?P<pk>\d+)/delete/$',
-                self.bodywork_delete_view.as_view(),
-                name='catalogue-bodywork-delete'),
             # engines
             url(r'^engines/(?P<pk>\d+)/$',
                 self.engine_createupdate_view.as_view(),
@@ -194,6 +190,36 @@ class CatalogueApplication(CoreCatalogueApplication):
             url(r'^engines/(?P<pk>\d+)/delete/$',
                 self.engine_delete_view.as_view(),
                 name='catalogue-engine-delete'),
+            # bodyworks
+            url(r'^bodyworks/(?P<pk>\d+)/$',
+                self.bodywork_createupdate_view.as_view(),
+                name='catalogue-bodywork'),
+            url(r'^bodyworks/$', self.bodywork_list_view.as_view(),
+                name='catalogue-bodywork-list'),
+            url(r'^bodywork/create/$',
+                self.bodywork_create_view.as_view(),
+                name='catalogue-bodywork-create'),
+            url(r'^bodyworks/(?P<pk>\d+)/update/$',
+                self.bodywork_update_view.as_view(),
+                name='catalogue-bodywork-update'),
+            url(r'^bodyworks/(?P<pk>\d+)/delete/$',
+                self.bodywork_delete_view.as_view(),
+                name='catalogue-bodywork-delete'),
+            # promotional code
+            url(r'^promotionalcodes/(?P<pk>\d+)/$',
+                self.promotionalcode_createupdate_view.as_view(),
+                name='catalogue-promotionalcode'),
+            url(r'^promotionalcodes/$', self.promotionalcode_list_view.as_view(),
+                name='catalogue-promotionalcode-list'),
+            url(r'^promotionalcode/create/$',
+                self.promotionalcode_create_view.as_view(),
+                name='catalogue-promotionalcode-create'),
+            url(r'^promotionalcodes/(?P<pk>\d+)/update/$',
+                self.promotionalcode_update_view.as_view(),
+                name='catalogue-promotionalcode-update'),
+            url(r'^promotionalcodes/(?P<pk>\d+)/delete/$',
+                self.promotionalcode_delete_view.as_view(),
+                name='catalogue-promotionalcode-delete'),
 
         ]
         return self.post_process_urls(patterns('', *urls))

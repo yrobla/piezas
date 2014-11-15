@@ -59,6 +59,8 @@ class PodAccountAuthView(RegisterUserMixin, TemplateView):
             ctx['login_form'] = self.get_login_form()
         if 'registration_form' not in kwargs:
             ctx['registration_form'] = self.get_registration_form()
+        print ctx
+        print kwargs
         return ctx
 
     def get_login_form(self, request=None):

@@ -11,7 +11,6 @@ class DashboardApplication(CoreDashboardApplication):
     users_app = UsersDashboardApplication()
 
     def get_urls(self):
-        print self.catalogue_app
         urls = [
             url(r'^$', self.index_view.as_view(), name='index'),
             url(r'^catalogue/', include(self.catalogue_app.urls)),

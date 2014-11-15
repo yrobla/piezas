@@ -167,7 +167,6 @@ $(document).ready(function()
 		{
                         options = '<option value="">---------<'+'/option>';
 			$(current_child).html(options);
-			$(this).html(options);
 			$("#"+current_id+' option:first').attr('selected', 'selected');
 			$(current_child).trigger('change');
                         return;
@@ -200,7 +199,6 @@ $(document).ready(function()
 		{
                         options = '<option value="">---------<'+'/option>';
 			$(current_child).html(options);
-			$(this).html(options);
 			$("#"+current_id+' option:first').attr('selected', 'selected');
 			$(current_child).trigger('change');
                         return;
@@ -233,12 +231,43 @@ $(document).ready(function()
 		{
                         options = '<option value="">---------<'+'/option>';
 			$(current_child).html(options);
-			$(this).html(options);
 			$("#"+current_id+' option:first').attr('selected', 'selected');
 			$(current_child).trigger('change');
                         return;
 		}
                 $.getJSON("/chaining/filter/catalogue/Version/model/"+category_value+"/", function(j){
+                	var options = '<option value="">---------<'+'/option>';
+                        for (var i = 0; i < j.length; i++) {
+                            options += '<option value="' + j[i].value + '">' + j[i].display + '<'+'/option>';
+                        }
+                        var width = $(current_child).outerWidth();
+                        $(current_child).html(options);
+                        if (navigator.appVersion.indexOf("MSIE") != -1)
+                            $(current_child).width(width + 'px');
+                        $('#'+current_id+' option:first').attr('selected', 'selected');
+                        var auto_choose = false;
+                        if(product_value){
+                            $('#'+current_id+' option[value="'+ product_value +'"]').attr('selected', 'selected');
+                        }
+                        if(auto_choose && j.length == 1){
+                            $('#'+current_id+' option[value="'+ j[0].value +'"]').attr('selected', 'selected');
+                        }
+                        $(current_child).trigger('change');
+		})
+
+	}
+	function fill_field_version(current_parent, current_child, category_value, product_value)
+	{
+		var current_id = current_child.id;
+		if (!category_value || category_value=='')
+		{
+                        options = '<option value="">---------<'+'/option>';
+			$(current_child).html(options);
+			$("#"+current_id+' option:first').attr('selected', 'selected');
+			$(current_child).trigger('change');
+                        return;
+		}
+                $.getJSON("/chaining/filter/catalogue/Engine/version/"+category_value+"/", function(j){
                 	var options = '<option value="">---------<'+'/option>';
                         for (var i = 0; i < j.length; i++) {
                             options += '<option value="' + j[i].value + '">' + j[i].display + '<'+'/option>';
@@ -443,18 +472,8 @@ $(document).ready(function()
 		else
 		{
 			$("#other_version").parent().parent().hide();
-		}
-	});
-	$("#id_bodywork").change(function()
-	{
-		var current_text = $("#id_bodywork option:selected").text();
-		if (current_text=="{% trans "Others" %}")
-		{
-			$("#other_bodywork").parent().parent().show();
-		}
-		else
-		{
-			$("#other_bodywork").parent().parent().hide();
+			var engine = $("#id_engine");
+			fill_field_version($("#id_engine"), engine[0], $(this).val(), '');
 		}
 	});
 	$("#id_engine").change(function()
@@ -467,6 +486,19 @@ $(document).ready(function()
 		else
 		{
 			$("#other_engine").parent().parent().hide();
+		}
+	});
+
+	$("#id_bodywork").change(function()
+	{
+		var current_text = $("#id_bodywork option:selected").text();
+		if (current_text=="{% trans "Others" %}")
+		{
+			$("#other_bodywork").parent().parent().show();
+		}
+		else
+		{
+			$("#other_bodywork").parent().parent().hide();
 		}
 	});
 
@@ -498,8 +530,8 @@ $(document).ready(function()
 	$("#id_brand").trigger("change");
 	$("#id_model").trigger("change");
 	$("#id_version").trigger("change");
-	$("#id_bodywork").trigger("change");
 	$("#id_engine").trigger("change");
+	$("#id_bodywork").trigger("change");
 
 	$(document).bind("ajaximage_added", function(context, data) {
 		var img_url = data.image;

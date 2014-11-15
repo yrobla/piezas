@@ -263,12 +263,16 @@ OSCAR_DASHBOARD_NAVIGATION = [
                 'url_name': 'dashboard:catalogue-version-list',
             },
             {
+                'label': _('Engine'),
+                'url_name': 'dashboard:catalogue-engine-list',
+            },
+            {
                 'label': _('Bodywork'),
                 'url_name': 'dashboard:catalogue-bodywork-list',
             },
             {
-                'label': _('Engine'),
-                'url_name': 'dashboard:catalogue-engine-list',
+                'label': _('Promotional code'),
+                'url_name': 'dashboard:catalogue-promotionalcode-list',
             },
         ]
     },

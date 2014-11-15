@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% if creating %}
+    {% blocktrans with name=promotionalcode.code %}
+        Created promotional code '{{ code }}'.
+    {% endblocktrans %}
+{% else %}
+    {% blocktrans with name=promotionalcode.code %}
+        Updated promotional code '{{ code }}'.
+    {% endblocktrans %}
+{% endif %}
+
+<p>
+    <a href="{% url 'dashboard:catalogue-promotionalcode' pk=promotionalcode.pk %}" class="btn btn-success">{% trans "Edit again" %}</a>
+</p>

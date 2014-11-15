@@ -7,6 +7,8 @@ from oscar.apps.customer.forms import EmailUserCreationForm
 from oscar.apps.customer.utils import normalise_email
 from piezas.apps.customuser.models import TYPE_CHOICES
 from django_iban.forms import IBANFormField
+from piezas.apps.catalogue.models import PromotionalCode
+from django.core.exceptions import ValidationError
 
 User = get_user_model()
 
@@ -14,6 +16,18 @@ class PodEmailUserCreationForm(EmailUserCreationForm):
     class Meta:
         model = User
         fields = ('email', 'type', 'cif', 'promotional_code')
+
+    def clean_promotional_code(self):
+        print "in clean"
+        """
+        Validate that the promotional code exists
+        """
+        promotional_code = self.cleaned_data['promotional_code']
+        if promotional_code:
+            if not PromotionalCode._default_manager.filter(
+                code=promotional_code).exists():
+                raise ValidationError(_('The promotional code is not valid'))
+        return promotional_code
 
 
 class ProfileForm(forms.ModelForm):
@@ -28,6 +42,17 @@ class ProfileForm(forms.ModelForm):
 
         if user and user.type=='customer':
             del self.fields['iban']
+
+    def clean_promotional_code(self):
+        """
+        Validate that the promotional code exists
+        """
+        promotional_code = self.cleaned_data['promotional_code']
+        if promotional_code:
+            if not PromotionalCode._default_manager.filter(
+                code=promotional_code).exists():
+                raise ValidationError(_('The promotional code is not valid'))
+        return promotional_code
 
     def clean_email(self):
         """

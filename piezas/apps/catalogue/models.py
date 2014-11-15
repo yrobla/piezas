@@ -373,3 +373,21 @@ class QuoteItem(models.Model):
     state = models.CharField(max_length=25, choices=QUOTE_ITEM_STATES, default='pending')
     comments = models.TextField(_('Comments'), blank=True)
     picture = models.ImageField(upload_to='searchpictures/', blank=True, null=True)
+
+class PromotionalCodeManager(models.Manager):
+
+    def base_queryset(self):
+        """
+        Return ``QuerySet`` with related content pre-loaded.
+        """
+        return self.get_query_set().all()
+
+class PromotionalCode(models.Model):
+    code = models.CharField(_('Promotional code'), max_length=100)
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
+    objects = PromotionalCodeManager()
+
+    def __unicode__(self):
+        return self.code
+

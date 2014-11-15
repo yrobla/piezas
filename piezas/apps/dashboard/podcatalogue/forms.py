@@ -19,6 +19,7 @@ Model = get_model('catalogue', 'Model')
 Version = get_model('catalogue', 'Version')
 Bodywork = get_model('catalogue', 'Bodywork')
 Engine = get_model('catalogue', 'Engine')
+PromotionalCode = get_model('catalogue', 'PromotionalCode')
 
 
 # brand
@@ -118,6 +119,25 @@ class EngineSearchForm(forms.Form):
     def clean(self):
         cleaned_data = super(EngineSearchForm, self).clean()
         cleaned_data['name'] = cleaned_data['name'].strip()
+        return cleaned_data
+
+# promotional code
+class PromotionalcodeForm(forms.ModelForm):
+    """
+    Form to create a promotional code
+    """
+    class Meta:
+        model = PromotionalCode
+
+    code = forms.CharField(max_length=100, required=True, label=_('Code'))
+
+
+class PromotionalcodeSearchForm(forms.Form):
+    code = forms.CharField(max_length=100, required=False, label=_('Code'))
+
+    def clean(self):
+        cleaned_data = super(PromotionalcodeSearchForm, self).clean()
+        cleaned_data['code'] = cleaned_data['code'].strip()
         return cleaned_data
 
 # product

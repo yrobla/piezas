@@ -78,16 +78,16 @@ class SearchCreationForm(forms.Form):
     other_version = forms.CharField(label=_('Other version'), max_length=255, required=False,
                                     widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'),
                                     'maxlength':255, 'style':'width:400px', 'id':'other_version'}))
-    bodywork = forms.ModelChoiceField(label=_('Bodywork'), required=True, queryset = Bodywork.objects.all(),
-                                      widget=forms.Select(attrs={'style':'width:415px;'}))
-    other_bodywork = forms.CharField(label=_('Other bodywork'), max_length=255, required=False,
-                                     widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'),
-                                     'maxlength':255, 'style':'width:400px', 'id':'other_bodywork'}))
     engine = forms.ModelChoiceField(label=_('Engine'), required=True, queryset = Engine.objects.all(),
                                     widget=forms.Select(attrs={'style':'width:415px;'}))
     other_engine = forms.CharField(label=_('Other engine'), max_length=255, required=False,
                                    widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'),
                                    'maxlength':255, 'style':'width:400px', 'id':'other_engine'}))
+    bodywork = forms.ModelChoiceField(label=_('Bodywork'), required=True, queryset = Bodywork.objects.all(),
+                                      widget=forms.Select(attrs={'style':'width:415px;'}))
+    other_bodywork = forms.CharField(label=_('Other bodywork'), max_length=255, required=False,
+                                     widget=forms.TextInput(attrs={'placeholder':_('---- Please enter the field value manually ----'),
+                                     'maxlength':255, 'style':'width:400px', 'id':'other_bodywork'}))
     frameref = forms.CharField(label=_('Frame reference'), max_length=255, required=False,
                                widget=forms.TextInput(attrs={'style':'width:400px;'}))
     comments = forms.CharField(label=_('Comments'), required=False,
