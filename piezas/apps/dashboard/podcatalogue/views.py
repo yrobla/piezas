@@ -667,206 +667,6 @@ class VersionDeleteView(VersionListMixin, generic.DeleteView):
         messages.info(self.request, _("Version deleted successfully"))
         return super(VersionDeleteView, self).get_success_url()
 
-# bodywork
-class BodyworkListMixin(object):
-
-    def get_success_url(self):
-        return reverse("dashboard:catalogue-bodywork-list")
-
-class BodyworkListView(generic.ListView):
-    """
-    Dashboard view of the version list.
-    Supports the permission-based dashboard.
-    """
-
-    template_name = 'dashboard/podcatalogue/bodywork_list.html'
-    model = Bodywork
-    context_object_name = 'bodyworks'
-    form_class = BodyworkSearchForm
-    description_template = _(u'Bodyworks %(title_filter)s')
-    paginate_by = 20
-    recent_bodyworks = 5
-
-    def get_context_data(self, **kwargs):
-        ctx = super(BodyworkListView, self).get_context_data(**kwargs)
-        ctx['form'] = self.form
-        if 'recently_edited' in self.request.GET:
-            ctx['queryset_description'] \
-                = _("Last %(num_bodyworks)d edited bodyworks") \
-                % {'num_bodyworks': self.recent_bodyworks}
-        else:
-            ctx['queryset_description'] = self.description
-
-        return ctx
-
-    def get_queryset(self):
-        """
-        Build the queryset for this list
-        """
-        queryset = Bodywork.objects.base_queryset()
-        queryset = self.apply_search(queryset)
-        queryset = self.apply_ordering(queryset)
-
-        return queryset
-
-    def apply_ordering(self, queryset):
-        if 'recently_edited' in self.request.GET:
-            # Just show recently edited
-            queryset = queryset.order_by('-date_updated')
-            queryset = queryset[:self.recent_bodyworks]
-        else:
-            # Allow sorting when all
-            queryset = sort_queryset(queryset, self.request,
-                                     ['name',], '-date_created')
-        return queryset
-
-    def apply_search(self, queryset):
-        """
-        Filter the queryset and set the description according to the search
-        parameters given
-        """
-        description_ctx = {'title_filter': ''}
-
-        self.form = self.form_class(self.request.GET)
-
-        if not self.form.is_valid():
-            self.description = self.description_template % description_ctx
-            return queryset
-
-        data = self.form.cleaned_data
-
-        if data.get('name'):
-            queryset = queryset.filter(
-                name__icontains=data['name']).distinct()
-            description_ctx['name_filter'] = _(
-                " including an item with title matching '%s'") % data['name']
-
-        self.description = self.description_template % description_ctx
-
-        return queryset
-
-class BodyworkCreateUpdateView(generic.UpdateView):
-    """
-    Dashboard view that bundles both creating and updating single products.
-    Supports the permission-based dashboard.
-    """
-
-    template_name = 'dashboard/podcatalogue/bodywork_update.html'
-    model = Bodywork
-    context_object_name = 'bodywork'
-
-    form_class = BodyworkForm
-
-    def get_context_data(self, **kwargs):
-        ctx = super(BodyworkCreateUpdateView, self).get_context_data(**kwargs)
-
-        if self.object is None:
-            ctx['title'] = _('Create new bodywork')
-        else:
-            ctx['title'] = ctx['bodywork'].name
-        return ctx
-
-    def forms_valid(self, form, formsets):
-        """
-        Save all changes and display a success url.
-        """
-        if not self.creating:
-            # a just created product was already saved in process_all_forms()
-            self.object = form.save()
-
-        return HttpResponseRedirect(self.get_success_url())
-
-    def forms_invalid(self, form, formsets):
-        # delete the temporary product again
-        if self.creating and self.object and self.object.pk is not None:
-            self.object.delete()
-            self.object = None
-
-        messages.error(self.request,
-                       _("Your submitted data was not valid - please "
-                         "correct the errors below"))
-        ctx = self.get_context_data(form=form, **formsets)
-        return self.render_to_response(ctx)
-
-    def get_url_with_querystring(self, url):
-        url_parts = [url]
-        if self.request.GET.urlencode():
-            url_parts += [self.request.GET.urlencode()]
-        return "?".join(url_parts)
-
-    def get_object(self, queryset=None):
-        """
-        This parts allows generic.UpdateView to handle creating products as
-        well. The only distinction between an UpdateView and a CreateView
-        is that self.object is None. We emulate this behavior.
-        Additionally, self.product_class is set.
-        """
-        self.creating = not 'pk' in self.kwargs
-        if not self.creating:
-            model = super(BodyworkCreateUpdateView, self).get_object(queryset)
-            return model
-
-    def get_success_url(self):
-        msg = render_to_string(
-            'dashboard/podcatalogue/messages/bodywork_saved.html',
-            {
-                'bodywork': self.object,
-                'creating': self.creating,
-            })
-        messages.success(self.request, msg)
-        url = reverse('dashboard:catalogue-bodywork-list')
-        if self.request.POST.get('action') == 'continue':
-            url = reverse('dashboard:catalogue-bodywork',
-                          kwargs={"pk": self.object.id})
-        return self.get_url_with_querystring(url)
-
-
-class BodyworkCreateView(BodyworkListMixin, generic.CreateView):
-    template_name = 'dashboard/podcatalogue/bodywork_form.html'
-    model = Bodywork
-    form_class = BodyworkForm
-
-    def get_context_data(self, **kwargs):
-        ctx = super(BodyworkCreateView, self).get_context_data(**kwargs)
-        ctx['title'] = _("Add a new bodywork")
-        return ctx
-
-    def get_success_url(self):
-        messages.info(self.request, _("Bodywork created successfully"))
-        return super(BodyworkCreateView, self).get_success_url()
-
-    def get_initial(self):
-        # set child category if set in the URL kwargs
-        initial = super(BodyworkCreateView, self).get_initial()
-        return initial
-
-
-class BodyworkUpdateView(BodyworkListMixin, generic.UpdateView):
-    template_name = 'dashboard/podcatalogue/bodywork_form.html'
-    model = Bodywork
-    form_class = BodyworkForm
-
-    def get_context_data(self, **kwargs):
-        ctx = super(BodyworkUpdateView, self).get_context_data(**kwargs)
-        return ctx
-
-    def get_success_url(self):
-        messages.info(self.request, _("Bodywork updated successfully"))
-        return super(BodyworkUpdateView, self).get_success_url()
-
-
-class BodyworkDeleteView(BodyworkListMixin, generic.DeleteView):
-    template_name = 'dashboard/podcatalogue/bodywork_delete.html'
-    model = Bodywork
-
-    def get_context_data(self, *args, **kwargs):
-        ctx = super(BodyworkDeleteView, self).get_context_data(*args, **kwargs)
-        return ctx
-
-    def get_success_url(self):
-        messages.info(self.request, _("Bodywork deleted successfully"))
-        return super(BodyworkDeleteView, self).get_success_url()
-
 # engine
 class EngineListMixin(object):
 
@@ -1066,6 +866,207 @@ class EngineDeleteView(EngineListMixin, generic.DeleteView):
     def get_success_url(self):
         messages.info(self.request, _("Engine deleted successfully"))
         return super(EngineDeleteView, self).get_success_url()
+
+
+# bodywork
+class BodyworkListMixin(object):
+
+    def get_success_url(self):
+        return reverse("dashboard:catalogue-bodywork-list")
+
+class BodyworkListView(generic.ListView):
+    """
+    Dashboard view of the version list.
+    Supports the permission-based dashboard.
+    """
+
+    template_name = 'dashboard/podcatalogue/bodywork_list.html'
+    model = Bodywork
+    context_object_name = 'bodyworks'
+    form_class = BodyworkSearchForm
+    description_template = _(u'Bodyworks %(title_filter)s')
+    paginate_by = 20
+    recent_bodyworks = 5
+
+    def get_context_data(self, **kwargs):
+        ctx = super(BodyworkListView, self).get_context_data(**kwargs)
+        ctx['form'] = self.form
+        if 'recently_edited' in self.request.GET:
+            ctx['queryset_description'] \
+                = _("Last %(num_bodyworks)d edited bodyworks") \
+                % {'num_bodyworks': self.recent_bodyworks}
+        else:
+            ctx['queryset_description'] = self.description
+
+        return ctx
+
+    def get_queryset(self):
+        """
+        Build the queryset for this list
+        """
+        queryset = Bodywork.objects.base_queryset()
+        queryset = self.apply_search(queryset)
+        queryset = self.apply_ordering(queryset)
+
+        return queryset
+
+    def apply_ordering(self, queryset):
+        if 'recently_edited' in self.request.GET:
+            # Just show recently edited
+            queryset = queryset.order_by('-date_updated')
+            queryset = queryset[:self.recent_bodyworks]
+        else:
+            # Allow sorting when all
+            queryset = sort_queryset(queryset, self.request,
+                                     ['name',], '-date_created')
+        return queryset
+
+    def apply_search(self, queryset):
+        """
+        Filter the queryset and set the description according to the search
+        parameters given
+        """
+        description_ctx = {'title_filter': ''}
+
+        self.form = self.form_class(self.request.GET)
+
+        if not self.form.is_valid():
+            self.description = self.description_template % description_ctx
+            return queryset
+
+        data = self.form.cleaned_data
+
+        if data.get('name'):
+            queryset = queryset.filter(
+                name__icontains=data['name']).distinct()
+            description_ctx['name_filter'] = _(
+                " including an item with title matching '%s'") % data['name']
+
+        self.description = self.description_template % description_ctx
+
+        return queryset
+
+class BodyworkCreateUpdateView(generic.UpdateView):
+    """
+    Dashboard view that bundles both creating and updating single products.
+    Supports the permission-based dashboard.
+    """
+
+    template_name = 'dashboard/podcatalogue/bodywork_update.html'
+    model = Bodywork
+    context_object_name = 'bodywork'
+
+    form_class = BodyworkForm
+
+    def get_context_data(self, **kwargs):
+        ctx = super(BodyworkCreateUpdateView, self).get_context_data(**kwargs)
+
+        if self.object is None:
+            ctx['title'] = _('Create new bodywork')
+        else:
+            ctx['title'] = ctx['bodywork'].name
+        return ctx
+
+    def forms_valid(self, form, formsets):
+        """
+        Save all changes and display a success url.
+        """
+        if not self.creating:
+            # a just created product was already saved in process_all_forms()
+            self.object = form.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def forms_invalid(self, form, formsets):
+        # delete the temporary product again
+        if self.creating and self.object and self.object.pk is not None:
+            self.object.delete()
+            self.object = None
+
+        messages.error(self.request,
+                       _("Your submitted data was not valid - please "
+                         "correct the errors below"))
+        ctx = self.get_context_data(form=form, **formsets)
+        return self.render_to_response(ctx)
+
+    def get_url_with_querystring(self, url):
+        url_parts = [url]
+        if self.request.GET.urlencode():
+            url_parts += [self.request.GET.urlencode()]
+        return "?".join(url_parts)
+
+    def get_object(self, queryset=None):
+        """
+        This parts allows generic.UpdateView to handle creating products as
+        well. The only distinction between an UpdateView and a CreateView
+        is that self.object is None. We emulate this behavior.
+        Additionally, self.product_class is set.
+        """
+        self.creating = not 'pk' in self.kwargs
+        if not self.creating:
+            model = super(BodyworkCreateUpdateView, self).get_object(queryset)
+            return model
+
+    def get_success_url(self):
+        msg = render_to_string(
+            'dashboard/podcatalogue/messages/bodywork_saved.html',
+            {
+                'bodywork': self.object,
+                'creating': self.creating,
+            })
+        messages.success(self.request, msg)
+        url = reverse('dashboard:catalogue-bodywork-list')
+        if self.request.POST.get('action') == 'continue':
+            url = reverse('dashboard:catalogue-bodywork',
+                          kwargs={"pk": self.object.id})
+        return self.get_url_with_querystring(url)
+
+
+class BodyworkCreateView(BodyworkListMixin, generic.CreateView):
+    template_name = 'dashboard/podcatalogue/bodywork_form.html'
+    model = Bodywork
+    form_class = BodyworkForm
+
+    def get_context_data(self, **kwargs):
+        ctx = super(BodyworkCreateView, self).get_context_data(**kwargs)
+        ctx['title'] = _("Add a new bodywork")
+        return ctx
+
+    def get_success_url(self):
+        messages.info(self.request, _("Bodywork created successfully"))
+        return super(BodyworkCreateView, self).get_success_url()
+
+    def get_initial(self):
+        # set child category if set in the URL kwargs
+        initial = super(BodyworkCreateView, self).get_initial()
+        return initial
+
+
+class BodyworkUpdateView(BodyworkListMixin, generic.UpdateView):
+    template_name = 'dashboard/podcatalogue/bodywork_form.html'
+    model = Bodywork
+    form_class = BodyworkForm
+
+    def get_context_data(self, **kwargs):
+        ctx = super(BodyworkUpdateView, self).get_context_data(**kwargs)
+        return ctx
+
+    def get_success_url(self):
+        messages.info(self.request, _("Bodywork updated successfully"))
+        return super(BodyworkUpdateView, self).get_success_url()
+
+
+class BodyworkDeleteView(BodyworkListMixin, generic.DeleteView):
+    template_name = 'dashboard/podcatalogue/bodywork_delete.html'
+    model = Bodywork
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(BodyworkDeleteView, self).get_context_data(*args, **kwargs)
+        return ctx
+
+    def get_success_url(self):
+        messages.info(self.request, _("Bodywork deleted successfully"))
+        return super(BodyworkDeleteView, self).get_success_url()
 
 
 class ProductCreateUpdateView(CoreProductCreateUpdateView):

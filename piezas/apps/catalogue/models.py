@@ -71,6 +71,25 @@ class Version(models.Model):
         return self.name
 
 
+class EngineManager(models.Manager):
+
+    def base_queryset(self):
+        """
+        Return ``QuerySet`` with related content pre-loaded.
+        """
+        return self.get_query_set().all()
+
+
+class Engine(models.Model):
+    version = models.ForeignKey(Version, verbose_name = _('Car version'))
+    name = models.CharField(_('Car engine'), max_length=255)
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
+    objects = EngineManager()
+
+    def __unicode__(self):
+        return self.name
+
 class BodyworkManager(models.Manager):
 
     def base_queryset(self):
@@ -85,25 +104,6 @@ class Bodywork(models.Model):
     date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
     date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
     objects = BodyworkManager()
-
-    def __unicode__(self):
-        return self.name
-
-
-class EngineManager(models.Manager):
-
-    def base_queryset(self):
-        """
-        Return ``QuerySet`` with related content pre-loaded.
-        """
-        return self.get_query_set().all()
-
-
-class Engine(models.Model):
-    name = models.CharField(_('Car engine'), max_length=255)
-    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
-    date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, db_index=True)
-    objects = EngineManager()
 
     def __unicode__(self):
         return self.name
