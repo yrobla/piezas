@@ -410,7 +410,8 @@ class CreateQuoteView(UpdateView):
         # validate if we already sent a quote to this search
         sent_quotes = None
         try:
-            sent_quotes = models.Quote.objects.get(search_request=self.object)
+            sent_quotes = models.Quote.objects.get(search_request=self.object,
+                                                   owner=self.request.user)
         except:
             pass
 
